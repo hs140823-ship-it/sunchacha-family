@@ -539,6 +539,32 @@ input[type=number]{text-align:right}
 .bonus-clear{margin-left:auto}
 .bonus-hint{font-size:10.5px;font-weight:700;color:var(--muted);margin:0;line-height:1.4}
 
+/* 💎 부모님 전체 보기 — 차분한 관리 요약 화면 (#6600) */
+.pm-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.pm-kid{display:flex;flex-direction:column;gap:7px;padding:11px 12px;border-radius:16px;border:1px solid rgba(15,23,42,.05);
+  box-shadow:0 10px 22px -22px rgba(38,66,110,.75);background:#fff;text-align:left;font-family:inherit;cursor:pointer}
+.pm-kid.s{background:linear-gradient(160deg,#F3F8FF,#FFFFFF)}
+.pm-kid.j{background:linear-gradient(160deg,#FDF4F9,#FFFFFF)}
+.pm-kid:hover{border-color:var(--kc,#94A9C4)}
+.pm-kid-top{display:flex;align-items:center;gap:6px}
+.pm-kid-top .kk-av{width:22px;height:22px}
+.pm-kid-name{font-size:12.5px;font-weight:900;color:#0F1E33;letter-spacing:-.01em;display:inline-flex;align-items:center;gap:2px}
+.pm-month{margin-left:auto;font-size:9px;font-weight:900;color:#5A708C;background:#EEF3F9;border-radius:999px;padding:2px 7px;white-space:nowrap}
+.pm-bal{display:flex;align-items:baseline;gap:5px}
+.pm-bal .pm-star{font-size:15px}
+.pm-bal b{font-size:21px;font-weight:900;letter-spacing:-.03em;color:#0F1E33;font-variant-numeric:tabular-nums;line-height:1.15}
+.pm-sub{font-size:9.5px;font-weight:700;color:#6C7F96;font-variant-numeric:tabular-nums}
+.pm-track{height:6px;border-radius:999px;background:#EDF1F6;overflow:hidden}
+.pm-track i{display:block;height:100%;border-radius:999px;background:var(--kc,#6F8AA6);transition:width .3s ease}
+.pm-cap{display:flex;justify-content:space-between;gap:6px;font-size:9px;font-weight:800;color:#8A9CB0;font-variant-numeric:tabular-nums}
+.pm-cap b{color:#3E5573;font-weight:900}
+.pm-cells{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px;margin-top:2px}
+.pm-cell{display:flex;flex-direction:column;gap:1px;padding:7px 8px;border-radius:11px;background:#F7FAFD;border:1px solid rgba(15,23,42,.04);min-width:0}
+.pm-cell b{font-size:11px;font-weight:900;color:#0F1E33;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.pm-cell small{font-size:8.5px;font-weight:800;color:#7A8DA3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pm-cell.stamps{grid-column:1 / -1}
+@media (max-width:340px){.pm-grid{grid-template-columns:1fr}}
+
 /* ---------- timer · 아날로그 Time Timer (#2933 · #2945 · #2964 · #2975) ---------- */
 .timer-body{display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:6px}
 .tt-stage{display:flex;flex-direction:column;align-items:center;gap:6px}
@@ -964,6 +990,9 @@ body.mode-viewer .chore-card.done:hover{border-color:var(--done-line);background
 body.mode-viewer .ac-item{cursor:default}
 body.mode-viewer .wchip-name{cursor:default;pointer-events:none}
 body.mode-viewer .self-tab{pointer-events:none}
+/* 🎁 보너스 주기 입력란은 아빠 화면에서도 엄마 화면과 똑같이 (직접 입력·저장)
+   — 위 관람 모드 규칙이 !important 로 숨기므로 같은 값으로 되살린다 */
+body.mode-viewer .bonus-box{display:flex !important}
 
 body.mode-kid .brand-sub{color:#A08B74}
 
@@ -1119,6 +1148,7 @@ body.mode-kid .brand-sub{color:#A08B74}
 .set-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
 .set-field{display:flex;flex-direction:column;gap:3px;font-size:11.5px;color:var(--muted);font-weight:700}
 .set-field input{min-height:38px;border-radius:10px}
+.set-fixed{min-height:38px;display:flex;align-items:center;padding:0 10px;border-radius:10px;background:var(--soft-bg);font-size:12px;font-weight:800;color:var(--ink-2)}
 .set-toggle{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:700;color:var(--ink-2);margin-top:8px}
 .set-toggle input{width:20px;height:20px;min-height:0;flex:0 0 auto;accent-color:var(--orange)}
 .pay-row{display:flex;align-items:center;gap:9px;padding:8px 0;font-size:12.5px;border-bottom:1px dashed #F0E4D4}
@@ -1694,6 +1724,9 @@ body.mode-viewer .rl-form{display:none !important}
 .rwd-h .streak{margin-left:auto;font-size:9.5px;padding:2px 8px}
 .rwd-h .rwd-weeknum{margin-left:6px}
 .bonus-box-h{display:flex;align-items:center;gap:5px;font-size:11.5px;font-weight:900;color:#41556E;margin-bottom:7px}
+.pm-targets{margin-left:auto;display:inline-flex;gap:5px}
+.pm-target{flex:0 0 auto;min-width:0;padding:5px 13px;font-size:11px}
+.pm-target.on{background:#E8F1FD;border-color:rgba(47,125,246,.45);color:#1D4ED8}
 .rwd-recent{padding:12px 13px}
 .rwd-recent .rw-feed-head{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
 .rwd-recent .rw-feed-head b{font-size:13px;font-weight:900;color:#2A3743}
@@ -1717,6 +1750,13 @@ body.mode-viewer .rl-form{display:none !important}
 .rg-top span{display:flex;flex-direction:column;gap:1px;padding:9px 11px;border-radius:14px;background:#F6FAF7;border:1px solid rgba(15,23,42,.05);
   font-size:10.5px;font-weight:800;color:#6C7F96}
 .rg-top b{font-size:15px;font-weight:900;color:#0F1E33}
+.rg-kids{display:grid;gap:7px;margin:8px 0 10px}
+.rg-kid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;padding:9px 11px;border-radius:14px;background:#F6FAF7;border:1px solid rgba(15,23,42,.05)}
+.rg-kid-name{grid-column:1 / -1;display:flex;align-items:center;gap:5px;font-size:11.5px;font-weight:900;color:#0F1E33}
+.rg-kid span{display:flex;flex-direction:column;gap:1px;font-size:10.5px;font-weight:800;color:#6C7F96}
+.rg-kid b{font-size:14px;font-weight:900;color:#0F1E33}
+/* 모달에서는 도장 로드맵을 가로 스크롤 대신 여러 줄로 — 카드가 오른쪽에서 잘리지 않게 */
+.modal .stamp-road{flex-wrap:wrap;overflow-x:visible;scroll-snap-type:none;padding:8px 0 2px}
 .rg-rule{display:flex;justify-content:space-between;gap:8px;padding:5px 2px;border-bottom:1px dashed rgba(15,23,42,.06);font-size:11px;font-weight:800;color:#41556E}
 .rg-rule:last-child{border-bottom:0}
 .rg-rule b{color:#1D4ED8;font-weight:900}
@@ -3402,7 +3442,8 @@ var DAY_ORDER = [1,2,3,4,5,6,0];
 
 var REWARD_DAILY = 500;   // 매일 공부 하루 완료 (토·일 포함)
 var REWARD_STREAK = 1000; // 월~금 5일 모두 완료
-var REWARD_SELF = 1000;   // 스스로 체크 주간 목표 달성
+var REWARD_SELF = 1000;   // 스스로 체크 월~일 7일 모두 달성
+var SELF_WEEK_GOAL_DAYS = 7; // 스스로 체크 주간 목표 — 7일 모두 (하루라도 빠지면 보너스 없음)
 var REWARD_MOM = 500;     // 엄마 보너스 기본값 (주마다 금액은 직접 정해요)
 var REWARD_DAD = 500;     // 아빠 보너스 기본값 (주마다 금액은 직접 정해요)
 var REWARD_FAMILY = 500;  // 함께 한 일 1개 완료 시 기본 추가 용돈
@@ -6376,7 +6417,7 @@ function makeDefaultState(){
     scheduleFix: SCHEDULE_FIX_VERSION,
     customEmojiMap: {},
     familyTeam: 'all',
-    settings: { sound:true, familyGoal:5, familyReward:500, parentPinHash:'' },
+    settings: { sound:true, familyGoal:7, familyReward:500, parentPinHash:'' },
     kids: kids,
     academies: seedAcademies(),
     tuition: seedTuition(),
@@ -6602,7 +6643,8 @@ function normalize(raw){
     selfTab: (raw.selfTab === 'family') ? 'family' : 'space',
     settings: {
       sound: !(raw.settings && raw.settings.sound === false),
-      familyGoal: num(raw.settings && (raw.settings.familyGoal || raw.settings.selfGoal), 5, 1, 50),
+      /* ⭐ 스스로 체크 보너스는 7일 고정 기준 — 예전 저장값(기본 5)은 더 쓰지 않고, 없는 값은 7로 채운다 */
+      familyGoal: num(raw.settings && (raw.settings.familyGoal || raw.settings.selfGoal), SELF_WEEK_GOAL_DAYS, 1, 50),
       familyReward: num(raw.settings && raw.settings.familyReward, 500, 0, 5000),
       parentPinHash: (raw.settings && typeof raw.settings.parentPinHash === 'string') ? raw.settings.parentPinHash : ''
     },
@@ -7091,6 +7133,11 @@ function findSelfItem(kidKey, id){
   (state.kids[kidKey].self || []).forEach(function(it){ if(it.id === id) found = it; });
   return found;
 }
+/* 하루에 스스로 체크한 항목 수 (내 공간·함께 하는 일 모두 · 화면 요일 칸과 같은 기준) */
+function selfCheckCountOn(kidKey, key){
+  var d = peekDay(kidKey, key);
+  return Object.keys(d.self || {}).length;
+}
 function selfChecksOn(kidKey, key){
   var d = peekDay(kidKey, key);
   var n = 0;
@@ -7344,21 +7391,23 @@ function weekStats(kidKey, wk){
   var days = weekDays(week);
   var doneDays = 0;
   var selfTotal = 0;
+  var selfDays = 0;
   days.forEach(function(k){
     if(basicDone(kidKey, k)) doneDays++;
     selfTotal += familyCheckedOn(kidKey, k);
+    if(selfCheckCountOn(kidKey, k) > 0) selfDays++;
   });
   var fam = familyWeekEarned(kidKey, week);
-  var goal = Math.max(1, Number(state.settings.familyGoal) || 5);
   var daily = doneDays * REWARD_DAILY;
   var streak = doneDays >= 5 ? REWARD_STREAK : 0;
-  var selfBonus = selfTotal >= goal ? REWARD_SELF : 0;
+  /* ⭐ 스스로 체크 보너스 — 월~일 7일 모두 체크했을 때만 1,000원 */
+  var selfBonus = selfDays >= SELF_WEEK_GOAL_DAYS ? REWARD_SELF : 0;
   var mom = Number((state.kids[kidKey].momBonusAmount || {})[week]) || 0;
   var dad = Number((state.kids[kidKey].dadBonusAmount || {})[week]) || 0;
   var hundred = Number((state.kids[kidKey].hundredBonusAmount || {})[week]) || 0;
   var total = daily + streak + selfBonus + mom + dad + hundred;
   return {
-    week: week, doneDays: doneDays, selfTotal: selfTotal, target: goal,
+    week: week, doneDays: doneDays, selfDays: selfDays, selfTotal: selfTotal, target: SELF_WEEK_GOAL_DAYS,
     daily: daily, streak: streak, selfBonus: selfBonus, mom: mom, dad: dad, hundred: hundred,
     familyEarned: fam.capped, familyRaw: fam.raw, familyCount: fam.count, familyOver: fam.over,
     familyMax: FAMILY_WEEK_MAX, familyLimit: FAMILY_WEEK_MISSIONS,
@@ -8664,14 +8713,15 @@ function renderRewardOverview(){
    💎 리워드 안내 · 🎁 스탬프 리워드 — 모달 (#6320)
    ========================================================= */
 function rewardGuideRulesHtml(){
+  /* 항목 합계와 머리글의 「최대 ○원」을 맞춘다 — 3,500 + 1,000 + 1,000 = 5,500 */
+  var fixed = REWARD_DAILY * 7 + REWARD_STREAK + REWARD_SELF;
   return '<div class="set-section">' +
-      '<div class="set-h">🪙 이번 주 용돈 <span class="set-hint">최대 ' + fmt(WEEK_MAX) + '</span></div>' +
-      '<div class="rg-rule"><span>📚 매일 공부</span><b>' + fmt(REWARD_DAILY) + ' × 7일</b></div>' +
+      '<div class="set-h">🪙 이번 주 용돈 <span class="set-hint">최대 ' + fmt(fixed) + '</span></div>' +
+      '<div class="rg-rule"><span>📚 매일 공부</span><b>' + fmt(REWARD_DAILY) + ' × 7일 = ' + fmt(REWARD_DAILY * 7) + '</b></div>' +
       '<div class="rg-rule"><span>🏅 5일 성공 보너스</span><b>+' + fmt(REWARD_STREAK) + '</b></div>' +
-      '<div class="rg-rule"><span>⭐ 스스로 체크 목표</span><b>+' + fmt(REWARD_SELF) + '</b></div>' +
+      '<div class="rg-rule"><span>⭐ 스스로 체크 7일 모두</span><b>+' + fmt(REWARD_SELF) + '</b></div>' +
       '<div class="rg-rule"><span>👩‍💼 엄마 · 🧔 아빠 보너스</span><b>주마다 직접 정해요</b></div>' +
-      '<div class="rg-rule"><span>💯 100점 보너스</span><b>' + fmt(HUNDRED_AMOUNT) + '</b></div>' +
-      '<p class="set-hint">가족 미션 용돈은 이 게이지 밖에서 따로 쌓여요 (주간 최대 ' + fmt(FAMILY_WEEK_MAX) + ').</p>' +
+      '<p class="set-hint">위 세 가지를 더하면 ' + fmt(fixed) + '이에요. 엄마·아빠 보너스(기본 500원씩)까지 더하면 이번 주 최대 ' + fmt(WEEK_MAX) + '. 💯 100점 보너스 ' + fmt(HUNDRED_AMOUNT) + '과 가족 미션 용돈(주간 최대 ' + fmt(FAMILY_WEEK_MAX) + ')은 이 합계 밖에서 따로 쌓여요.</p>' +
     '</div>';
 }
 function stampRoadmapHtml(kidKey){
@@ -8682,18 +8732,35 @@ function stampRoadmapHtml(kidKey){
 }
 function openRewardGuide(){
   var kidKeys = rewardKidKeys();
+  var multi = kidKeys.length > 1;
   var k = kidKeys[0] || state.current;
   var tot = totalStamps(k);
-  openModal(
-    '<h2 class="modal-title">💎 리워드 안내</h2>' +
-    '<p class="modal-sub">' + esc(kidDef(k).name) + ' · MY SPACE 도장 ' + numFmt(tot) + '개 · 다음 ' + numFmt(nextStampMilestone(tot)) + '개 ' + esc(stampRewardOf(nextStampMilestone(tot)).title) + '</p>' +
-    '<div class="rg-top">' +
+  var kd = kidDef(k);
+  var head, top;
+  if(multi){
+    /* 전체 보기 — 선우·지우 두 아이의 남은 용돈과 누적 스탬프를 나란히 */
+    head = '<p class="modal-sub">' + kidKeys.map(function(kk){ return kidAvHtml(kk) + ' ' + esc(kidDef(kk).name); }).join(' · ') + ' · 남은 용돈과 누적 스탬프를 함께 봐요</p>';
+    top = '<div class="rg-kids">' + kidKeys.map(function(kk){
+      return '<div class="rg-kid">' +
+        '<span class="rg-kid-name">' + kidAvHtml(kk) + ' ' + esc(kidDef(kk).name) + '</span>' +
+        '<span>🐷 남은 용돈 <b>' + fmt(balanceOf(kk)) + '</b></span>' +
+        '<span>⭐ 누적 스탬프 <b>' + numFmt(totalStamps(kk)) + '개</b></span>' +
+      '</div>';
+    }).join('') + '</div>';
+  }else{
+    head = '<p class="modal-sub">' + esc(kd.name) + ' · MY SPACE 도장 ' + numFmt(tot) + '개 · 다음 ' + numFmt(nextStampMilestone(tot)) + '개 ' + esc(stampRewardOf(nextStampMilestone(tot)).title) + '</p>';
+    top = '<div class="rg-top">' +
       '<span>🐷 남은 용돈 <b>' + fmt(balanceOf(k)) + '</b></span>' +
       '<span>⭐ 누적 스탬프 <b>' + numFmt(tot) + '개</b></span>' +
-    '</div>' +
+    '</div>';
+  }
+  openModal(
+    '<h2 class="modal-title">💎 리워드 안내</h2>' +
+    head +
+    top +
     rewardGuideRulesHtml() +
     '<div class="set-section">' +
-      '<div class="set-h">🏆 MY SPACE 누적 도장 리워드 <span class="set-hint">도장 차감 없음</span></div>' +
+      '<div class="set-h">🏆 MY SPACE 누적 도장 리워드' + (multi ? ' · ' + esc(kd.name) : '') + ' <span class="set-hint">도장 차감 없음</span></div>' +
       stampRoadmapHtml(k) +
       '<p class="set-hint">300 · 600 · 900개는 책 1권 📚, 1,000개는 FUN PASS ' + fmt(STAMP_FUNPASS_AMOUNT) + ' 🎟️ · 1,000개를 채우면 새 사이클이 시작돼요.</p>' +
     '</div>' +
@@ -8892,7 +8959,7 @@ function renderHundred(){
    · 아빠: 리워드 범위 기준 (처음엔 전체, 홈에서 아이를 고르면 그 아이만)
    · 아이: 자기 대시보드 하나만
    ========================================================= */
-/* 지금 리워드에 보여 줄 아이들 — 항상 지금 보는 아이가 맨 위(기본 id를 쓴다) */
+/* 지금 리워드에 보여 줄 아이들 — 늘 선우 → 지우 순서 (전체 보기에서 순서가 바뀌지 않는다) */
 function rewardKidKeys(){
   var cur = state.current === 'jiwoo' ? 'jiwoo' : 'seonwoo';
   var out;
@@ -8902,18 +8969,13 @@ function rewardKidKeys(){
     var sc = editScopeNow();
     out = (sc === 'all') ? bothKidKeys() : [sc === 'jiwoo' ? 'jiwoo' : 'seonwoo'];
   }
-  if(out.indexOf(cur) > 0){
-    out = [cur].concat(out.filter(function(k){ return k !== cur; }));
-  }
   return out;
 }
-/* 이번 주 스스로 체크한 날 (월~일) */
+/* 이번 주 스스로 체크한 날 (월~일) — 주간 보너스 계산과 같은 함수를 쓴다 */
 function selfCheckWeek(kidKey){
   var week = weekStartKey(new Date());
   return weekDays(week).map(function(k){
-    var d = peekDay(kidKey, k);
-    var n = 0;
-    Object.keys(d.self || {}).forEach(function(id){ n++; });
+    var n = selfCheckCountOn(kidKey, k);
     return { day: k, stamp: n > 0, n: n };
   });
 }
@@ -8940,7 +9002,7 @@ function rewardKidCardHtml(kidKey, primary, multi){
   var todayStamps = dayStamps(kidKey, dayKey());
   var todayWon = todayWonOf(kidKey);
   var selfWeek = selfCheckWeek(kidKey);
-  var selfDays = selfWeek.filter(function(x){ return x.stamp; }).length;
+  var selfDays = st.selfDays;   /* 주간 보너스와 같은 계산 (7일 모두) */
   var name = esc(kd.name);
   var WD = ['월', '화', '수', '목', '금', '토', '일'];
   var todayKey = dayKey();
@@ -8955,8 +9017,8 @@ function rewardKidCardHtml(kidKey, primary, multi){
   var rows = [
     { card:'study', label:'📚 매일 공부', valText: st.doneDays + '일 / ' + fmt(REWARD_DAILY * 7), pct: st.daily / (REWARD_DAILY * 7), cls:'' },
     { card:'study', label:'🏅 5일 성공 보너스', valText: st.doneDays + '/5일 · ' + fmt(REWARD_STREAK), pct: st.streak ? 1 : st.doneDays / 5, cls:'streak' },
-    { card:'self', label:'⭐ 스스로 체크 목표', valText: st.selfTotal + '/' + st.target + '회', pct: Math.min(1, st.selfTotal / st.target), cls:'self' },
-    { card:'self', label:'5회 달성 보너스', valText: st.selfTotal + '/' + st.target + '회 · ' + fmt(REWARD_SELF), pct: Math.min(1, st.selfTotal / st.target), cls:'self', nobar:true },
+    { card:'self', label:'⭐ 스스로 체크 목표', valText: st.selfDays + '/' + SELF_WEEK_GOAL_DAYS + '일', pct: Math.min(1, st.selfDays / SELF_WEEK_GOAL_DAYS), cls:'self' },
+    { card:'self', label:'7일 달성 보너스', valText: st.selfDays + '/' + SELF_WEEK_GOAL_DAYS + '일 · ' + fmt(REWARD_SELF), pct: Math.min(1, st.selfDays / SELF_WEEK_GOAL_DAYS), cls:'self', nobar:true },
     /* fmt()가 이미 「원」을 붙인다 — 뒤에 또 붙이면 「0원원」 (#6311) */
     { card:'bonus', label:'👩‍💼 엄마 보너스', valText: (st.mom ? '받음' : '아직') + ' · ' + fmt(st.mom), pct: st.mom ? 1 : 0, cls:'mom', nobar:true },
     { card:'bonus', label:'🧔 아빠 보너스', valText: (st.dad ? '받음' : '아직') + ' · ' + fmt(st.dad), pct: st.dad ? 1 : 0, cls:'dad', nobar:true },
@@ -9012,6 +9074,14 @@ function rewardKidCardHtml(kidKey, primary, multi){
     '<div class="rwd-kidhead">' +
       '<span class="wk-who" style="--kc:' + kd.color + '">' + name + '</span>' +
       '<p class="rwd-kidline" id="' + kidId('walletSub') + '">' + kidAvHtml(kd.key) + ' 이번 주 ' + fmt(st.grand) + ' · 매일 공부 ' + fmt(st.total) + ' / ' + fmt(WEEK_MAX) + '</p>' +
+    '</div>' +
+
+    /* 👩‍💼 🧔 보너스 주기 (엄마 전용) — 아이 이름 바로 아래, 리워드 카드보다 먼저 */
+    '<div class="bonus-box" id="' + kidId('bonusBox') + '" data-parent-only="1" aria-label="' + name + ' 엄마 아빠 보너스">' +
+      '<div class="bonus-box-h"><span aria-hidden="true">🎁</span><b>' + name + ' 보너스 주기</b></div>' +
+      bonusRow('mom', '👩‍💼', '엄마 보너스', st.mom) +
+      bonusRow('dad', '🧔', '아빠 보너스', st.dad) +
+      '<p class="bonus-hint">이번 주 <b>' + name + '</b>에게 주는 보너스 · 원하는 금액을 넣어 주세요 (0원부터, 주마다 새로 정해요)</p>' +
     '</div>' +
 
     /* 오늘·이번 달 요약 2×2 */
@@ -9071,14 +9141,6 @@ function rewardKidCardHtml(kidKey, primary, multi){
       '</div>' +
     '</div>' +
 
-    /* 👩‍💼 🧔 보너스 주기 (엄마 전용) */
-    '<div class="bonus-box" id="' + kidId('bonusBox') + '" data-parent-only="1" aria-label="' + name + ' 엄마 아빠 보너스">' +
-      '<div class="bonus-box-h"><span aria-hidden="true">🎁</span><b>' + name + ' 보너스 주기</b></div>' +
-      bonusRow('mom', '👩‍💼', '엄마 보너스', st.mom) +
-      bonusRow('dad', '🧔', '아빠 보너스', st.dad) +
-      '<p class="bonus-hint">이번 주 <b>' + name + '</b>에게 주는 보너스 · 원하는 금액을 넣어 주세요 (0원부터, 주마다 새로 정해요)</p>' +
-    '</div>' +
-
     '<div id="' + kidId('payLogBox') + '"' + (plog ? '' : ' hidden') + '>' + plog + '</div>' +
     '<div class="w-actions">' +
       '<button class="btn btn-soft btn-sm" data-action="pay" data-kid="' + kidKey + '" data-parent-only="1">용돈 정산 · 지급 완료</button>' +
@@ -9086,11 +9148,109 @@ function rewardKidCardHtml(kidKey, primary, multi){
     '</div>' +
   '</section>';
 }
+/* 💎 부모님 전체 보기 — 보너스 주기 한 장 + 아이 요약 두 장 (#6600)
+   개별 아이 보기·아이 화면은 기존 상세 카드(rewardKidCardHtml)를 그대로 쓴다 */
+/* 💎 부모님 전체 보기 보너스 — 지금 고른 대상 아이 (선우 기본) */
+var PM_BONUS_TARGET = 'seonwoo';
+function pmTargetSet(kidKey){
+  if(kidKey !== 'seonwoo' && kidKey !== 'jiwoo') return;
+  PM_BONUS_TARGET = kidKey;
+  var box = document.querySelector('#walletStack .bonus-box');
+  if(!box) return;
+  box.querySelectorAll('.pm-target').forEach(function(b){
+    b.classList.toggle('on', b.getAttribute('data-kid') === kidKey);
+  });
+  box.querySelectorAll('.bonus-row [data-kid], .bonus-row input').forEach(function(el){
+    if(el.hasAttribute('data-kid')) el.setAttribute('data-kid', kidKey);
+  });
+}
+function pmBonusApply(which, kidKey, src){
+  var row = (src && src.closest) ? src.closest('.bonus-row') : null;
+  var input = row ? row.querySelector('.bonus-input') : $('#' + which + 'BonusInputAll');
+  setBonusAmount(which, input ? input.value : 0, kidKey || PM_BONUS_TARGET, src);
+  if(input) input.value = '';
+}
+function pmBonusClear(which, kidKey){
+  clearBonus(which, kidKey || PM_BONUS_TARGET);
+}
+function parentBonusCardHtml(){
+  var st = { mom: {}, dad: {} };
+  KID_DEFS.forEach(function(kd){
+    var s = weekStats(kd.key);
+    st.mom[kd.key] = s.mom;
+    st.dad[kd.key] = s.dad;
+  });
+  var quick = [500, 1000, 2000, 5000];
+  var targetBtn = function(kd, first){
+    return '<button type="button" class="bonus-chip pm-target' + (first ? ' on' : '') + '" data-action="pm-target" data-kid="' + kd.key + '">' + kd.name + '</button>';
+  };
+  var row = function(which, icon, label){
+    return '<div class="bonus-row" data-bonus="' + which + '">' +
+        '<div class="bonus-head">' +
+          '<span class="bonus-name">' + icon + ' ' + label + '</span>' +
+          '<span class="bonus-now">' + KID_DEFS.map(function(kd){ return kd.name + ' ' + fmt(st[which][kd.key]); }).join(' · ') + '</span>' +
+        '</div>' +
+        '<div class="bonus-controls">' +
+          '<div class="bonus-quick">' + quick.map(function(v){
+            return '<button type="button" class="bonus-chip" data-action="bonus-set" data-who="' + which + '" data-kid="' + PM_BONUS_TARGET + '" data-amount="' + v + '">' + numFmt(v) + '</button>';
+          }).join('') +
+          '</div>' +
+          '<div class="bonus-set">' +
+            '<input type="number" class="bonus-input" id="' + which + 'BonusInputAll" min="0" max="100000" step="100" inputmode="numeric" placeholder="직접 입력" aria-label="' + label + ' 금액(원)">' +
+            '<button type="button" class="btn btn-soft btn-sm" data-action="bonus-apply" data-who="' + which + '" data-kid="' + PM_BONUS_TARGET + '">주기</button>' +
+            '<button type="button" class="btn btn-ghost btn-sm bonus-clear" data-action="bonus-clear" data-who="' + which + '" data-kid="' + PM_BONUS_TARGET + '" hidden>취소</button>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+  };
+  var whiches = isDadMode() ? ['dad'] : ['mom', 'dad'];
+  return '<section class="rwd-kid" aria-label="보너스 주기">' +
+    '<div class="bonus-box" data-parent-only="1" aria-label="보너스 주기">' +
+      '<div class="bonus-box-h"><span aria-hidden="true">🎁</span><b>보너스 주기</b>' +
+        '<span class="pm-targets" role="group" aria-label="보너스 대상">' + KID_DEFS.map(function(kd, i){ return targetBtn(kd, i === 0); }).join('') + '</span>' +
+      '</div>' +
+      whiches.map(function(w){ return row(w, w === 'mom' ? '👩‍💼' : '🧔', w === 'mom' ? '엄마 보너스' : '아빠 보너스'); }).join('') +
+      '<p class="bonus-hint">대상 아이를 고르고 금액을 넣어 주세요 · 이번 주에 새로 정해요 (0원으로 지우면 취소)</p>' +
+    '</div>' +
+  '</section>';
+}
+/* 아이 요약 카드 한 장 — 시안의 두 칸짜리 요약 (선우 왼쪽 · 지우 오른쪽) */
+function parentKidCardHtml(kidKey){
+  var kd = kidDef(kidKey);
+  var st = weekStats(kidKey);
+  var me = monthEarnedOf(kidKey);
+  var used = monthPaidOf(kidKey);
+  var bal = balanceOf(kidKey);
+  var stamps = totalStamps(kidKey);
+  var pct = Math.max(0, Math.min(1, st.total / WEEK_MAX));
+  var remain = Math.max(0, WEEK_MAX - st.total);
+  return '<button type="button" class="pm-kid ' + (kidKey === 'seonwoo' ? 's' : 'j') + '" style="--kc:' + kd.color + '" data-action="open-kid-reward" data-kid="' + kidKey + '" aria-label="' + kd.name + ' 리워드 자세히 보기">' +
+    '<span class="pm-kid-top">' + kidAvHtml(kidKey) +
+      '<span class="pm-kid-name">' + kd.name + ' <span aria-hidden="true">›</span></span>' +
+      '<span class="pm-month">이번 달 🗓️</span>' +
+    '</span>' +
+    '<span class="pm-bal"><span class="pm-star" aria-hidden="true">⭐</span><b>' + fmt(bal) + '</b></span>' +
+    '<span class="pm-sub">남은 용돈 · 이번 달 받은 ' + fmt(me.total) + ' | 사용 ' + fmt(used) + '</span>' +
+    '<span class="pm-track"><i style="width:' + Math.round(pct * 100) + '%"></i></span>' +
+    '<span class="pm-cap"><span>목표 ' + fmt(WEEK_MAX) + '까지</span><span>' + (remain > 0 ? fmt(remain) + ' 남았어요!' : '모두 달성! 🎉') + '</span></span>' +
+    '<span class="pm-cells">' +
+      '<span class="pm-cell"><small>스스로 체크</small><b>' + st.selfDays + '/' + SELF_WEEK_GOAL_DAYS + '일</b></span>' +
+      '<span class="pm-cell"><small>이번 주 보너스</small><b>' + fmt(st.mom + st.dad) + '</b></span>' +
+      '<span class="pm-cell stamps"><small>누적 도장</small><b>' + numFmt(stamps) + '개</b></span>' +
+    '</span>' +
+  '</button>';
+}
 function renderWallet(){
   var box = $('#walletStack');
   if(!box) return;
   var keys = rewardKidKeys();
   var multi = keys.length > 1;
+  /* 💎 부모님(엄마·아빠) 「전체」 — 보너스 주기 한 장 + 아이 요약 두 장 (#6600) */
+  if(multi && !isKidMode()){
+    box.innerHTML = parentBonusCardHtml() + '<div class="pm-grid" aria-label="아이별 요약">' +
+      keys.map(parentKidCardHtml).join('') + '</div>';
+    return;
+  }
   var inputId = function(k, which){ return which + 'BonusInput' + (k === keys[0] ? '' : '--' + k); };
   /* 다시 그려도 입력 중이던 보너스 금액은 잃지 않는다 */
   var keep = {};
@@ -10557,7 +10717,7 @@ function checkWeeklyBonuses(prev){
     setTimeout(function(){ toast('🎉 이번 주 5일 성공! 보너스 +' + fmt(REWARD_STREAK)); chime('win'); }, 900);
   }
   if(st.selfBonus && !prev.selfBonus){
-    setTimeout(function(){ toast('🎉 스스로 체크 목표 달성! 보너스 +' + fmt(REWARD_SELF)); chime('win'); }, 1400);
+    setTimeout(function(){ toast('🎉 스스로 체크 7일 모두 성공! 보너스 +' + fmt(REWARD_SELF)); chime('win'); }, 1400);
   }
 }
 function markRow(selector, cls){
@@ -11028,7 +11188,8 @@ function bonusKidOf(kidKey){
 }
 /* 💰 엄마·아빠 보너스 — 카드마다 그 아이에게 준다 (data-kid) (#6310) */
 function setBonusAmount(which, amount, kidKey, src){
-  if(!isParentMode() || !BONUS_META[which]) return false;
+  /* 엄마·아빠 화면에서 모두 보너스를 줄 수 있다 (아이 화면만 막음) */
+  if(isKidMode() || !BONUS_META[which]) return false;
   kidKey = bonusKidOf(kidKey);
   var kd = kidDef(kidKey);
   var wk = weekStartKey(new Date());
@@ -11052,7 +11213,7 @@ function setBonusAmount(which, amount, kidKey, src){
   return true;
 }
 function clearBonus(which, kidKey){
-  if(!isParentMode() || !BONUS_META[which]) return;
+  if(isKidMode() || !BONUS_META[which]) return;
   kidKey = bonusKidOf(kidKey);
   var wk = weekStartKey(new Date());
   var k = state.kids[kidKey];
@@ -11138,12 +11299,12 @@ function openSettings(){
     '<div class="set-section">' +
       '<div class="set-h">🪙 주간 용돈 규칙 <span class="set-hint">최대 6,500원</span></div>' +
       '<div class="set-grid">' +
-        '<label class="set-field">스스로 체크 주간 목표 (회)' +
-          '<input type="number" min="1" max="50" step="1" value="' + s.familyGoal + '" data-set="familyGoal"></label>' +
+        '<div class="set-field">스스로 체크 주간 목표' +
+          '<div class="set-fixed">월~일 ' + SELF_WEEK_GOAL_DAYS + '일 모두 · 보너스 ' + fmt(REWARD_SELF) + '</div></div>' +
         '<label class="set-field">새 가족 미션 기본 용돈 (원)' +
           '<input type="number" min="0" max="5000" step="100" value="' + s.familyReward + '" data-set="familyReward"></label>' +
       '</div>' +
-      '<div class="set-hint" style="margin-top:4px">매일 공부 500원×7일 + 5일 성공 1,000 + 스스로 체크 1,000 + 엄마·아빠 보너스 = 최대 6,500원(보너스 500원씩 기준)<br>👨‍👩‍👧 가족 미션 용돈은 게이지 밖에서 따로 쌓여요 (주간 최대 3,000원).</div>' +
+      '<div class="set-hint" style="margin-top:4px">매일 공부 500원×7일 + 5일 성공 1,000 + 스스로 체크 7일 모두 1,000 + 엄마·아빠 보너스 = 최대 6,500원(보너스 500원씩 기준)<br>👨‍👩‍👧 가족 미션 용돈은 게이지 밖에서 따로 쌓여요 (주간 최대 3,000원).</div>' +
       '<label class="set-toggle"><input type="checkbox" data-set="sound"' + (s.sound ? ' checked' : '') + '> 효과음 켜기 (도장·타이머 소리)</label>' +
     '</div>' +
 
@@ -11941,8 +12102,15 @@ document.addEventListener('click', function(e){
       break;
     case 'del-self': deleteSelf(target.getAttribute('data-id')); break;
     case 'bonus-set': setBonusAmount(target.getAttribute('data-who'), Number(target.getAttribute('data-amount')), target.getAttribute('data-kid'), target); break;
-    case 'bonus-apply': applyBonusInput(target.getAttribute('data-who'), target.getAttribute('data-kid'), target); break;
-    case 'bonus-clear': clearBonus(target.getAttribute('data-who'), target.getAttribute('data-kid')); break;
+    case 'bonus-apply':
+      if(target.closest('.bonus-box') && target.closest('.bonus-box').querySelector('.pm-target')) pmBonusApply(target.getAttribute('data-who'), target.getAttribute('data-kid'), target);
+      else applyBonusInput(target.getAttribute('data-who'), target.getAttribute('data-kid'), target);
+      break;
+    case 'bonus-clear':
+      if(target.closest('.bonus-box') && target.closest('.bonus-box').querySelector('.pm-target')){ pmBonusClear(target.getAttribute('data-who'), target.getAttribute('data-kid')); }
+      else { clearBonus(target.getAttribute('data-who'), target.getAttribute('data-kid')); }
+      break;
+    case 'pm-target': pmTargetSet(target.getAttribute('data-kid')); break;
     case 'open-kid-reward': openKidReward(target.getAttribute('data-kid')); break;
     case 'open-reward-all': openRewardAll(); break;
     case 'reward-guide': openRewardGuide(); break;
@@ -12302,7 +12470,7 @@ document.addEventListener('change', function(e){
     var key = t.getAttribute('data-set');
     if(key === 'sound') state.settings.sound = !!t.checked;
     else if(key === 'familyGoal'){
-      state.settings.familyGoal = num(t.value, 5, 1, 50);
+      state.settings.familyGoal = num(t.value, SELF_WEEK_GOAL_DAYS, 1, 50);
       t.value = state.settings.familyGoal;
       renderAll();
     }
