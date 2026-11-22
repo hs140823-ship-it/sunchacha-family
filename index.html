@@ -1337,6 +1337,26 @@ body.mode-kid .extra-edit{display:none}
 #spaceList .chore-desc{-webkit-line-clamp:3;min-height:4.05em}   /* 필통 정리처럼 긴 안내 (#5372) */
 body.mode-kid .chore-tools{display:none}
 
+/* ---------- ↕️ 꾹 눌러 순서 바꾸기 (#6285) — 엄마 화면에서만 ---------- */
+.chore-card,.task-row{-webkit-touch-callout:none}
+body.drag-active,body.drag-active *{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;cursor:grabbing}
+.drag-slot{border-radius:16px;border:2px dashed rgba(124,107,242,.45);
+  background:linear-gradient(160deg,rgba(124,107,242,.10),rgba(91,141,239,.07));
+  animation:dragSlotPulse 1.1s ease-in-out infinite alternate}
+@keyframes dragSlotPulse{from{opacity:.55}to{opacity:.95}}
+.chore-card.dragging,.task-row.dragging{
+  position:fixed;z-index:140;margin:0 !important;pointer-events:none;
+  border-radius:16px;transform:scale(1.03) !important;
+  border-color:rgba(255,214,165,.95) !important;
+  background:#fff !important;
+  box-shadow:0 20px 38px -18px rgba(38,66,110,.55),0 0 0 2px rgba(255,214,165,.75);
+  opacity:.97;transition:none !important;will-change:top}
+.drag-hint{position:fixed;left:50%;top:8px;transform:translateX(-50%);z-index:150;
+  padding:6px 12px;border-radius:999px;background:rgba(62,52,124,.92);color:#fff;
+  font-size:11px;font-weight:900;letter-spacing:-.01em;white-space:nowrap;
+  box-shadow:0 10px 20px -12px rgba(38,66,110,.8);pointer-events:none}
+.drag-hint[hidden]{display:none}
+
 .self-tag{font-size:10.5px;font-weight:800;line-height:1.45;border-radius:11px;padding:6px 10px;margin:0 0 7px}
 .self-tag.space{background:var(--row-bg);border:1px dashed var(--line-strong);color:var(--muted)}
 .self-tag.family{background:var(--soft-bg);border:1px solid var(--soft-line);color:var(--soft-ink)}
@@ -2211,30 +2231,40 @@ body.mode-kid .brand-sub{color:#6E829B}
 .mode-tag.sunwoo{background:linear-gradient(160deg,#7FB2F8,#4C86F5)}
 .mode-tag.jiwoo{background:linear-gradient(160deg,#F9A8C6,#EE6EA2)}
 .mode-tag.viewer{background:linear-gradient(160deg,#8FCBA5,#5E9E78)}
-/* ---------- 👦👧 머리글 아이 전환 캡슐 (#4012 · #4015) ---------- */
+/* ---------- 👦👧 머리글 [선우 | 지우 | 전체] 3단 스위치 (#4012 · #4015 · #6277) ---------- */
 .kidswap{
-  display:inline-flex;align-items:center;gap:4px;flex:0 0 auto;
-  min-height:32px;padding:3px 11px 3px 4px;border:1px solid rgba(255,255,255,.7);border-radius:999px;
-  background:#3B82F6;color:#fff;font-size:11.5px;font-weight:900;letter-spacing:-.01em;
-  cursor:pointer;box-shadow:0 10px 20px -16px rgba(38,66,110,.9);
-  transition:background .18s ease,transform .12s ease;
+  display:inline-flex;align-items:center;gap:2px;flex:0 0 auto;
+  min-height:32px;padding:2px;border:1px solid rgba(120,150,190,.22);border-radius:999px;
+  background:rgba(255,255,255,.92);box-shadow:0 10px 20px -18px rgba(38,66,110,.9);
   -webkit-tap-highlight-color:transparent;
 }
 .kidswap[hidden]{display:none}
-.kidswap.on-jiwoo{background:#EC4899;padding:3px 4px 3px 11px}
-.kidswap:active{transform:scale(.96)}
-.kidswap .ks-side{display:inline-flex;align-items:center;gap:5px}
-.kidswap .ks-av{width:24px;height:24px;border-radius:50%;object-fit:cover;background:#fff;border:2px solid rgba(255,255,255,.95);flex:0 0 auto}
-.kidswap .ks-name{color:#fff;font-size:11.5px;font-weight:900;white-space:nowrap}
-.kidswap .ks-off{color:rgba(255,255,255,.72);font-weight:800;white-space:nowrap}
-.kidswap .ks-flip{width:20px;height:20px;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:11px;font-weight:900;line-height:1;flex:0 0 auto}
-.kidswap.on-seonwoo .ks-flip{color:#3B82F6}
+.kidswap .ks-opt{
+  -webkit-appearance:none;appearance:none;border:0;background:transparent;
+  min-height:26px;padding:4px 8px;border-radius:999px;margin:0;
+  font-family:inherit;font-size:11px;font-weight:900;letter-spacing:-.02em;line-height:1;
+  color:#6E829B;white-space:nowrap;cursor:pointer;
+  transition:background .16s ease,color .16s ease,box-shadow .16s ease;
+}
+.kidswap .ks-opt:hover{color:#3E566F}
+.kidswap .ks-opt[aria-pressed="true"]{color:#fff}
+.kidswap .ks-opt[data-kid="seonwoo"][aria-pressed="true"]{background:#3B82F6;box-shadow:0 6px 12px -8px rgba(59,130,246,.95)}
+.kidswap .ks-opt[data-kid="jiwoo"][aria-pressed="true"]{background:#EC4899;box-shadow:0 6px 12px -8px rgba(236,72,153,.95)}
+.kidswap .ks-opt[data-kid="all"][aria-pressed="true"]{background:#7C6BF2;box-shadow:0 6px 12px -8px rgba(124,107,242,.95)}
+.kidswap:focus-within{outline:2px solid rgba(124,107,242,.35);outline-offset:2px}
+/* ✏️ 「전체 수정 중」 안내 띠 (#6282) */
+.scope-bar{display:flex;align-items:center;gap:7px;margin:0 0 9px;padding:7px 11px;border-radius:13px;
+  background:linear-gradient(135deg,rgba(124,107,242,.13),rgba(91,141,239,.13));
+  border:1px solid rgba(124,107,242,.28);color:#514799;
+  font-size:11px;font-weight:800;letter-spacing:-.01em;line-height:1.35}
+.scope-bar[hidden]{display:none}
+.scope-bar b{font-weight:900;color:#5B4FD6}
 /* 머리글에는 아이 전환 캡슐과 🔒·⚙️만 — 시계·구름 아이콘은 두지 않는다 (#4157) */
 .topbar .clock,.topbar .sync-pill{display:none !important}
 /* 👀 미리보기 중에는 머리글을 통째로 숨기고 「○○ 화면 미리보기 중」 안내부터 시작 (#4138) */
 body.preview-on .topbar{display:none !important}
 @media (min-width:861px){body.preview-on .tabbar{top:0}}
-.kidswap.on-jiwoo .ks-flip{color:#EC4899}
+
 .mini-summary{gap:4px}
 .ms-chip{font-size:10.5px;padding:4px 8px;background:rgba(255,255,255,.85);border-color:rgba(120,150,190,.18);color:#4A5E76}
 .clock strong{font-size:12.5px;color:#2A3A4C}
@@ -2551,12 +2581,8 @@ body[data-face="parent"] .hh-art{max-width:none;right:auto;top:auto}
   .clock strong{font-size:12px}
   .clock span{font-size:9px}
   .sync-pill{max-width:88px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .kidswap{gap:3px;min-height:28px;padding:2px 9px 2px 3px}
-  .kidswap.on-jiwoo{padding:2px 3px 2px 9px}
-  .kidswap .ks-side{gap:4px}
-  .kidswap .ks-av{width:21px;height:21px}
-  .kidswap .ks-name,.kidswap .ks-off{font-size:10.5px}
-  .kidswap .ks-flip{width:17px;height:17px;font-size:10px}
+  .kidswap{gap:1px;min-height:29px;padding:2px}
+  .kidswap .ks-opt{font-size:10.5px;padding:4px 6px;min-height:24px}
   .tabbar{position:fixed;left:8px;right:8px;bottom:calc(8px + env(safe-area-inset-bottom));top:auto;height:auto;
     padding:6px 4px;border-radius:22px;background:rgba(255,255,255,.94);border:1px solid #fff;box-shadow:0 18px 36px -26px rgba(38,66,110,.8);gap:3px}
   /* 6탭은 390px에서도 넉넉하게 — 이름이 잘리지 않는 크기 (#4309) */
@@ -2621,8 +2647,8 @@ body[data-face="parent"] .hh-art{max-width:none;right:auto;top:auto}
         <span id="clockDate">--</span>
       </div>
       <span class="sync-pill" id="syncStatus" data-state="off" hidden title="실시간 동기화"><i id="syncIcon" aria-hidden="true">☁️</i><b id="syncText">실시간 동기화 연결됨</b></span>
-      <!-- 👦👧 엄마 화면의 아이 전환 캡슐 — 자물쇠(🔒) 바로 왼쪽 (#4012 · #4015 · #4213) -->
-      <button type="button" class="kidswap" id="topKidSwitch" hidden></button>
+      <!-- 👦👧 엄마 화면의 아이 전환 — [선우 | 지우 | 전체] 3단 스위치, 자물쇠(🔒) 바로 왼쪽 (#4012 · #4015 · #4213 · #6277) -->
+      <div class="kidswap kid3" id="topKidSwitch" role="group" aria-label="보고 고칠 아이 고르기" hidden></div>
       <!-- 🕒 SCHEDULE은 이제 하단 탭으로 간다 (#5071) — 머리글에는 자물쇠·설정만 -->
       <button class="icon-btn" id="logoutBtn" data-action="auth-logout" aria-label="가족 계정 로그아웃" hidden>🔓 <span>로그아웃</span></button>
       <button class="icon-btn" id="topSettings" data-action="open-settings" aria-label="부모님 설정 열기"><span class="ib-ico" aria-hidden="true">⚙️</span><span class="ib-txt">설정</span></button>
@@ -2635,6 +2661,7 @@ body[data-face="parent"] .hh-art{max-width:none;right:auto;top:auto}
 
   <div id="previewReturnBar" hidden></div>
   <div id="modeBarSlot"></div>
+  <div id="scopeBar" class="scope-bar" hidden><span aria-hidden="true">✏️</span><span><b>전체 수정 중</b> — MY SPACE · STUDY · FAMILY 순서와 이름을 선우·지우에게 함께 반영해요</span></div>
 
   <nav class="tabbar" id="tabBar" role="tablist" aria-label="대시보드 탭">
     <button type="button" class="tab-btn" role="tab" id="tabBtn-home" data-action="tab" data-tab="home" aria-controls="tabPanel-home" aria-selected="true" tabindex="0"><span class="tb-ico" aria-hidden="true">🏠</span><span class="tb-label">HOME</span></button>
@@ -6139,12 +6166,14 @@ function applyRemoteFamily(data){
     var remoteAt = Number(data.updatedAt) || Date.now();
     var keepCurrent = state.current;
     var keepTab = state.activeTab;
+    var keepScope = state.editScope;   /* ✏️ 전체 수정 선택은 기기마다 따로 (#6282) */
     var next = normalize((data.state && typeof data.state === 'object') ? data.state : data);
     /* 보고 있는 아이 탭은 기기마다 다를 수 있으니 이 화면의 선택을 지킨다 */
     if(!isKidMode() && (keepCurrent === 'seonwoo' || keepCurrent === 'jiwoo')) next.current = keepCurrent;
     /* 6탭(#1550): 지금 보고 있는 탭도 기기마다 다르니 이 화면의 선택을 지킨다 */
     if(isTabKey(keepTab)) next.activeTab = keepTab;
     else next.activeTab = TAB_DEFAULT;
+    if(!isKidMode() && (keepScope === 'all' || keepScope === 'seonwoo' || keepScope === 'jiwoo')) next.editScope = keepScope;
     state = next;
     if(isKidMode()) state.current = MODE;
     SYNC.lastRemoteUpdatedAt = Math.max(SYNC.lastRemoteUpdatedAt, remoteAt);
@@ -6272,6 +6301,8 @@ function makeDefaultState(){
   KID_DEFS.forEach(function(kd){
     kids[kd.key] = {
       self: defaultSelfItems(),
+      /* 🔀 매일 공부(수학·받아쓰기·영어숙제·독서)를 꾹 눌러 바꾼 순서 (#6285) */
+      basicOrder: BASIC_TASKS.map(function(t){ return t.id; }),
       days: {},
       momBonusAmount: {},
       dadBonusAmount: {},
@@ -6285,6 +6316,8 @@ function makeDefaultState(){
   return {
     v: 3,
     current: KID_DEFS[0].key,
+    /* ✏️ 전체 수정(#6282): 'seonwoo' | 'jiwoo' | 'all' — 엄마 화면에서 고친 내용이 누구에게 가는지 */
+    editScope: KID_DEFS[0].key,
     activeTab: TAB_DEFAULT,
     month: currentMonthKey(),
     glanceDay: new Date().getDay(),
@@ -6330,11 +6363,134 @@ function selfLabelKey(label){
   var k = selfLabelNorm(label);
   return SELF_LEGACY_LABELS[k] ? selfLabelNorm(SELF_LEGACY_LABELS[k].label) : k;
 }
+
+/* =========================================================
+   ↕️ 꾹 눌러 순서 바꾸기 — 순서 도우미 (#6285)
+   · MY SPACE · FAMILY : state.kids[kid].self 안에서 같은 분류(cat)끼리만 자리를 바꾼다
+     (다른 분류 카드는 제자리에 그대로 — 아침 습관·함께 하기가 섞이지 않는다)
+   · STUDY            : state.kids[kid].basicOrder (매일 공부 4개의 순서)
+   ========================================================= */
+/* 저장된 매일 공부 순서 — 모르는 id 는 버리고, 빠진 과목은 기본 순서 뒤에 붙인다 */
+function cleanBasicOrder(raw){
+  var out = [];
+  if(Array.isArray(raw)){
+    raw.forEach(function(id){
+      if(typeof id !== 'string') return;
+      if(isBasicTaskId(id) && out.indexOf(id) < 0) out.push(id);
+    });
+  }
+  BASIC_TASKS.forEach(function(t){ if(out.indexOf(t.id) < 0) out.push(t.id); });
+  return out;
+}
+function isBasicTaskId(id){
+  for(var i = 0; i < BASIC_TASKS.length; i++){ if(BASIC_TASKS[i].id === id) return true; }
+  return false;
+}
+function basicOrderOf(kidKey){
+  var k = state.kids[kidKey];
+  return cleanBasicOrder(k ? k.basicOrder : null);
+}
+/* 화면·체크에 쓰는 「매일 공부」 순서대로의 항목 */
+function orderedBasicTasks(kidKey){
+  var byId = {};
+  BASIC_TASKS.forEach(function(t){ byId[t.id] = t; });
+  return basicOrderOf(kidKey).map(function(id){ return byId[id]; }).filter(function(t){ return !!t; });
+}
+/* self 목록에서 한 분류(cat)의 카드를 정해진 id 순서로 다시 놓는다.
+   다른 분류 카드와 순서에 없는 카드는 지금 자리 그대로 남는다. */
+function orderSelfItems(self, cat, orderedIds){
+  var byId = {}, queue = [];
+  (self || []).forEach(function(it){ if((it.cat || 'space') === cat) byId[it.id] = it; });
+  (orderedIds || []).forEach(function(id){
+    if(byId[id] && queue.indexOf(id) < 0) queue.push(id);
+  });
+  (self || []).forEach(function(it){
+    if((it.cat || 'space') === cat && queue.indexOf(it.id) < 0) queue.push(it.id);
+  });
+  var i = 0;
+  return (self || []).map(function(it){
+    if((it.cat || 'space') === cat) return byId[queue[i++]];
+    return it;
+  });
+}
+/* 한 아이의 self 안에서 분류(cat) 순서만 바꾼다. 바뀌었으면 true */
+function reorderSelfList(kidKey, cat, orderedIds){
+  var kid = state.kids && state.kids[kidKey];
+  if(!kid || !Array.isArray(kid.self)) return false;
+  var before = kid.self.map(function(it){ return it.id; }).join('|');
+  kid.self = orderSelfItems(kid.self, cat, orderedIds);
+  return kid.self.map(function(it){ return it.id; }).join('|') !== before;
+}
+/* 한 아이의 매일 공부 순서를 바꾼다. 바뀌었으면 true */
+function reorderBasicList(kidKey, orderedIds){
+  var kid = state.kids && state.kids[kidKey];
+  if(!kid) return false;
+  var next = basicOrderOf(kidKey), out = [];
+  (orderedIds || []).forEach(function(id){
+    if(next.indexOf(id) >= 0 && out.indexOf(id) < 0) out.push(id);
+  });
+  next.forEach(function(id){ if(out.indexOf(id) < 0) out.push(id); });
+  var changed = out.join('|') !== next.join('|');
+  kid.basicOrder = out;
+  return changed;
+}
+/* 다른 아이 목록에서 같은 분류·같은 이름의 카드 id 로 바꿔 준다
+   (선우·지우 MY SPACE 기본 카드는 id 가 서로 달라서 이름으로 잇는다) (#6282) */
+function siblingIdsFor(kidKey, cat, orderedIds, targetKid){
+  if(targetKid === kidKey) return orderedIds.slice();
+  var byLabel = {};
+  var target = state.kids && state.kids[targetKid];
+  if(!target) return [];
+  (target.self || []).forEach(function(it){
+    if((it.cat || 'space') === cat) byLabel[selfLabelKey(it.label)] = it.id;
+  });
+  var out = [];
+  (orderedIds || []).forEach(function(id){
+    var it = findSelfItem(kidKey, id);
+    if(!it) return;
+    var nid = byLabel[selfLabelKey(it.label)];
+    if(nid && out.indexOf(nid) < 0) out.push(nid);
+  });
+  return out;
+}
+/* MY SPACE · FAMILY 순서 바꾸기
+   · 전체 수정이면 두 아이 모두 (#6282)
+   · FAMILY TEAM 은 언제나 온 가족 미션이라 두 아이 모두 (#6293) */
+function reorderSelfForScope(kidKey, cat, orderedIds){
+  var changed = false;
+  var targets = (cat === 'family') ? bothKidKeys() : scopeKidKeys();
+  targets.forEach(function(k){
+    if(!state.kids[k]) return;
+    if(reorderSelfList(k, cat, siblingIdsFor(kidKey, cat, orderedIds, k))) changed = true;
+  });
+  return changed;
+}
+/* STUDY 매일 공부 순서 바꾸기 — 전체 수정이면 두 아이 모두 (#6282) */
+function reorderBasicForScope(kidKey, orderedIds){
+  var changed = false;
+  scopeKidKeys().forEach(function(k){
+    if(!state.kids[k]) return;
+    if(reorderBasicList(k, orderedIds)) changed = true;
+  });
+  return changed;
+}
+/* 같은 카드인지 가르는 열쇠 — 분류 + 이름 + 아이콘 (#6109 · #6304)
+   · 같은 분류·같은 이름이라도 아이콘이 다르면 서로 다른 항목이에요 (🍎 간식 정리 / 🍪 간식 정리)
+   · 예전 이름(물통 비우고… · 양말 짝 맞추기)과 그렇게 이름이 바뀐 「물통 정리」·「먹은 자리 정리」는
+     아이콘이 달라도 같은 항목이라 한 장으로 (#6109 · #6310) */
+var SELF_LEGACY_MERGE_TITLES = { '물통정리': 1, '먹은자리정리': 1 };
+function selfDedupeKey(it){
+  var cat = it.cat || 'space';
+  var raw = selfLabelNorm(it.label);
+  var key = selfLabelKey(it.label);
+  if(SELF_LEGACY_LABELS[raw] || SELF_LEGACY_MERGE_TITLES[key]) return cat + '|' + key + '|~legacy';
+  return cat + '|' + key + '|' + (it.icon || '');
+}
 function dedupeSelfItems(list){
   var out = [], remap = {}, seen = {}, changed = false;
   (list || []).forEach(function(it){
     if(!it || !it.label) return;
-    var key = (it.cat || 'space') + '|' + selfLabelKey(it.label);
+    var key = selfDedupeKey(it);
     if(seen[key] === undefined){
       seen[key] = out.length;
       out.push(it);
@@ -6386,6 +6542,10 @@ function normalize(raw){
   var s = {
     v: 3,
     current: (raw.current === 'jiwoo' || raw.current === 'seonwoo') ? raw.current : base.current,
+    /* ✏️ 전체 수정(#6282) — 저장된 선택이 없으면 지금 보는 아이 한 명 */
+    editScope: (raw.editScope === 'all' || raw.editScope === 'jiwoo' || raw.editScope === 'seonwoo')
+      ? raw.editScope
+      : ((raw.current === 'jiwoo') ? 'jiwoo' : 'seonwoo'),
     activeTab: isTabKey(raw.activeTab) ? raw.activeTab : TAB_DEFAULT,
     month: /^\d{4}-\d{2}$/.test(raw.month || '') ? raw.month : currentMonthKey(),
     glanceDay: (function(){
@@ -6695,6 +6855,8 @@ function normalize(raw){
     var tUsedCycle = tLegacy ? -1 : num(tSrc.usedCycle, -1, -1, 100000);
     s.kids[kd.key] = {
       self: self,
+      /* 🔀 꾹 눌러 바꾼 매일 공부 순서 — 목록에 없는 id 는 뒤에 기본 순서로 붙는다 (#6285) */
+      basicOrder: cleanBasicOrder(src.basicOrder),
       days: days,
       momBonusAmount: momBonusAmount,
       dadBonusAmount: dadBonusAmount,
@@ -7725,36 +7887,55 @@ function renderMiniSummary(){
   root.innerHTML = html;
 }
 
+/* ✏️ 지금 고친 내용이 누구에게 가는지 — 'seonwoo' | 'jiwoo' | 'all' (#6282)
+   · 선우 · 지우: 그 아이 목록만 보고 고친다
+   · 전체: 화면은 지금 보는 아이 것을 그대로 보여 주고, 순서·이름·추가·삭제를 두 아이에게 함께 반영 */
+function editScopeNow(){
+  var cur = state.current === 'jiwoo' ? 'jiwoo' : 'seonwoo';
+  if(!isParentMode()) return cur;   /* 아이·아빠 화면은 한 명씩 */
+  var sc = state.editScope;
+  return (sc === 'all' || sc === 'jiwoo' || sc === 'seonwoo') ? sc : cur;
+}
+function bothKidKeys(){ return KID_DEFS.map(function(kd){ return kd.key; }); }
+/* 고친 내용을 함께 저장할 아이들 — 전체 수정이면 둘 다 (#6282) */
+function scopeKidKeys(forceAll){
+  var cur = state.current === 'jiwoo' ? 'jiwoo' : 'seonwoo';
+  if(forceAll || editScopeNow() === 'all') return bothKidKeys();
+  return [cur];
+}
 function renderKidSwitch(){
-  /* 👦👧 머리글의 아이 전환 캡슐 (#4012 · #4015)
-     · 엄마·아빠 화면: [선우 ⇄ 지우] 캡슐 하나 — 지금 보는 아이 쪽에 얼굴, 캡슐은 그 아이 색
-     · 선우·지우 전용 화면: 캡슐 대신 「선우 전용」 배지(#modeTag)만 */
+  /* 👦👧 머리글의 [선우 | 지우 | 전체] 3단 스위치 (#4012 · #4015 · #6277 · #6282)
+     · 엄마 화면: 지금 보고 고치는 범위가 켜진 알약으로 보인다
+     · 선우·지우·아빠 화면: 스위치 대신 그 사람 배지(#modeTag)만 */
   var swap = $('#topKidSwitch');
-  if(swap){
-    if(!isParentMode()){
-      /* 선우·지우·아빠 화면: 캡슐 없이 그 사람 배지(#modeTag)만 (#4081) */
-      swap.hidden = true;
-      swap.innerHTML = '';
-      swap.removeAttribute('data-action');
-      swap.removeAttribute('data-kid');
-    }else{
-      var cur = state.current === 'jiwoo' ? 'jiwoo' : 'seonwoo';
-      var other = cur === 'seonwoo' ? 'jiwoo' : 'seonwoo';
-      var cd = kidDef(cur), od = kidDef(other);
-      var onSide = '<span class="ks-side"><img class="ks-av" src="' + kidAvatarOf(cur) + '" alt=""><b class="ks-name">' + esc(cd.name) + '</b></span>';
-      var offSide = '<span class="ks-side ks-off">' + esc(od.name) + '</span>';
-      swap.hidden = false;
-      swap.className = 'kidswap on-' + cur;
-      swap.setAttribute('data-action', 'select-kid');
-      swap.setAttribute('data-kid', other);
-      swap.setAttribute('aria-label', esc(od.name) + ' 화면으로 바꾸기');
-      swap.setAttribute('title', esc(od.name) + ' 화면으로 바꾸기');
-      swap.innerHTML = (cur === 'seonwoo' ? onSide : offSide) +
-        '<span class="ks-flip" aria-hidden="true">⇄</span>' +
-        (cur === 'seonwoo' ? offSide : onSide);
-    }
+  if(!swap) return;
+  if(!isParentMode()){
+    swap.hidden = true;
+    swap.innerHTML = '';
+    swap.removeAttribute('data-action');
+    swap.removeAttribute('data-kid');
+    return;
   }
-  /* 다른 탭에서는 왼쪽 아이 알약을 없애고, 오른쪽에 아이의 리워드 요약만 (#4325 · #4333) */
+  var scope = editScopeNow();
+  swap.hidden = false;
+  swap.className = 'kidswap kid3 on-' + scope;
+  var html = KID_DEFS.map(function(kd){
+    var on = (scope === kd.key);
+    return '<button type="button" class="ks-opt" data-action="select-kid" data-kid="' + kd.key + '"' +
+      ' aria-pressed="' + (on ? 'true' : 'false') + '"' +
+      ' aria-label="' + esc(kd.name) + (on ? ' 화면 (지금)' : ' 화면으로 바꾸기') + '">' + esc(kd.name) + '</button>';
+  }).join('');
+  html += '<button type="button" class="ks-opt ks-all" data-action="select-kid" data-kid="all"' +
+    ' aria-pressed="' + (scope === 'all' ? 'true' : 'false') + '"' +
+    ' aria-label="전체 수정' + (scope === 'all' ? ' (지금)' : ' · 선우·지우 함께 고치기') + '">전체</button>';
+  swap.innerHTML = html;
+  swap.setAttribute('aria-label', '보고 고칠 아이 고르기 · 지금 ' + (scope === 'all' ? '전체' : kidDef(scope).name));
+}
+function renderScopeBar(){
+  /* ✏️ 전체 수정 중일 때만 보이는 안내 띠 (#6282) */
+  var el = $('#scopeBar');
+  if(!el) return;
+  el.hidden = !(isParentMode() && editScopeNow() === 'all');
 }
 function renderTopAvatar(){
   /* 👩‍💼 엄마(관리) 화면에만 왼쪽 동그란 얼굴 — 미리보기·아이·아빠 화면에서는 숨김 (#4367) */
@@ -7987,9 +8168,10 @@ function renderMissions(){
   var lastDoneId = '';
   if(studyAll){
     if(d.basicLast && d.basic[d.basicLast]) lastDoneId = d.basicLast;
-    else BASIC_TASKS.forEach(function(t){ if(d.basic[t.id]) lastDoneId = t.id; });
+    else orderedBasicTasks(kidKey).forEach(function(t){ if(d.basic[t.id]) lastDoneId = t.id; });
   }
-  BASIC_TASKS.forEach(function(t){
+  /* 🔀 엄마가 꾹 눌러 바꾼 순서대로 (#6285) */
+  orderedBasicTasks(kidKey).forEach(function(t){
     var isDone = !!d.basic[t.id];
     var stamp = !isDone ? '' : (t.id === lastDoneId ? 'CLEAR!' : 'DONE!');
     var stampCls = (stamp === 'CLEAR!') ? ' st-clear' : (stamp === 'DONE!' ? ' st-done' : '');
@@ -10100,6 +10282,7 @@ function renderAll(){
   renderHome();
   renderHeroHead();
   renderUserMenu();
+  renderScopeBar();
   renderClock();
   renderMiniSummary();
   renderKidSwitch();
@@ -10395,13 +10578,25 @@ function createSelf(){
   var icon = typed || ITEM_EDIT_ICON || (isFam ? '🤝' : (pendingSelfCat === 'morning' ? '🌤️' : '✅'));
   if(ITEM_EDIT_MANUAL || typed) rememberEmojiForTitle(label, icon);
   var newSelfId = uid();
-  state.kids[state.current].self.push({ id: newSelfId, label: label, desc: desc, icon: icon, cat: pendingSelfCat, reward: reward });
-  dedupeKidSelfNow(state.current);
+  /* ✏️ 전체 수정이면 두 아이에게 함께, FAMILY TEAM 은 언제나 온 가족에게 (#6282 · #6293) */
+  var targets = (pendingSelfCat === 'family') ? bothKidKeys() : scopeKidKeys();
+  targets.forEach(function(k){
+    var kid = state.kids[k];
+    if(!kid) return;
+    kid.self.push({
+      id: (k === state.current ? newSelfId : uid()),
+      label: label, desc: desc, icon: icon, cat: pendingSelfCat, reward: reward
+    });
+    dedupeKidSelfNow(k);
+  });
   saveState();
   closeModal();
   renderAll();
   var addedNow = state.kids[state.current].self.some(function(it){ return it.id === newSelfId; });
-  toast(addedNow ? ('"' + label + '" 항목을 추가했어요') : ('"' + label + '"은(는) 이미 있어서 한 장으로 합쳤어요'));
+  var whoNames = targets.map(function(k){ return kidDef(k).name; }).join('·');
+  toast(addedNow
+    ? ('"' + label + '" 항목을 ' + (targets.length > 1 ? whoNames + '에게 ' : '') + '추가했어요')
+    : ('"' + label + '"은(는) 이미 있어서 한 장으로 합쳤어요'));
 }
 function editSelfModal(id){
   if(!isParentMode()) return;
@@ -10438,8 +10633,39 @@ function saveSelf(id){
   var typed = freeEl ? String(freeEl.value || '').trim().slice(0, 4) : '';
   var icon = typed || ITEM_EDIT_ICON || '';
   if(ITEM_EDIT_MANUAL || typed) rememberEmojiForTitle(label, icon);
-  state.kids[state.current].self.forEach(function(s){ if(s.id === id){ s.label = label; s.desc = desc; if(icon) s.icon = icon; } });
-  dedupeKidSelfNow(state.current);
+  var kidKey = state.current;
+  var item = findSelfItem(kidKey, id);
+  if(!item) return;
+  var oldKey = selfLabelKey(item.label);
+  var oldIcon = item.icon || '';
+  var itemCat = item.cat || 'space';
+  item.label = label;
+  item.desc = desc;
+  if(icon) item.icon = icon;
+  /* ✏️ 전체 수정이면 다른 아이의 같은 카드도 함께 고친다 (#6282 · #6293) */
+  var targets = (itemCat === 'family') ? bothKidKeys() : scopeKidKeys();
+  targets.forEach(function(k){
+    if(k === kidKey) return;
+    var other = state.kids[k];
+    if(!other) return;
+    var hit = null;
+    (other.self || []).forEach(function(s){ if(!hit && s.id === id) hit = s; });
+    if(!hit){
+      (other.self || []).forEach(function(s){
+        if(hit) return;
+        if((s.cat || 'space') !== itemCat) return;
+        if(selfLabelKey(s.label) !== oldKey) return;
+        if((s.icon || '') !== oldIcon) return;
+        hit = s;
+      });
+    }
+    if(!hit) return;
+    hit.label = label;
+    hit.desc = desc;
+    if(icon) hit.icon = icon;
+    dedupeKidSelfNow(k);
+  });
+  dedupeKidSelfNow(kidKey);
   saveState();
   closeModal();
   renderAll();
@@ -10458,12 +10684,33 @@ function deleteSelf(id){
     ok:'지우기',
     okClass:'btn-danger',
     onOk:function(){
-      state.kids[kidKey].self = state.kids[kidKey].self.filter(function(s){ return s.id !== id; });
-      var d = state.kids[kidKey].days[dayKey()];
-      if(d && d.self) delete d.self[id];
+      var cat = item.cat || 'space';
+      var oldKey = selfLabelKey(item.label);
+      var oldIcon = item.icon || '';
+      /* ✏️ 전체 수정이면 두 아이에서 함께 지운다 (#6282 · #6293) */
+      var targets = (cat === 'family') ? bothKidKeys() : scopeKidKeys();
+      targets.forEach(function(k){
+        var kid = state.kids[k];
+        if(!kid) return;
+        var hitId = null;
+        (kid.self || []).forEach(function(s){ if(!hitId && s.id === id) hitId = s.id; });
+        if(!hitId){
+          (kid.self || []).forEach(function(s){
+            if(hitId) return;
+            if((s.cat || 'space') !== cat) return;
+            if(selfLabelKey(s.label) !== oldKey) return;
+            if((s.icon || '') !== oldIcon) return;
+            hitId = s.id;
+          });
+        }
+        if(!hitId) return;
+        kid.self = kid.self.filter(function(s){ return s.id !== hitId; });
+        var dd = kid.days[dayKey()];
+        if(dd && dd.self) delete dd.self[hitId];
+      });
       saveState();
       renderAll();
-      toast('항목을 지웠어요');
+      toast(targets.length > 1 ? '두 아이 목록에서 함께 지웠어요' : '항목을 지웠어요');
     }
   });
 }
@@ -10794,16 +11041,24 @@ function settingsAddSelf(kidKey, cat){
   var label = inp ? String(inp.value || '').trim().slice(0, 20) : '';
   if(!label){ toast('항목 이름을 적어 주세요'); if(inp) inp.focus(); return; }
   var newAddId = uid();
-  state.kids[kidKey].self.push({
-    id: newAddId, label: label, desc:'', icon: (c === 'family' ? '🤝' : (c === 'morning' ? '🌤️' : '✅')), cat: c,
-    reward: (c === 'family') ? (Number(state.settings.familyReward) || 500) : 0
+  /* ✏️ 전체 수정이면 두 아이에게 함께 넣는다 (#6282) */
+  var targets = (isParentMode() && kidKey === state.current && editScopeNow() === 'all') ? bothKidKeys() : [kidKey];
+  targets.forEach(function(k){
+    var kid = state.kids[k];
+    if(!kid) return;
+    kid.self.push({
+      id: (k === kidKey ? newAddId : uid()), label: label, desc:'',
+      icon: (c === 'family' ? '🤝' : (c === 'morning' ? '🌤️' : '✅')), cat: c,
+      reward: (c === 'family') ? (Number(state.settings.familyReward) || 500) : 0
+    });
+    dedupeKidSelfNow(k);
   });
-  dedupeKidSelfNow(kidKey);
   saveState();
   openSettings();
   renderAll();
   var addedOk = state.kids[kidKey].self.some(function(it){ return it.id === newAddId; });
-  if(addedOk) toast(kidDef(kidKey).name + '에게 "' + label + '" 항목 추가!');
+  var whoAdd = targets.map(function(k){ return kidDef(k).name; }).join('·');
+  if(addedOk) toast(whoAdd + '에게 "' + label + '" 항목 추가!');
   else toast('"' + label + '"은(는) 이미 있어서 한 장으로 합쳤어요');
 }
 function armReset(){
@@ -11417,15 +11672,25 @@ document.addEventListener('click', function(e){
     case 'undo-hundred': undoHundred(target.getAttribute('data-id')); break;
     case 'retry-weather': closeModal(); fetchWeather(); break;
     case 'weather-detail': openWeatherDetail(); break;
-    case 'select-kid':
+    case 'select-kid': {
       if(!isParentMode() && !isDadMode()) return;
       var kid = target.getAttribute('data-kid');
-      if(kid && state.kids[kid] && state.current !== kid){
-        state.current = kid;
+      /* ✏️ 전체 — 지금 보는 화면은 그대로 두고 두 아이에게 함께 반영 (#6282) */
+      if(kid === 'all'){
+        if(!isParentMode()) return;
+        state.editScope = 'all';
         saveState();
         renderAll();
+        toast('✏️ 전체 수정 — 선우·지우에게 함께 반영돼요');
+        break;
       }
+      if(!kid || !state.kids[kid]) return;
+      var scopeChanged = (state.editScope !== kid);
+      if(state.current !== kid){ state.current = kid; scopeChanged = true; }
+      state.editScope = kid;
+      if(scopeChanged){ saveState(); renderAll(); }
       break;
+    }
     case 'toggle-basic': toggleBasic(target.getAttribute('data-id')); break;
     case 'toggle-self': toggleSelf(target.getAttribute('data-id')); break;
     case 'set-team': setTeam(target.getAttribute('data-id'), target.getAttribute('data-team')); break;
@@ -11525,6 +11790,236 @@ document.addEventListener('click', function(e){
     default: break;
   }
 });
+
+/* =========================================================
+   ↕️ 꾹 눌러 순서 바꾸기 (#6285 · #6282 · #6293)
+   핸드폰 앱 아이콘을 옮기듯 0.38초 꾹 누르면 카드가 살짝 떠오르고,
+   위아래로 끌어 MY SPACE · STUDY · FAMILY TEAM 순서를 바꾼다. (엄마 화면에서만)
+   · 0.38초 전에 8px 넘게 움직이면 바로 취소 — 평소 스크롤을 절대 가로채지 않아요
+   · 손을 떼면 state 에 저장하고 localStorage · Firebase 로 함께 보냅니다
+   · 방금 끈 카드의 click 은 삼켜서 미션이 엉뚱하게 체크되지 않게 합니다
+   ========================================================= */
+var DRAG_HOLD_MS = 380;
+var DRAG_SLOP = 8;
+var DRAG_EDGE = 80;
+var dragState = null;
+var dragSuppressClick = false;
+
+/* 끌 수 있는 카드인지 — MY SPACE(#spaceList) · FAMILY(#familyList) · STUDY(#basicList)만 */
+function dragTargetOf(el){
+  if(!el || !el.closest) return null;
+  if(el.closest('button,a,input,select,textarea,label')) return null;
+  var card = el.closest('.chore-card[data-id]');
+  if(card && card.parentNode && (card.parentNode.id === 'spaceList' || card.parentNode.id === 'familyList')){
+    return {
+      card: card, container: card.parentNode, kind: 'self',
+      cat: (card.parentNode.id === 'familyList') ? 'family' : 'space',
+      idAttr: 'data-id', selector: '.chore-card[data-id]'
+    };
+  }
+  var row = el.closest('.task-row[data-basic-id]');
+  if(row && row.parentNode && row.parentNode.id === 'basicList'){
+    return { card: row, container: row.parentNode, kind: 'basic', cat: '', idAttr: 'data-basic-id', selector: '.task-row[data-basic-id]' };
+  }
+  return null;
+}
+function dragPointerDown(e){
+  if(!isParentMode()) return;
+  if(dragState) return;
+  if(document.body.classList.contains('modal-open')) return;
+  if(e.isPrimary === false) return;
+  if(e.pointerType === 'mouse' && e.button > 0) return;
+  var t = dragTargetOf(e.target);
+  if(!t) return;
+  dragState = {
+    card: t.card, container: t.container, kind: t.kind, cat: t.cat,
+    idAttr: t.idAttr, selector: t.selector,
+    kid: state.current === 'jiwoo' ? 'jiwoo' : 'seonwoo',
+    pointerId: (e.pointerId === undefined || e.pointerId === null) ? null : e.pointerId,
+    startX: Number(e.clientX) || 0, startY: Number(e.clientY) || 0,
+    lastX: Number(e.clientX) || 0, lastY: Number(e.clientY) || 0,
+    grabDy: 0, active: false, timer: 0, placeholder: null, raf: 0, scrollDir: 0
+  };
+  dragState.timer = setTimeout(dragActivate, DRAG_HOLD_MS);
+  document.addEventListener('pointermove', dragPointerMove, { passive: false });
+  document.addEventListener('pointerup', dragPointerUp);
+  document.addEventListener('pointercancel', dragPointerUp);
+}
+function dragCleanup(){
+  var ds = dragState;
+  if(!ds) return;
+  if(ds.timer) clearTimeout(ds.timer);
+  if(ds.raf && window.cancelAnimationFrame){ try{ window.cancelAnimationFrame(ds.raf); }catch(e){} }
+  document.removeEventListener('pointermove', dragPointerMove, { passive: false });
+  document.removeEventListener('pointerup', dragPointerUp);
+  document.removeEventListener('pointercancel', dragPointerUp);
+  document.removeEventListener('touchmove', dragTouchMove, { passive: false });
+  document.removeEventListener('contextmenu', dragBlockMenu);
+  if(ds.placeholder && ds.placeholder.parentNode) ds.placeholder.parentNode.removeChild(ds.placeholder);
+  if(ds.card){
+    ds.card.classList.remove('dragging');
+    ds.card.style.position = '';
+    ds.card.style.left = '';
+    ds.card.style.top = '';
+    ds.card.style.width = '';
+    ds.card.style.height = '';
+  }
+  if(document.body) document.body.classList.remove('drag-active');
+  var hint = document.getElementById('dragHint');
+  if(hint) hint.hidden = true;
+  dragState = null;
+}
+function dragActivate(){
+  var ds = dragState;
+  if(!ds || ds.active) return;
+  if(!ds.card || !ds.card.parentNode || !document.body.contains(ds.card)){ dragCleanup(); return; }
+  ds.active = true;
+  var rect = (ds.card.getBoundingClientRect ? ds.card.getBoundingClientRect() : null) || { left:0, top:0, width:0, height:0 };
+  ds.grabDy = Math.max(0, Math.min(rect.height || 0, ds.startY - rect.top));
+  var ph = document.createElement(ds.container.tagName === 'UL' ? 'li' : 'div');
+  ph.className = 'drag-slot';
+  ph.setAttribute('aria-hidden', 'true');
+  if(rect.height) ph.style.height = rect.height + 'px';
+  ds.container.insertBefore(ph, ds.card);
+  ds.placeholder = ph;
+  ds.card.classList.add('dragging');
+  if(rect.width) ds.card.style.width = rect.width + 'px';
+  if(rect.height) ds.card.style.height = rect.height + 'px';
+  ds.card.style.left = rect.left + 'px';
+  ds.card.style.top = rect.top + 'px';
+  document.body.classList.add('drag-active');
+  /* 끄는 동안에만: 화면 스크롤·길게 누르기 메뉴 막기 */
+  document.addEventListener('touchmove', dragTouchMove, { passive: false });
+  document.addEventListener('contextmenu', dragBlockMenu);
+  var hint = document.getElementById('dragHint');
+  if(!hint){
+    hint = document.createElement('div');
+    hint.id = 'dragHint';
+    hint.className = 'drag-hint';
+    hint.setAttribute('role', 'status');
+    hint.textContent = '↕ 순서 바꾸는 중 — 손을 떼면 저장돼요';
+    document.body.appendChild(hint);
+  }
+  hint.hidden = false;
+  dragFollow(ds.lastX, ds.lastY);
+}
+function dragTouchMove(e){
+  if(dragState && dragState.active && e.cancelable && e.preventDefault) e.preventDefault();
+}
+function dragBlockMenu(e){
+  if(dragState && dragState.active && e.preventDefault) e.preventDefault();
+}
+function dragPointerMove(e){
+  var ds = dragState;
+  if(!ds) return;
+  if(ds.pointerId !== null && e.pointerId !== undefined && e.pointerId !== null && e.pointerId !== ds.pointerId) return;
+  var x = Number(e.clientX) || 0, y = Number(e.clientY) || 0;
+  ds.lastX = x; ds.lastY = y;
+  if(!ds.active){
+    /* 아직 길게 누르기 전 — 조금이라도 움직이면 스크롤로 보고 손을 뗀다 */
+    if(Math.abs(x - ds.startX) > DRAG_SLOP || Math.abs(y - ds.startY) > DRAG_SLOP) dragCleanup();
+    return;
+  }
+  if(e.cancelable && e.preventDefault) e.preventDefault();
+  dragFollow(x, y);
+  dragAutoScroll(y);
+}
+/* 끌고 있는 카드와 자리표시(.drag-slot)를 손가락 위치로 옮긴다 */
+function dragFollow(x, y){
+  var ds = dragState;
+  if(!ds || !ds.active) return;
+  if(ds.card) ds.card.style.top = (y - ds.grabDy) + 'px';
+  var ph = ds.placeholder, box = ds.container;
+  if(!ph || !box) return;
+  var items = [];
+  Array.prototype.forEach.call(box.children, function(ch){
+    if(ch === ph || ch === ds.card) return;
+    if(ch.nodeType === 1 && ch.matches && ch.matches(ds.selector)) items.push(ch);
+  });
+  if(!items.length) return;
+  var best = null, bestAfter = false, bestDist = Infinity;
+  items.forEach(function(it){
+    var r = it.getBoundingClientRect ? it.getBoundingClientRect() : null;
+    if(!r) return;
+    var cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+    var dist = Math.abs(y - cy) * 1.25 + Math.abs(x - cx);
+    if(dist < bestDist){
+      bestDist = dist;
+      best = it;
+      bestAfter = (y > cy + 2) || (Math.abs(y - cy) <= r.height / 2 && x > cx);
+    }
+  });
+  if(!best) return;
+  var ref = items[items.indexOf(best) + (bestAfter ? 1 : 0)] || null;
+  if(ref === ph) return;
+  if(ph.parentNode === box && ph.nextElementSibling === ref) return;
+  box.insertBefore(ph, ref);
+}
+/* 화면 맨 위·아래 80px 안으로 오면 창을 천천히 따라 굴린다 */
+function dragAutoScroll(y){
+  var ds = dragState;
+  if(!ds || !ds.active) return;
+  var h = window.innerHeight || 0;
+  var dir = 0;
+  if(h){
+    if(y < DRAG_EDGE) dir = -1;
+    else if(y > h - DRAG_EDGE) dir = 1;
+  }
+  ds.scrollDir = dir;
+  if(dir && !ds.raf) dragScrollStep();
+}
+function dragScrollStep(){
+  var ds = dragState;
+  if(!ds || !ds.active || !ds.scrollDir){ if(ds) ds.raf = 0; return; }
+  if(typeof window.scrollBy === 'function') window.scrollBy(0, ds.scrollDir * 9);
+  dragFollow(ds.lastX, ds.lastY);
+  ds.raf = window.requestAnimationFrame ? window.requestAnimationFrame(dragScrollStep) : setTimeout(dragScrollStep, 16);
+}
+/* 지금 화면 차례대로 카드 id 를 모은다 (자리표시 자리에 끌던 카드가 들어간다) */
+function dragCollectIds(ds){
+  var ids = [];
+  if(!ds || !ds.container || !ds.card) return ids;
+  var draggedId = ds.card.getAttribute(ds.idAttr);
+  Array.prototype.forEach.call(ds.container.children, function(ch){
+    if(ch === ds.card) return;
+    if(ch === ds.placeholder){ if(draggedId) ids.push(draggedId); return; }
+    if(ch.nodeType === 1 && ch.matches && ch.matches(ds.selector)){
+      var id = ch.getAttribute(ds.idAttr);
+      if(id) ids.push(id);
+    }
+  });
+  return ids;
+}
+function dragPointerUp(e){
+  var ds = dragState;
+  if(!ds) return;
+  if(ds.pointerId !== null && e && e.pointerId !== undefined && e.pointerId !== null && e.pointerId !== ds.pointerId) return;
+  if(!ds.active){ dragCleanup(); return; }
+  var ids = dragCollectIds(ds);
+  var kind = ds.kind, cat = ds.cat, kid = ds.kid;
+  dragCleanup();
+  /* 손을 뗀 직후 따라오는 click 은 먹지 않는다 — 미션이 저절로 체크되지 않게 */
+  dragSuppressClick = true;
+  setTimeout(function(){ dragSuppressClick = false; }, 700);
+  if(!ids.length) return;
+  var changed = (kind === 'basic') ? reorderBasicForScope(kid, ids) : reorderSelfForScope(kid, cat, ids);
+  if(changed){
+    saveState();
+    renderAll();
+    toast('순서를 바꿨어요!');
+  }
+}
+/* 끌던 카드에서 올라온 click 한 번만 삼킨다 (#6285) */
+document.addEventListener('click', function(e){
+  if(!dragSuppressClick) return;
+  dragSuppressClick = false;
+  if(e.preventDefault) e.preventDefault();
+  if(e.stopPropagation) e.stopPropagation();
+  if(e.stopImmediatePropagation) e.stopImmediatePropagation();
+}, true);
+document.addEventListener('pointerdown', dragPointerDown, { passive: true });
+/* 창 밖에서 손을 떼면 pointerup 이 오지 않는다 — 그때도 끌던 자리로 마무리 */
+window.addEventListener('blur', function(){ if(dragState) dragPointerUp({}); });
 
 /* 🏠 학원 이름을 치는 동안 '집'이면 주소·할 일 칸 안내가 바뀐다 (#3598) */
 document.addEventListener('input', function(e){
@@ -11704,6 +12199,11 @@ function boot(){
       tabs: function(){ return TAB_KEYS.slice(); },
       currentMode: function(){ return MODE; },
       initialMode: function(){ return INITIAL_URL_MODE; },
+      /* ✏️ 전체 수정 · ↕️ 꾹 눌러 순서 바꾸기 (#6282 · #6285) */
+      editScope: function(){ return editScopeNow(); },
+      basicOrder: function(kid){ return basicOrderOf(kid || state.current); },
+      reorderSelf: function(kid, cat, ids){ return reorderSelfForScope(kid || state.current, cat || 'space', ids || []); },
+      reorderBasic: function(kid, ids){ return reorderBasicForScope(kid || state.current, ids || []); },
       familyEvents: function(){ return familyEvents().slice(); },
       getState: function(){ return JSON.parse(JSON.stringify(state)); },
       affirmations: function(){ return AFFIRMATIONS.slice(); },
