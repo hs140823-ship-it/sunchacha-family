@@ -726,6 +726,42 @@ details.ac-add[open] summary{margin-bottom:9px}
 .ac-item{cursor:pointer;transition:border-color .15s ease,background .15s ease}
 .ac-item:hover{border-color:#C3DCF5;background:#FBFDFF}
 
+/* ---------- 🕒 SCHEDULE · 세로 동선 v31 ---------- */
+/* 「🏫 오늘의 학원」 옆 오늘 날짜 */
+.ac-date{font-size:11px;font-weight:900;color:#7A8DA3;background:#F4F8FC;border:1px solid #E4EDF7;border-radius:999px;
+  padding:2px 8px;margin-left:6px;white-space:nowrap;letter-spacing:-.01em;vertical-align:middle}
+/* 세로 동선 — 학교·정류장은 얇은 한 줄 박스, 차량은 그 사이 한 줄 (#v31) */
+.ac-thin{display:flex;align-items:center;justify-content:center;gap:5px;flex-wrap:wrap;padding:5px 9px;border-radius:11px;
+  border:1px solid var(--line-strong);background:var(--row-bg);font-size:11px;font-weight:900;color:var(--ink-2);
+  text-align:center;word-break:keep-all;line-height:1.3}
+.ac-thin small{font-size:10px;font-weight:800;color:var(--muted)}
+.ac-thin.school{background:var(--wday-bg);border-color:var(--wday-line);color:var(--wday-tink);margin-bottom:5px}
+.ac-thin.school b{font-weight:900}
+.ac-thin.stop{background:#FBFDFF;border-style:dashed;color:var(--ink-2)}
+.ac-thin.home-stop{background:var(--done-soft);border-color:var(--done-line);color:var(--done-ink)}
+.ac-leg.veh{justify-content:center;font-size:10.5px;font-weight:900;color:#3D6FA8;background:#F2F8FF;border:1px dashed #CFE3F7;
+  border-radius:999px;padding:2px 9px;margin:2px auto;max-width:100%}
+.ac-leg.veh small{font-size:9.5px;color:#6F8CAD;font-weight:800}
+.ac-leg.veh b{font-weight:900}
+/* ➕ 학원 · 셔틀 동선 추가 — 시작/종료 시간 2열 고정 (#v31 · 360px 겹침 없음) */
+.ac-time-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;align-items:start}
+.ac-time-row > .ac-time-field{flex:0 0 auto;width:100%;min-width:0}
+.ac-time-field input{box-sizing:border-box;min-width:0;max-width:100%;-webkit-appearance:none;appearance:none}
+.ac-pick-block{display:flex;flex-direction:column;gap:4px;min-width:0}
+.ac-pick-label{font-size:9.5px;font-weight:900;color:#9C8B7A;letter-spacing:.02em}
+.ac-emoji-row,.ac-stop-row{display:flex;flex-wrap:wrap;gap:4px;min-width:0}
+.ac-emo{display:inline-flex;flex-direction:column;align-items:center;gap:0;min-width:44px;padding:3px 5px 2px;
+  border:1px solid var(--line-strong);border-radius:11px;background:#fff;font-size:15px;line-height:1.15;cursor:pointer}
+.ac-emo small{font-size:8px;font-weight:800;color:var(--muted);line-height:1.1}
+.ac-emo.on{border-color:#7FB8DE;background:#EAF6FF}
+.ac-emo.on small{color:#3D6FA8}
+.ac-stop{display:inline-flex;align-items:center;gap:4px;min-height:34px;padding:5px 10px;border-radius:999px;
+  border:1px solid var(--line-strong);background:#fff;font-size:11.5px;font-weight:900;color:var(--ink-2);
+  white-space:nowrap;cursor:pointer}
+.ac-stop.on{border-color:#7FB8DE;background:#EAF6FF;color:#1E5C86}
+.ac-bus-row[hidden],.ac-bus-time-row[hidden],.ac-form-row[hidden]{display:none !important}
+.ac-hide{position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none}
+
 /* ---------- evening routine ---------- */
 .evening{
   display:flex;align-items:center;gap:9px;
@@ -1227,6 +1263,48 @@ button.tt-cell:hover{background:#F7FCFF;border-color:#CDE7F8}
   border-radius:10px;padding:5px 0}
 .tt-hint{font-size:10.5px;font-weight:700;color:var(--muted);margin:8px 0 0;text-align:center;line-height:1.5}
 .tt-foot{font-size:9.5px;font-weight:700;color:#A9B6C2;margin:6px 0 0;text-align:center}
+/* 🏫 학교 정보 · 수업 시간 고르기 (#v31) */
+.tt-info{display:flex;flex-direction:column;gap:7px;padding:9px 10px;border:1px solid #DDEDF9;border-radius:16px;
+  background:linear-gradient(160deg,#F7FCFF,#FFFFFF);margin:0 0 9px}
+.tt-info-row{display:grid;grid-template-columns:72px minmax(0,1fr) minmax(0,1fr);gap:6px;align-items:end;min-width:0}
+.tt-info-row.wide{grid-template-columns:minmax(0,1fr)}
+.tt-field{display:flex;flex-direction:column;gap:2px;font-size:9.5px;font-weight:900;color:#7A93A6;min-width:0}
+.tt-field input,.tt-field select{min-height:34px;padding:4px 7px;border-radius:10px;font-size:12px;width:100%;min-width:0;max-width:100%;box-sizing:border-box}
+.tt-field input[type=number]{text-align:center}
+.tt-info-line{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:11.5px;font-weight:900;color:#3E7599}
+.tt-info-line small{font-size:10.5px;font-weight:800;color:var(--muted)}
+.tt-style-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px}
+.tt-style{min-height:36px;padding:5px 8px;border-radius:12px;border:1px solid var(--line-strong);background:#fff;
+  font-size:11px;font-weight:900;color:var(--ink-2);line-height:1.25}
+.tt-style.on{background:#EAF6FF;border-color:#7FB8DE;color:#1E5C86}
+.tt-zero{min-height:32px;padding:4px 12px;border-radius:999px;border:1px dashed var(--line-strong);background:#fff;
+  font-size:11px;font-weight:900;color:var(--muted)}
+.tt-zero.on{background:#FBF2D6;border-color:#E4CE8C;color:#8A7434;border-style:solid}
+/* 과목 고르기 칩 (#v31) */
+.tt-pick{margin-top:9px;padding:8px 9px;border:1px dashed #CFE3F7;border-radius:14px;background:#F7FCFF;display:flex;flex-direction:column;gap:5px}
+.tt-pick[hidden]{display:none}
+.tt-pick-head{font-size:10.5px;font-weight:900;color:#3E7599}
+.tt-pick-row{display:flex;flex-wrap:wrap;gap:4px}
+.tt-sub{min-height:30px;padding:4px 9px;border-radius:999px;border:1px solid var(--line-strong);background:#fff;
+  font-size:11px;font-weight:900;color:var(--ink-2);white-space:nowrap}
+.tt-sub.on{background:#EAF6FF;border-color:#7FB8DE;color:#1E5C86}
+/* 지우 시간표 — 「국어\n(도서관)」처럼 괄호 앞에서 줄을 바꿔 보여 준다 (#v31) */
+.tt-cell{white-space:pre-line}
+.tt-cell .tt-sub2{display:block;font-size:9px;font-weight:800;color:#7A93A6}
+/* iPhone 360px — 6열(교시 열 + 월~금)이 한 화면에 겹치지 않게 (#v31) */
+@media (max-width:400px){
+  .tt-wrap{padding:6px;border-radius:16px}
+  .tt-table{border-spacing:2px}
+  .tt-table th.tt-corner,.tt-table th.tt-p{width:44px}
+  .tt-table th.tt-p{font-size:8px;line-height:1.15;padding:2px 1px}
+  .tt-table th.tt-p small{font-size:6.5px}
+  .tt-table th.tt-dow{font-size:9.5px;padding:4px 0}
+  .tt-cell{font-size:9px;min-height:32px;padding:2px 1px;border-radius:8px}
+  .tt-lunch td{font-size:9px;padding:4px 0}
+  .tt-info{padding:7px 8px}
+  .tt-info-row{grid-template-columns:56px minmax(0,1fr) minmax(0,1fr);gap:5px}
+  .tt-style{font-size:10px;padding:4px 5px}
+}
 .fam-field-wide{flex:1 1 100%}
 .fam-field-wide select{width:100%}
 .fam-form{margin-top:11px;padding:10px 11px;border:1px dashed var(--line-strong);border-radius:14px;background:var(--set-bg)}
@@ -3867,7 +3945,7 @@ body.mode-kid .home-more{display:none}
     <section class="card academy" id="academyCard">
       <div class="card-head">
         <div>
-          <h2>🏫 오늘의 학원</h2>
+          <h2>🏫 오늘의 학원<small class="ac-date" id="acTodayDate" aria-live="polite"></small></h2>
           <p class="sub" id="academySub">요일별 시간표도 아래에서 볼 수 있어요</p>
         </div>
       </div>
@@ -3890,15 +3968,20 @@ body.mode-kid .home-more{display:none}
               <option value="0">일요일</option>
             </select>
           </div>
-          <div class="ac-form-row">
+          <div class="ac-form-row ac-time-row">
             <label class="ac-time-field">시작<input id="acStart" type="time" value="16:00" aria-label="시작 시간"></label>
             <label class="ac-time-field">종료<input id="acEnd" type="time" aria-label="종료 시간 (모르면 비워 두세요)"></label>
           </div>
-          <input id="acName" type="text" maxlength="24" placeholder="학원 이름 (예: 수학학원 · 집)" aria-label="학원 이름 또는 집">
-          <div class="ac-quick-row">
-            <button type="button" class="chip" data-action="ac-quick-name" data-value="집">🏠 집</button>
-            <span class="ac-quick-hint">집에 들렀다 가는 시간도 「집」으로 넣어 두세요</span>
+          <input id="acName" type="text" maxlength="24" placeholder="학원 이름 (예: 수학학원 · 영어)" aria-label="학원 이름">
+          <div class="ac-pick-block">
+            <span class="ac-pick-label">학원 이모지 (선택)</span>
+            <div class="ac-emoji-row" id="acEmojiRow" role="group" aria-label="학원 이모지 고르기"></div>
           </div>
+          <div class="ac-pick-block">
+            <span class="ac-pick-label">정류장 · 활동 (선택)</span>
+            <div class="ac-stop-row" id="acStopRow" role="group" aria-label="정류장·활동 프리셋 고르기"></div>
+          </div>
+          <input id="acStopPlace" type="text" maxlength="20" placeholder="만날 장소 (예: 양원성당 · 학교 앞)" aria-label="만날 장소" hidden>
           <input id="acHomeTask" type="text" maxlength="40" placeholder="집에서 할 일 (선택) 예: 간식 먹고 숙제" aria-label="집에서 할 일">
           <input id="acPlace" type="text" maxlength="40" placeholder="학원 장소·주소 (예: 양원역로10길)" aria-label="학원 장소나 주소">
           <div class="ac-form-row">
@@ -3920,8 +4003,14 @@ body.mode-kid .home-more{display:none}
             </select>
           </div>
           <p class="ac-form-hint" id="acMoveHint">갈 때·올 때를 따로 고를 수 있어요 · 도보는 동선에 쓰지 않아요</p>
-          <div class="ac-form-row">
-            <select id="acPickupKind" aria-label="승차·하차 구분">
+          <div class="ac-form-row ac-bus-row" id="acBusRow" hidden>
+            <input id="acPickup" type="text" maxlength="20" placeholder="승차 장소 (예: 양원성당)" aria-label="학원차 승차·하차 장소">
+          </div>
+          <div class="ac-form-row ac-bus-time-row" id="acBusTimeRow" hidden>
+            <label class="ac-time-field">학원차 시각<input id="acPickupTime" type="time" aria-label="학원차 탑승 시각 (자차는 비워 두세요)"></label>
+          </div>
+          <div class="ac-hide" aria-hidden="true">
+            <select id="acPickupKind" aria-label="승차·하차 구분" tabindex="-1">
               <option value="">승차·하차 (선택)</option>
               <option value="승차">승차</option>
               <option value="하차">하차</option>
@@ -3929,20 +4018,10 @@ body.mode-kid .home-more{display:none}
               <option value="데려다줌">데려다줌</option>
               <option value="도착">도착</option>
             </select>
-            <input id="acPickup" type="text" maxlength="20" placeholder="탑승·픽업 장소 (예: 양원성당)" aria-label="탑승 또는 픽업 장소">
-          </div>
-          <div class="ac-form-row">
-            <label class="ac-time-field">학원차 시각<input id="acPickupTime" type="time" aria-label="학원차 탑승 시각 (자차는 비워 두세요)"></label>
           </div>
           <input id="acMemo" type="text" maxlength="40" placeholder="메모 (선택) 예: 준비물 챙기기" aria-label="메모">
           <button class="btn btn-primary btn-sm" data-action="add-academy">학원 · 동선 추가</button>
         </div>
-      </details>
-      <details class="ac-add" id="acSchoolPanel" data-parent-only="1">
-        <summary>🏫 학교 하교 시간 바꾸기 <small>엄마 화면</small></summary>
-        <div class="ac-school" id="acSchoolForm"></div>
-        <p class="ac-form-hint" id="acSchoolHint">교시를 고르면 하교 시각이 함께 보여요 · 방과후처럼 다르면 「직접 입력」에 적어 주세요</p>
-        <button class="btn btn-primary btn-sm" data-action="save-school">학교 하교 시간 저장</button>
       </details>
     </section>
 
@@ -7025,18 +7104,8 @@ function num(v, dflt, min, max){
   if(typeof max === 'number' && n > max) n = max;
   return n;
 }
-/* 학교 하교 시간 (#1813) — 4교시 12:50 · 5교시 13:40 · 6교시 14:30 */
-var SCHOOL_END = { '4교시': '12:50', '5교시': '13:40', '6교시': '14:30' };
-function schoolEndOf(label){
-  var key = String(label || '').trim();
-  if(SCHOOL_END[key]) return SCHOOL_END[key];
-  var m = key.match(/^([456])\s*교시/);
-  return m ? (SCHOOL_END[m[1] + '교시'] || '') : '';
-}
-function schoolText(label){
-  var t = schoolEndOf(label);
-  return t ? (String(label).trim() + ' · ' + t) : String(label || '');
-}
+/* 학교 하교 시간 (#1813) — 4교시 12:50 · 5교시 13:40 · 6교시 14:30
+   schoolEndOf · schoolText 는 🏫 학교 시간표(#v31) 옆에서 교시별 시각까지 함께 본다 */
 function isWeekend(d){
   var x = d || new Date();
   var dow = x.getDay();
@@ -7880,7 +7949,11 @@ function makeDefaultState(){
     /* 🎂 생일 축하 팡업 — 같은 날 두 번 뜨지 않게 마지막으로 보여 준 날짜를 남긴다 */
     bdayShown: {},
     /* 🏫 학교 시간표 — 「요일-교시」 키로 과목 이름 (#v24) · 비어 있으면 기본 시간표로 채워요 */
-    schoolTimetable: {}
+    schoolTimetable: {},
+    /* 🏫 학교 정보·수업 시간 종류·0교시 (#v31) */
+    schoolInfo: {},
+    schoolStyle: {},
+    schoolZero: {}
   };
 }
 
@@ -8423,6 +8496,39 @@ function normalize(raw){
       });
       return out;
     })(raw.schoolTimetable),
+    /* 🏫 학교 정보·수업 시간 종류·0교시 (#v31) — 저장값이 없으면 비워 두고 기본값을 쓴다 */
+    schoolInfo: (function(o){
+      var out = {};
+      if(o && typeof o === 'object'){
+        ['seonwoo', 'jiwoo'].forEach(function(k){
+          var it = o[k];
+          if(!it || typeof it !== 'object') return;
+          var info = {};
+          if(['초','중','고'].indexOf(it.level) >= 0) info.level = it.level;
+          ['grade','cls'].forEach(function(f){
+            var n = Number(it[f]);
+            if(n >= 1 && n <= 20) info[f] = String(n);
+          });
+          if(it.name) info.name = String(it.name).trim().slice(0, 20);
+          if(info.name || info.grade || info.level) out[k] = info;
+        });
+      }
+      return out;
+    })(raw.schoolInfo),
+    schoolStyle: (function(o){
+      var out = {};
+      if(o && typeof o === 'object'){
+        ['seonwoo', 'jiwoo'].forEach(function(k){ if(o[k] === '50') out[k] = '50'; });
+      }
+      return out;
+    })(raw.schoolStyle),
+    schoolZero: (function(o){
+      var out = {};
+      if(o && typeof o === 'object'){
+        ['seonwoo', 'jiwoo'].forEach(function(k){ if(o[k]) out[k] = true; });
+      }
+      return out;
+    })(raw.schoolZero),
     familySeed: FAMILY_SEED_VERSION,
     labelSeed: LABEL_SEED_VERSION,
     spaceSeed: SPACE_SEED_VERSION,
@@ -8850,6 +8956,21 @@ function normalize(raw){
   /* 🌤️ 숙제 없는 날 · ⭐ 추가 보너스 도전 항목 (#v26) */
   s.noHomework = cleanNoHomework(raw.noHomework);
   s.bonusItems = cleanBonusItems(raw.bonusItems, raw.weekendBonusLabels);
+  /* 🏫 지우 시간표의 였 괄호 표기 → 괄호 앞 줄바꿈 (#v31)
+     「통합(운동장)」은 지혜님이 짚은 대로 「창체(운동장)」로 바로잡는다 */
+  (function(){
+    var j = s.schoolTimetable && s.schoolTimetable.jiwoo;
+    if(!j) return;
+    var fix = { '통합(운동장)':'창체\n(운동장)', '국어(도서관)':'국어\n(도서관)', '통합(체육관)':'통합\n(체육관)' };
+    Object.keys(j).forEach(function(key){
+      var v = String(j[key] || '').trim();
+      if(fix[v]){ j[key] = fix[v]; NORMALIZE_DIRTY = true; }
+      else if(/^[^(\n]{1,12}\([^)\n]{1,8}\)$/.test(v)){
+        j[key] = v.replace(/^([^(\n]{1,12})\((.{1,8})\)$/, '$1\n($2)');
+        NORMALIZE_DIRTY = true;
+      }
+    });
+  })();
   /* 🤝 FAMILY 미션 목록은 선우·지우가 늘 같게 (순서까지) — #v29 */
   if(alignFamilyMissionLists(s)) NORMALIZE_DIRTY = true;
   return s;
@@ -9057,7 +9178,13 @@ function cleanEntries(list){
       backMove: moveModeOf(e.backMove) ? e.backMove : '',
       homeMove: moveModeOf(e.homeMove) ? e.homeMove : '',
       homeNote: e.homeNote ? String(e.homeNote).trim().slice(0, 24) : '',
-      homeTask: e.homeTask ? String(e.homeTask).trim().slice(0, 40) : ''
+      homeTask: e.homeTask ? String(e.homeTask).trim().slice(0, 40) : '',
+      /* 🏫 학원 이모지 · 정류장 프리셋 · 학원차 승하차 장소 (#v31) */
+      emoji: e.emoji ? String(e.emoji).trim().slice(0, 4) : '',
+      stop: ['parking', 'place', 'school', 'home'].indexOf(e.stop) >= 0 ? e.stop : '',
+      stopPlace: e.stopPlace ? String(e.stopPlace).trim().slice(0, 20) : '',
+      goPlace: e.goPlace ? String(e.goPlace).trim().slice(0, 20) : '',
+      backPlace: e.backPlace ? String(e.backPlace).trim().slice(0, 20) : ''
     });
   });
   return out;
@@ -12741,6 +12868,7 @@ function routeFlowHtml(kidKey, mk, day, opts){
   var md = monthData(kidKey, mk);
   var list = dayEntries(kidKey, mk, day);
   var school = (md.school && md.school[day]) || '';
+  var dismiss = schoolDismissalOf(kidKey, mk, day);
   /* 🏖️ 토·일·공휴일에는 학교에 가지 않는다 — 동선은 🏠 집에서 시작 (#5524) */
   var dateKey = routeDateKey(mk, day, o.date);
   var off = !!dateKey && isSchoolOffDay(dateKey);
@@ -12751,13 +12879,13 @@ function routeFlowHtml(kidKey, mk, day, opts){
   var editable = isParentMode();
   var h = '<div class="route">' +
     '<div class="route-head"><span>🛣️ ' + esc(o.label || '오늘의 동선') + '</span><em>' +
-      (off ? '🏠 집에서 시작 · ' + esc(offName) : (school ? esc(schoolText(school)) + ' 하교' : '학교 하교')) + '</em></div>' +
+      (off ? '🏠 집에서 시작 · ' + esc(offName) : (dismiss ? esc(dismiss.text) : '학교 하교')) + '</em></div>' +
     '<div class="route-flow">' +
       (off
         ? '<span class="rt-node ' + (lead ? 'home-stop' : 'home') + '" title="토·일·공휴일에는 학교에 가지 않아요"><span class="rt-ico">🏠</span><b>집</b><small>' + (lead && entryHomeTask(lead) ? '📝 ' + esc(entryHomeTask(lead)) : '학교 안 가는 날') + '</small>' +
           (lead && editable ? '<button type="button" class="rt-edit" data-action="edit-academy" data-id="' + lead.id + '" aria-label="집 이동·픽업 수정" title="이동·픽업 수정">✏️</button>' : '') +
           '</span>'
-        : '<span class="rt-node school" title="' + esc(SCHOOL_INFO.name + ' · ' + SCHOOL_INFO.addr) + '"><span class="rt-ico">🏫</span><b>' + esc(SCHOOL_INFO.name) + '</b><small>' + (school ? esc(schoolText(school)) + ' 하교' : '하교') + '</small></span>');
+        : '<span class="rt-node school" title="' + esc(SCHOOL_INFO.addr) + '"><span class="rt-ico">🏫</span><b>' + esc(schoolNameOf(kidKey)) + '</b><small>' + (dismiss ? esc(dismiss.text) : '하교') + '</small></span>');
   if(lead && lead.move) h += legHtml(lead.move, routeStopText(lead));
   flow.forEach(function(e, idx){
     /* 🏠 집 정류장은 책 아이콘 대신 집 아이콘 + '집에서 할 일' (#3598) */
@@ -12829,6 +12957,43 @@ function weekRouteHtml(kidKey, mk, day){
   h += '<span class="wr-arrow">→</span><span class="wr-home">🏠</span></div>';
   return h;
 }
+/* 세로 동선의 차량 한 줄 — 도보는 그리지 않는다 (#v31)
+   phase 는 한쪽만 있을 때 붙는 말(「갈 때」·「올 때」) */
+function acVehLegHtml(key, e, phase){
+  var m = moveModeOf(key);
+  if(!m || key === 'walk') return '';
+  var sub = '';
+  if(isBusMove(key)){
+    var bits = [];
+    var place = e ? ((key === e.move) ? (e.goPlace || e.pickup) : (e.backPlace || e.pickup)) : '';
+    if(place) bits.push(place);
+    if(e && e.pickupTime) bits.push(e.pickupTime);
+    if(bits.length) sub = bits.join(' ');
+  }else if(e && e.pickup && isCarMove(key)){
+    sub = e.pickup;
+  }
+  return '<li class="ac-leg veh">↓ ' + (phase ? esc(phase) + ' ' : '') +
+    '<b>' + m.icon + ' ' + esc(m.label) + '</b>' +
+    (sub ? ' <small>' + esc(sub) + '</small>' : '') + '</li>';
+}
+/* 학원 박스 안 이동 줄 — 위아래 차량 줄로 이미 보이는 한쪽짜리 줄은 겹치지 않게 뺄다 (#v31) */
+function acItemMoveLine(e){
+  var t = moveDetailText(e);
+  if(!t) return '';
+  var goM = moveModeOf(e && e.move), backM = moveModeOf(entryBackMove(e));
+  if(goM && backM && goM.key !== backM.key) return t;   /* 갈 때 → 올 때 */
+  if(t.indexOf(' · ') > -1) return t;                    /* 장소·시각이 붙는 줄 */
+  return '';
+}
+/* 들렀다 가는 곳 (via) — 얇은 한 줄 박스 (#v31)
+   마지막 학원 뒤에 들르는 「집」은 아래 「↓ 🏠 집」과 겹치니 그리지 않는다 */
+function acViaHtml(e, isLast){
+  if(!e || !e.via) return '';
+  if(isLast && /집/.test(e.via)) return '';
+  var ico = /주차/.test(e.via) ? '🅿️' : (/집/.test(e.via) ? '🏠' : '📍');
+  return '<li class="ac-thin stop via">' + ico + ' <span>' + esc(e.via) + '</span>' +
+    (e.viaNote ? '<small>' + esc(e.viaNote) + '</small>' : '') + '</li>';
+}
 function renderAcademy(){
   var kidKey = state.current;
   var kd = kidDef(kidKey);  var now = new Date();
@@ -12851,45 +13016,86 @@ function renderAcademy(){
 
   var box = $('#todayAcademy');
   if(!box) return;
-  var html = '<div class="ac-meta"><span class="ac-month">' + monthTitle(mk) + '</span>' +
-    (off
-      ? '<span class="gk-school" title="토·일·공휴일에는 학교에 가지 않아요">🏠 집 · ' + esc(schoolOffName(offKey)) + '</span>'
-      : (school ? '<span class="gk-school" title="' + esc(SCHOOL_INFO.addr) + '">🏫 ' + esc(SCHOOL_INFO.name) + ' · ' + esc(schoolText(school)) + '</span>' : '')) + '</div>';
+  /* 🕒 「🏫 오늘의 학원」 옆에 오늘 날짜 (#v31) */
+  var dateEl = $('#acTodayDate');
+  if(dateEl) dateEl.textContent = now.getFullYear() + '.' + pad2(now.getMonth() + 1) + '.' + pad2(now.getDate()) + ' (' + WEEK[dow] + ')';
+  var dismiss = off ? null : schoolDismissalOf(kidKey, mk, dow);
+  var html = '';
 
   if(!todayList.length){
     var next = nextAcademy(kidKey, mk);
+    html += '<ul class="ac-list"><li class="ac-thin school">' + (off
+      ? '🏠 집 · ' + esc(schoolOffName(offKey))
+      : '🏫 ' + esc(schoolNameOf(kidKey)) + (dismiss ? '<small>' + esc(dismiss.text) + '</small>' : '')) + '</li></ul>';
     html += '<div class="empty"><span class="empty-emoji">🎈</span><p><b>오늘은 학원이 없어요.</b></p>';
     if(next) html += '<p class="muted">다음 학원은 ' + WEEK[next.day] + '요일 ' + fmtTime(next.start) + ' ' + esc(next.name) + '</p>';
     else html += '<p class="muted">학원 시간표·동선을 추가하거나 차차에게 알려주세요!</p>';
     html += '</div>';
   }else{
-    /* 오늘 가는 학원 이름을 작은 칩으로 (#v27) */
-    /* 오늘 가는 학원 — 이모지 + 이름만 담은 네모 미니 카드, 한 줄에 최대 4개 (#v27) */
-    var chipCols = Math.max(1, Math.min(4, todayList.length));
-    html += '<div class="ac-chips" style="grid-template-columns:repeat(' + chipCols + ',minmax(0,1fr))">' + todayList.map(function(a){
-      return '<span class="ac-chip">' + academyIcon(a.name) + ' <b>' + esc(a.name) + '</b></span>';
-    }).join('') + '</div>';
+    /* 오늘 가는 학원 — 이모지 + 이름만 담은 네모 미니 카드 (방과후·집 정류장은 뺌) */
+    var chips = todayList.filter(function(a){ return !isHomeStop(a.name) && a.stop !== 'school'; });
+    if(chips.length){
+      var chipCols = Math.max(1, Math.min(4, chips.length));
+      html += '<div class="ac-chips" style="grid-template-columns:repeat(' + chipCols + ',minmax(0,1fr))">' + chips.map(function(a){
+        return '<span class="ac-chip">' + entryEmoji(a) + ' <b>' + esc(a.name) + '</b></span>';
+      }).join('') + '</div>';
+    }
+    /* 🛣️ 세로 동선 — 학교 줄 바로 아래에서 첫 학원 위 「↓ 🚗 엄마차」부터 (#v31)
+       · 가는 차는 학원 박스 위, 오는 차는 학원 박스 아래
+       · 앞 학원의 「올 때」와 다음 학원의 「갈 때」가 같은 차면 한 번만
+       · 갈아타는 날만 두 줄로 */
     html += '<ul class="ac-list">';
-    /* 맨 위 — 등교일엔 학교, 쉬는 날엔 집 */
-    html += '<li class="ac-leg top">' + (off
-      ? '🏠 집 · 학교 안 가는 날'
-      : '🏫 ' + esc(SCHOOL_INFO.name)) + '</li>';
+    html += '<li class="ac-thin school">' + (off
+      ? '🏠 집 · ' + esc(schoolOffName(offKey)) + '<small>학교 안 가는 날</small>'
+      : '🏫 ' + esc(schoolNameOf(kidKey)) + (dismiss ? '<small>' + esc(dismiss.text) + '</small>' : '')) + '</li>';
     var marked = false;
     todayList.forEach(function(a, aIdx){
-      if(aIdx > 0){
-        var prev = todayList[aIdx - 1];
-        var pm = moveModeOf(prev.move);
-        var pstop = routeStopText(prev);
-        html += '<li class="ac-leg">↓' + (pm && pm.key !== 'walk' ? ' ' + pm.icon + ' ' + esc(pm.label) : '') +
-          (pstop ? ' · 🏠 ' + esc(pstop) : '') + '</li>';
+      var prev = aIdx > 0 ? todayList[aIdx - 1] : null;
+      var outKey = prev ? (entryBackMove(prev) || '') : '';
+      var inKey = a.move || '';
+      if(aIdx === 0){
+        html += acVehLegHtml(inKey, a);
+      }else if(outKey && inKey && outKey === inKey){
+        /* 같은 차 — 한 번만 */
+        html += acVehLegHtml(inKey, a);
+      }else if(outKey && inKey){
+        /* 갈아타는 날만 두 줄 */
+        html += acVehLegHtml(outKey, prev, '올 때');
+        html += acVehLegHtml(inKey, a, '갈 때');
+      }else if(outKey){
+        html += acVehLegHtml(outKey, prev, '올 때');
+      }else if(inKey){
+        html += acVehLegHtml(inKey, a);
       }
       var isNext = !marked && toMin(a.start) >= nowMin;
       if(isNext) marked = true;
-      html += '<li class="ac-item' + (isNext ? ' next' : '') + '" data-action="edit-academy" data-id="' + a.id + '" role="button" tabindex="0">' +
+      /* 🏫 방과후 · 🅿️ 주차장 · 📍 장소 — 얇은 한 줄 박스 (#v31) */
+      if(a.stop === 'school'){
+        html += '<li class="ac-thin stop school" data-action="edit-academy" data-id="' + a.id + '" role="button" tabindex="0">' +
+          '🏫 <span>' + esc(String(a.name) + ' 방과후') + '</span>' +
+          (a.end ? '<small>' + esc(a.start + '~' + a.end) + '</small>' : '') + '</li>';
+        return;   /* 방과후는 학교 줄로 이미 보인다 */
+      }
+      if(a.stop === 'parking' || a.stop === 'place'){
+        html += '<li class="ac-thin stop">' +
+          (a.stop === 'parking' ? '🅿️ 주차장 · ' : '📍 장소 · ') + '<span>' + esc(acStopText(a) || a.name) + '</span></li>';
+      }
+      /* 🏠 집 정류장 — 얇은 한 줄 박스 (#v31) */
+      if(isHomeStop(a.name)){
+        html += '<li class="ac-item home-stop ac-thin" data-action="edit-academy" data-id="' + a.id + '" role="button" tabindex="0">' +
+          '🏠 <b>집</b>' + (entryHomeTask(a) ? ' · ' + esc(entryHomeTask(a)) + '를 해요' : '') +
+          '<small>' + esc(fmtRangePretty(a)) + '</small>' +
+          (moveDetailText(a) ? '<small class="ac-move">' + esc(moveDetailText(a)) + '</small>' : '') +
+          (isNext ? '<span class="ac-badge">다음</span>' : '') +
+          (isParentMode() ? '<button class="ac-del" data-action="del-academy" data-id="' + a.id + '" aria-label="집 삭제">✕</button>' : '') +
+        '</li>';
+        return;
+      }
+      html += '<li class="ac-item' + (isNext ? ' next' : '') + (isHomeStop(a.name) ? ' home-stop' : '') + '" data-action="edit-academy" data-id="' + a.id + '" role="button" tabindex="0">' +
         '<span class="ac-time">' + fmtRangePretty(a) + '</span>' +
-        '<span class="ac-main"><b>' + academyIcon(a.name) + ' ' + esc(a.name) + '</b>' +
+        '<span class="ac-main"><b>' + entryEmoji(a) + ' ' + esc(a.name) + '</b>' +
           (entryPlace(a) ? '<small>📍 ' + esc(entryPlace(a)) + '</small>' : '') +
-          (moveDetailText(a) ? '<small class="ac-move">' + esc(moveDetailText(a)) + '</small>' :
+          (acItemMoveLine(a) ? '<small class="ac-move">' + esc(acItemMoveLine(a)) + '</small>' :
             (routeStopText(a) ? '<small class="ac-stop">' + esc((moveModeOf(a.move) ? moveModeOf(a.move).icon + ' ' : '🚏 ') + routeStopText(a)) + '</small>' : '')) +
           (entryHomeTask(a) ? '<small class="ac-task">📝 ' + esc(entryHomeTask(a)) + '</small>' : '') +
           (entryMemo(a) ? '<small class="ac-memo">📝 ' + esc(entryMemo(a)) + '</small>' : '') +
@@ -12897,7 +13103,12 @@ function renderAcademy(){
         (isNext ? '<span class="ac-badge">다음</span>' : '') +
         '<button class="ac-del" data-action="del-academy" data-id="' + a.id + '" data-parent-only="1" aria-label="' + esc(a.name) + ' 삭제">✕</button>' +
       '</li>';
+      /* 들렀다 가는 곳 (via) — 다음 학원으로 가기 전 한 줄 (#v31) */
+      html += acViaHtml(a, aIdx === todayList.length - 1);
     });
+    /* 마지막 학원에서 집으로 오는 길 (#v31) */
+    var lastE = todayList[todayList.length - 1];
+    if(lastE) html += acVehLegHtml(entryBackMove(lastE) || '', lastE, '올 때');
     html += '<li class="ac-leg bottom">↓ 🏠 집</li>';
     html += '</ul>';
     if(!marked) html += '<p class="ac-done-note">오늘 학원 일정은 모두 끝났어요. 수고했어요 👏</p>';
@@ -12906,6 +13117,10 @@ function renderAcademy(){
 
   var sub = $('#academySub');
   if(sub) sub.textContent = kd.name + ' · ' + (todayList.length ? todayList.length + '개 일정' : '오늘은 일정 없음');
+  /* ➕ 추가 폼의 이모지·프리셋 칩과 조건부 학원차 칸 (#v31) */
+  renderAcEmojiRow();
+  renderAcStopRow();
+  acBusSync('');
 }
 function nextAcademy(kidKey, mk){
   var md = monthData(kidKey, mk);
@@ -12935,14 +13150,14 @@ function renderWeek(){
   var academyCount = 0;
   DAY_ORDER.forEach(function(d){
     var items = dayEntries(kidKey, mk, d);
-    /* 🏠 「집」 정류장은 학원 목록 카드에 넣지 않고 아래 동선 줄에만 남긴다 (#v30) */
-    var chips = items.filter(function(a){ return !isHomeStop(a.name); });
+    /* 🏠 「집」 정류장 · 🏫 방과후는 학원 목록 카드에 넣지 않고 동선 줄에만 남긴다 (#v30 · #v31) */
+    var chips = items.filter(function(a){ return !isHomeStop(a.name) && a.stop !== 'school'; });
     academyCount += chips.length;
-    var school = (md.school && md.school[d]) || '';
+    var dismiss = schoolDismissalOf(kidKey, mk, d);
     var isToday = isCur && d === todayDow;
     html += '<div class="wday' + (isToday ? ' today' : '') + '">' +
       '<div class="wday-head"><span class="wday-name">' + WEEK[d] + '</span>' +
-        (school ? '<span class="wday-school">' + esc(schoolText(school)) + '</span>' : '') + '</div>' +
+        (dismiss ? '<span class="wday-school">' + esc(dismiss.text.replace(/ 하교$/, '')) + '</span>' : '') + '</div>' +
       '<div class="wday-body">';
     if(items.length){
       chips.forEach(function(a){
@@ -12997,10 +13212,10 @@ function renderGlance(){
   KID_DEFS.forEach(function(kd){
     var md = monthData(kd.key, mk);
     var list = dayEntries(kd.key, mk, day);
-    var school = (md.school && md.school[day]) || '';
+    var dismiss = schoolDismissalOf(kd.key, mk, day);
     html += '<div class="glance-kid" style="--kc:' + kd.color + '">' +
       '<div class="gk-head"><span class="gk-emoji"><img src="' + kidAvatarOf(kd.key) + '" alt=""></span><span>' + esc(kd.name) + '</span>' +
-        (school ? '<span class="gk-school">' + esc(schoolText(school)) + '</span>' : '') +
+        (dismiss ? '<span class="gk-school">' + esc(dismiss.text.replace(/ 하교$/, '')) + '</span>' : '') +
         '<span class="gk-count">' + list.length + '</span></div>';
     html += '<div class="glist">';
     if(list.length){
@@ -14388,31 +14603,27 @@ function deleteFamilyEvent(id){
 var TT_DAYS = [
   { d:1, label:'월' }, { d:2, label:'화' }, { d:3, label:'수' }, { d:4, label:'목' }, { d:5, label:'금' }
 ];
-var TT_META = {
-  seonwoo: {
-    grade: '3학년 4반',
-    rows: [
-      { k:'1', name:'1교시', time:'09:00~09:40' },
-      { k:'2', name:'2교시', time:'09:50~10:30' },
-      { k:'3', name:'3교시', time:'10:40~11:20' },
-      { k:'4', name:'4교시', time:'11:30~12:10' },
-      { k:'L', name:'점심시간', time:'12:20~13:00', lunch:true },
-      { k:'5', name:'5교시', time:'13:00~13:40' },
-      { k:'6', name:'6교시', time:'13:50~14:30' }
-    ]
-  },
-  jiwoo: {
-    grade: '2학년 6반',
-    rows: [
-      { k:'1', name:'1교시', time:'09:00~09:40' },
-      { k:'2', name:'2교시', time:'09:50~10:30' },
-      { k:'3', name:'3교시', time:'10:40~11:20' },
-      { k:'L', name:'점심시간', time:'11:20~12:10', lunch:true },
-      { k:'4', name:'4교시', time:'12:10~12:50' },
-      { k:'5', name:'5교시', time:'13:00~13:40' }
-    ]
-  }
+/* 🏫 학교 정보 · 수업 시간 종류 (#v31)
+   · 엄마가 「🏫 학교 시간표」 모달에서 학교급·학년·반·학교명과 수업 시간 종류를 고친다
+   · state.schoolInfo / schoolStyle / schoolZero 에 저장돼 Firebase 로 함께 동기화된다 */
+var SCHOOL_DEFAULT_INFO = {
+  seonwoo: { level:'초', grade:'3', cls:'4', name:'양원숲초등학교', lunchAfter:4 },
+  jiwoo:   { level:'초', grade:'2', cls:'6', name:'양원숲초등학교', lunchAfter:3 }
 };
+var TT_STYLES = [
+  { key:'40', label:'40분 수업 · 10분 휴식' },
+  { key:'50', label:'50분 수업 · 10분 휴식' }
+];
+/* 40분 수업 — 점심은 선우 4교시 뒤(12:20~13:00) · 지우 3교시 뒤(11:20~12:10) */
+var TT_40_TIMES = {
+  seonwoo: ['09:00~09:40','09:50~10:30','10:40~11:20','11:30~12:10','12:20~13:00','13:00~13:40','13:50~14:30','14:40~15:20','15:30~16:10'],
+  jiwoo:   ['09:00~09:40','09:50~10:30','10:40~11:20','11:20~12:10','12:10~12:50','13:00~13:40','13:50~14:30','14:40~15:20','15:30~16:10']
+};
+/* 50분 수업 — 점심은 4교시 뒤(12:50~13:30) */
+var TT_50_TIMES = ['09:00~09:50','10:00~10:50','11:00~11:50','12:00~12:50','12:50~13:30','13:30~14:20','14:30~15:20','15:30~16:20','16:30~17:20'];
+var TT_ZERO_TIME = { '40':'08:10~08:50', '50':'08:00~08:50' };
+/* 과목 고르기 칩 — 모자라면 「직접입력」으로 */
+var TT_SUBJECTS = ['국어','영어','수학','과학','사회','미술','음악','체육','도덕','창체','통합'];
 /* 키는 「요일-교시」 — 1-1 은 월요일 1교시 */
 var TT_DEFAULT = {
   seonwoo: {
@@ -14425,20 +14636,116 @@ var TT_DEFAULT = {
   },
   jiwoo: {
     '1-1':'국어', '2-1':'국어', '3-1':'국어', '4-1':'국어', '5-1':'국어',
-    '1-2':'수학', '2-2':'통합(체육관)', '3-2':'수학', '4-2':'국어', '5-2':'통합',
-    '1-3':'수학', '2-3':'통합', '3-3':'통합', '4-3':'통합(운동장)', '5-3':'통합',
-    '1-4':'통합', '2-4':'통합', '3-4':'통합', '4-4':'수학', '5-4':'국어(도서관)',
+    '1-2':'수학', '2-2':'통합\n(체육관)', '3-2':'수학', '4-2':'국어', '5-2':'통합',
+    '1-3':'수학', '2-3':'통합', '3-3':'통합', '4-3':'창체\n(운동장)', '5-3':'통합',
+    '1-4':'통합', '2-4':'통합', '3-4':'통합', '4-4':'수학', '5-4':'국어\n(도서관)',
     '2-5':'창체', '3-5':'통합', '4-5':'창체'
   }
 };
 var TT_KID = 'seonwoo';
 function ttKidKey(kid){ return (kid === 'jiwoo') ? 'jiwoo' : 'seonwoo'; }
+/* 학교 정보 (학교급·학년·반·학교명) — 저장값이 없으면 기본값 */
+function schoolInfoOf(kid){
+  var k = ttKidKey(kid);
+  if(!state.schoolInfo || typeof state.schoolInfo !== 'object') state.schoolInfo = {};
+  var cur = state.schoolInfo[k];
+  if(!cur || typeof cur !== 'object'){ state.schoolInfo[k] = Object.assign({}, SCHOOL_DEFAULT_INFO[k]); cur = state.schoolInfo[k]; }
+  var def = SCHOOL_DEFAULT_INFO[k];
+  ['level','grade','cls','name','lunchAfter'].forEach(function(f){
+    if(cur[f] === undefined || cur[f] === null || cur[f] === '') cur[f] = def[f];
+  });
+  return cur;
+}
+function schoolStyleOf(kid){
+  var m = (state.schoolStyle && typeof state.schoolStyle === 'object') ? state.schoolStyle : {};
+  return m[ttKidKey(kid)] === '50' ? '50' : '40';
+}
+function schoolZeroOf(kid){
+  var m = (state.schoolZero && typeof state.schoolZero === 'object') ? state.schoolZero : {};
+  return !!m[ttKidKey(kid)];
+}
+function schoolGradeText(kid){
+  var i = schoolInfoOf(kid);
+  var t = String(i.grade || '') + '학년';
+  if(String(i.cls || '')) t += ' ' + String(i.cls) + '반';
+  return t;
+}
+function schoolLevelText(kid){ var i = schoolInfoOf(kid); return String(i.level || '초') + '등학교'; }
+function schoolNameOf(kid){ return String(schoolInfoOf(kid).name || SCHOOL_INFO.name); }
+function schoolLunchAfter(kid){ var i = schoolInfoOf(kid); return Number(i.lunchAfter) || SCHOOL_DEFAULT_INFO[ttKidKey(kid)].lunchAfter; }
+/* 교시 줄 — 0교시(켜면) · 1~8교시 · 점심시간 (#v31) */
+function ttRowsOf(kid, opts){
+  var k = ttKidKey(kid);
+  var o = opts || {};
+  var style = o.style || schoolStyleOf(k);
+  var rows = [];
+  if(o.zero === undefined ? schoolZeroOf(k) : !!o.zero){
+    rows.push({ k:'0', name:'0교시', time: TT_ZERO_TIME[style] });
+  }
+  if(style === '50'){
+    var n50 = 0;
+    TT_50_TIMES.forEach(function(t, i){
+      if(i === 4){ rows.push({ lunch:true, name:'점심시간', time:t }); return; }
+      n50++;
+      rows.push({ k:String(n50), name:n50 + '교시', time:t });
+    });
+  }else{
+    var times = TT_40_TIMES[k];
+    var lunchAfter = schoolLunchAfter(k);
+    var n = 0;
+    times.forEach(function(t, i){
+      if(i === lunchAfter){ rows.push({ lunch:true, name:'점심시간', time:t }); return; }
+      n++;
+      rows.push({ k:String(n), name:n + '교시', time:t });
+    });
+  }
+  return rows;
+}
+function ttEndOfPeriod(kid, period){
+  var rows = ttRowsOf(kid);
+  for(var i = 0; i < rows.length; i++){
+    if(!rows[i].lunch && String(rows[i].k) === String(period)){
+      var p = String(rows[i].time).split('~');
+      return p[1] || '';
+    }
+  }
+  return '';
+}
+function ttStartOfPeriod(kid, period){
+  var rows = ttRowsOf(kid);
+  for(var i = 0; i < rows.length; i++){
+    if(!rows[i].lunch && String(rows[i].k) === String(period)){
+      var p = String(rows[i].time).split('~');
+      return p[0] || '';
+    }
+  }
+  return '';
+}
+/* 그 요일에 과목이 적힌 마지막 교시 번호 (#v31) — 하교 시간 자동 계산 */
+function ttLastFilledPeriod(kid, day){
+  var k = ttKidKey(kid);
+  var grid = schoolTimetableOf(k);
+  var last = 0;
+  Object.keys(grid).forEach(function(key){
+    var m = String(key).match(/^(\d)-(-?\d+)$/);
+    if(!m) return;
+    if(Number(m[1]) !== Number(day)) return;
+    var p = Number(m[2]);
+    if(p >= 0 && p <= 8 && p > last && String(grid[key] || '').trim()) last = p;
+  });
+  return last;
+}
 function cleanTtGrid(src){
   var out = {};
   if(!src || typeof src !== 'object') return out;
   Object.keys(src).forEach(function(k){
-    if(!/^[1-5]-[1-6]$/.test(k)) return;
-    var v = String(src[k] === undefined || src[k] === null ? '' : src[k]).replace(/\s+/g, ' ').trim().slice(0, 10);
+    if(!/^[1-5]-[0-8]$/.test(k)) return;
+    /* 「국어(도서관)」처럼 띄어 쓴 값은 괄호 앞 줄바꿈으로 — 새 저장값은 \n 을 그대로 둔다 (#v31) */
+    var v = String(src[k] === undefined || src[k] === null ? '' : src[k])
+      .replace(/[ \t]*\n[ \t]*/g, '\n')
+      .replace(/[ \t]+/g, ' ')
+      .replace(/^\s+|\s+$/g, '')
+      .slice(0, 20);
     if(v) out[k] = v;
   });
   return out;
@@ -14453,15 +14760,56 @@ function schoolTimetableOf(kid){
   }
   return cur;
 }
+/* 「국어\n(도서관)」 — 괄호 앞에서 줄을 바꿔 보여 준다 (#v31) */
+function ttCellText(v){
+  return String(v || '').split('\n').map(function(seg){ return esc(seg); }).join('<br>');
+}
 function ttCellHtml(kid, day, period, editable, grid){
   var key = day + '-' + period;
   var v = grid[key] || '';
-  var lab = TT_META[kid].grade + ' ' + WEEK[day] + '요일 ' + period + '교시' + (v ? ' ' + v : ' 비어 있음');
-  var inner = v ? esc(v) : '<span class="tt-blank" aria-hidden="true">·</span>';
+  var lab = schoolGradeText(kid) + ' ' + WEEK[day] + '요일 ' + period + '교시' + (v ? ' ' + v.replace(/\n/g, ' ') : ' 비어 있음');
+  var inner = v ? ttCellText(v) : '<span class="tt-blank" aria-hidden="true">·</span>';
   if(editable){
     return '<button type="button" class="tt-cell' + (v ? '' : ' empty') + '" data-action="tt-cell" data-tt-kid="' + kid + '" data-tt-key="' + key + '" aria-label="' + esc(lab) + '">' + inner + '</button>';
   }
   return '<span class="tt-cell' + (v ? '' : ' empty') + '" data-tt-kid="' + kid + '" data-tt-key="' + key + '" aria-label="' + esc(lab) + '">' + inner + '</span>';
+}
+/* 학교 정보 줄 — 엄마는 고치고, 아이·아빠는 보기만 (#v31) */
+function ttInfoHtml(who, editable){
+  var info = schoolInfoOf(who);
+  if(!editable){
+    return '<div class="tt-info"><div class="tt-info-line">' + esc(schoolLevelText(who)) + ' · <b>' + esc(schoolGradeText(who)) + '</b> · ' + esc(schoolNameOf(who)) +
+      '<small>' + esc(schoolStyleOf(who)) + '분 수업' + (schoolZeroOf(who) ? ' · 0교시' : '') + '</small></div></div>';
+  }
+  var levels = ['초','중','고'].map(function(l){
+    return '<option value="' + l + '"' + (String(info.level) === l ? ' selected' : '') + '>' + l + '</option>';
+  }).join('');
+  var styles = TT_STYLES.map(function(s){
+    return '<button type="button" class="tt-style' + (schoolStyleOf(who) === s.key ? ' on' : '') + '" data-action="tt-style" data-tt-kid="' + who + '" data-style="' + s.key + '" aria-pressed="' + (schoolStyleOf(who) === s.key ? 'true' : 'false') + '">' + s.label + '</button>';
+  }).join('');
+  return '<div class="tt-info">' +
+    '<div class="tt-info-row">' +
+      '<label class="tt-field">학교급<select id="ttLevel" data-tt-kid="' + who + '">' + levels + '</select></label>' +
+      '<label class="tt-field">학년<input id="ttGrade" type="number" inputmode="numeric" min="1" max="6" value="' + esc(info.grade) + '"></label>' +
+      '<label class="tt-field">반<input id="ttCls" type="number" inputmode="numeric" min="1" max="20" value="' + esc(info.cls) + '"></label>' +
+    '</div>' +
+    '<label class="tt-field">학교명<input id="ttName" type="text" maxlength="20" value="' + esc(info.name) + '"></label>' +
+    '<div class="tt-style-row" role="group" aria-label="수업 시간 고르기">' + styles + '</div>' +
+    '<div><button type="button" class="tt-zero' + (schoolZeroOf(who) ? ' on' : '') + '" data-action="tt-zero" data-tt-kid="' + who + '" aria-pressed="' + (schoolZeroOf(who) ? 'true' : 'false') + '">' + (schoolZeroOf(who) ? '✓ ' : '+ ') + '0교시</button></div>' +
+  '</div>';
+}
+function ttPickHtml(who, editable){
+  if(!editable) return '';
+  var chips = TT_SUBJECTS.map(function(s){
+    return '<button type="button" class="tt-sub" data-action="tt-sub" data-sub="' + esc(s) + '">' + esc(s) + '</button>';
+  }).join('');
+  return '<div class="tt-pick" id="ttPick" hidden>' +
+    '<div class="tt-pick-head" id="ttPickHead">과목 고르기</div>' +
+    '<div class="tt-pick-row">' + chips +
+      '<button type="button" class="tt-sub" data-action="tt-sub-free">＋ 직접입력</button>' +
+      '<button type="button" class="tt-sub" data-action="tt-sub-clear">비우기</button>' +
+    '</div>' +
+  '</div>';
 }
 function renderSchoolTimetable(kid){
   var who = isKidMode() ? MODE : ttKidKey(kid || TT_KID);
@@ -14469,26 +14817,34 @@ function renderSchoolTimetable(kid){
   TT_MODAL_KID = who;
   TT_MODAL_TAB = 'school';
   var editable = isParentMode();
-  var meta = TT_META[who];
   var grid = schoolTimetableOf(who);
+  var allRows = ttRowsOf(who);
+  /* 과목이 적힌 마지막 교시까지만 보여 준다 (#v31) — 빈 뒷교시 숨김
+     엄마가 고칠 때는 다음 한 줄만 더 둔다 (그 줄을 채우면 또 한 줄 생김) */
+  var lastFilled = ttLastFilledPeriod(who, 1);
+  [2,3,4,5].forEach(function(d){ lastFilled = Math.max(lastFilled, ttLastFilledPeriod(who, d)); });
+  var limit = Math.min(8, Math.max(1, lastFilled + (editable ? 1 : 0)));
+  var rows = allRows.filter(function(r){ return r.lunch || Number(r.k) <= limit; });
   var head = '<tr><th class="tt-corner" aria-hidden="true"></th>' +
     TT_DAYS.map(function(d){ return '<th class="tt-dow" scope="col">' + d.label + '</th>'; }).join('') + '</tr>';
-  var body = meta.rows.map(function(r){
+  var body = rows.map(function(r){
     if(r.lunch){
       return '<tr class="tt-lunch"><th class="tt-p" scope="row">' + r.name + '<small>' + r.time + '</small></th>' +
-        '<td colspan="5">점심시간 (50분)</td></tr>';
+        '<td colspan="5">점심시간</td></tr>';
     }
     return '<tr><th class="tt-p" scope="row">' + r.name + '<small>' + r.time + '</small></th>' +
       TT_DAYS.map(function(d){ return '<td>' + ttCellHtml(who, d.d, r.k, editable, grid) + '</td>'; }).join('') + '</tr>';
   }).join('');
   openModal(
     '<h2 class="modal-title">🏫 학교 시간표</h2>' +
-    ttModalTabs(who, meta.grade) +
-    '<div class="tt-wrap"><table class="tt-table"><thead>' + head + '</thead><tbody>' + body + '</tbody></table></div>' +
+    ttModalTabs(who, schoolGradeText(who)) +
+    ttInfoHtml(who, editable) +
+    '<div class="tt-wrap"><table class="tt-table" data-tt-kid="' + who + '"><thead>' + head + '</thead><tbody>' + body + '</tbody></table></div>' +
+    ttPickHtml(who, editable) +
     '<p class="tt-hint" id="ttHint">' + (editable
-      ? '칸을 눌러 과목을 고치고, 꾹 눌러(0.4초) 다른 칸으로 옮겨요'
+      ? '칸을 눌러 과목을 고르고, 꾹 눌러(0.4초) 다른 칸으로 옮겨요'
       : '보기만 해요 · 엄마 화면에서 고칠 수 있어요') + '</p>' +
-    '<p class="tt-foot">※ 시간표는 학교 사정에 따라 바뀔 수 있어요</p>' +
+    '<p class="tt-foot">※ 시간표는 학교 사정에 따라 바뀔 수 있어요 · 하교 시간은 「🕒 SCHEDULE」에 바로 반영돼요</p>' +
     '<div class="modal-actions"><button type="button" class="btn btn-ghost" data-action="close-modal">닫기</button></div>'
   );
 }
@@ -14504,6 +14860,8 @@ function openAcademyTimetable(kid){
    모달 안에서는 아이(선우·지우) 전환만 남긴다 */
 var TT_MODAL_TAB = 'school';
 var TT_MODAL_KID = '';
+/* 고른 칸 — 과목 고르기 칸(#ttPick)이 어느 칸을 고치는지 (#v31) */
+var TT_PICK = null;
 function ttModalTabs(who, grade){
   var kidMode = isKidMode();
   if(kidMode){
@@ -14512,7 +14870,7 @@ function ttModalTabs(who, grade){
   return '<div class="tt-switch" role="group" aria-label="아이 시간표 고르기">' + ['seonwoo', 'jiwoo'].map(function(k){
     var on = (k === who);
     return '<button type="button" class="' + (on ? 'on' : '') + '" data-action="tt-kid" data-kid="' + k + '" aria-pressed="' + (on ? 'true' : 'false') + '">' +
-      '<span>' + esc(kidDef(k).name) + '</span><small>' + esc(TT_META[k].grade) + '</small></button>';
+      '<span>' + esc(kidDef(k).name) + '</span><small>' + esc(schoolGradeText(k)) + '</small></button>';
   }).join('') + '</div>';
 }
 /* 🎨 학원 시간표 — 이번 달 시간표를 월~금 가로 5열 표로 (각 열은 시간순 아래로 · #v28)
@@ -14522,7 +14880,7 @@ function academyTimetableHtml(kidKey){
   var mk = state.month || currentMonthKey();
   var md = monthData(kidKey, mk);
   /* 집에 들렀다 가는 시간은 학원 일정이 아니라 동선이라 표에서 뺀다 (#v30) */
-  var entries = (md.entries || []).filter(function(en){ return !isHomeStop(en.name); });
+  var entries = (md.entries || []).filter(function(en){ return !isHomeStop(en.name) && en.stop !== 'school'; });
   if(!entries.length){
     return '<p class="tt-hint">🎨 이번 달 학원 시간표가 아직 없어요 · 아래 「🗓 학원 시간표」에서 넣을 수 있어요</p>';
   }
@@ -14539,7 +14897,7 @@ function academyTimetableHtml(kidKey){
   var cells = days.map(function(d){
     var list = (byDay[d] || []).slice().sort(byStart);
     var inner = list.length ? list.map(function(en){
-      var emo = academyEmojiOf(en.name);
+      var emo = entryEmoji(en);
       return '<span class="att-item"><i aria-hidden="true">' + emo + '</i><b>' + esc(en.name) + '</b>' +
         (en.start || en.end ? '<small>' + esc((en.start || '') + (en.end ? '~' + en.end : '')) + '</small>' : '') + '</span>';
     }).join('') : '<span class="att-empty">—</span>';
@@ -14572,28 +14930,142 @@ function renderAcademyTimetable(kid){
     '<div class="modal-actions"><button type="button" class="btn btn-ghost" data-action="close-modal">닫기</button></div>'
   );
 }
-function ttSetCell(kid, key, value){
-  if(!isParentMode()) return false;
-  if(!/^[1-5]-[1-6]$/.test(String(key || ''))) return false;
+/* 🏫 하교 시간은 학교 시간표에서 자동으로 (#v31)
+   · 그 요일 마지막 교시 → 「N교시」 · 그 교시가 끝나는 시각
+   · 저장된 달별 값(md.school)이 있으면 그 값을 먼저 쓰고, 없으면 시간표에서 계산한다 */
+var SCHOOL_END = { '4교시': '12:50', '5교시': '13:40', '6교시': '14:30' };
+function schoolEndOf(label, kid){
+  var key = String(label || '').trim();
+  var m = key.match(/^(\d)\s*교시/);
+  /* 그 아이의 시간표에서 그 교시가 끝나는 시각 (#v31) — 50분 수업이면 시각도 달라진다 */
+  if(m && kid){
+    var t = ttEndOfPeriod(kid, m[1]);
+    if(t) return t;
+  }
+  if(SCHOOL_END[key]) return SCHOOL_END[key];
+  return m ? (SCHOOL_END[m[1] + '교시'] || '') : '';
+}
+function schoolText(label, kid){
+  var t = schoolEndOf(label, kid);
+  return t ? (String(label).trim() + ' · ' + t) : String(label || '');
+}
+/* 그날 하교 안내 — 방과후(🏫 학교) 일정이 있으면 그 끝나는 시각으로 (#v31) */
+function schoolDismissalOf(kidKey, mk, day){
+  var md = monthData(kidKey, mk);
+  var list = dayEntries(kidKey, mk, day);
+  var after = null;
+  list.forEach(function(e){ if(e.stop === 'school' && e.end) after = e; });
+  if(after) return { label: after.name, time: after.end, after: true, text: after.name + ' 방과후 · ' + after.end + ' 하교' };
+  var leg = (md.school && md.school[day]) ? String(md.school[day]).trim() : '';
+  if(!leg){
+    var last = ttLastFilledPeriod(kidKey, day);
+    if(last) leg = last + '교시';
+  }
+  if(!leg) return null;
+  return { label: leg, time: schoolEndOf(leg, kidKey), after: false, text: schoolText(leg, kidKey) + ' 하교' };
+}
+/* 학교 시간표를 고치면 달별 「N교시」 하교 시간도 함께 맞춘다 —
+   직접 적은 값(특강·방과후 15:30)은 건드리지 않는다 (#v31) */
+function syncSchoolDismissals(kid){
+  var k = ttKidKey(kid);
+  var box = (state.academies && state.academies[k]) || {};
+  Object.keys(box).forEach(function(mk){
+    var m = box[mk];
+    if(!m || typeof m !== 'object') return;
+    if(!m.school || typeof m.school !== 'object') m.school = {};
+    [1, 2, 3, 4, 5].forEach(function(d){
+      var cur = String(m.school[d] == null ? '' : m.school[d]).trim();
+      if(cur && !/^\d교시$/.test(cur)) return;
+      var last = ttLastFilledPeriod(k, d);
+      if(last) m.school[d] = last + '교시';
+      else delete m.school[d];
+    });
+  });
+}
+function ttSaveCell(kid, key, value, opts){
   var k = ttKidKey(kid);
   var grid = schoolTimetableOf(k);
-  var v = String(value === undefined || value === null ? '' : value).replace(/\s+/g, ' ').trim().slice(0, 10);
+  /* 「국어(도서관)」처럼 붙여 쓴 과목은 괄호 앞에서 줄을 바꿔 저장한다 (#v31) */
+  var v = String(value === undefined || value === null ? '' : value)
+    .replace(/[ \t]*\n[ \t]*/g, '\n')
+    .replace(/[ \t]+/g, ' ')
+    .replace(/^\s+|\s+$/g, '')
+    .slice(0, 20);
+  if(v && v.indexOf('\n') < 0){
+    v = v.replace(/^([^(\n]{1,12})\((.{1,8})\)$/, '$1\n($2)');
+  }
   if(v) grid[key] = v; else delete grid[key];
+  syncSchoolDismissals(k);
   saveState();
-  renderSchoolTimetable(k);
-  toast(v ? ('🏫 ' + v + ' 로 바꿨어요') : '🏫 칸을 비웠어요');
+  /* 칸 안에서 바로 고칠 때는 모달을 다시 그리지 않는다 — 다른 버튼 클릭을 삼키지 않게 */
+  if(!opts || opts.modal !== false) renderSchoolTimetable(k);
+  renderAcademy();
+  renderWeek();
+  renderGlance();
+  renderHome();
+  toast(v ? ('🏫 ' + v.replace(/\n/g, ' ') + ' 로 바꿨어요') : '🏫 칸을 비웠어요');
   return true;
+}
+function ttSetCell(kid, key, value, opts){
+  if(!isParentMode()) return false;
+  if(!/^[1-5]-[0-8]$/.test(String(key || ''))) return false;
+  return ttSaveCell(kid, key, value, opts);
 }
 /* 꾹 눌러 자리 바꾸기 — 두 칸의 과목을 맞바꿈 */
 function ttSwap(kid, a, b){
   if(!isParentMode()) return false;
-  if(!/^[1-5]-[1-6]$/.test(String(a || '')) || !/^[1-5]-[1-6]$/.test(String(b || '')) || a === b) return false;
+  if(!/^[1-5]-[0-8]$/.test(String(a || '')) || !/^[1-5]-[0-8]$/.test(String(b || '')) || a === b) return false;
   var k = ttKidKey(kid);
   var grid = schoolTimetableOf(k);
   var va = grid[a] || '', vb = grid[b] || '';
   if(!va && !vb) return false;
   if(vb) grid[a] = vb; else delete grid[a];
   if(va) grid[b] = va; else delete grid[b];
+  syncSchoolDismissals(k);
+  saveState();
+  return true;
+}
+/* 수업 시간 종류(40분·50분) · 0교시 · 학교 정보 (#v31) */
+function ttSetStyle(kid, style){
+  if(!isParentMode()) return false;
+  var k = ttKidKey(kid);
+  if(style !== '40' && style !== '50') return false;
+  if(!state.schoolStyle || typeof state.schoolStyle !== 'object') state.schoolStyle = {};
+  state.schoolStyle[k] = style;
+  syncSchoolDismissals(k);
+  saveState();
+  renderSchoolTimetable(k);
+  renderAcademy();
+  renderWeek();
+  renderGlance();
+  renderHome();
+  toast('🏫 ' + style + '분 수업 시간으로 바꿨어요');
+  return true;
+}
+function ttToggleZero(kid){
+  if(!isParentMode()) return false;
+  var k = ttKidKey(kid);
+  if(!state.schoolZero || typeof state.schoolZero !== 'object') state.schoolZero = {};
+  state.schoolZero[k] = !state.schoolZero[k];
+  saveState();
+  renderSchoolTimetable(k);
+  return true;
+}
+function ttSetInfo(kid, patch){
+  if(!isParentMode()) return false;
+  var k = ttKidKey(kid);
+  var info = schoolInfoOf(k);
+  Object.keys(patch || {}).forEach(function(f){
+    if(['level','grade','cls','name'].indexOf(f) < 0) return;
+    var v = String(patch[f] === undefined || patch[f] === null ? '' : patch[f]).trim().slice(0, 20);
+    if(f === 'level' && ['초','중','고'].indexOf(v) < 0) return;
+    if(f === 'grade' || f === 'cls'){
+      var n = Number(v);
+      if(!n || n < 1) return;
+      v = String(n);
+    }
+    info[f] = v;
+  });
   saveState();
   return true;
 }
@@ -14603,16 +15075,38 @@ function ttBeginEdit(cell){
   if(!kid || !key) return;
   var grid = schoolTimetableOf(kid);
   var cur = grid[key] || '';
+  /* 🏫 과목 고르기 칸을 함께 연다 (#v31) */
+  TT_PICK = { kid: kid, key: key };
+  var pick = document.getElementById('ttPick');
+  if(pick){
+    pick.hidden = false;
+    var head = document.getElementById('ttPickHead');
+    var p = String(key).split('-');
+    if(head) head.textContent = schoolGradeText(kid) + ' ' + WEEK[Number(p[0])] + '요일 ' + p[1] + '교시 과목';
+    Array.prototype.forEach.call(pick.querySelectorAll('.tt-sub[data-sub]'), function(ch){
+      ch.classList.toggle('on', ch.getAttribute('data-sub') === cur.replace(/\n.*$/, ''));
+    });
+  }
   cell.classList.add('editing');
-  cell.innerHTML = '<input class="tt-in" type="text" maxlength="10" value="' + esc(cur) + '" aria-label="과목 이름">';
+  cell.innerHTML = '<input class="tt-in" type="text" maxlength="20" value="' + esc(cur) + '" aria-label="과목 이름">';
   var inp = cell.querySelector('.tt-in');
   if(!inp) return;
+  var done = false;
   try{ inp.focus(); inp.select(); }catch(e){}
   function commit(save){
-    if(cell.getAttribute('data-tt-done') === '1') return;
-    cell.setAttribute('data-tt-done', '1');
-    if(save) ttSetCell(kid, key, inp.value);
-    else renderSchoolTimetable(kid);
+    if(done) return;
+    done = true;
+    if(save){
+      ttSetCell(kid, key, inp.value, { modal:false });
+      /* 모달은 그대로 둔 채 칸만 다시 칠해요 — 다음 버튼 클릭이 먹히게 (#v31) */
+      var g = schoolTimetableOf(kid);
+      var v = g[key] || '';
+      cell.classList.remove('editing');
+      cell.classList.toggle('empty', !v);
+      cell.innerHTML = v ? ttCellText(v) : '<span class="tt-blank" aria-hidden="true">·</span>';
+    }else{
+      renderSchoolTimetable(kid);
+    }
   }
   inp.addEventListener('keydown', function(ev){
     var kk = ev.key || '';
@@ -15120,8 +15614,8 @@ function renderHome(){
     acBox.innerHTML = keys.map(function(k){
       var kd = kidDef(k);
       var md = monthData(k, mk);
-      var school = (md.school && md.school[dow]) || '';
       var list = dayEntries(k, mk, dow);
+      var dismiss = off ? null : schoolDismissalOf(k, mk, dow);
       var body = '';
       if(list.length){
         body = list.map(function(a){
@@ -15147,7 +15641,7 @@ function renderHome(){
           ? ' · ' + stops.map(function(a){ return academyIcon(a.name) + ' ' + esc(a.name); }).join(' · ')
           : ' · ' + esc(schoolOffName(offKey)) + ' · 학교 안 가는 날');
       }else{
-        routeLine = '🏫 ' + esc(SCHOOL_INFO.name) + (school ? ' ' + esc(schoolText(school)) + ' 하교' : '');
+        routeLine = '🏫 ' + esc(schoolNameOf(k)) + (dismiss ? ' ' + esc(dismiss.text) : '');
       }
       return '<div class="ha">' +
         '<div class="ha-head"><span class="ha-av" aria-hidden="true"><img src="' + kidAvatarOf(k) + '" alt=""></span>' + esc(kd.name) + '</div>' +
@@ -16539,12 +17033,27 @@ function addAcademy(){
   var pickup = pickupEl ? String(pickupEl.value || '').trim().slice(0, 20) : '';
   var kindEl = $('#acPickupKind');
   var pickupKind = kindEl && pickupKindOf(kindEl.value) ? kindEl.value : '';
+  /* 학원차를 고른 쪽에 따라 승차/하차 — 둘 다면 구분 없이 (#v31) */
+  if(move === 'bus' && backMove === 'bus') pickupKind = '';
+  else if(move === 'bus') pickupKind = '승차';
+  else if(backMove === 'bus') pickupKind = '하차';
+  else pickupKind = '';
   var pTimeEl = $('#acPickupTime');
   var pickupTime = pTimeEl && /^\d{2}:\d{2}$/.test(pTimeEl.value) ? pTimeEl.value : '';
+  var stopPlaceEl = $('#acStopPlace');
+  var stopPlace = stopPlaceEl ? String(stopPlaceEl.value || '').trim().slice(0, 20) : '';
+  var stop = acStopDef(AC_FORM_STOP) ? AC_FORM_STOP : '';
+  /* 주차장·장소 프리셋은 안내 문구에 들어갈 장소를 승·하차 칸에도 같이 둔다 */
+  if((stop === 'parking' || stop === 'place') && !pickup) pickup = stopPlace;
   var kidKey = state.current;
   var mk = state.month;
   var box = ensureMonth(kidKey, mk);
-  box.entries.push({ id: uid(), day: day, start: start, end: end, name: name.slice(0, 24), memo: memo, place: place, move: move, backMove: backMove, pickup: pickup, pickupTime: pickupTime, pickupKind: pickupKind, homeTask: homeTask });
+  box.entries.push({ id: uid(), day: day, start: start, end: end, name: name.slice(0, 24), memo: memo, place: place, move: move, backMove: backMove, pickup: pickup, pickupTime: pickupTime, pickupKind: pickupKind, homeTask: homeTask, emoji: AC_FORM_EMOJI, stop: stop, stopPlace: stopPlace, goPlace: (move === 'bus' ? pickup : ''), backPlace: (backMove === 'bus' ? pickup : '') });
+  /* 🏫 학교 프리셋 — 그날 하교 시간을 이 방과후가 끝나는 시각으로 */
+  if(stop === 'school' && end){
+    if(!box.school || typeof box.school !== 'object') box.school = {};
+    box.school[day] = name.slice(0, 24) + ' 방과후 ' + end;
+  }
   saveState();
   if(nameEl) nameEl.value = '';
   if(memoEl) memoEl.value = '';
@@ -16556,6 +17065,7 @@ function addAcademy(){
   if(moveEl) moveEl.value = '';
   if(backEl) backEl.value = '';
   if(kindEl) kindEl.value = '';
+  resetAcForm();
   syncAcFormHome();
   syncAcFormMove();
   renderAcademy();
@@ -16570,6 +17080,12 @@ function editAcademyModal(id){
   if(!found) return;
   var e = found.entry;
   var kd = kidDef(found.kid);
+  AC_EDIT_ID = e.id;
+  AC_EDIT_EMOJI = e.emoji || '';
+  AC_EDIT_STOP = e.stop || '';
+  var go = e.move || '', back = entryBackMove(e);
+  var bus = (go === 'bus' || back === 'bus');
+  var busLabel = (go === 'bus' && back === 'bus') ? '승하차 장소' : (back === 'bus' ? '하차 장소' : '승차 장소');
   openModal(
     '<h2 class="modal-title">✏️ 학원 일정 수정</h2>' +
     '<p class="modal-sub">' + kidAvHtml(kd.key) + ' ' + esc(kd.name) + ' · ' + monthTitle(found.month) + '</p>' +
@@ -16582,9 +17098,17 @@ function editAcademyModal(id){
         '</select></label>' +
         '<label class="set-field">학원 이름<input type="text" id="editAcName" maxlength="24" value="' + esc(e.name) + '"></label>' +
       '</div>' +
-      '<div class="set-grid" style="margin-top:7px">' +
-        '<label class="set-field">시작<input type="time" id="editAcStart" value="' + esc(e.start) + '"></label>' +
-        '<label class="set-field">종료 (모르면 비워두기)<input type="time" id="editAcEnd" value="' + esc(e.end) + '"></label>' +
+      '<div class="ac-time-row" style="margin-top:7px">' +
+        '<label class="ac-time-field">시작<input type="time" id="editAcStart" value="' + esc(e.start) + '"></label>' +
+        '<label class="ac-time-field">종료 (모르면 비워두기)<input type="time" id="editAcEnd" value="' + esc(e.end) + '"></label>' +
+      '</div>' +
+      '<div class="ac-pick-block" style="margin-top:7px">' +
+        '<span class="ac-pick-label">학원 이모지 (선택)</span>' +
+        '<div class="ac-emoji-row">' + acEmojiRowHtml(AC_EDIT_EMOJI, 'edit-ac-emoji') + '</div>' +
+      '</div>' +
+      '<div class="ac-pick-block" style="margin-top:7px">' +
+        '<span class="ac-pick-label">정류장 · 활동 (선택)</span>' +
+        '<div class="ac-stop-row">' + acStopRowHtml(AC_EDIT_STOP, 'edit-ac-preset') + '</div>' +
       '</div>' +
       '<div class="set-grid" style="margin-top:7px">' +
         '<label class="set-field">장소·주소<input type="text" id="editAcPlace" maxlength="40" value="' + esc(e.place || '') + '" placeholder="예: 양원역로10길 · 집이면 비워 두세요"></label>' +
@@ -16607,20 +17131,20 @@ function editAcademyModal(id){
           }).join('') +
         '</select></label>' +
       '</div>' +
-      '<div class="set-hint" style="margin-top:5px">갈 때·올 때를 따로 고를 수 있어요 · 도보는 동선에 그리지 않고, 학원차만 탑승 시각·장소를 함께 보여 줘요</div>' +
-      '<div class="set-grid" style="margin-top:7px">' +
-        '<label class="set-field">승차·하차 구분<select id="editAcPickupKind">' +
-          '<option value=""' + (!e.pickupKind ? ' selected' : '') + '>미입력</option>' +
+      '<p class="set-hint" id="editAcMoveHint" style="margin-top:5px">갈 때·올 때를 따로 고를 수 있어요 · 도보는 동선에 그리지 않아요</p>' +
+      '<div class="ac-form-row ac-bus-row" id="editAcBusRow"' + (bus ? '' : ' hidden') + ' style="margin-top:7px">' +
+        '<input type="text" id="editAcPickup" maxlength="20" value="' + esc(e.pickup) + '" placeholder="' + busLabel + ' (예: 양원성당)">' +
+      '</div>' +
+      '<div class="ac-form-row ac-bus-time-row" id="editAcBusTimeRow"' + (bus ? '' : ' hidden') + ' style="margin-top:7px">' +
+        '<label class="ac-time-field">학원차 시각<input type="time" id="editAcPickupTime" value="' + esc(e.pickupTime || '') + '"></label>' +
+      '</div>' +
+      '<div class="ac-hide" aria-hidden="true">' +
+        '<select id="editAcPickupKind" tabindex="-1"><option value=""' + (!e.pickupKind ? ' selected' : '') + '>미입력</option>' +
           PICKUP_KINDS.map(function(k){
             return '<option value="' + k.key + '"' + (e.pickupKind === k.key ? ' selected' : '') + '>' + k.icon + ' ' + k.label + '</option>';
           }).join('') +
-        '</select></label>' +
-        '<label class="set-field">탑승·픽업 장소<input type="text" id="editAcPickup" maxlength="20" value="' + esc(e.pickup) + '" placeholder="예: 양원성당"></label>' +
+        '</select>' +
       '</div>' +
-      '<div class="set-grid" style="margin-top:7px">' +
-        '<label class="set-field">학원차 탑승 시각<input type="time" id="editAcPickupTime" value="' + esc(e.pickupTime || '') + '"></label>' +
-      '</div>' +
-      '<div class="set-hint" style="margin-top:5px">「양원성당 16:10 승차」처럼 적으면 오늘의 동선에 그대로 보여요.</div>' +
     '</div>' +
     '<div class="modal-actions">' +
       '<button class="btn btn-danger btn-sm" data-action="del-academy" data-id="' + e.id + '" style="margin-right:auto">삭제</button>' +
@@ -16662,8 +17186,23 @@ function saveAcademyEdit(id){
   found.entry.pickup = pickupEl ? String(pickupEl.value || '').trim().slice(0, 20) : '';
   var kindEl = $('#editAcPickupKind');
   found.entry.pickupKind = (kindEl && pickupKindOf(kindEl.value)) ? kindEl.value : '';
+  if(found.entry.move === 'bus' && found.entry.backMove === 'bus') found.entry.pickupKind = '';
+  else if(found.entry.move === 'bus') found.entry.pickupKind = '승차';
+  else if(found.entry.backMove === 'bus') found.entry.pickupKind = '하차';
+  else found.entry.pickupKind = '';
   var pTimeEl = $('#editAcPickupTime');
   found.entry.pickupTime = (pTimeEl && /^\d{2}:\d{2}$/.test(pTimeEl.value)) ? pTimeEl.value : '';
+  /* 🏫 학원 이모지 · 정류장 프리셋 (#v31) */
+  found.entry.emoji = AC_EDIT_EMOJI || '';
+  found.entry.stop = acStopDef(AC_EDIT_STOP) ? AC_EDIT_STOP : '';
+  found.entry.goPlace = (found.entry.move === 'bus') ? found.entry.pickup : '';
+  found.entry.backPlace = (found.entry.backMove === 'bus') ? found.entry.pickup : '';
+  /* 🏫 학교 프리셋은 그날 하교 시간을 이 일정이 끝나는 시각으로 */
+  if(found.entry.stop === 'school' && found.entry.end){
+    var mm = ensureMonth(found.kid, found.month);
+    if(!mm.school) mm.school = {};
+    mm.school[found.entry.day] = String(found.entry.name) + ' 방과후 ' + found.entry.end;
+  }
   saveState();
   closeModal();
   renderAcademy();
@@ -16787,25 +17326,168 @@ function syncAcFormHome(){
   var row = taskEl && taskEl.parentNode;
   if(taskEl && taskEl.classList) taskEl.classList.toggle('home-on', !!isHome);
 }
-/* 갈 때·올 때 안내 — 학원차만 시각이 필요하다 (#3631) */
+/* 갈 때·올 때 안내 — 학원차만 시각·장소가 필요하다 (#3631 · #v31) */
 function syncAcFormMove(){
-  var hint = $('#acMoveHint');
-  if(!hint) return;
-  var goEl = $('#acMove'), backEl = $('#acBackMove');
-  var go = goEl ? goEl.value : '';
-  var back = backEl ? backEl.value : '';
-  if(go === 'bus' || back === 'bus') hint.textContent = '학원차는 탑승 시각·장소까지 함께 보여 줘요';
-  else if(go || back) hint.textContent = '엄마차·아빠차·지하주차장은 차 이름만 보여 줘요 (시각은 필요 없어요)';
-  else hint.textContent = '갈 때·올 때를 따로 고를 수 있어요 · 도보는 동선에 쓰지 않아요';
+  if($('#acMove') || $('#acBackMove')) acBusSync('');
 }
 function acQuickName(value){
   if(!isParentMode()) return;
   var nameEl = $('#acName');
   if(nameEl){ nameEl.value = value || ''; }
+  /* 🏠 집 프리셋을 고른 것과 같게 (#v31) */
+  if(isHomeStop(value)){
+    AC_FORM_STOP = 'home';
+    renderAcStopRow();
+  }
   syncAcFormHome();
   syncAcFormMove();
-  var taskEl = $('#acHomeTask');
-  if(taskEl){ try{ taskEl.focus(); }catch(e){} }
+}
+
+/* =========================================================
+   ➕ 학원 · 셔틀 동선 추가 (#v31)
+   · 학원 이모지 (선택) — 🔤 영어 · 📚 책나무 · ⚽️ 축구 …
+   · 정류장 · 활동 프리셋 — 🅿️ 주차장 · 📍 장소 · 🏫 학교 · 🏠 집
+     고르면 동선에 얇은 한 줄 박스로 들어가고, 안내 문구가 자동으로 붙는다
+   · 학원차를 골랐을 때만 승차/하차 장소·시각 칸이 나타난다
+   ========================================================= */
+var AC_EMOJIS = [
+  ['🔤','영어'], ['📚','책나무'], ['⚽️','축구'], ['🥊','복싱'], ['🎹','피아노'], ['🥋','태권도'],
+  ['💃🏻','댄스'], ['🎨','미술'], ['⚾','야구'], ['🏀','농구'], ['🎾','테니스']
+];
+var AC_STOPS = [
+  { key:'parking', icon:'🅿️', label:'주차장' },
+  { key:'place',   icon:'📍', label:'장소' },
+  { key:'school',  icon:'🏫', label:'학교' },
+  { key:'home',    icon:'🏠', label:'집' }
+];
+var AC_FORM_EMOJI = '';
+var AC_FORM_STOP = '';
+var AC_EDIT_EMOJI = '';
+var AC_EDIT_STOP = '';
+var AC_EDIT_ID = '';
+function acStopDef(key){
+  for(var i = 0; i < AC_STOPS.length; i++){ if(AC_STOPS[i].key === key) return AC_STOPS[i]; }
+  return null;
+}
+/* 프리셋 안내 문구 — 예) 「양원성당에서 만나요!」 · 「영어 방과후」 · 「간식 먹고 숙제를 해요」 */
+function acStopText(e){
+  var d = acStopDef(e && e.stop);
+  if(!d) return '';
+  if(d.key === 'parking') return (e.stopPlace || e.pickup || '') + '에서 만나요!';
+  if(d.key === 'place') return (e.stopPlace || e.pickup || '') + '에서 기다려요!';
+  if(d.key === 'school') return String(e.name || '') + ' 방과후';
+  if(d.key === 'home') return (e.homeTask || '') + '를 해요';
+  return '';
+}
+function entryEmoji(e){
+  if(e && e.emoji) return String(e.emoji);
+  return academyIcon(e && e.name);
+}
+function acEmojiRowHtml(cur, act){
+  return AC_EMOJIS.map(function(e){
+    var on = e[0] === cur;
+    return '<button type="button" class="ac-emo' + (on ? ' on' : '') + '" data-action="' + act + '" data-emoji="' + esc(e[0]) + '"' +
+      ' aria-pressed="' + (on ? 'true' : 'false') + '" title="' + esc(e[1]) + '"><span aria-hidden="true">' + esc(e[0]) + '</span><small>' + esc(e[1]) + '</small></button>';
+  }).join('');
+}
+function acStopRowHtml(cur, act){
+  var isEdit = (act.indexOf('edit') === 0);
+  return AC_STOPS.map(function(s){
+    var on = s.key === cur;
+    /* 🏠 집은 이름을 「집」으로 — 추가 폼에서는 빠른 선택과 같은 동작 */
+    var a = (s.key === 'home' && !isEdit) ? 'ac-quick-name' : act;
+    var extra = (s.key === 'home' && !isEdit) ? ' data-value="집"' : '';
+    return '<button type="button" class="ac-stop' + (on ? ' on' : '') + '" data-action="' + a + '"' + extra +
+      ' data-preset="' + s.key + '" aria-pressed="' + (on ? 'true' : 'false') + '">' + s.icon + ' ' + s.label + '</button>';
+  }).join('');
+}
+function renderAcEmojiRow(){
+  var box = $('#acEmojiRow');
+  if(box) box.innerHTML = acEmojiRowHtml(AC_FORM_EMOJI, 'ac-emoji');
+}
+function renderAcStopRow(){
+  var box = $('#acStopRow');
+  if(box){
+    box.innerHTML = acStopRowHtml(AC_FORM_STOP, 'ac-preset');
+    /* 🏠 집 칩에 ac-quick-name 을 달았어도 프리셋 표시는 AC_FORM_STOP 을 따른다 */
+    Array.prototype.forEach.call(box.querySelectorAll('.ac-stop'), function(b){
+      var on = b.getAttribute('data-preset') === AC_FORM_STOP;
+      b.classList.toggle('on', on);
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+  }
+}
+function pickAcEmoji(emoji, target){
+  if(!isParentMode()) return;
+  if(target === 'edit'){
+    AC_EDIT_EMOJI = (AC_EDIT_EMOJI === emoji) ? '' : emoji;
+    var box = document.querySelector('#modalRoot .ac-emoji-row');
+    if(box) box.innerHTML = acEmojiRowHtml(AC_EDIT_EMOJI, 'edit-ac-emoji');
+    return;
+  }
+  AC_FORM_EMOJI = (AC_FORM_EMOJI === emoji) ? '' : emoji;
+  renderAcEmojiRow();
+}
+function setAcPreset(key, target){
+  if(!isParentMode()) return;
+  var isEdit = (target === 'edit');
+  var cur = isEdit ? AC_EDIT_STOP : AC_FORM_STOP;
+  var next = (cur === key) ? '' : key;
+  if(isEdit) AC_EDIT_STOP = next; else AC_FORM_STOP = next;
+  var placeEl = isEdit ? null : $('#acStopPlace');
+  var taskEl = isEdit ? $('#editAcHomeTask') : $('#acHomeTask');
+  var nameEl = isEdit ? $('#editAcName') : $('#acName');
+  if(next === 'home' && nameEl) nameEl.value = '집';
+  if(placeEl){
+    var show = (next === 'parking' || next === 'place');
+    placeEl.hidden = !show;
+    placeEl.placeholder = next === 'parking' ? '주차장에서 만날 곳 (예: 양원성당)' : '기다릴 곳 (예: 학교 정문)';
+  }
+  if(taskEl && next === 'home'){
+    taskEl.classList.add('home-on');
+    try{ taskEl.focus(); }catch(e){}
+  }
+  var row = isEdit ? document.querySelector('#modalRoot .ac-stop-row') : $('#acStopRow');
+  if(row) row.innerHTML = acStopRowHtml(next, isEdit ? 'edit-ac-preset' : 'ac-preset');
+  if(!isEdit) syncAcFormHome();
+}
+/* 갈 때·올 때 중 하나라도 학원차(🚌)일 때만 승·하차 장소·시각 칸 (#v31) */
+function acBusSync(scope){
+  var isEdit = (scope === 'edit');
+  var p = isEdit ? '#editAc' : '#ac';
+  var goEl = $(p + 'Move'), backEl = $(p + 'BackMove');
+  var go = goEl ? goEl.value : '';
+  var back = backEl ? backEl.value : '';
+  var bus = (go === 'bus' || back === 'bus');
+  var row = $(p + 'BusRow'), timeRow = $(p + 'BusTimeRow'), inp = $(p + 'Pickup');
+  if(row) row.hidden = !bus;
+  if(timeRow) timeRow.hidden = !bus;
+  if(inp){
+    var label = '승차 장소', ph = '승차 장소 (예: 양원성당)';
+    if(go === 'bus' && back === 'bus'){ label = '승하차 장소'; ph = '승하차 장소 (예: 양원성당)'; }
+    else if(back === 'bus'){ label = '하차 장소'; ph = '하차 장소 (예: 학원 앞)'; }
+    inp.placeholder = ph;
+    inp.setAttribute('aria-label', label);
+  }
+  var hint = $(p + 'MoveHint');
+  if(hint){
+    if(bus) hint.textContent = (go === 'bus' && back === 'bus')
+      ? '학원차는 승하차 장소와 탑승 시각을 함께 보여 줘요'
+      : (go === 'bus' ? '가는 학원차 — 승차 장소·시각을 적어 주세요' : '오는 학원차 — 하차 장소·시각을 적어 주세요');
+    else if(go || back) hint.textContent = '엄마차·아빠차·지하주차장은 차 이름만 보여 줘요 (시각은 필요 없어요)';
+    else hint.textContent = '갈 때·올 때를 따로 고를 수 있어요 · 도보는 동선에 쓰지 않아요';
+  }
+}
+function resetAcForm(){
+  AC_FORM_EMOJI = '';
+  AC_FORM_STOP = '';
+  renderAcEmojiRow();
+  renderAcStopRow();
+  var placeEl = $('#acStopPlace');
+  if(placeEl){ placeEl.value = ''; placeEl.hidden = true; }
+  var kindEl = $('#acPickupKind');
+  if(kindEl) kindEl.value = '';
+  acBusSync('');
 }
 
 /* =========================================================
@@ -17197,6 +17879,11 @@ document.addEventListener('click', function(e){
     case 'add-academy': addAcademy(); break;
     case 'save-school': saveSchoolTimes(); break;
     case 'ac-quick-name': acQuickName(target.getAttribute('data-value')); break;
+    /* ➕ 학원 · 셔틀 동선 추가 — 학원 이모지 · 정류장 프리셋 (#v31) */
+    case 'ac-emoji': pickAcEmoji(target.getAttribute('data-emoji'), 'form'); break;
+    case 'ac-preset': setAcPreset(target.getAttribute('data-preset'), 'form'); break;
+    case 'edit-ac-emoji': pickAcEmoji(target.getAttribute('data-emoji'), 'edit'); break;
+    case 'edit-ac-preset': setAcPreset(target.getAttribute('data-preset'), 'edit'); break;
     case 'edit-academy': editAcademyModal(target.getAttribute('data-id')); break;
     case 'save-academy': saveAcademyEdit(target.getAttribute('data-id')); break;
     case 'del-academy': deleteAcademy(target.getAttribute('data-id')); break;
@@ -17244,6 +17931,21 @@ document.addEventListener('click', function(e){
       break;
     }
     case 'tt-cell': ttBeginEdit(ttCellOf(target) || target); break;
+    /* 🏫 학교 시간표 — 수업 시간 종류 · 0교시 · 과목 칩 (#v31) */
+    case 'tt-style': ttSetStyle(target.getAttribute('data-tt-kid') || TT_MODAL_KID, target.getAttribute('data-style')); break;
+    case 'tt-zero': ttToggleZero(target.getAttribute('data-tt-kid') || TT_MODAL_KID); break;
+    case 'tt-sub':
+      if(TT_PICK) ttSetCell(TT_PICK.kid, TT_PICK.key, target.getAttribute('data-sub') || '');
+      break;
+    case 'tt-sub-clear':
+      if(TT_PICK) ttSetCell(TT_PICK.kid, TT_PICK.key, '');
+      break;
+    case 'tt-sub-free': {
+      if(!TT_PICK) break;
+      var tc = document.querySelector('#modalRoot .tt-cell[data-tt-key="' + TT_PICK.key + '"]');
+      if(tc) ttBeginEdit(tc);
+      break;
+    }
     case 'preview-mode': setPreviewMode(target.getAttribute('data-mode')); break;
     case 'select-month':
       state.month = target.getAttribute('data-month');
@@ -17578,8 +18280,21 @@ document.addEventListener('input', function(e){
 document.addEventListener('change', function(e){
   var t = e.target;
   if(!t || !t.hasAttribute) return;
-  /* 학원 동선: 갈 때·올 때를 고르면 안내 문구가 바뀐다 (#3631) */
+  /* 학원 동선: 갈 때·올 때를 고르면 학원차 승·하차 칸이 나타난다 (#3631 · #v31) */
   if((t.id === 'acMove' || t.id === 'acBackMove') && isParentMode()){ syncAcFormMove(); return; }
+  if((t.id === 'editAcMove' || t.id === 'editAcBackMove') && isParentMode()){ acBusSync('edit'); return; }
+  /* 🏫 학교 시간표 — 학교급·학년·반·학교명을 바로 저장 (#v31) */
+  if((t.id === 'ttLevel' || t.id === 'ttGrade' || t.id === 'ttCls' || t.id === 'ttName') && isParentMode()){
+    var patch = {};
+    patch[t.id === 'ttLevel' ? 'level' : (t.id === 'ttGrade' ? 'grade' : (t.id === 'ttCls' ? 'cls' : 'name'))] = t.value;
+    ttSetInfo(TT_MODAL_KID || TT_KID, patch);
+    renderSchoolTimetable(TT_MODAL_KID || TT_KID);
+    renderAcademy();
+    renderWeek();
+    renderGlance();
+    renderHome();
+    return;
+  }
   /* 공유 달력: 종류를 고르면 대상을 같은 사람으로 맞춰 준다 */
   if(t.id === 'famEvCat' && isParentMode()){
     var whoEl = $('#famEvWho');
@@ -17762,6 +18477,17 @@ function boot(){
       schoolTimetable: function(kid){ return JSON.parse(JSON.stringify(schoolTimetableOf(kid || TT_KID))); },
       schoolTimetableSet: function(kid, key, v){ return ttSetCell(kid, key, v); },
       schoolTimetableSwap: function(kid, a, b){ return ttSwap(kid, a, b); },
+      /* 🏫 학교 정보·수업 시간·0교시·하교 안내 (#v31) */
+      schoolInfo: function(kid){ return JSON.parse(JSON.stringify(schoolInfoOf(kid || TT_KID))); },
+      schoolStyle: function(kid){ return schoolStyleOf(kid || TT_KID); },
+      schoolZero: function(kid){ return schoolZeroOf(kid || TT_KID); },
+      schoolRows: function(kid){ return JSON.parse(JSON.stringify(ttRowsOf(kid || TT_KID))); },
+      schoolDismissal: function(kid, dateKey){
+        var dk = /^\d{4}-\d{2}-\d{2}$/.test(dateKey || '') ? dateKey : dayKey();
+        var dd = fromKey(dk);
+        var r = schoolDismissalOf(kid || state.current, dk.slice(0, 7), dd.getDay());
+        return r ? r.text : '';
+      },
       openSchoolTimetable: function(kid){ openSchoolTimetable(kid); },
       /* 🎂 생일 축하 팡업 (#v24) */
       birthdayOf: function(dk){ return calBdayOf(dk); },
