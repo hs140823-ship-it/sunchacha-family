@@ -1475,6 +1475,19 @@ body.mode-kid .brand-sub{color:#A08B74}
 .set-field input{min-height:38px;border-radius:10px}
 .set-fixed{min-height:38px;display:flex;align-items:center;padding:0 10px;border-radius:10px;background:var(--soft-bg);font-size:12px;font-weight:800;color:var(--ink-2)}
 .set-toggle{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:700;color:var(--ink-2);margin-top:8px}
+/* 🛠️ 용돈·도장 직접 맞추기 (#v29) */
+.set-adjust{border:1px solid var(--set-line);border-radius:14px;padding:9px 11px;margin-top:8px;background:var(--set-bg)}
+.set-adjust-head{display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:800;flex-wrap:wrap}
+.sa-now{margin-left:auto;font-size:10.5px;font-weight:700;color:var(--muted);white-space:nowrap}
+.sa-now b{font-weight:900;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.sa-row{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:6px;margin-top:6px}
+.sa-row label{font-size:11px;font-weight:800;color:var(--muted);white-space:nowrap}
+.sa-in{width:100%;min-width:0;box-sizing:border-box;min-height:36px;padding:5px 9px;border-radius:9px;font-size:13px;font-weight:800;text-align:right;font-variant-numeric:tabular-nums}
+.sa-row .btn{flex:0 0 auto;min-height:36px;padding:5px 10px;font-size:12px;white-space:nowrap}
+/* 🗑️ 상세 내역 삭제 버튼 (#v29) */
+.rdt-del{flex:0 0 auto;width:26px;height:26px;min-height:0;border-radius:8px;border:1px solid var(--line);background:var(--paper);color:#D64545;font-size:12px;font-weight:900;line-height:1;display:flex;align-items:center;justify-content:center}
+.rdt-del:hover{background:#FDEEEE;border-color:#F2C6C6}
+.rdt-note{margin:8px 0 0;font-size:10.5px;font-weight:700;color:var(--muted);text-align:center}
 .set-toggle input{width:20px;height:20px;min-height:0;flex:0 0 auto;accent-color:var(--orange)}
 .pay-row{display:flex;align-items:center;gap:9px;padding:8px 0;font-size:12.5px;border-bottom:1px dashed #F0E4D4}
 .pay-row:last-child{border-bottom:0}
@@ -1737,10 +1750,10 @@ body.mode-kid .extra-edit{display:none}
 .chore-card.done{background:var(--done-soft);border-color:var(--done-line);box-shadow:inset 0 0 0 1px rgba(255,255,255,.5)}
 .chore-top{display:flex;align-items:center;gap:6px;min-width:0;padding-right:20px}
 .chore-ico{font-size:17px;line-height:1;flex:0 0 auto}
-.chore-name{font-size:12.5px;font-weight:800;letter-spacing:-.01em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.chore-name{font-size:12.5px;font-weight:800;letter-spacing:-.01em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;word-break:keep-all;line-height:1.24}
 .chore-card.done .chore-name{color:var(--done-ink)}
 .chore-desc{
-  font-size:10px;color:var(--muted);line-height:1.35;
+  font-size:10px;color:var(--muted);line-height:1.35;word-break:keep-all;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
   min-height:2.7em;
 }
@@ -4429,24 +4442,40 @@ var DEFAULT_MORNING = [
   { label:'유산균 챙겨 먹기', desc:'아침에 유산균 챙겨 먹기',          icon:'💊' },
   { label:'영양제 챙겨 먹기', desc:'아침에 영양제 챙겨 먹기',          icon:'🌿' }
 ];
+/* 🧺 MY SPACE 11가지 (#v29) — 지혜님이 정해 주신 순서 그대로
+   외출 준비 4가지 → 정리 4가지 → 물통 · 입은 옷 · 반려 생물 */
 var DEFAULT_SPACE = [
-  { label:'책상 정리',        desc:'책상 위 물건 정리하기',        icon:'🪑' },
-  { label:'침대 정리',        desc:'이불·베개 정돈하기',            icon:'🛏️' },
-  { label:'책장 정리',        desc:'책 꽂고 정리하기',              icon:'📚' },
-  { label:'방 바닥 정리',      desc:'바닥에 있는 물건 제자리',       icon:'🧹' },
-  { label:'옷 정리',          desc:'입은 옷·옷장 정리하기',         icon:'👕' },
-  { label:'빨래 바구니 정리',  desc:'빨래 모아 바구니에 넣기',       icon:'🧺' },
-  { label:'먹은 자리 정리',    desc:'식사 후 식기 정리 및 간식 먹고 정리', icon:'🍽️' },
-  /* 🎒 학교 가는 세 가지는 나란히 (#5360 · #5384 · #5396) */
-  { label:'가방 정리',        desc:'가방 속 정리하고 준비하기',     icon:'🎒' },
-  { label:'필통 정리',        desc:'연필 깎기 · 연필 3자루 이상 · 지우개 · 빨간 색연필 · 풀 · 네임펜 챙기기', icon:'✏️' },
-  { label:'물통 정리',        desc:'물통 비우고 싱크대에 넣기',     icon:'🚰' },
-  { label:'신발 정리',        desc:'신발 가지런히 정리하기',        icon:'👟' },
-  { label:'자기 물건 제자리',  desc:'사용한 물건 원위치',            icon:'🧸' },
-  { label:'쓰레기 정리',      desc:'내 책상·방 쓰레기 모으기',        icon:'🗑️' },
-  { label:'새우 돌보기',      desc:'먹이주기 · 물 관리하기',         icon:'🦐' },
-  { label:'장수풍뎅이 & 사슴벌레', desc:'먹이주기 · 물주기',              icon:'🪲' }
+  { label:'마스크 챙기기',        desc:'가방에 마스크 넣어 두기',          icon:'😷' },
+  { label:'마스크줄 정리하기',    desc:'사용한 마스크 제자리 정리',        icon:'🎗️' },
+  { label:'핫팩 챙기기',          desc:'추운 날 핫팩 하나 챙기기',          icon:'🔥' },
+  { label:'우산 챙기기',          desc:'비 소식 있으면 우산 챙기기',        icon:'☂️' },
+  { label:'버스카드 챙기기',      desc:'버스카드 지갑에 넣어 두기',         icon:'💳' },
+  { label:'책상 정리',            desc:'책상 위 물건 정리하기',            icon:'🪑' },
+  { label:'가방 정리',            desc:'가방 속 정리하고 준비하기',         icon:'🎒' },
+  { label:'필통 정리',            desc:'연필 깎기 · 연필 3자루 이상 · 지우개 · 빨간 색연필 · 풀 · 네임펜 챙기기', icon:'✏️' },
+  { label:'물통 정리',            desc:'물통 비우고 싱크대에 넣기',         icon:'🚰' },
+  { label:'입은 옷 정리',         desc:'벗은 옷 제자리 또는 빨래바구니 넣기',  icon:'👕' },
+  { label:'간식 정리',            desc:'내가 먹은 간식 그릇·봉지 정리하기',   icon:'🍪' },
+  { label:'새우',                 desc:'먹이 주기 · 물 갈아주기',            icon:'🦐' },
+  { label:'장수풍뎅이',           desc:'먹이 주기 · 물 주기',                icon:'🪲' },
+  { label:'사슴벌레',             desc:'먹이 주기 · 물 주기',                icon:'🪲' }
 ];
+/* 예전 MY SPACE 기본 항목 — v3 이전 저장본에서 이 이름들만 걷어낸다
+   (부모님이 직접 넣은 다른 항목은 그대로 둔다) */
+var SPACE_OLD_LABELS = [
+  '책상 정리','침대 정리','책장 정리','방 바닥 정리','옷 정리','빨래 바구니 정리','먹은 자리 정리',
+  '가방 정리','필통 정리','물통 정리','물통 비우고 싱크대에 넣기','신발 정리','자기 물건 제자리',
+  '쓰레기 정리','침대 정리','새우 돌보기','장수풍뎅이 & 사슴벌레','내 옷 정리','내 옷 정리 · 빨래바구니 넣기','반려 생물 기본 돌봄'
+];
+/* 예전 이름 → 새 이름 — 카드 id는 그대로 두어 오늘 체크 기록이 살아남는다 */
+var SPACE_RENAME = {
+  '옷 정리':'입은 옷 정리', '빨래 바구니 정리':'입은 옷 정리',
+  '내 옷 정리':'입은 옷 정리', '내 옷 정리 · 빨래바구니 넣기':'입은 옷 정리',
+  '입은 옷 정리 · 빨래바구니 넣기':'입은 옷 정리',
+  '물통 챙기기':'물통 정리', '물통 비우고 싱크대에 넣기':'물통 정리', '물통 정리':'물통 정리',
+  '새우 돌보기':'새우', '장수풍뎅이 & 사슴벌레':'장수풍뎅이', '반려 생물 기본 돌봄':'새우', '반려 생물 돌봄':'새우',
+  '먹은 자리 정리':'간식 정리'
+};
 var DEFAULT_FAMILY = [
   /* 🍽️ 식사 */
   { id:'fam_cooking',   label:'요리',           desc:'가족 식사 또는 간식 함께 만들기',   icon:'🍳', reward:1000 },
@@ -4456,6 +4485,8 @@ var DEFAULT_FAMILY = [
   /* 👕🧺 빨래 */
   { id:'fam_laundry_wash', label:'빨래 널기',      desc:'빨래 돌리고 널기',                 icon:'👕', reward:500 },
   { id:'fam_laundry',   label:'빨래 개기',      desc:'빨래 개고 각자 옷 정리하기',        icon:'🧺', reward:500 },
+  /* 🧺 가족 공용 수건 접기 — 함께 +200원 / 스스로 +500원 (#v29) */
+  { id:'fam_towel',     label:'가족 공용 수건 접기', desc:'가족 공용 수건 접어 정리하기',     icon:'🧺', reward:500 },
   /* 🧹 청소 */
   { id:'fam_room',      label:'방 정리',        desc:'거실·공용 공간 함께 정리하기',     icon:'🛋️', reward:500 },
   { id:'fam_cleaning',  label:'청소기',         desc:'청소기 · 바닥 정리하기',           icon:'🧹', reward:500 },
@@ -4469,11 +4500,11 @@ var DEFAULT_FAMILY = [
 var FAMILY_WEEK_MAX = 3000;   /* 가족 미션 용돈 주간 상한 */
 var FAMILY_WEEK_MISSIONS = 6; /* 주 6회까지 */
 /* 미션 목록 세대 — 저장된 기록에 빠진 기본 미션을 한 번만 채워 넣는다 (#2773) */
-var FAMILY_SEED_VERSION = 'v4'; /* v4: 겹치던 「가족 수저…」 미션 정리 · KITCHEN/WASH 설명·보상 (#5265 · #5291) */
+var FAMILY_SEED_VERSION = 'v5'; /* v5: 「가족 공용 수건 접기」 추가 (#v29) · v4: 겹치던 「가족 수저…」 미션 정리 · KITCHEN/WASH 설명·보상 (#5265 · #5291) */
 /* 항목 이름 세대 — 저장된 항목 이름을 한 번만 새 이름으로 바꾼다 (#2792 · #2817) */
 var LABEL_SEED_VERSION = 'v5'; /* v5: 물통·필통 정리 (#5360 · #5384) · v4: 「먹은 자리 정리」 아이콘 🍽️ (#4590) */
-/* MY SPACE 목록 세대 — 저장된 목록에 빠진 기본 항목을 한 번만 채운다 (#3115) */
-var SPACE_SEED_VERSION = 'v2';
+/* MY SPACE 목록 세대 — 저장된 목록을 지혜님이 정한 11가지로 한 번만 맞춘다 (#v29) */
+var SPACE_SEED_VERSION = 'v3';
 /* 🎉 팀은 「함께」·「스스로」 두 가지만 (#v25) — 예전 엄마팀·아빠팀 기록은 「함께」로 옮긴다 */
 var FAMILY_TEAMS = [
   { key:'all',  label:'함께', icon:'👫', withLabel:'다 함께' },
@@ -4538,21 +4569,45 @@ function familyWeekLog(kidKey, wk){
    · 방학 중: 아이·부모 모두 100원 미션을 체크해 FAMILY 이번 주 용돈에 함께 쌓는다
    · 학기 중: 아이·아빠 화면은 숨기고, 엄마는 미리 넣고 고치고 지울 수 있다 (🔒 배지)
    ========================================================= */
+/* 🪙 100원 미니알바 17가지 (#v29) — 가족을 위한 일 · 모두 +100원
+   기존 13개 중 겹치는 항목은 오늘 표현으로 다듬고(수건·화분·휴지·의자·수저 등) 3개를 더했다 */
 var VACATION_MINI_JOBS_DEFAULT = [
-  { id:'vac_shoes',  icon:'👟', label:'신발 정리',          desc:'가족 신발 가지런히 정리하기',            amount:100 },
-  { id:'vac_table',  icon:'🥛', label:'식탁 닦기',          desc:'식탁 깨끗하게 닦기',                    amount:100 },
-  { id:'vac_tissue', icon:'🧻', label:'휴지 채우기',        desc:'화장실·거실 휴지 보충하기',              amount:100 },
-  { id:'vac_plant',  icon:'🪴', label:'식물 물주기',        desc:'지정된 화분 물주기',                    amount:100 },
-  { id:'vac_chair',  icon:'🪑', label:'의자 정리',          desc:'식탁 의자 제자리로 정리하기',            amount:100 },
-  { id:'vac_bin',    icon:'🗑️', label:'작은 쓰레기통 비우기', desc:'방·화장실 작은 쓰레기통 비우기',        amount:100 },
-  { id:'vac_towel',  icon:'🧺', label:'수건 정리',          desc:'세탁된 수건 접어 정리하기',              amount:100 },
-  { id:'vac_set',    icon:'🍽️', label:'식탁 세팅',          desc:'가족 식사 전 수저·물컵 놓기',            amount:100 },
-  { id:'vac_sink',   icon:'🧴', label:'세면대 정리',        desc:'세면대 주변 물건 정리하기',              amount:100 },
-  { id:'vac_parcel', icon:'📦', label:'택배 정리',          desc:'택배 상자 접어 지정 장소에 놓기',        amount:100 },
-  { id:'vac_entry',  icon:'🧹', label:'현관 쓸기',          desc:'현관 주변 가볍게 쓸기',                  amount:100 },
-  { id:'vac_shared', icon:'🧸', label:'공용 물건 정리',     desc:'거실에 흩어진 공용 물건 정리하기',        amount:100 },
-  { id:'vac_dining', icon:'🥣', label:'식탁 물건 정리',     desc:'식탁 위 불필요한 물건 제자리로 옮기기',    amount:100 }
+  { id:'vac_plant',   icon:'🪴', label:'공용 화분 물주기',       desc:'거실·배란다 공용 화분 물주기',            amount:100 },
+  { id:'vac_tissue',  icon:'🧻', label:'휴지 보충',             desc:'화장실·거실 휴지 보충하기',              amount:100 },
+  { id:'vac_soap',    icon:'🧼', label:'비누 보충',             desc:'손세정·비누·치약 채워 두기',              amount:100 },
+  { id:'vac_wipes',   icon:'🧴', label:'물티슈 보충',           desc:'물티슈·물티슈 케이스 채워 두기',          amount:100 },
+  { id:'vac_handle',  icon:'🧽', label:'문 손잡이 닦기',        desc:'방·화장실 문 손잡이 닦기',                amount:100 },
+  { id:'vac_parcel',  icon:'📦', label:'택배 상자 접기',        desc:'택배 상자 접어 지정 장소에 놓기',          amount:100 },
+  { id:'vac_chair',   icon:'🪑', label:'식탁 의자 정렬',        desc:'식탁 의자 제자리로 정렬하기',              amount:100 },
+  { id:'vac_basket',  icon:'🛍️', label:'장바구니 접기',        desc:'장바구니 접어 제자리에 놓기',              amount:100 },
+  { id:'vac_shoes',   icon:'👟', label:'신발 정리',             desc:'가족 신발 가지런히 정리하기',            amount:100 },
+  { id:'vac_sink',    icon:'🪥', label:'세면대 정리',           desc:'세면대 주변 물건 정리하기',              amount:100 },
+  { id:'vac_entry',   icon:'🧹', label:'현관 쓸기',             desc:'현관 주변 가볍게 쓸기',                  amount:100 },
+  { id:'vac_window',  icon:'🪟', label:'창틀 닦기',             desc:'방·거실 창틀 먼지 닦기',                  amount:100 },
+  { id:'vac_door',    icon:'🚪', label:'현관 중문 닦기',        desc:'현관 중문·문틀 닦기',                    amount:100 },
+  { id:'vac_shared',  icon:'🧸', label:'공용 물건 정리',        desc:'내 것 말고 거실에 흩어진 가족 물건 정리하기',  amount:100 },
+  { id:'vac_dining',  icon:'🥣', label:'식탁 물건 정리',        desc:'내 것 말고 식탁 위 가족 물건 제자리로 옮기기', amount:100 },
+  { id:'vac_undertable', icon:'🧹', label:'식사 후 식탁 밑 닦기', desc:'식사 후 식탁 밑 바닥 닦기',              amount:100 },
+  { id:'vac_cushion', icon:'🛋️', label:'소파 쿠션 정리',       desc:'소파 쿠션 털고 가지런히 정리하기',        amount:100 },
+  { id:'vac_bedding', icon:'🛏️', label:'가족 침구 정리',       desc:'내 것 말고 거실·안방 등 가족 침구 정리하기', amount:100 }
 ];
+/* 미니알바 목록 세대 — 예전 13개 이름을 새 목록으로 한 번만 다듬는다 (#v29) */
+var MINI_JOB_SEED_VERSION = 'v2';
+var MINI_JOB_OLD_LABELS = [
+  '신발 정리','식탁 닦기','휴지 채우기','식물 물주기','의자 정리','작은 쓰레기통 비우기',
+  '수건 정리','식탁 세팅','세면대 정리','택배 정리','현관 쓸기','공용 물건 정리','식탁 물건 정리',
+  '가족 공용 수건 접기','공용 화분 물주기','휴지 보충','식탁 의자 정렬','택배 상자 접기',
+  '가족 식사 수저 놓기','가족 물컵 준비','창문 닦기','창틀 닦기','현관 중문 닦기','식사 후 식탁 밑 닦기','물티슈 보충',
+  '비누 보충','문 손잡이 닦기','장바구니 접기','소파 쿠션 정리','가족 침구 정리'
+];
+/* 예전 이름 → 새 이름 — 되도록 id를 그대로 두어 오늘 체크 기록을 살린다 */
+var MINI_JOB_RENAME = {
+  '수건 정리':'가족 공용 수건 접기',
+  '식물 물주기':'공용 화분 물주기',
+  '휴지 채우기':'휴지 보충',
+  '택배 정리':'택배 상자 접기',
+  '의자 정리':'식탁 의자 정렬'
+};
 function vacationJobs(){
   if(!Array.isArray(state.vacationMiniJobs) || !state.vacationMiniJobs.length){
     state.vacationMiniJobs = VACATION_MINI_JOBS_DEFAULT.map(function(j){
@@ -4562,6 +4617,31 @@ function vacationJobs(){
   return state.vacationMiniJobs.filter(function(j){
     return j && typeof j === 'object' && j.id && String(j.label || '').trim();
   });
+}
+/* 🪙 미니알바 목록 v2 (#v29) — 예전 13개를 새 19개 목록으로 한 번만 다듬는다
+   · 예전 이름은 되도록 id를 그대로 두어 오늘 체크 기록을 살린다
+   · 부모님이 직접 더한 항목(예전 기본 이름이 아닌 것)은 뒤에 그대로 둔다 */
+function migrateMiniJobList(list, seedOld){
+  var src = (list || []).filter(function(j){
+    return j && typeof j === 'object' && j.id && String(j.label || '').trim();
+  });
+  if(!seedOld) return src;
+  var oldLabels = {}, newLabels = {}, keepId = {}, custom = [];
+  MINI_JOB_OLD_LABELS.forEach(function(l){ oldLabels[l] = true; });
+  VACATION_MINI_JOBS_DEFAULT.forEach(function(j){ newLabels[j.label] = true; });
+  src.forEach(function(j){
+    var lbl = MINI_JOB_RENAME[j.label] || j.label;
+    if(newLabels[lbl]){
+      if(!keepId[lbl]) keepId[lbl] = j.id;
+      return;
+    }
+    if(oldLabels[j.label]) return;
+    custom.push({ id:j.id, icon:j.icon, label:String(j.label).trim().slice(0, 20), desc:String(j.desc || '').slice(0, 40), amount:num(j.amount, 100, 0, 5000) });
+  });
+  var out = VACATION_MINI_JOBS_DEFAULT.map(function(j){
+    return { id: keepId[j.label] || j.id, icon:j.icon, label:j.label, desc:j.desc, amount:j.amount };
+  });
+  return out.concat(custom);
 }
 function vacationJobOf(id){
   return vacationJobs().filter(function(j){ return j.id === id; })[0] || null;
@@ -6954,7 +7034,7 @@ function loadState(){
     /* 새 규칙으로 한 번 정리했으면(학원 시간표 이전 · 이름 표기) 바로 저장해 둔다 */
     var stored = null;
     try{ stored = JSON.parse(window.localStorage.getItem(STORE_KEY) || 'null'); }catch(e){ stored = null; }
-    if(NORMALIZE_DIRTY || !stored || stored.scheduleFix !== SCHEDULE_FIX_VERSION || stored.nameFix !== NAME_FIX_VERSION || stored.placeFix !== PLACE_FIX_VERSION || stored.labelSeed !== LABEL_SEED_VERSION){
+    if(NORMALIZE_DIRTY || !stored || stored.scheduleFix !== SCHEDULE_FIX_VERSION || stored.nameFix !== NAME_FIX_VERSION || stored.placeFix !== PLACE_FIX_VERSION || stored.labelSeed !== LABEL_SEED_VERSION || stored.spaceSeed !== SPACE_SEED_VERSION || stored.miniJobSeed !== MINI_JOB_SEED_VERSION){
       writeLocalState(local);
     }
   }
@@ -7690,6 +7770,8 @@ function makeDefaultState(){
       hundredBonusAmount: {},
       paidOut: 0,
       payouts: [],
+      /* 🛠️ 용돈·도장 직접 맞추기 기록 (#v29) — { id, date, kind:'money'|'stamp', amount, memo } */
+      adjustments: [],
       specialTicket: { usedCycle: -1, usedAt: '' },
       rewardLog: []
     };
@@ -7723,6 +7805,7 @@ function makeDefaultState(){
     familyTeam: 'all',          /* 👫 함께 | 🌟 스스로 */
     familyTab: 'mission',       /* mission | minijob — FAMILY 상단 3단 스위치 (#v27) */
     miniJobLockMode: 'auto',    /* auto | open | locked — 엄마 수동 제어 (#v27) */
+    miniJobSeed: MINI_JOB_SEED_VERSION,  /* 🪙 미니알바 목록 세대 (#v29) */
     settings: { sound:true, familyGoal:7, familyReward:500, parentPinHash:'' },
     kids: kids,
     academies: seedAcademies(),
@@ -7764,7 +7847,7 @@ var NORMALIZE_DIRTY = false;
    부모님이 직접 넣은, 이름이 다른 항목은 건드리지 않는다. */
 var SELF_LEGACY_LABELS = {
   '물통비우고싱크대에넣기': { label:'물통 정리', desc:'물통 비우고 싱크대에 넣기', icon:'🚰' },
-  '양말짝맞추기':           { label:'먹은 자리 정리', desc:'식사 후 식기 정리 및 간식 먹고 정리', icon:'🍽️' }
+  '양말짝맞추기':           { label:'간식 정리', desc:'내가 먹은 간식 그릇·봉지 정리하기', icon:'🍪' }
 };
 function selfLabelNorm(label){
   return String(label === undefined || label === null ? '' : label).replace(/[\s\u00a0]+/g, '');
@@ -8200,20 +8283,26 @@ function normalize(raw){
     calMonth: /^\d{4}-\d{2}$/.test(raw.calMonth || '') ? raw.calMonth : currentMonthKey(),
     calDay: /^\d{4}-\d{2}-\d{2}$/.test(raw.calDay || '') ? raw.calDay : dayKey(),
     vacationMiniJobs: (function(a){
-      if(!Array.isArray(a)) return base.vacationMiniJobs;
-      var out = a.filter(function(j){
-        return j && typeof j === 'object' && String(j.label || '').trim();
-      }).slice(0, 40).map(function(j){
-        return {
-          id: (typeof j.id === 'string' && j.id) ? j.id : ('vac-' + uid()),
-          icon: (typeof j.icon === 'string') ? j.icon.slice(0, 4) : '🌴',
-          label: String(j.label).trim().slice(0, 20),
-          desc: (typeof j.desc === 'string') ? j.desc.slice(0, 40) : '',
-          amount: num(j.amount, 100, 0, 5000)
-        };
-      });
-      return out;
+      var seedOld = raw.miniJobSeed !== MINI_JOB_SEED_VERSION;
+      if(seedOld) NORMALIZE_DIRTY = true;
+      var normalized = (function(list){
+        if(!Array.isArray(list)) return null;
+        return list.filter(function(j){
+          return j && typeof j === 'object' && String(j.label || '').trim();
+        }).slice(0, 40).map(function(j){
+          return {
+            id: (typeof j.id === 'string' && j.id) ? j.id : ('vac-' + uid()),
+            icon: (typeof j.icon === 'string') ? j.icon.slice(0, 4) : '🌴',
+            label: String(j.label).trim().slice(0, 20),
+            desc: (typeof j.desc === 'string') ? j.desc.slice(0, 40) : '',
+            amount: num(j.amount, 100, 0, 5000)
+          };
+        });
+      })(a);
+      if(normalized === null) return base.vacationMiniJobs;
+      return migrateMiniJobList(normalized, seedOld);
     })(raw.vacationMiniJobs),
+    miniJobSeed: MINI_JOB_SEED_VERSION,
     recurringAnniversaries: (function(a){
       if(!Array.isArray(a)) return defaultRecurringAnniversaries();
       var out = a.filter(function(x){
@@ -8411,6 +8500,7 @@ function normalize(raw){
        홈클리닝 하나를 청소기·바닥 / 걸레질로 나누고, 빨래 돌리고 널기와 욕실 청소를 더한다.
        부모님이 직접 고친 이름·설명은 그대로 두고, 빠진 기본 미션만 채운다. */
     if(famSeedOld){
+      NORMALIZE_DIRTY = true;
       /* 겹치던 「🥄 가족 수저·젓가락·물컵 준비해주기」 카드는 지운다 (#5246 · #5265) */
       self = self.filter(function(it){ return !(it.cat === 'family' && it.id === 'fam_setting'); });
       self.forEach(function(it){
@@ -8443,12 +8533,45 @@ function normalize(raw){
       self.push.apply(self, sortedFam);
       self.push.apply(self, custom);
     }
-    /* MY SPACE 목록 v2 (#3115) — 새우·장수풍뎅이 돌보기처럼 빠진 기본 항목 채우기 */
+    /* 🧺 MY SPACE 11가지 (#v29) — 지혜님이 정한 목록으로 한 번만 맞춘다
+       · 예전 이름은 카드 id를 그대로 둔 채 새 이름으로 (오늘 체크 기록 유지)
+       · 새 목록에 없는 예전 기본 항목만 걷어내고, 부모님이 직접 넣은 항목은 뒤에 그대로 둔다
+       · 빠진 기본 항목은 채워 넣고, 순서는 DEFAULT_SPACE 그대로 */
     if(spaceSeedOld){
+      NORMALIZE_DIRTY = true;
+      /* 1) 예전 이름 → 새 이름 (id 유지 → 체크 기록 유지) — 설명·아이콘도 새 기본값으로 */
+      self.forEach(function(it){
+        if((it.cat || 'space') !== 'space') return;
+        var to = SPACE_RENAME[it.label];
+        if(!to) return;
+        it.label = to;
+        var def = DEFAULT_SPACE.filter(function(sp){ return sp.label === to; })[0];
+        if(def){ it.icon = def.icon; it.desc = def.desc; }
+      });
+      /* 2) 새 목록에 없는 예전 기본 항목은 뺀다 (직접 넣은 항목은 남긴다) */
+      var keepLabels = {};
+      DEFAULT_SPACE.forEach(function(sp){ keepLabels[sp.label] = true; });
+      self = self.filter(function(it){
+        if((it.cat || 'space') !== 'space') return true;
+        if(keepLabels[it.label]) return true;
+        return SPACE_OLD_LABELS.indexOf(it.label) === -1;
+      });
+      /* 3) 빠진 기본 항목 채우기 */
       DEFAULT_SPACE.forEach(function(sp){
-        var has = self.some(function(it){ return it.label === sp.label; });
+        var has = self.some(function(it){ return (it.cat || 'space') === 'space' && it.label === sp.label; });
         if(!has) self.push({ id:uid(), label:sp.label, desc:sp.desc, icon:sp.icon, cat:'space', reward:0 });
       });
+      /* 4) 기본 11가지는 정해진 순서로, 직접 넣은 항목은 그 뒤에 */
+      var spRank = {}, customSp = [];
+      DEFAULT_SPACE.forEach(function(sp, i){ spRank[sp.label] = i; });
+      var spDefaults = self.filter(function(it){ return (it.cat || 'space') === 'space' && spRank[it.label] !== undefined; })
+        .sort(function(a, b){ return spRank[a.label] - spRank[b.label]; });
+      self.forEach(function(it){ if((it.cat || 'space') === 'space' && spRank[it.label] === undefined) customSp.push(it); });
+      var nonSp = self.filter(function(it){ return (it.cat || 'space') !== 'space'; });
+      self.length = 0;
+      self.push.apply(self, nonSp);
+      self.push.apply(self, spDefaults);
+      self.push.apply(self, customSp);
     }
     /* 이름 바꾸기 (#2792 · #2817) — 저장된 항목 이름을 한 번만 새 이름으로 */
     if(labelSeedOld){
@@ -8460,9 +8583,9 @@ function normalize(raw){
           it.icon = '🚰';
         }
         if(it.label === '양말 짝 맞추기'){
-          it.label = '먹은 자리 정리';
-          it.desc = '식사 후 식기 정리 및 간식 먹고 정리';
-          if(it.icon === '🧦') it.icon = '🍽️';
+          it.label = '간식 정리';
+          it.desc = '내가 먹은 간식 그릇·봉지 정리하기';
+          if(it.icon === '🧦') it.icon = '🍪';
         }
       });
       /* ✏️ 필통 정리 — 저장된 목록에도 한 번 채워 넣는다 (#5360) */
@@ -8618,8 +8741,12 @@ function normalize(raw){
       if(legacyFlat === true && !Object.keys(out).length) out[weekStartKey(new Date())] = 500;
       return out;
     }
-    var momBonusAmount = bonusMapFrom(src.momBonusAmount, src.momWeeks, src.momBonus);
-    var dadBonusAmount = bonusMapFrom(src.dadBonusAmount, src.dadWeeks, src.dadBonus);
+    var momBonusAmount = normalizeWeekMap(bonusMapFrom(src.momBonusAmount, src.momWeeks, src.momBonus));
+    var dadBonusAmount = normalizeWeekMap(bonusMapFrom(src.dadBonusAmount, src.dadWeeks, src.dadBonus));
+    /* 주(월요일)가 아닌 날짜 키가 남아 있으면 한 번 정리해 저장한다 — 같은 주를 두 번 세지 않게 */
+    [src.momBonusAmount, src.dadBonusAmount, src.hundredBonusAmount].forEach(function(m){
+      Object.keys(m || {}).forEach(function(k){ if(/^\d{4}-\d{2}-\d{2}$/.test(k) && weekStartKey(fromKey(k)) !== k) NORMALIZE_DIRTY = true; });
+    });
     var tSrc = (src.specialTicket && typeof src.specialTicket === 'object') ? src.specialTicket : {};
     /* 예전 '혼자/함께 쓰기' 시절 저장값은 새 규칙(FUN PASS = 1,000도장 리워드)과 뜻이 달라 버린다 (#2667) */
     var tLegacy = (tSrc.usedMode !== undefined || tSrc.bonus !== undefined || tSrc.shareUsedCycle !== undefined || tSrc.pendingShareDebt !== undefined);
@@ -8633,8 +8760,22 @@ function normalize(raw){
       days: days,
       momBonusAmount: momBonusAmount,
       dadBonusAmount: dadBonusAmount,
-      hundredBonusAmount: bonusMapFrom(src.hundredBonusAmount, null, null),
+      hundredBonusAmount: normalizeWeekMap(bonusMapFrom(src.hundredBonusAmount, null, null)),
       paidOut: num(src.paidOut, 0, 0, 100000000),
+      /* 🛠️ 직접 맞추기 기록 (#v29) — 저장된 기록을 그대로 살린다 */
+      adjustments: Array.isArray(src.adjustments) ? src.adjustments.filter(function(a){
+        return a && typeof a === 'object' && (a.kind === 'money' || a.kind === 'stamp');
+      }).slice(-300).map(function(a){
+        var kind = a.kind === 'stamp' ? 'stamp' : 'money';
+        var lim = kind === 'stamp' ? 100000 : 10000000;
+        return {
+          id: (typeof a.id === 'string' && a.id) ? a.id : uid(),
+          date: /^\d{4}-\d{2}-\d{2}$/.test(a.date || '') ? a.date : dayKey(),
+          kind: kind,
+          amount: num(a.amount, 0, -lim, lim),
+          memo: a.memo ? String(a.memo).slice(0, 20) : ''
+        };
+      }).filter(function(a){ return a.amount !== 0; }) : [],
       specialTicket: {
         usedCycle: (tUsedCycle >= 0) ? tUsedCycle : -1,
         usedAt: (tUsedCycle >= 0 && typeof tSrc.usedAt === 'string') ? tSrc.usedAt.slice(0, 10) : ''
@@ -8661,7 +8802,81 @@ function normalize(raw){
   /* 🌤️ 숙제 없는 날 · ⭐ 추가 보너스 도전 항목 (#v26) */
   s.noHomework = cleanNoHomework(raw.noHomework);
   s.bonusItems = cleanBonusItems(raw.bonusItems, raw.weekendBonusLabels);
+  /* 🤝 FAMILY 미션 목록은 선우·지우가 늘 같게 (순서까지) — #v29 */
+  if(alignFamilyMissionLists(s)) NORMALIZE_DIRTY = true;
   return s;
+}
+/* 🤝 FAMILY(함께·스스로) 미션 목록을 두 아이가 똑같이, 같은 순서로 갖게 맞춘다 (#v29)
+   · 두 아이 중 한 명이라도 가진 미션은 둘 다에 (지운 미션은 둘 다 없으므로 되살아나지 않는다)
+   · 순서: 기본 13가지가 먼저(기본 이름 우선), 부모님이 더한 미션은 뒤에
+   · 같은 id 의 옛 이름 카드(FLOOR TEAM 등)는 하나로 모아 두 아이가 같은 이름을 쓴다
+   · 미니알바는 state.vacationMiniJobs 한 목록을 둘이 함께 쓰므로 이미 똑같다 */
+function alignFamilyMissionLists(s){
+  if(!s || !s.kids) return false;
+  var keys = ['seonwoo', 'jiwoo'];
+  var has = function(k){ return s.kids[k] && Array.isArray(s.kids[k].self); };
+  var pool = {};
+  keys.forEach(function(k){
+    if(!has(k)) return;
+    s.kids[k].self.forEach(function(it){
+      if((it.cat || 'space') !== 'family') return;
+      if(!pool[it.id]) pool[it.id] = [];
+      pool[it.id].push(it);
+    });
+  });
+  var ids = Object.keys(pool);
+  if(!ids.length) return false;
+  var rank = {};
+  DEFAULT_FAMILY.forEach(function(f, i){ rank[f.id] = i; });
+  ids.sort(function(a, b){
+    var ra = rank[a] === undefined ? 999 : rank[a];
+    var rb = rank[b] === undefined ? 999 : rank[b];
+    if(ra !== rb) return ra - rb;
+    return 0;
+  });
+  var canon = ids.map(function(id){
+    var def = null;
+    DEFAULT_FAMILY.forEach(function(f){ if(f.id === id) def = f; });
+    var list = pool[id];
+    var pick = list[0];
+    if(def){
+      var exact = list.filter(function(it){ return it.label === def.label; })[0];
+      if(exact) pick = exact;
+    }
+    return {
+      id: id,
+      label: pick.label || (def && def.label) || '가족 미션',
+      desc: pick.desc || (def && def.desc) || '',
+      icon: pick.icon || (def && def.icon) || '🤝',
+      reward: Number(pick.reward) || (def && def.reward) || REWARD_FAMILY,
+      soloAmount: pick.soloAmount,
+      togetherAmount: pick.togetherAmount
+    };
+  });
+  var changed = false;
+  keys.forEach(function(k){
+    if(!has(k)) return;
+    var kid = s.kids[k];
+    var byId = {};
+    kid.self.forEach(function(it){ if((it.cat || 'space') === 'family' && !byId[it.id]) byId[it.id] = it; });
+    var ordered = canon.map(function(c){
+      var it = byId[c.id];
+      if(!it){ changed = true; it = { id:c.id, cat:'family' }; }
+      if(it.label !== c.label || (it.desc || '') !== c.desc || (it.icon || '') !== c.icon || Number(it.reward) !== c.reward) changed = true;
+      it.label = c.label;
+      it.desc = c.desc;
+      it.icon = c.icon;
+      it.reward = c.reward;
+      if(c.soloAmount !== undefined && Number(it.soloAmount) !== Number(c.soloAmount)){ it.soloAmount = Number(c.soloAmount) || 0; changed = true; }
+      if(c.togetherAmount !== undefined && Number(it.togetherAmount) !== Number(c.togetherAmount)){ it.togetherAmount = Number(c.togetherAmount) || 0; changed = true; }
+      return it;
+    });
+    var nonFam = kid.self.filter(function(it){ return (it.cat || 'space') !== 'family'; });
+    var next = nonFam.concat(ordered);
+    var same = next.length === kid.self.length && next.every(function(it, i){ return it === kid.self[i]; });
+    if(!same){ kid.self = next; changed = true; }
+  });
+  return changed;
 }
 /* 🌤️ 저장된 '숙제 없는 날'을 날짜(YYYY-MM-DD) + 아이별로 읽는다 (#v26) */
 function cleanNoHomework(raw){
@@ -9089,6 +9304,7 @@ function morningAllDone(kidKey, key){
   var items = morningItemsOf(kidKey);
   if(!items.length) return false;
   var d = peekDay(kidKey, key || dayKey());
+  if(d.morningOff) return false;   /* 🛠️ 엄마가 아침 도장을 직접 취소한 날 (#v29) */
   for(var i = 0; i < items.length; i++){ if(d.self[items[i].id] === undefined) return false; }
   return true;
 }
@@ -9121,7 +9337,9 @@ function totalStamps(kidKey){
   });
   /* 🌟 추가 보너스 도장 — 한 항목마다 +1 (오늘 숙제를 다 끝낸 날에만 체크되어 있다) */
   Object.keys(k.days).forEach(function(dk){ sum += bonusStampAmount(bonusCountOf(kidKey, dk)); });
-  return sum;
+  /* 🛠️ 직접 맞춘 도장 (#v29) */
+  sum += adjustSumOf(kidKey, 'stamp');
+  return Math.max(0, sum);
 }
 /* =========================================================
    누적 도장 리워드 로드맵 (#481 · #2667)
@@ -9384,6 +9602,7 @@ function weekStamps(kidKey, wk){
   return sum;
 }
 function weekStats(kidKey, wk){
+  wk = weekStartKey(/^\d{4}-\d{2}-\d{2}$/.test(String(wk || '')) ? fromKey(wk) : new Date());
   var week = wk || weekStartKey(new Date());
   var days = weekDays(week);
   var selfTotal = 0;
@@ -9402,9 +9621,9 @@ function weekStats(kidKey, wk){
   /* ⭐ 스스로 체크 보너스 — 월~일 7일 모두 체크했을 때만 1,000원 */
   /* 🌟 7일 보너스는 이제 용돈이 아니라 도장 +5개 (totalStamps) */
   var selfBonus = 0;
-  var mom = Number((state.kids[kidKey].momBonusAmount || {})[week]) || 0;
-  var dad = Number((state.kids[kidKey].dadBonusAmount || {})[week]) || 0;
-  var hundred = Number((state.kids[kidKey].hundredBonusAmount || {})[week]) || 0;
+  var mom = weekSumOfMap(state.kids[kidKey].momBonusAmount, week);
+  var dad = weekSumOfMap(state.kids[kidKey].dadBonusAmount, week);
+  var hundred = weekSumOfMap(state.kids[kidKey].hundredBonusAmount, week);
   var total = daily + streak + selfBonus + mom + dad + hundred;
   /* 🌟 추가 보너스 — 한 항목당 도장 +1 (최대 +5도장) · 용돈이 아니라 도장으로 쌓인다 */
   var wkBonusTotals = weekBonusTotals(kidKey, week);
@@ -9425,15 +9644,62 @@ function allWeeks(kidKey){
   var set = {};
   set[weekStartKey(new Date())] = true;
   Object.keys(k.days).forEach(function(d){ set[weekStartKey(fromKey(d))] = true; });
-  Object.keys(k.momBonusAmount || {}).forEach(function(w){ set[w] = true; });
-  Object.keys(k.dadBonusAmount || {}).forEach(function(w){ set[w] = true; });
-  Object.keys(k.hundredBonusAmount || {}).forEach(function(w){ set[w] = true; });
+  /* 보너스 기록 키도 주(월요일) 단위로 모아 센다 — 같은 주가 다른 날짜 키로 두 번 세지지 않게 */
+  [k.momBonusAmount, k.dadBonusAmount, k.hundredBonusAmount].forEach(function(map){
+    Object.keys(map || {}).forEach(function(w){ if(/^\d{4}-\d{2}-\d{2}$/.test(w)) set[weekStartKey(fromKey(w))] = true; });
+  });
   return Object.keys(set);
+}
+/* 같은 주(월~일)에 다른 날짜 키로 저장된 금액도 함께 더한다 — 주가 겹쳐 두 번 세지 않는다 */
+function weekSumOfMap(map, week){
+  var sum = 0;
+  Object.keys(map || {}).forEach(function(k){
+    if(!/^\d{4}-\d{2}-\d{2}$/.test(k)) return;
+    if(weekStartKey(fromKey(k)) !== week) return;
+    sum += Number(map[k]) || 0;
+  });
+  return sum;
+}
+/* 저장된 보너스 금액의 날짜 키를 그 주 월요일로 모은다 (한 번만 정리) */
+function normalizeWeekMap(map){
+  var out = {};
+  Object.keys(map || {}).forEach(function(k){
+    var v = Number(map[k]) || 0;
+    if(!v || !/^\d{4}-\d{2}-\d{2}$/.test(k)) return;
+    var nk = weekStartKey(fromKey(k));
+    out[nk] = (out[nk] || 0) + v;
+  });
+  return out;
 }
 function totalEarned(kidKey){
   var sum = 0;
   allWeeks(kidKey).forEach(function(w){ sum += weekStats(kidKey, w).grand; });
   return sum;
+}
+/* =========================================================
+   🛠️ 용돈·도장 직접 맞추기 (#v29)
+   · 저장 모양: state.kids[k].adjustments = [{ id, date, kind:'money'|'stamp', amount, memo }]
+   · amount 는 차이값 — 남은 용돈 = 받은 용돈 + 조정 합계 - 지급한 용돈
+   · 기존 저장본에 없으면 빈 배열로 시작 (호환 유지)
+   ========================================================= */
+function adjustmentsOf(kidKey){
+  var k = state.kids && state.kids[kidKey];
+  if(!k) return [];
+  if(!Array.isArray(k.adjustments)) k.adjustments = [];
+  return k.adjustments;
+}
+function adjustSumOf(kidKey, kind, month){
+  var sum = 0;
+  adjustmentsOf(kidKey).forEach(function(a){
+    if(!a || (a.kind === 'stamp' ? 'stamp' : 'money') !== kind) return;
+    if(month && String(a.date || '').slice(0, 7) !== month) return;
+    sum += Number(a.amount) || 0;
+  });
+  return sum;
+}
+/* 지급 기록을 빼기 전의 잔액 — 직접 맞추기의 차이값을 정확히 계산하려고 쓴다 */
+function balanceRaw(kidKey){
+  return totalEarned(kidKey) + adjustSumOf(kidKey, 'money') - (Number(state.kids[kidKey].paidOut) || 0);
 }
 function monthEarnedOf(kidKey, mk){
   var month = mk || currentMonthKey();
@@ -9441,10 +9707,12 @@ function monthEarnedOf(kidKey, mk){
   allWeeks(kidKey).forEach(function(w){
     if(String(w).slice(0, 7) === month){ sum += weekStats(kidKey, w).grand; weeks++; }
   });
+  var adj = adjustSumOf(kidKey, 'money', month);
+  if(adj){ sum += adj; if(!weeks) weeks = 1; }
   return { month: month, total: sum, weeks: weeks };
 }
 function balanceOf(kidKey){
-  return Math.max(0, totalEarned(kidKey) - (Number(state.kids[kidKey].paidOut) || 0));
+  return Math.max(0, balanceRaw(kidKey));
 }
 var PAY_METHODS = {
   bank: { label:'계좌이체', icon:'🏦' },
@@ -10912,67 +11180,117 @@ function rwdRowDate(d){
   var s = String(d || '');
   return s.length >= 10 ? s.slice(5, 7) + '/' + s.slice(8, 10) : s;
 }
+/* =========================================================
+   💰 상세 내역의 한 줄 = 돈이 들어오고 나간 실제 항목
+   · 항목마다 del(지우기 정보)을 달아 엄마 화면에서 ✕로 바로 지운다 (#v29)
+   ========================================================= */
+function rwdMoneyRowMaker(rows){
+  return function(date, icon, label, sub, val, del){
+    rows.push({ date:String(date || ''), icon:icon || '•', label:String(label || ''), sub:String(sub || ''), val:Number(val) || 0, del:del || null });
+  };
+}
+function rwdWeekMoneyRows(kidKey, month, add){
+  var k = state.kids[kidKey] || {};
+  allWeeks(kidKey).forEach(function(w){
+    if(month && String(w).slice(0, 7) !== month) return;
+    var days = weekDays(w);
+    var done = 0, streakDay = '';
+    for(var i = 0; i <= 4; i++){
+      if(!basicDone(kidKey, days[i])) continue;
+      done++;
+      streakDay = days[i];
+      add(days[i], '📚', '매일 공부 완료', '공부 보상', REWARD_DAILY, { type:'study', day:days[i] });
+    }
+    /* 5회 성공 보너스는 공부 기록에서 나오는 값 — 공부 줄을 지우면 함께 빠집니다 */
+    if(done >= STUDY_WEEK_GOALS) add(w, '🏅', '숙제 5회 성공 보너스', '공부 5회 완료', REWARD_STREAK, null);
+    var mom = weekSumOfMap(k.momBonusAmount, w);
+    var dad = weekSumOfMap(k.dadBonusAmount, w);
+    if(mom) add(w, '👩‍💼', '엄마 보너스', '주간 보너스', mom, { type:'bonus', who:'mom', week:w });
+    if(dad) add(w, '🧔', '아빠 보너스', '주간 보너스', dad, { type:'bonus', who:'dad', week:w });
+    /* 가족 미션 · 미니알바 — 체크한 날짜 그대로 한 줄씩
+       같은 미션을 한 주에 두 번 했으면 첫날만 금액이 인정되고, 둘째 줄은 +0으로 날짜를 남긴다 */
+    var seen = {};
+    days.forEach(function(dk){
+      var d = peekDay(kidKey, dk);
+      (k.self || []).forEach(function(it){
+        if((it.cat || 'space') !== 'family') return;
+        if(d.self[it.id] === undefined) return;
+        var first = !seen[it.id];
+        if(first) seen[it.id] = dk;
+        var team = familyTeamKeyOf(d, it.id);
+        var teamLabel = (team === 'solo') ? '스스로' : '함께';
+        add(dk, it.icon || '🤝', it.label,
+          '가족 미션 · ' + teamLabel + (first ? '' : ' · 이번 주 이미 인정'),
+          first ? (Number(d.self[it.id]) || 0) : 0,
+          { type:'self', day:dk, id:it.id });
+      });
+      Object.keys(d.vac || {}).forEach(function(vid){
+        var job = vacationJobOf(vid);
+        add(dk, job ? job.icon : '🪙', job ? job.label : '미니알바', '100원 미니알바', Number(d.vac[vid]) || 0, { type:'vac', day:dk, id:vid });
+      });
+    });
+  });
+  /* 🛠️ 직접 맞춘 기록 */
+  adjustmentsOf(kidKey).forEach(function(a){
+    if((a.kind === 'stamp' ? 'stamp' : 'money') !== 'money') return;
+    if(month && String(a.date || '').slice(0, 7) !== month) return;
+    add(a.date, '🛠️', '용돈 직접 맞추기', a.memo || '엄마가 직접 맞춤', a.amount, { type:'adjust', id:a.id });
+  });
+}
+/* 🏅 하루 도장 줄 — MY SPACE · 아침 · 추가 보너스 한 줄씩 (엄마는 ✕로 하나씩 취소) (#v29) */
+function rwdStampRowsForDay(kidKey, dk, add){
+  var k = state.kids[kidKey] || {};
+  var d = peekDay(kidKey, dk);
+  var spaceItems = (k.self || []).filter(function(it){ return (it.cat || 'space') === 'space' && d.self[it.id] !== undefined; });
+  var n = Math.min(STAMP_DAILY_MAX, Number(d.spaceStamps) || 0);
+  if(!n && spaceItems.length) n = Math.min(STAMP_DAILY_MAX, spaceItems.length);   /* 예전 저장본 호환 */
+  for(var i = 0; i < n; i++){
+    var it = spaceItems[i];
+    add(dk, it ? (it.icon || '✅') : '⭐', it ? it.label : 'MY SPACE 도장', 'MY SPACE 스스로 체크', 1,
+      it ? { type:'space', day:dk, id:it.id } : { type:'space', day:dk, id:'' });
+  }
+  if(morningAllDone(kidKey, dk)) add(dk, '☀️', '아침 습관 3가지 완료', '보너스 도장', MORNING_STAMP_BONUS, { type:'morning', day:dk });
+  bonusItemsAllOf(kidKey).forEach(function(r){
+    if(d.bonus && d.bonus[r.key]) add(dk, '🌟', r.label, '추가 보너스', WEEKEND_BONUS_STAMP, { type:'bonusItem', day:dk, key:r.key });
+  });
+}
 function rwdDetailRows(kind, kidKey){
   var rows = [];
   var k = state.kids[kidKey] || {};
   var today = dayKey();
   var month = currentMonthKey();
-  function add(date, icon, label, sub, val){
-    rows.push({ date:String(date || ''), icon:icon || '•', label:String(label || ''), sub:String(sub || ''), val:Number(val) || 0 });
-  }
+  var add = rwdMoneyRowMaker(rows);
   if(kind === 'today-earn'){
-    if(basicDone(kidKey, studyKeyNow())) add(today, '📚', '매일 공부 완료', '오늘 공부 보상', REWARD_DAILY);
+    if(basicDone(kidKey, studyKeyNow())) add(today, '📚', '매일 공부 완료', '오늘 공부 보상', REWARD_DAILY, { type:'study', day:studyKeyNow() });
     familyMissionsOn(kidKey, today).forEach(function(id){
       var it = findSelfItem(kidKey, id);
-      if(it) add(today, it.icon || '🤝', it.label, '가족 미션 완료', Number(it.reward) || REWARD_FAMILY);
+      if(it) add(today, it.icon || '🤝', it.label, '가족 미션 완료', Number(it.reward) || REWARD_FAMILY, { type:'self', day:today, id:id });
+    });
+    Object.keys(peekDay(kidKey, today).vac || {}).forEach(function(vid){
+      var job = vacationJobOf(vid);
+      add(today, job ? job.icon : '🪙', job ? job.label : '미니알바', '100원 미니알바', Number(peekDay(kidKey, today).vac[vid]) || 0, { type:'vac', day:today, id:vid });
+    });
+    adjustmentsOf(kidKey).forEach(function(a){
+      if((a.kind === 'stamp' ? 'stamp' : 'money') !== 'money' || a.date !== today) return;
+      add(a.date, '🛠️', '용돈 직접 맞추기', a.memo || '엄마가 직접 맞춤', a.amount, { type:'adjust', id:a.id });
     });
   }else if(kind === 'today-stamp'){
-    var d = peekDay(kidKey, today);
-    var got = 0;
-    (k.self || []).forEach(function(it){
-      if((it.cat || 'space') !== 'space') return;
-      if(d.self[it.id] === undefined) return;
-      if(got >= STAMP_DAILY_MAX) return;
-      got++;
-      add(today, it.icon || '✅', it.label, 'MY SPACE 스스로 체크', 1);
+    rwdStampRowsForDay(kidKey, today, add);
+  }else if(kind === 'month-earn'){
+    rwdWeekMoneyRows(kidKey, month, add);
+  }else if(kind === 'balance'){
+    /* 남은 용돈 — 받은 용돈 전부 + 직접 맞춘 기록 - 정산 지급 */
+    rwdWeekMoneyRows(kidKey, null, add);
+    (k.payouts || []).forEach(function(p, i){
+      add(p.date, '💸', '용돈 정산 지급', payMethodLabel(p.method) + (p.memo ? ' · ' + p.memo : ''), -(Number(p.amount) || 0), { type:'payout', index:i });
     });
-    if(morningAllDone(kidKey, today)) add(today, '☀️', '아침 습관 3가지 완료', '보너스 도장', MORNING_STAMP_BONUS);
-    bonusItemsAllOf(kidKey).forEach(function(r){
-      if(d.bonus && d.bonus[r.key]) add(today, '🌟', r.label, '추가 보너스', WEEKEND_BONUS_STAMP);
-    });
-  }else if(kind === 'month-earn' || kind === 'balance'){
-    allWeeks(kidKey).forEach(function(w){
-      if(kind === 'month-earn' && String(w).slice(0, 7) !== month) return;
-      var st = weekStats(kidKey, w);
-      if(!st.grand) return;
-      var bits = [];
-      if(st.daily) bits.push('매일 공부 ' + fmt(st.daily));
-      if(st.streak) bits.push('5회 보너스 ' + fmt(st.streak));
-      if(st.selfBonus) bits.push('스스로 보너스 ' + fmt(st.selfBonus));
-      if(st.mom) bits.push('엄마 보너스 ' + fmt(st.mom));
-      if(st.dad) bits.push('아빠 보너스 ' + fmt(st.dad));
-      if(st.hundred) bits.push('100점 보너스 ' + fmt(st.hundred));
-      if(st.familyEarned) bits.push('가족 미션 ' + fmt(st.familyEarned));
-      add(w, '🗓️', rwdRowDate(w) + ' 주 적립', bits.join(' · '), st.grand);
-    });
-    if(kind === 'balance'){
-      /* 남은 용돈 — 받은 용돈에서 쓴(정산 지급한) 용돈까지 함께 */
-      (k.payouts || []).forEach(function(p){
-        add(p.date, '💸', '용돈 정산 지급', payMethodLabel(p.method) + (p.memo ? ' · ' + p.memo : ''), -(Number(p.amount) || 0));
-      });
-    }
   }else if(kind === 'month-use'){
-    (k.payouts || []).forEach(function(p){
+    (k.payouts || []).forEach(function(p, i){
       if(String(p.date || '').slice(0, 7) !== month) return;
-      add(p.date, '💸', '용돈 정산 지급', payMethodLabel(p.method) + (p.memo ? ' · ' + p.memo : ''), -(Number(p.amount) || 0));
+      add(p.date, '💸', '용돈 정산 지급', payMethodLabel(p.method) + (p.memo ? ' · ' + p.memo : ''), -(Number(p.amount) || 0), { type:'payout', index:i });
     });
   }else if(kind === 'stamps'){
-    Object.keys(k.days || {}).forEach(function(dk){
-      var n = dayStamps(kidKey, dk);
-      var b = bonusStampAmount(bonusCountOf(kidKey, dk));
-      if(n + b <= 0) return;
-      add(dk, '⭐', '스탬프 적립', 'MY SPACE · 아침' + (b ? ' · 추가 보너스' : ''), n + b);
-    });
+    Object.keys(k.days || {}).forEach(function(dk){ rwdStampRowsForDay(kidKey, dk, add); });
     allWeeks(kidKey).forEach(function(w){
       var b = morningWeekBonus(kidKey, w);
       if(b) add(w, '☀️', '아침 습관 7일 보너스', '한 주 모두 3/3', b);
@@ -10982,13 +11300,17 @@ function rwdDetailRows(kind, kidKey){
       if(!r || r.kind === 'money') return;
       add(e.date, '🎁', e.text || '스탬프 리워드 사용', rewardLogShort(e), -r.stamp);
     });
+    adjustmentsOf(kidKey).forEach(function(a){
+      if(a.kind !== 'stamp') return;
+      add(a.date, '🛠️', '도장 직접 맞추기', a.memo || '엄마가 직접 맞춤', a.amount, { type:'adjust', id:a.id });
+    });
   }
   rows.sort(function(a, b){ return a.date < b.date ? 1 : (a.date > b.date ? -1 : 0); });
   return rows;
 }
 function rwdDetailValue(kind, kidKey){
   if(kind === 'today-earn') return fmt(todayWonOf(kidKey));
-  if(kind === 'today-stamp') return numFmt(dayStamps(kidKey, dayKey())) + '개';
+  if(kind === 'today-stamp') return numFmt(dayStamps(kidKey, dayKey()) + bonusStampAmount(bonusCountOf(kidKey, dayKey()))) + '개';
   if(kind === 'month-earn') return fmt(monthEarnedOf(kidKey).total);
   if(kind === 'month-use') return fmt(monthPaidOf(kidKey));
   if(kind === 'balance') return fmt(balanceOf(kidKey));
@@ -11001,15 +11323,23 @@ function openRewardDetail(kind, kidKey){
   if(key !== 'jiwoo' && key !== 'seonwoo') return;
   var kd = kidDef(key);
   var rows = rwdDetailRows(kind, key);
+  var canDel = isParentMode();
+  var deletable = 0;
   var body = rows.length ? ('<ul class="rdt-list">' + rows.map(function(r){
     var up = r.val > 0;
     var amt = (meta.kind === 'stamp')
       ? (up ? '+' : '-') + numFmt(Math.abs(r.val)) + '개'
       : (up ? '+' : '-') + fmt(Math.abs(r.val));
+    var delBtn = '';
+    if(canDel && r.del){
+      deletable++;
+      delBtn = '<button type="button" class="rdt-del" data-action="rwd-del" data-kind="' + esc(kind) + '" data-kid="' + esc(key) + '" data-del="' + encodeURIComponent(JSON.stringify(r.del)) + '" aria-label="' + esc(r.label) + ' 내역 삭제">✕</button>';
+    }
     return '<li class="rdt-row">' +
       '<span class="rdt-ico" aria-hidden="true">' + esc(r.icon) + '</span>' +
       '<span class="rdt-main"><b>' + esc(r.label) + '</b><small>' + esc(rwdRowDate(r.date)) + (r.sub ? ' · ' + esc(r.sub) : '') + '</small></span>' +
       '<span class="rdt-amt ' + (up ? 'up' : 'down') + '">' + esc(amt) + '</span>' +
+      delBtn +
     '</li>';
   }).join('') + '</ul>') : '<p class="rdt-empty">아직 내역이 없어요</p>';
   openModal(
@@ -11017,8 +11347,104 @@ function openRewardDetail(kind, kidKey){
     '<p class="rdt-sub">' + esc(kd ? kd.name : '') + ' · ' + esc(meta.sub) + '</p>' +
     '<div class="rdt-head"><span>지금</span><b>' + esc(rwdDetailValue(kind, key)) + '</b></div>' +
     body +
+    (canDel && deletable ? '<p class="rdt-note">✕ 를 누르면 그 내역을 지우고 용돈을 바로 다시 계산해요</p>' : '') +
     '<div class="modal-actions"><button type="button" class="btn btn-ghost" data-action="close-modal">닫기</button></div>'
   );
+}
+/* 🗑️ 상세 내역 한 줄 지우기 (엄마 전용) — 확인한 뒤 지우고 바로 다시 계산 */
+function rwdDeleteItem(kind, kidKey, del){
+  if(!isParentMode() || !del) return;
+  if(kidKey !== 'seonwoo' && kidKey !== 'jiwoo') return;
+  var k = state.kids[kidKey];
+  if(!k) return;
+  var kd = kidDef(kidKey);
+  var type = del.type;
+  var label = '', body = '', run = null;
+  if(type === 'bonus'){
+    var keyMap = del.who === 'dad' ? 'dadBonusAmount' : 'momBonusAmount';
+    var amt = weekSumOfMap(k[keyMap] || {}, del.week);
+    if(!amt) return;
+    label = (del.who === 'dad' ? '아빠 보너스' : '엄마 보너스') + ' ' + fmt(amt);
+    body = '<b>' + esc(kd.name) + '</b>의 ' + esc(rwdRowDate(del.week)) + ' 주 ' + (del.who === 'dad' ? '아빠 보너스' : '엄마 보너스') + ' <b>' + fmt(amt) + '</b>을 지울까요?<br><small>지우면 남은 용돈도 ' + fmt(amt) + '만큼 줄어요.</small>';
+    run = function(){
+      Object.keys(k[keyMap] || {}).forEach(function(kk){ if(/^\d{4}-\d{2}-\d{2}$/.test(kk) && weekStartKey(fromKey(kk)) === del.week) delete k[keyMap][kk]; });
+    };
+  }else if(type === 'study'){
+    var sd = k.days && k.days[del.day];
+    if(!sd) return;
+    label = '매일 공부 완료 ' + fmt(REWARD_DAILY);
+    body = '<b>' + esc(kd.name) + '</b> ' + esc(rwdRowDate(del.day)) + ' 공부 완료를 취소할까요?<br><small>매일 공부 ' + fmt(REWARD_DAILY) + '와 함께, 그날이 5회 중 하나였다면 숙제 5회 성공 ' + fmt(REWARD_STREAK) + '도 같이 빠질 수 있어요.</small>';
+    run = function(){ sd.basic = {}; sd.basicLast = ''; sd.basicClear = false; };
+  }else if(type === 'self'){
+    var fmd = k.days && k.days[del.day];
+    if(!fmd || !fmd.self || fmd.self[del.id] === undefined) return;
+    var it = findSelfItem(kidKey, del.id);
+    var famAmt = Number(fmd.self[del.id]) || 0;
+    label = (it ? it.label : '가족 미션') + ' ' + fmt(famAmt);
+    body = '<b>' + esc(kd.name) + '</b> ' + esc(rwdRowDate(del.day)) + ' <b>' + esc(it ? it.label : '가족 미션') + ' ' + fmt(famAmt) + '</b> 완료를 취소할까요?<br><small>가족 미션 용돈이 함께 빠져요.</small>';
+    run = function(){ delete fmd.self[del.id]; };
+  }else if(type === 'vac'){
+    var vd = k.days && k.days[del.day];
+    if(!vd || !vd.vac || vd.vac[del.id] === undefined) return;
+    var job = vacationJobOf(del.id);
+    var vamt = Number(vd.vac[del.id]) || 0;
+    label = (job ? job.label : '미니알바') + ' ' + fmt(vamt);
+    body = '<b>' + esc(kd.name) + '</b> ' + esc(rwdRowDate(del.day)) + ' <b>' + esc(job ? job.label : '미니알바') + ' ' + fmt(vamt) + '</b> 완료를 취소할까요?';
+    run = function(){ delete vd.vac[del.id]; };
+  }else if(type === 'payout'){
+    var p = (k.payouts || [])[del.index];
+    if(!p) return;
+    var pamt = Number(p.amount) || 0;
+    label = '용돈 정산 지급 ' + fmt(pamt);
+    body = '<b>' + esc(kd.name) + '</b> ' + esc(rwdRowDate(p.date)) + ' <b>' + fmt(pamt) + ' ' + esc(payMethodLabel(p.method)) + '</b> 지급 기록을 지울까요?<br><small>지우면 그만큼 남은 용돈이 다시 늘어나요.</small>';
+    run = function(){
+      k.payouts.splice(del.index, 1);
+      k.paidOut = Math.max(0, (Number(k.paidOut) || 0) - pamt);
+    };
+  }else if(type === 'adjust'){
+    var idx = -1;
+    adjustmentsOf(kidKey).forEach(function(a, i){ if(a.id === del.id) idx = i; });
+    if(idx < 0) return;
+    var a0 = adjustmentsOf(kidKey)[idx];
+    label = (a0.kind === 'stamp' ? '도장' : '용돈') + ' 직접 맞추기 ' + (a0.amount > 0 ? '+' : '') + fmt(a0.amount);
+    body = '<b>' + esc(kd.name) + '</b> ' + esc(rwdRowDate(a0.date)) + ' <b>' + esc(label) + '</b> 기록을 지울까요?<br><small>지우면 맞추기 전 금액으로 돌아가요.</small>';
+    run = function(){ k.adjustments.splice(idx, 1); };
+  }else if(type === 'space'){
+    var sd2 = k.days && k.days[del.day];
+    if(!sd2) return;
+    var sIt = del.id ? findSelfItem(kidKey, del.id) : null;
+    var before = Math.min(STAMP_DAILY_MAX, Number(sd2.spaceStamps) || 0);
+    label = (sIt ? sIt.label : 'MY SPACE') + ' 도장 1개';
+    body = '<b>' + esc(kd.name) + '</b> ' + esc(rwdRowDate(del.day)) + ' <b>' + esc(sIt ? sIt.label : 'MY SPACE') + ' 도장 1개</b>를 취소할까요?<br><small>누적 도장도 1개 줄어들어요.</small>';
+    run = function(){
+      if(del.id){ delete sd2.self[del.id]; if(sd2.team) delete sd2.team[del.id]; }
+      sd2.spaceStamps = Math.max(0, Math.min(STAMP_DAILY_MAX, before) - 1);
+    };
+  }else if(type === 'morning'){
+    var md2 = k.days && k.days[del.day];
+    if(!md2 || !morningAllDone(kidKey, del.day)) return;
+    label = '아침 습관 보너스 도장 ' + numFmt(MORNING_STAMP_BONUS) + '개';
+    body = '<b>' + esc(kd.name) + '</b> ' + esc(rwdRowDate(del.day)) + ' <b>아침 습관 3가지 보너스 도장 ' + numFmt(MORNING_STAMP_BONUS) + '개</b>를 취소할까요?<br><small>그날 체크는 그대로 두고 도장만 빠져요.</small>';
+    run = function(){ md2.morningOff = true; };
+  }else if(type === 'bonusItem'){
+    var bd = k.days && k.days[del.day];
+    if(!bd || !bd.bonus || !bd.bonus[del.key]) return;
+    var bItem = bonusItemsAllOf(kidKey).filter(function(r){ return r.key === del.key; })[0];
+    label = (bItem ? bItem.label : '추가 보너스') + ' 도장 ' + numFmt(WEEKEND_BONUS_STAMP) + '개';
+    body = '<b>' + esc(kd.name) + '</b> ' + esc(rwdRowDate(del.day)) + ' <b>' + esc(bItem ? bItem.label : '추가 보너스') + ' 도장 ' + numFmt(WEEKEND_BONUS_STAMP) + '개</b>를 취소할까요?<br><small>그날 추가 보너스 체크도 함께 풀려요.</small>';
+    run = function(){ delete bd.bonus[del.key]; };
+  }
+  if(!run) return;
+  confirmModal({
+    icon:'🗑️', title:'내역 지우기', body:body, ok:'지우기', okClass:'btn-danger',
+    onOk:function(){
+      run();
+      saveState();
+      renderAll();
+      openRewardDetail(kind, kidKey);
+      toast('🗑️ ' + kd.name + ' ' + label + ' 내역을 지웠어요');
+    }
+  });
 }
 
 /* =========================================================
@@ -11640,7 +12066,7 @@ function rewardKidCardHtml(kidKey, primary, multi){
 
     '<div id="' + kidId('payLogBox') + '"' + (plog ? '' : ' hidden') + '>' + plog + '</div>' +
     '<div class="w-actions">' +
-      '<button class="btn btn-soft btn-sm" data-action="pay" data-kid="' + kidKey + '" data-parent-only="1">용돈 정산 · 지급 완료</button>' +
+      '<button class="btn btn-soft btn-sm" data-action="pay" data-kid="' + kidKey + '" data-parent-only="1">정산하기</button>' +
       '<button class="btn btn-ghost btn-sm" data-action="open-settings" data-parent-only="1">부모님 설정</button>' +
     '</div>' +
   '</section>';
@@ -14813,6 +15239,7 @@ function toggleSelf(id){
   }else{
     if(isFam){ d.team = d.team || {}; d.team[id] = currentFamilyTeam(); }
     d.self[id] = isFam ? familyMissionAmount(item, currentFamilyTeam()) : 0;
+    if(isMorning && d.morningOff) delete d.morningOff;   /* 다시 체크하면 취소했던 아침 도장도 돌아온다 (#v29) */
   }
   if((item.cat || 'space') === 'space'){
     /* MY SPACE 도장은 그날 이미 찍힌 만큼은 줄지 않는다 (아침 보너스는 따로 센다) */
@@ -15001,12 +15428,13 @@ function createSelf(){
     var kid = state.kids[k];
     if(!kid) return;
     kid.self.push({
-      id: (k === state.current ? newSelfId : uid()),
+      id: newSelfId,
       label: label, desc: desc, icon: icon, cat: pendingSelfCat, reward: reward,
       soloAmount: soloAmt, togetherAmount: togAmt
     });
     dedupeKidSelfNow(k);
   });
+  alignFamilyMissionLists(state);
   saveState();
   closeModal();
   renderAll();
@@ -15095,6 +15523,7 @@ function saveSelf(id){
     dedupeKidSelfNow(k);
   });
   dedupeKidSelfNow(kidKey);
+  alignFamilyMissionLists(state);
   saveState();
   closeModal();
   renderAll();
@@ -15137,6 +15566,7 @@ function deleteSelf(id){
         var dd = kid.days[dayKey()];
         if(dd && dd.self) delete dd.self[hitId];
       });
+      alignFamilyMissionLists(state);
       saveState();
       renderAll();
       toast(targets.length > 1 ? '두 아이 목록에서 함께 지웠어요' : '항목을 지웠어요');
@@ -15620,7 +16050,7 @@ function bonusMapOf(which, kidKey){
   return (map && typeof map === 'object') ? map : {};
 }
 function bonusOf(which, kidKey, wk){
-  return Number(bonusMapOf(which, kidKey)[wk || weekStartKey(new Date())]) || 0;
+  return weekSumOfMap(bonusMapOf(which, kidKey), wk || weekStartKey(new Date()));
 }
 function bonusKidOf(kidKey){
   if(kidKey === 'jiwoo' || kidKey === 'seonwoo') return kidKey;
@@ -15637,6 +16067,8 @@ function setBonusAmount(which, amount, kidKey, src){
   var k = state.kids[kidKey];
   if(!k[key] || typeof k[key] !== 'object') k[key] = {};
   var amt = Math.max(0, Math.min(100000, Math.round(Number(amount) || 0)));
+  /* 같은 주의 다른 날짜 키가 남아 있으면 두 번 세지 않게 지운다 */
+  Object.keys(k[key]).forEach(function(kk){ if(kk !== wk && /^\d{4}-\d{2}-\d{2}$/.test(kk) && weekStartKey(fromKey(kk)) === wk) delete k[key][kk]; });
   if(amt > 0) k[key][wk] = amt;
   else delete k[key][wk];
   saveState();
@@ -15658,7 +16090,7 @@ function clearBonus(which, kidKey){
   var wk = weekStartKey(new Date());
   var k = state.kids[kidKey];
   var key = bonusKeyOf(which);
-  var cur = Number((k[key] || {})[wk]) || 0;
+  var cur = weekSumOfMap(k[key] || {}, wk);
   if(!cur) return;
   confirmModal({
     icon: BONUS_META[which].icon,
@@ -15667,7 +16099,7 @@ function clearBonus(which, kidKey){
     ok:'취소하기',
     okClass:'btn-danger',
     onOk:function(){
-      delete k[key][wk];
+      Object.keys(k[key]).forEach(function(kk){ if(/^\d{4}-\d{2}-\d{2}$/.test(kk) && weekStartKey(fromKey(kk)) === wk) delete k[key][kk]; });
       saveState();
       renderAll();
       toast(BONUS_META[which].label + '를 취소했어요');
@@ -15722,6 +16154,43 @@ function weekTable(){
   }
   return html + '</tbody></table>';
 }
+/* 🛠️ 남은 용돈·누적 도장을 원하는 숫자로 맞춘다 (#v29)
+   · 지금 값과의 차이만큼만 조정 기록(adjustments)을 남긴다 — 기존 기록은 건드리지 않는다
+   · 남은 용돈은 지급 기록까지 뺀 실제 값(balanceRaw)을 기준으로 계산해 입력한 숫자와 꼭 같아지게 한다 */
+function applyKidAdjust(kidKey, kind){
+  if(!isParentMode()) return;
+  if(kidKey !== 'seonwoo' && kidKey !== 'jiwoo') return;
+  var isStamp = (kind === 'stamp');
+  var el = document.getElementById((isStamp ? 'adjStamp_' : 'adjMoney_') + kidKey);
+  var raw = el ? String(el.value || '').trim() : '';
+  var kd = kidDef(kidKey);
+  if(!raw){
+    toast(isStamp ? '맞추고 싶은 도장 수를 넣어 주세요' : '맞추고 싶은 금액을 넣어 주세요');
+    if(el && el.focus) el.focus();
+    return;
+  }
+  var target = Math.round(Number(raw.replace(/[,\s]/g, '')));
+  if(!isFinite(target) || target < 0){
+    toast('0 이상의 숫자로 넣어 주세요');
+    return;
+  }
+  if(isStamp && target > 100000) target = 100000;
+  if(!isStamp && target > 10000000) target = 10000000;
+  var cur = isStamp ? totalStamps(kidKey) : balanceRaw(kidKey);
+  var delta = target - cur;
+  if(!delta){
+    toast('이미 ' + (isStamp ? numFmt(target) + '개' : fmt(target)) + '예요');
+    return;
+  }
+  adjustmentsOf(kidKey).push({
+    id: uid(), date: dayKey(), kind: isStamp ? 'stamp' : 'money', amount: delta,
+    memo: '직접 맞추기'
+  });
+  saveState();
+  renderAll();
+  openSettings();
+  toast('🛠️ ' + kd.name + ' ' + (isStamp ? '누적 도장' : '남은 용돈') + '을 ' + (isStamp ? numFmt(target) + '개' : fmt(target)) + (delta > 0 ? '으로 맞췄어요' : '으로 내렸어요'));
+}
 function openSettings(){
   if(!isParentMode()) return;
   var s = state.settings;
@@ -15775,6 +16244,23 @@ function openSettings(){
     '<div class="set-section">' +
       '<div class="set-h">☀️ 아침 습관 항목 관리 <span class="set-hint">MY SPACE·FAMILY는 각 탭에서 수정</span></div>' +
       KID_DEFS.map(selfSettingsSection).join('') +
+    '</div>' +
+
+    '<div class="set-section">' +
+      '<div class="set-h">🛠️ 선우·지우 용돈·도장 직접 맞추기 <span class="set-hint">지금 값을 바로 고쳐요</span></div>' +
+      '<p class="set-hint" style="margin:0 0 6px">잘못 쌓인 남은 용돈·누적 도장을 원하는 숫자로 맞춰요. 넣은 숫자와 지금 값의 차이만큼 조정 기록이 남고, ☁️ Firebase에도 함께 저장돼요.</p>' +
+      KID_DEFS.map(function(kd){
+        return '<div class="set-adjust" data-adjust-kid="' + kd.key + '">' +
+          '<div class="set-adjust-head">' + kidAvHtml(kd.key) + ' <b>' + esc(kd.name) + '</b>' +
+            '<span class="sa-now">남은 용돈 <b>' + fmt(balanceOf(kd.key)) + '</b> · 누적 도장 <b>' + numFmt(totalStamps(kd.key)) + '개</b></span></div>' +
+          '<div class="sa-row"><label for="adjMoney_' + kd.key + '">남은 용돈</label>' +
+            '<input type="number" class="sa-in" id="adjMoney_' + kd.key + '" min="0" max="10000000" step="100" inputmode="numeric" placeholder="예: 1500" aria-label="' + esc(kd.name) + ' 남은 용돈 맞추기">' +
+            '<button type="button" class="btn btn-soft btn-sm" data-action="adjust-money" data-kid="' + kd.key + '">맞추기</button></div>' +
+          '<div class="sa-row"><label for="adjStamp_' + kd.key + '">누적 도장</label>' +
+            '<input type="number" class="sa-in" id="adjStamp_' + kd.key + '" min="0" max="100000" step="1" inputmode="numeric" placeholder="예: 120" aria-label="' + esc(kd.name) + ' 누적 도장 맞추기">' +
+            '<button type="button" class="btn btn-soft btn-sm" data-action="adjust-stamp" data-kid="' + kd.key + '">맞추기</button></div>' +
+        '</div>';
+      }).join('') +
     '</div>' +
 
     '<div class="set-section">' +
@@ -16658,6 +17144,15 @@ document.addEventListener('click', function(e){
     case 'ann-del': annDelete(target.getAttribute('data-id')); break;
     case 'ann-del-one': annDeleteOneOff(target.getAttribute('data-key') || ''); break;
     case 'rwd-detail': openRewardDetail(target.getAttribute('data-kind') || '', target.getAttribute('data-kid') || state.current); break;
+    case 'rwd-del': {
+      var delRaw = target.getAttribute('data-del') || '';
+      var delObj = null;
+      try{ delObj = JSON.parse(decodeURIComponent(delRaw)); }catch(err){ delObj = null; }
+      rwdDeleteItem(target.getAttribute('data-kind') || '', target.getAttribute('data-kid') || state.current, delObj);
+      break;
+    }
+    case 'adjust-money': applyKidAdjust(target.getAttribute('data-kid'), 'money'); break;
+    case 'adjust-stamp': applyKidAdjust(target.getAttribute('data-kid'), 'stamp'); break;
     case 'del-family-event': deleteFamilyEvent(target.getAttribute('data-id')); break;
     /* 🏫 학교 시간표 (#v24) */
     case 'open-school-tt': openSchoolTimetable(); break;
@@ -17192,6 +17687,10 @@ function boot(){
       birthdayShown: function(who){ return bdayShownOn(who, dayKey()); },
       birthdayOpen: function(){ var el = document.querySelector('#modalRoot.open .bday-card'); return !!el; },
       getState: function(){ return JSON.parse(JSON.stringify(state)); },
+      /* 🛠️ 용돈·도장 직접 맞추기 (#v29) — 테스트·디버깅용 */
+      balance: function(kid){ return balanceOf(kid || state.current); },
+      totalStamps: function(kid){ return totalStamps(kid || state.current); },
+      adjustments: function(kid){ return JSON.parse(JSON.stringify(adjustmentsOf(kid || state.current))); },
       affirmations: function(){ return AFFIRMATIONS.slice(); },
       adultAffirmations: function(){ return ADULT_AFFIRMATIONS.slice(); },
       stampPraisePool: function(){ return STAMP_PRAISE.slice(); },
