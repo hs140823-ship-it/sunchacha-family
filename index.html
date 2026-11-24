@@ -463,6 +463,21 @@ input[type=number]{text-align:right}
 /* 작은 「참 잘했어요」 도장 — 아침 습관 줄 옆 */
 .tr-stamp{display:inline-grid;place-items:center;min-width:26px;height:26px;padding:0 6px;border-radius:999px;
   font-size:8.5px;font-weight:900;color:#D93B36;border:2px double #E2736E;background:#FFF4F3;letter-spacing:-.02em;flex:0 0 auto}
+/* 🪙 미니알바 도장 — 보라 동그라미, 가운데에 크게 찍힌다 (#v34) */
+.stamp-slam .ss-minijob{
+  width:min(190px,54vw);height:min(190px,54vw);border-radius:50%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;text-align:center;
+  color:#5B3BC4;border:5px double #8B6BE0;box-shadow:inset 0 0 0 3px rgba(139,107,224,.22), 0 14px 28px -10px rgba(38,60,96,.32);
+  background:radial-gradient(circle at 38% 32%,rgba(255,255,255,.97),rgba(243,238,255,.93));
+  transform:rotate(-9deg);word-break:keep-all;padding:10px}
+.stamp-slam .ss-minijob .ssm-ico{font-size:min(30px,8.6vw);line-height:1}
+.stamp-slam .ss-minijob .ssm-t{font-size:min(15px,4.4vw);font-weight:900;line-height:1.15;letter-spacing:-.02em}
+.stamp-slam .ss-minijob .ssm-amt{font-size:min(12px,3.6vw);font-weight:900;color:#7C6BF2;letter-spacing:-.02em}
+@keyframes vacStampPop{
+  0%{opacity:.4;transform:scale(.94)}
+  55%{opacity:1;transform:scale(1.03)}
+  100%{opacity:1;transform:scale(1)}
+}
 @media (prefers-reduced-motion: reduce){
   .stamp-slam .ss-wrap{animation:stampSlamFade 2.2s ease both}
   @keyframes stampSlamFade{0%{opacity:0}8%{opacity:1}82%{opacity:1}100%{opacity:0}}
@@ -555,7 +570,14 @@ input[type=number]{text-align:right}
 .bonus-chip.on{background:var(--accent-soft);border-color:var(--accent-line);color:var(--accent-ink);box-shadow:inset 0 0 0 1px var(--accent-line)}
 .bonus-input{flex:1 1 auto;min-width:0;min-height:34px;padding:6px 10px;font-size:12px;text-align:right;font-variant-numeric:tabular-nums}
 .bonus-clear{margin-left:auto}
-.bonus-hint{font-size:10.5px;font-weight:700;color:var(--muted);margin:0;line-height:1.4}
+.bonus-hint{font-size:10.5px;font-weight:700;color:var(--muted);margin:0;line-height:1.45}
+/* 🎁 안내 2줄 — 「(0원부터, 주마다 새로 정해요)」는 둘째 줄로 (#v34) */
+.bonus-hint .bh-sub{display:block;margin-top:1px;font-size:10px;color:#9AA9BA}
+/* 💯 100점 요청 줄과 안내 2줄은 한 덩어리로 붙여 보여 준다 (#v34) */
+.pm-hundred{margin-top:6px;padding-top:7px;border-top:1px dashed rgba(120,150,190,.28)}
+.pmh-h{margin-bottom:3px}
+.pmh-empty{margin:0}
+.pm-hundred + .bonus-hint{margin-top:-3px}
 
 /* 💎 부모님 전체 보기 — 차분한 관리 요약 화면 (#6600) */
 .pm-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
@@ -689,7 +711,7 @@ body[data-face="jiwoo"] .tt-dial{--tt:#EC4899;--tt2:#F472B6}
 }
 .ac-del:hover{background:#fff;color:#D0573B}
 .ac-done-note{font-size:11.5px;color:var(--muted);margin-top:9px;text-align:center}
-.empty{
+.empty:not(.cal-cell){
   margin-top:12px;padding:18px 12px;text-align:center;
   border:1.5px dashed var(--line-strong);border-radius:16px;background:var(--row-bg);
 }
@@ -1279,7 +1301,8 @@ button.tt-cell:hover{background:#F7FCFF;border-color:#CDE7F8}
 .tt-lunch td{text-align:center;font-size:10px;font-weight:900;color:#8A7434;background:#FFF6D9;
   border-radius:10px;padding:5px 0}
 .tt-hint{font-size:10.5px;font-weight:700;color:var(--muted);margin:8px 0 0;text-align:center;line-height:1.5}
-.tt-foot{font-size:9.5px;font-weight:700;color:#A9B6C2;margin:6px 0 0;text-align:center}
+.tt-foot{font-size:9.5px;font-weight:700;color:#A9B6C2;margin:6px 0 0;text-align:center;line-height:1.55}
+.tt-foot span{display:block}
 /* 🏫 학교 줄 — 표 바로 위 「🏫 양원숲초등학교 3학년 4반」 · 엄마는 눌러서 고친다 */
 .tt-school{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:5px;margin:0 0 7px;
   font-size:12px;font-weight:900;color:#3E7599;line-height:1.35;text-align:center;letter-spacing:-.01em;min-width:0}
@@ -1395,7 +1418,6 @@ body.mode-viewer .ac-del,
 body.mode-viewer .wchip-x,
 body.mode-viewer .wday-add,
 body.mode-viewer #acAddPanel,
-body.mode-viewer #familyPickBar,
 body.mode-viewer .team-chip,
 body.mode-viewer .extra-edit,
 body.mode-viewer:not(.preview-on) .mode-bar{display:none !important}
@@ -1998,6 +2020,11 @@ body.drag-active,body.drag-active *{-webkit-user-select:none;user-select:none;-w
 .vac-card .vac-amt{flex:0 0 auto;font-size:10.5px;font-weight:900;color:#0E7C43;font-variant-numeric:tabular-nums}
 .vac-card.done{background:#E9F8EF;border-color:#C8ECDA}
 .vac-card.locked{opacity:.62}
+/* 🪙 찍힌 미니알바 도장 — 보라 동그라미 (#v34) */
+.vac-card .vac-stamp{flex:0 0 auto;width:23px;height:23px;border-radius:50%;display:grid;place-items:center;
+  font-size:10.5px;font-weight:900;color:#5B3BC4;border:2px double #8B6BE0;background:#F5F1FF;
+  transform:rotate(-8deg);line-height:1;letter-spacing:-.02em}
+.vac-card.just-done{animation:vacStampPop 1.2s cubic-bezier(.2,1.5,.4,1) both}
 /* ✏️ ✕ 도구는 흐름 안에 둔다 — 오른쪽 +100원 배지를 가리지 않게 (#v28) */
 .vac-card .vac-tools{flex:0 0 auto;display:flex;gap:2px;margin-left:3px}
 .vac-card .vac-tools button{width:18px;height:18px;border-radius:6px;border:1px solid var(--line-strong);background:var(--paper);font-size:9px;line-height:1;display:grid;place-items:center;padding:0;color:var(--muted)}
@@ -2308,9 +2335,9 @@ body.mode-viewer .rl-form{display:none !important}
 .rw-dot.done{background:#8B7CF0;border-color:#8B7CF0;box-shadow:0 6px 12px -10px rgba(91,59,196,.9)}
 .rw-dot.done i{color:#fff}
 .rw-dot.today{border-style:dashed;border-color:#8B7CF0}
-.pm-hundred{margin-top:8px;padding-top:8px;border-top:1px dashed rgba(120,150,190,.28)}
-.pmh-h{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:900;color:#3F5570;margin-bottom:5px}
-.pmh-empty{font-size:10.5px;font-weight:700;color:#8AA0B8;margin:0 0 2px}
+.pm-hundred{margin-top:6px;padding-top:7px;border-top:1px dashed rgba(120,150,190,.28)}
+.pmh-h{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:900;color:#3F5570;margin-bottom:3px}
+.pmh-empty{font-size:10.5px;font-weight:700;color:#8AA0B8;margin:0}
 .pm-settle{margin-top:8px;padding-top:8px;border-top:1px dashed rgba(120,150,190,.28)}
 .pms-h{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:900;color:#3F5570;margin-bottom:5px}
 .pms-h small{font-size:9.5px;font-weight:700;color:#8AA0B8}
@@ -3385,9 +3412,14 @@ body.mode-kid .brand-sub{color:#6E829B}
 .funm-tool{flex:1 1 0;border:1px solid #DDE7D2;background:#fff;border-radius:10px;padding:6px 4px;
   font:inherit;font-size:10px;font-weight:900;color:#4B6B3B;cursor:pointer;min-height:30px}
 .funm-tool:active{transform:scale(.98)}
-.funm-chips{display:flex;flex-wrap:wrap;gap:5px;margin:10px 0 0;padding:0 0 3px}
-.funm-chip{flex:0 0 auto;border:1px solid #E4E8DC;background:#fff;border-radius:999px;padding:6px 10px;
-  font:inherit;font-size:10.5px;font-weight:900;color:#6E7A64;cursor:pointer;white-space:nowrap;min-height:30px}
+/* ⭐ 6갈래 버튼 — 390·360px 에서도 한 줄 (6열 균등) (#v34) */
+.funm-chips{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:3px;margin:10px 0 0;padding:0 0 3px}
+.funm-chip{display:flex;align-items:center;justify-content:center;gap:1px;min-width:0;width:100%;
+  border:1px solid #E4E8DC;background:#fff;border-radius:999px;padding:6px 2px;
+  font:inherit;font-size:9.5px;font-weight:900;color:#6E7A64;cursor:pointer;white-space:nowrap;min-height:30px;
+  letter-spacing:-.04em;overflow:hidden}
+.funm-chip .fc-ico{flex:0 0 auto;font-size:10px;line-height:1}
+.funm-chip .fc-lbl{flex:0 1 auto;min-width:0;font-size:9px;line-height:1;letter-spacing:-.05em}
 .funm-chip.on{background:linear-gradient(160deg,#5FAE4F,#3F8F37);border-color:transparent;color:#fff;
   box-shadow:0 8px 14px -12px rgba(63,143,55,.95)}
 .funm-list{display:flex;flex-direction:column;gap:8px;margin-top:9px}
@@ -3847,7 +3879,8 @@ body.mode-kid .home-more{display:none}
 #famCalGrid .cal-cell{grid-row:1/-1;position:relative;border:0;border-radius:0;background:transparent;
   display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:2px;
   padding:6px 2px 7px;min-width:0;min-height:74px;height:100%;box-sizing:border-box;overflow:visible}
-#famCalGrid .cal-cell.empty{justify-content:center;padding-bottom:0}
+#famCalGrid .cal-cell.empty{justify-content:flex-start;padding-bottom:7px}
+/* 🗓 한 주 안의 날짜 숫자는 모두 같은 높이에서 (#v34) — 빈 칸도 위에서 시작 */
 #famCalGrid button.cal-cell:active{transform:none;background:transparent}
 #famCalGrid button.cal-cell:hover{background:rgba(120,150,190,.05)}
 #famCalGrid .cal-cell .cal-date{font-size:15px;font-weight:800;line-height:1.15;letter-spacing:-.02em;color:#1F2A37;min-width:0;padding:0}
@@ -3857,6 +3890,12 @@ body.mode-kid .home-more{display:none}
 #famCalGrid .cal-cell.today .cal-date{color:#fff;background:#2F6FB2;border-radius:999px;min-width:24px;padding:1px 5px}
 #famCalGrid .cal-cell.sel{background:rgba(124,107,242,.07)}
 #famCalGrid .cal-cell.sel .cal-date{box-shadow:0 0 0 2px rgba(47,111,178,.38);border-radius:999px}
+/* 🗓 선택한 날짜 원 — 일·토·공휴일이라도 흰 글씨로 또렷하게 (#v34) */
+#famCalGrid .cal-cell.sel .cal-date,
+#famCalGrid .cal-cell.sel.sun .cal-date,
+#famCalGrid .cal-cell.sel.sat .cal-date,
+#famCalGrid .cal-cell.sel.hol .cal-date{background:#2F6FB2;color:#fff;box-shadow:0 0 0 2px rgba(47,111,178,.26);padding:0 6px}
+#famCalGrid .cal-cell.sel.today .cal-date{background:#2F6FB2;color:#fff}
 #famCalGrid .cal-cell.other{opacity:.26}
 #famCalGrid .cal-cell.other .cal-date{font-size:13px}
 #famCalGrid .cal-cell.bg-winter{background:#FBF3D3}
@@ -3865,7 +3904,7 @@ body.mode-kid .home-more{display:none}
 #famCalGrid .cal-cell.bg-winter.today{background:#F7EBBF}
 #famCalGrid .cal-cell.bg-spring.today{background:#F9DCE8}
 #famCalGrid .cal-cell.bg-summer.today{background:#DBEEFB}
-#famCalGrid .cal-cell.has-ann::after{content:'';position:absolute;inset:2px 1px;border:2px solid var(--ann,#D9537E);
+#famCalGrid .cal-cell.has-ann::after{content:'';position:absolute;inset:3px 2px;border:2px solid var(--ann,#D9537E);
   border-radius:9px;pointer-events:none;opacity:.92}
 #famCalGrid .cal-hol{font-size:8px;font-weight:900;color:#E55353;line-height:1.05;max-width:100%;
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -3873,11 +3912,11 @@ body.mode-kid .home-more{display:none}
 #famCalGrid .cal-dot{width:5px;height:5px;border-radius:50%}
 #famCalGrid .cal-flow{display:flex;flex-direction:column;align-items:center;gap:2px;pointer-events:none;
   padding:0 1px;align-self:start;min-width:0;z-index:2}
-#famCalGrid .cal-bday-list{display:flex;flex-direction:column;align-items:center;gap:1px;min-width:0}
+#famCalGrid .cal-bday-list{display:flex;flex-direction:column;align-items:center;gap:1px;min-width:0;padding:0 3px}
 #famCalGrid .cal-bday{display:flex;flex-direction:column;align-items:center;gap:3px;line-height:1.15;min-width:0}
 #famCalGrid .cal-bday-emo{font-size:11px;font-style:normal;line-height:1}
-#famCalGrid .cal-bday-name{font-size:10px;font-weight:900;color:var(--ann,#D9537E);letter-spacing:-.03em;
-  white-space:normal;word-break:keep-all;overflow-wrap:anywhere;text-align:center;line-height:1.15}
+#famCalGrid .cal-bday-name{font-size:9.5px;font-weight:900;color:var(--ann,#D9537E);letter-spacing:-.04em;
+  white-space:normal;word-break:keep-all;overflow-wrap:anywhere;text-align:center;line-height:1.15;padding:0 1px}
 #famCalGrid .cal-paren{display:block;max-width:100%;font-size:9.5px;font-weight:900;color:var(--cat);letter-spacing:-.03em;
   background:var(--cat-soft);border-radius:999px;padding:1px 6px;line-height:1.2;
   box-shadow:inset 3px 0 0 var(--cat),inset -3px 0 0 var(--cat);
@@ -3889,6 +3928,13 @@ body.mode-kid .home-more{display:none}
 #famCalGrid .cal-band.cont-r{border-top-right-radius:0;border-bottom-right-radius:0;box-shadow:inset 3px 0 0 var(--cat)}
 #famCalGrid .cal-band.cont-l.cont-r{box-shadow:none}
 #famCalGrid .cal-band-txt{font-size:9px;font-weight:900;letter-spacing:-.03em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* 🗓 1칸짜리 바(주 경계에 걸친 일정) — 잘리지 않고 두 줄로 접혀 보이게 (#v34) */
+#famCalGrid .cal-band.narrow{height:auto;min-height:14px;align-items:center;padding:1px 4px;border-radius:9px;
+  box-shadow:inset 2px 0 0 var(--cat),inset -2px 0 0 var(--cat)}
+#famCalGrid .cal-band.narrow.cont-l{box-shadow:inset -2px 0 0 var(--cat)}
+#famCalGrid .cal-band.narrow.cont-r{box-shadow:inset 2px 0 0 var(--cat)}
+#famCalGrid .cal-band.narrow .cal-band-txt{font-size:8px;letter-spacing:-.05em;white-space:normal;overflow:visible;
+  text-overflow:clip;word-break:keep-all;overflow-wrap:anywhere;text-align:center;line-height:1.16}
 @media (max-width:380px){
   #famCalGrid .cal-cell .cal-date{font-size:14px}
   #famCalGrid .cal-bday-name{font-size:9.5px}
@@ -5150,30 +5196,48 @@ function vacationDayEarned(kidKey, day){
   Object.keys(d.vac || {}).forEach(function(id){ sum += Number(d.vac[id]) || 0; });
   return sum;
 }
-function toggleVacationJob(id){
+function toggleVacationJob(id, undo){
   if(!canCheck()) return;
   var job = vacationJobOf(id);
   if(!job) return;
-  var kidKey = state.current;
+  var kidKey = scopedKidKey();
   var d = ensureDay(kidKey, dayKey());
   if(!d.vac) d.vac = {};
   var wasDone = d.vac[id] !== undefined;
   if(!isMiniJobOpenNow()){
-    toast('🗓️ 주말·공휴일·방학에 열려요!');
+    toast(isParentMode()
+      ? '🗓️ 지금은 잠겨 있어요 — 위 「여는 시점」에서 🔓 열기를 누르면 바로 찍혀요'
+      : '🗓️ 주말·공휴일·방학에 열려요!');
     return;
   }
-  if(!wasDone && isVacationDate(dayKey()) && vacationJobCountOn(kidKey, dayKey()) >= MINI_JOB_VACATION_DAILY){
+  /* 🪙 한 번 누르면 도장, 두 번 누르면 취소 (#v32 와 같은 방식 · #v34) */
+  if(wasDone){
+    if(!undo){
+      toast('🪙 ' + job.label + ' · 도장이 찍혀 있어요 (두 번 누르면 취소)');
+      return;
+    }
+    delete d.vac[id];
+    saveState();
+    renderAll();
+    toast('🪙 ' + job.label + ' 도장을 취소했어요');
+    return;
+  }
+  if(isVacationDate(dayKey()) && vacationJobCountOn(kidKey, dayKey()) >= MINI_JOB_VACATION_DAILY){
     toast('🌴 방학에는 미니알바를 하루 ' + MINI_JOB_VACATION_DAILY + '건까지 할 수 있어요');
     return;
   }
-  if(wasDone) delete d.vac[id];
-  else d.vac[id] = Number(job.amount) || 0;
+  var amt = Number(job.amount) || 0;
+  d.vac[id] = amt;
   saveState();
   renderAll();
-  if(!wasDone){
-    chime('pay');
-    toast('🪙 ' + job.label + ' 완료! +' + fmt(Number(job.amount) || 0) + ' 용돈');
+  chime('pay');
+  var card = document.querySelector('#vacationMiniJobsList .vac-card[data-id="' + id + '"]');
+  if(card){
+    card.classList.add('just-done');
+    setTimeout(function(){ card.classList.remove('just-done'); }, 1500);
   }
+  showMiniJobStampSlam(job, amt);
+  toast('🪙 ' + job.label + ' 완료! +' + fmt(amt) + ' 용돈');
 }
 /* 🌴 방학 미니알바 카드 그리기 */
 function renderVacationMiniJobs(){
@@ -5220,6 +5284,7 @@ function renderVacationMiniJobs(){
       ' aria-label="' + esc(j.label) + ' ' + (open ? '완료 체크' : '지금은 잠겨 있어요') + '">' +
       '<span class="vac-ico" aria-hidden="true">' + esc(j.icon || '🌴') + '</span>' +
       '<span class="vac-main"><b>' + esc(j.label) + '</b><small>' + esc(j.desc || '') + '</small></span>' +
+      (done ? '<span class="vac-stamp" aria-hidden="true">✓</span>' : '') +
       '<span class="vac-amt">+' + fmt(amt) + '</span>' +
       '<span class="vac-tools" data-parent-only="1">' +
         '<button type="button" data-action="vac-edit" data-id="' + esc(j.id) + '" aria-label="' + esc(j.label) + ' 수정">✏️</button>' +
@@ -7265,6 +7330,8 @@ function renderDadKidSwitch(){
       bar.setAttribute('aria-label', '보는 아이 고르기');
       dadInsertAfterHead(panel, bar);
     }
+    /* 🗂 탭 제목 아래가 아니라 「탭 맨 윗칸」으로 — 네 탭 모두 같은 자리 (#v34) */
+    if(panel.firstChild !== bar) panel.insertBefore(bar, panel.firstChild);
     bar.hidden = false;
     var cur = dadKidNow();
     bar.innerHTML = '<span class="dad-kid-lbl" aria-hidden="true">👀 보는 아이</span>' +
@@ -7310,40 +7377,10 @@ function dadFamTodayItems(kind){
   return out;
 }
 function renderDadFamView(){
-  var host = document.querySelector('[data-tab-panel="family"]');
-  if(!host) return;
-  var box = document.getElementById('dadFamView');
-  if(!isDadMode()){ if(box) box.hidden = true; return; }
-  if(!box){
-    box = document.createElement('div');
-    box.className = 'dadfam';
-    box.id = 'dadFamView';
-    var bar = document.getElementById('dadKidBar-family');
-    if(bar && bar.parentNode) bar.parentNode.insertBefore(box, bar.nextSibling);
-    else host.insertBefore(box, host.firstChild);
-  }
-  box.hidden = false;
-  var kind = DAD_FAM_TAB;
-  var items = dadFamTodayItems(kind);
-  var labels = { all:'👫 함께', solo:'🌟 스스로', minijob:'🪙 미니알바' };
-  var titles = { all:'오늘 함께 참여한 일', solo:'오늘 스스로 해낸 일', minijob:'오늘 한 미니알바' };
-  var kidName = kidDef(dadKidNow()) ? kidDef(dadKidNow()).name : '';
-  box.innerHTML = '<div class="dadfam-head">🤝 ' + titles[kind] + '<span>' + items.length + '개</span></div>' +
-    '<div class="dadfam-tabs" role="group" aria-label="참여 방식 골라 보기">' +
-      ['all', 'solo', 'minijob'].map(function(k){
-        return '<button type="button" class="dadfam-tab' + (kind === k ? ' on' : '') + '" data-action="dad-fam-tab" data-kind="' + k + '"' +
-          ' aria-pressed="' + (kind === k ? 'true' : 'false') + '">' + labels[k] + '</button>';
-      }).join('') +
-    '</div>' +
-    (items.length
-      ? '<div class="dadfam-list">' + items.map(function(it){
-          return '<div class="dadfam-row">' +
-            (it.stamp ? '<img src="' + it.stamp + '" alt="' + esc(it.label) + ' 도장">' : '<span class="dfr-ico" aria-hidden="true">' + esc(it.icon) + '</span>') +
-            '<span><b>' + esc(it.label) + '</b><small>' + labels[kind] + ' · ' + esc(kidName) + '</small></span>' +
-            '<span class="dfr-amt">+' + fmt(Number(it.amt) || 0) + '</span>' +
-          '</div>';
-        }).join('') + '</div>'
-      : '<p class="dadfam-empty">오늘은 아직 ' + (kind === 'minijob' ? '미니알바' : '참여') + ' 기록이 없어요 🌿</p>');
+  /* 👀 아빠 FAMILY (#v34) — 별도 요약 패널 대신 아이들의 FAMILY 화면을 그대로 보여 준다.
+     상단 [👦 선우 보기 | 👧 지우 보기] 로 아이만 바꾸고, 체크·도장은 관람 전용(canCheck=false). */
+  var old = document.getElementById('dadFamView');
+  if(old && old.parentNode) old.parentNode.removeChild(old);
 }
 
 /* =========================================================
@@ -9858,9 +9895,14 @@ function funMissionDone(kidKey, key, id){
 }
 function funToggleDone(id){
   if(!canCheck()) return;
-  var kidKey = state.current;
+  var kidKey = scopedKidKey();
   var key = studyKeyNow();
-  if(!bonusOpenNow(kidKey)) return;
+  /* ⭐ 엄마 화면은 숙제 전에도 미리 찍어 줄 수 있다 (#v34)
+     · 아이 화면은 숙제를 모두 끝내야 열리므로, 막힌 이유를 말해 준다 */
+  if(!bonusOpenNow(kidKey) && !isParentMode()){
+    toast('🔒 오늘 숙제를 모두 끝내면 열려요');
+    return;
+  }
   var sel = funSelOf(kidKey, key);
   if(sel.indexOf(id) < 0){ toast('⭐ 먼저 오늘의 도전에 담아 주세요'); return; }
   var d = ensureDay(kidKey, key);
@@ -9878,7 +9920,7 @@ function funToggleDone(id){
 }
 function funUndoDone(id){
   if(!canCheck()) return false;
-  var kidKey = state.current;
+  var kidKey = scopedKidKey();
   var key = studyKeyNow();
   var d = ensureDay(kidKey, key);
   if(!d.bonus || !d.bonus[id]) return false;
@@ -9995,10 +10037,15 @@ function funMissionHtml(kidKey, key, noHw){
   var cards = sel.map(function(m){ return funCardHtml(m, funMissionDone(kidKey, key, m.key)); });
   for(var i = sel.length; i < FUN_MAX; i++) cards.push(funEmptySlotHtml());
 
-  var chips = '<button type="button" class="funm-chip' + (FUN_FILTER_KEY === 'all' ? ' on' : '') + '" data-action="fun-filter" data-cat="all" aria-pressed="' + (FUN_FILTER_KEY === 'all' ? 'true' : 'false') + '">전체</button>' +
+  var chips = '<button type="button" class="funm-chip' + (FUN_FILTER_KEY === 'all' ? ' on' : '') + '" data-action="fun-filter" data-cat="all" aria-pressed="' + (FUN_FILTER_KEY === 'all' ? 'true' : 'false') + '"><span class="fc-lbl">전체</span></button>' +
     FUN_CATS.map(function(c){
       var on = (FUN_FILTER_KEY === c.key);
-      return '<button type="button" class="funm-chip' + (on ? ' on' : '') + '" data-action="fun-filter" data-cat="' + c.key + '" aria-pressed="' + (on ? 'true' : 'false') + '">' + c.chip + '</button>';
+      /* 이모지와 이름을 나눠 한 줄에 꼭 맞게 (#v34) — 390·360px 에서도 6개가 한 줄 */
+      var parts = String(c.chip || '').split(' ');
+      var ico = parts.length > 1 ? parts.shift() : '';
+      return '<button type="button" class="funm-chip' + (on ? ' on' : '') + '" data-action="fun-filter" data-cat="' + c.key + '" aria-pressed="' + (on ? 'true' : 'false') + '" aria-label="' + esc(c.chip || '') + '">' +
+        (ico ? '<span class="fc-ico" aria-hidden="true">' + esc(ico) + '</span> ' : '') +
+        '<span class="fc-lbl">' + esc(parts.join(' ')) + '</span></button>';
     }).join('');
 
   var groups = FUN_CATS.filter(function(c){ return FUN_FILTER_KEY === 'all' || FUN_FILTER_KEY === c.key; }).map(function(c){
@@ -11327,6 +11374,22 @@ function showStampSlam(src, text){
     box.setAttribute('hidden', '');
     box.innerHTML = '';
   }, 2450);
+}
+/* 🪙 미니알바 도장 — 화면 가운데에 보라 동그라미로 찍힌다 (#v34) */
+function showMiniJobStampSlam(job, amt){
+  var box = $('#stampSlam');
+  if(!box) return;
+  var label = (job && job.label) || '미니알바';
+  box.innerHTML = '<div class="ss-wrap"><span class="ss-minijob" aria-label="' + esc(label) + ' 완료">' +
+    '<span class="ssm-ico" aria-hidden="true">' + esc((job && job.icon) || '🪙') + '</span>' +
+    '<span class="ssm-t">' + esc(label) + '</span>' +
+    '<span class="ssm-amt">+' + fmt(Number(amt) || 0) + '</span></span></div>';
+  box.removeAttribute('hidden');
+  if(box._slamT) clearTimeout(box._slamT);
+  box._slamT = setTimeout(function(){
+    box.setAttribute('hidden', '');
+    box.innerHTML = '';
+  }, 2100);
 }
 /* ☀️ 아침 습관 3가지 완료 — 화면 가운데에 「참 잘했어요!」 동그라미 도장 */
 function showMorningStampSlam(){
@@ -12798,7 +12861,7 @@ function rewardKidCardHtml(kidKey, primary, multi){
       bonusRow('dad', '🧔', '아빠 보너스', st.dad) +
       (isKidMode() ? '' : hundredCashBoxHtml()) +
       (isKidMode() ? '' : settlementBoxHtml()) +
-      '<p class="bonus-hint">이번 주 <b>' + name + '</b>에게 주는 보너스 · 원하는 금액을 넣어 주세요 (0원부터, 주마다 새로 정해요)</p>' +
+      '<p class="bonus-hint">이번 주 <b>' + name + '</b>에게 주는 보너스 · 원하는 금액을 넣어 주세요<span class="bh-sub">(0원부터, 주마다 새로 정해요)</span></p>' +
     '</div>' +
 
     /* 오늘·이번 달 요약 2×2 */
@@ -15045,6 +15108,7 @@ function renderFamilyCalendar(){
       /* 여러 날 이어지는 바는 제목만 (이모지는 첫 조각에 붙는다) */
       var text = (ev.end && String(ev.end) && String(ev.end) > String(ev.date)) ? esc(parts.name) : esc(parts.full);
       return '<span class="cal-band cal-c-' + ev.category + (sg.contL ? ' cont-l' : '') + (sg.contR ? ' cont-r' : '') +
+        ((sg.col1 - sg.col0 + 1) === 1 ? ' narrow' : '') +
         '" style="grid-column:' + (sg.col0 + 1) + '/span ' + (sg.col1 - sg.col0 + 1) + ';grid-row:' + row + '" title="' + esc(parts.full) + '">' +
         '<span class="cal-band-txt">' + text + '</span></span>';
     }).join('');
@@ -15729,7 +15793,7 @@ function renderSchoolTimetable(kid){
     '<p class="tt-hint" id="ttHint">' + (editable
       ? '칸을 눌러 글씨를 고치고, 꾹 눌러(0.4초) 다른 칸으로 옮겨요'
       : '보기만 해요 · 엄마 화면에서 고칠 수 있어요') + '</p>' +
-    '<p class="tt-foot">※ 시간표는 학교 사정에 따라 바뀔 수 있어요 · 하교 시간은 「🕒 SCHEDULE」에 바로 반영돼요</p>' +
+    '<p class="tt-foot"><span>※ 시간표는 학교 사정에 따라 바뀔 수 있어요</span><span>하교 시간은 「🕒 SCHEDULE」에 바로 반영돼요</span></p>' +
     '<div class="modal-actions"><button type="button" class="btn btn-ghost" data-action="close-modal">닫기</button></div>'
   );
   /* 학교 줄을 고치는 중 — Enter 로 저장, 이름 칸에 바로 커서 */
@@ -18494,7 +18558,7 @@ function openTimerPanel(){
    TAP_WINDOW 안에 들어오면 그때 취소한다 — iPhone Safari 터치에서도 그대로 동작한다.
    대상: 🏠 HOME 아침 습관 · ✨ MY SPACE · 📚 STUDY 숙제·펀미션 · 🤝 FAMILY
    ========================================================= */
-var TAP_WINDOW = 380;
+var TAP_WINDOW = 460;   /* 두 번 누름을 「취소」로 읽는 시간 (#v34 — 380ms는 손이 빠르지 않으면 놓쳤다) */
 var _lastTapKey = '';
 var _lastTapAt = 0;
 function stampTapHit(el){
@@ -18504,6 +18568,9 @@ function stampTapHit(el){
   if(card) return (inner && inner !== card) ? null : { kind:'self', id:card.getAttribute('data-id') || '', el:card };
   var fun = el.closest('[data-action="fun-mission"]');
   if(fun) return (inner && inner !== fun) ? null : { kind:'fun', id:fun.getAttribute('data-id') || '', el:fun };
+  /* 🪙 미니알바 카드 — 한 번 누르면 도장, 두 번 누르면 취소 (#v34) */
+  var vac = el.closest('[data-action="toggle-vac"]');
+  if(vac) return (inner && inner !== vac) ? null : { kind:'vac', id:vac.getAttribute('data-id') || '', el:vac };
   var row = el.closest('[data-basic-id]');
   if(row){
     /* 행 안의 ○ 버튼(toggle-basic)은 행과 같은 것으로 본다 — ✏️·✕ 도구만 빠진다 (#v32) */
@@ -18529,11 +18596,13 @@ document.addEventListener('click', function(e){
   if(dbl){
     if(hit.kind === 'self') toggleSelf(hit.id, true);
     else if(hit.kind === 'basic') toggleBasic(hit.id, true);
+    else if(hit.kind === 'vac') toggleVacationJob(hit.id, true);
     else funUndoDone(hit.id);
     return;
   }
   if(hit.kind === 'self') toggleSelf(hit.id, false);
   else if(hit.kind === 'basic') toggleBasic(hit.id, false);
+  else if(hit.kind === 'vac') toggleVacationJob(hit.id, false);
   else funToggleDone(hit.id);
 }, true);
 
