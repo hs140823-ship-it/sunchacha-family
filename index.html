@@ -340,11 +340,14 @@ input[type=number]{text-align:right}
 .col{display:flex;flex-direction:column;gap:14px;min-width:0}
 
 /* ---------- missions ---------- */
+.card-head > .progress-pill{flex:0 0 auto;min-width:34px}
 .progress-pill{
-  font-size:12.5px;font-weight:800;color:var(--kc,#FF8A3D);
+  display:inline-grid;place-items:center;text-align:center;
+  min-width:34px;height:34px;padding:0 7px;box-sizing:border-box;
+  font-size:11px;font-weight:900;line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums;
+  color:var(--kc,#FF8A3D);
   background:var(--ks,#FFF1E2);
-  border:1px solid rgba(0,0,0,.03);
-  padding:5px 11px;border-radius:999px;
+  border:1.5px solid rgba(0,0,0,.04);border-radius:999px;
   white-space:nowrap;
 }
 .track{height:9px;border-radius:99px;background:var(--track);overflow:hidden;margin-top:12px}
@@ -1006,6 +1009,31 @@ body.mode-kid .cal-tools{display:none !important}
 .ann-check span{white-space:nowrap}
 .ann-form-actions{display:flex;gap:6px;justify-content:flex-end}
 .ann-readonly{font-size:11.5px;font-weight:700;color:var(--muted);text-align:center;margin:6px 0 0}
+/* 🎂 생일·기념일 관리 — 종류 탭 · 음력 체크 · 겹침 없는 두 칸 (#v32) */
+.ann-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;margin:0 0 8px;padding:3px;border-radius:999px;background:var(--paper);border:1px solid var(--line)}
+.ann-tab{border:0;background:transparent;border-radius:999px;padding:7px 2px;font:inherit;font-size:11px;font-weight:900;color:var(--muted);cursor:pointer;min-height:30px;white-space:nowrap}
+.ann-tab.on{color:#fff}
+.ann-tab.birth.on{background:linear-gradient(160deg,#F07CA3,#D9537E);box-shadow:0 8px 16px -12px rgba(217,83,126,.95)}
+.ann-tab.memorial.on{background:linear-gradient(160deg,#9C8BC0,#7C6A9B);box-shadow:0 8px 16px -12px rgba(124,106,155,.95)}
+.ann-tab.anniv.on{background:linear-gradient(160deg,#DDB268,#C08828);box-shadow:0 8px 16px -12px rgba(192,136,40,.95)}
+.ann-form.birth{background:linear-gradient(170deg,#FFF7FA,#FFFDFE);border-color:#F6CBD9}
+.ann-form.memorial{background:linear-gradient(170deg,#F8F5FD,#FEFDFF);border-color:#DFD6F1}
+.ann-form.anniv{background:linear-gradient(170deg,#FFFAF0,#FFFEFB);border-color:#F1E0BC}
+.ann-form-row.date-row{grid-template-columns:minmax(0,1.1fr) minmax(0,0.9fr)}
+.ann-form-row.name-row{grid-template-columns:minmax(0,1fr) 60px}
+.ann-checks{display:flex;align-items:center;gap:14px;margin:2px 0 6px}
+.ann-checks .ann-check{margin:0}
+.ann-check.lunar input{accent-color:#7C6A9B}
+.ann-preview{margin:0 0 8px;padding:6px 9px;border-radius:10px;background:rgba(255,255,255,.8);border:1px solid var(--line);
+  font-size:10.5px;font-weight:800;color:var(--ink-2);line-height:1.4}
+.ann-row.birth{background:#FFF7FA;border-color:#F6DCE7}
+.ann-row.memorial{background:#F8F5FD;border-color:#E2DAF2}
+.ann-row.anniv{background:#FFFAF0;border-color:#F1E3C6}
+.ann-kindpill{flex:0 0 auto;font-size:9px;font-weight:900;border-radius:999px;padding:2px 7px;background:#fff;border:1px solid var(--line);color:var(--muted)}
+.ann-kindpill.birth{color:#C2447A;border-color:#F6D2E1}
+.ann-kindpill.memorial{color:#6B5A8C;border-color:#E0D8F0}
+.ann-kindpill.anniv{color:#A5762A;border-color:#F0E2C2}
+.ann-row .ann-main small{line-height:1.35}
 .cal-day-head span{font-size:11px;font-weight:800;color:var(--muted)}
 .cal-today-tag{font-style:normal;font-size:10px;font-weight:900;color:var(--wday-tink);background:var(--wday-t1);border:1px solid var(--wday-tline);border-radius:999px;padding:1px 7px}
 .cal-events{display:flex;flex-direction:column;gap:6px}
@@ -1040,19 +1068,8 @@ body.mode-kid .cal-tools{display:none !important}
 .cal-week.has-bars .cal-dots{margin-top:auto;padding-bottom:1px}
 /* 형광펜 바 (#v25): 왼쪽 세로 테두리를 없애 곡률이 `(` 처럼 보이지 않게 하고,
    양 끝은 날짜 칸 테두리 안쪽으로 2px 들여 넣는다. 제목은 바(기간) 정가운데. */
-.cal-bar{display:flex;align-items:center;justify-content:center;align-self:center;height:13px;margin:1px 2px 0;padding:0 3px;
-  border:0;border-radius:4px;background:var(--cat-soft);color:var(--cat);
-  font-size:8.5px;font-weight:900;letter-spacing:-.02em;line-height:1;text-align:center;overflow:hidden}
-.cal-bar .cb-txt{min-width:0;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:center}
-/* 하루짜리 바: 이모지 / 제목 두 줄, 세로 가운데 (#v25) */
-.cal-bar.solo{height:auto;min-height:12px;padding:1px 2px 1.5px}
 /* 주 경계에서 1칸만 걸친 이어지는 일정 — 「아빠 필리핀 출장」과 같은 얇은 1줄 바 (#v28)
    앞 조각은 왼쪽부터 「이모지 + 첫 어절」, 뒤 조각은 「나머지 어절」로 나눠 이어 적는다 */
-.cal-bar.wrap{padding:0 1px;letter-spacing:-.04em;justify-content:flex-start}
-.cal-bar.wrap .cb-txt{text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:.94em}
-.cal-bar .cb-txt.cb-two{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;white-space:normal;overflow:visible;text-overflow:clip;line-height:1.06}
-.cal-bar .cb-emo{display:block;font-size:1.05em;line-height:1}
-.cal-bar .cb-name{display:block;max-width:100%;word-break:keep-all;overflow-wrap:anywhere;text-align:center}
 /* 날짜 칸이 하얀 카드 위에 묻히지 않게 얇은 선만 살짝 (#v24) */
 #famCalGrid .cal-cell{background:#fff;border-color:rgba(15,23,42,.06)}
 #famCalGrid .cal-cell.other{background:transparent;border-color:transparent}
@@ -1263,34 +1280,28 @@ button.tt-cell:hover{background:#F7FCFF;border-color:#CDE7F8}
   border-radius:10px;padding:5px 0}
 .tt-hint{font-size:10.5px;font-weight:700;color:var(--muted);margin:8px 0 0;text-align:center;line-height:1.5}
 .tt-foot{font-size:9.5px;font-weight:700;color:#A9B6C2;margin:6px 0 0;text-align:center}
-/* 🏫 학교 정보 · 수업 시간 고르기 (#v31) */
-.tt-info{display:flex;flex-direction:column;gap:7px;padding:9px 10px;border:1px solid #DDEDF9;border-radius:16px;
-  background:linear-gradient(160deg,#F7FCFF,#FFFFFF);margin:0 0 9px}
-.tt-info-row{display:grid;grid-template-columns:72px minmax(0,1fr) minmax(0,1fr);gap:6px;align-items:end;min-width:0}
-.tt-info-row.wide{grid-template-columns:minmax(0,1fr)}
-.tt-field{display:flex;flex-direction:column;gap:2px;font-size:9.5px;font-weight:900;color:#7A93A6;min-width:0}
-.tt-field input,.tt-field select{min-height:34px;padding:4px 7px;border-radius:10px;font-size:12px;width:100%;min-width:0;max-width:100%;box-sizing:border-box}
-.tt-field input[type=number]{text-align:center}
-.tt-info-line{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:11.5px;font-weight:900;color:#3E7599}
-.tt-info-line small{font-size:10.5px;font-weight:800;color:var(--muted)}
-.tt-style-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px}
-.tt-style{min-height:36px;padding:5px 8px;border-radius:12px;border:1px solid var(--line-strong);background:#fff;
-  font-size:11px;font-weight:900;color:var(--ink-2);line-height:1.25}
-.tt-style.on{background:#EAF6FF;border-color:#7FB8DE;color:#1E5C86}
-.tt-zero{min-height:32px;padding:4px 12px;border-radius:999px;border:1px dashed var(--line-strong);background:#fff;
-  font-size:11px;font-weight:900;color:var(--muted)}
-.tt-zero.on{background:#FBF2D6;border-color:#E4CE8C;color:#8A7434;border-style:solid}
-/* 과목 고르기 칩 (#v31) */
-.tt-pick{margin-top:9px;padding:8px 9px;border:1px dashed #CFE3F7;border-radius:14px;background:#F7FCFF;display:flex;flex-direction:column;gap:5px}
-.tt-pick[hidden]{display:none}
-.tt-pick-head{font-size:10.5px;font-weight:900;color:#3E7599}
-.tt-pick-row{display:flex;flex-wrap:wrap;gap:4px}
-.tt-sub{min-height:30px;padding:4px 9px;border-radius:999px;border:1px solid var(--line-strong);background:#fff;
-  font-size:11px;font-weight:900;color:var(--ink-2);white-space:nowrap}
-.tt-sub.on{background:#EAF6FF;border-color:#7FB8DE;color:#1E5C86}
+/* 🏫 학교 줄 — 표 바로 위 「🏫 양원숲초등학교 3학년 4반」 · 엄마는 눌러서 고친다 */
+.tt-school{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:5px;margin:0 0 7px;
+  font-size:12px;font-weight:900;color:#3E7599;line-height:1.35;text-align:center;letter-spacing:-.01em;min-width:0}
+.tt-school b{font-weight:900;color:#1E5C86;min-width:0;overflow-wrap:anywhere}
+.tt-school .tt-school-g{color:#2E6E97}
+.tt-school .tt-pen{font-size:11px;opacity:.7}
+button.tt-school{width:100%;min-height:34px;padding:6px 10px;border:1px solid #DDEDF9;border-radius:14px;
+  background:linear-gradient(160deg,#F7FCFF,#FFFFFF);cursor:pointer;-webkit-appearance:none;appearance:none}
+button.tt-school:hover{border-color:#BFE0F6}
+.tt-school-form{display:flex;flex-direction:column;gap:6px;margin:0 0 8px;padding:8px 9px;
+  border:1px solid #DDEDF9;border-radius:14px;background:#F7FCFF}
+.tt-school-name{display:flex;align-items:center;gap:6px;min-width:0;font-size:11px;font-weight:900;color:#3E7599}
+.tt-school-name input{flex:1 1 auto;min-width:0;min-height:32px;padding:4px 9px;border-radius:10px;
+  border:1px solid #CFE3F7;background:#fff;color:#31485C;font-size:12px;font-weight:800;box-sizing:border-box}
+.tt-school-nums{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.tt-school-nums label{display:inline-flex;align-items:center;gap:3px;font-size:10.5px;font-weight:900;color:#7A93A6}
+.tt-school-nums input{width:38px;min-height:32px;padding:4px 4px;border-radius:10px;border:1px solid #CFE3F7;
+  background:#fff;color:#31485C;font-size:12px;font-weight:800;text-align:center;box-sizing:border-box}
+.tt-school-nums .btn{flex:0 0 auto}
+.tt-school-nums .btn[data-action="tt-info-save"]{margin-left:auto}
 /* 지우 시간표 — 「국어\n(도서관)」처럼 괄호 앞에서 줄을 바꿔 보여 준다 (#v31) */
 .tt-cell{white-space:pre-line}
-.tt-cell .tt-sub2{display:block;font-size:9px;font-weight:800;color:#7A93A6}
 /* iPhone 360px — 6열(교시 열 + 월~금)이 한 화면에 겹치지 않게 (#v31) */
 @media (max-width:400px){
   .tt-wrap{padding:6px;border-radius:16px}
@@ -1301,9 +1312,9 @@ button.tt-cell:hover{background:#F7FCFF;border-color:#CDE7F8}
   .tt-table th.tt-dow{font-size:9.5px;padding:4px 0}
   .tt-cell{font-size:9px;min-height:32px;padding:2px 1px;border-radius:8px}
   .tt-lunch td{font-size:9px;padding:4px 0}
-  .tt-info{padding:7px 8px}
-  .tt-info-row{grid-template-columns:56px minmax(0,1fr) minmax(0,1fr);gap:5px}
-  .tt-style{font-size:10px;padding:4px 5px}
+  .tt-school{font-size:11px;gap:4px;margin-bottom:6px}
+  .tt-school-form{padding:7px 8px}
+  .tt-school-nums input{width:40px}
 }
 .fam-field-wide{flex:1 1 100%}
 .fam-field-wide select{width:100%}
@@ -1315,6 +1326,10 @@ button.tt-cell:hover{background:#F7FCFF;border-color:#CDE7F8}
 /* 📅 시작일·종료일 2열 · 시간은 아래 줄 — iPhone 390px에서 겹치지 않게 (#v27) */
 .fam-date-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;flex-wrap:nowrap}
 .fam-date-row .fam-field,.fam-date-row .set-field{min-width:0}
+/* ⏰ 시간 + 표시 방식 나란히 (#v32) */
+.fam-time-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);gap:8px;align-items:end}
+.fam-time-row .fam-field{min-width:0;flex:1 1 auto}
+.fam-time-row input[type=time],.fam-time-row select{width:100%;font-size:11.5px;min-height:34px}
 .fam-field input,.fam-field select,.ev-edit-form .set-field input,.ev-edit-form .set-field select{min-width:0;width:100%;max-width:100%;box-sizing:border-box}
 .fam-date-row input[type=date]{font-size:11.5px;padding:4px 6px}
 /* 누구 일정인가요? 5개 칩이 한 줄에 (#v27) */
@@ -1334,7 +1349,6 @@ button.tt-cell:hover{background:#F7FCFF;border-color:#CDE7F8}
   .cal-week{--cal-base:76px;--cal-lane:13px;--bar-top:31px}
   .cal-week.two-line{--cal-lane:28px}
   .cal-week .cal-cell{min-height:calc(var(--cal-base) + var(--extra,0) * var(--cal-lane))}
-  .cal-bar{height:11px;font-size:7px;padding:0 1.5px}
   .cal-bday-emo{font-size:8.5px}
   .cal-bday-name{font-size:7px;line-height:1.15}
   .cal-cell{min-height:76px;border-radius:10px}
@@ -1892,7 +1906,7 @@ body.drag-active,body.drag-active *{-webkit-user-select:none;user-select:none;-w
 
 /* FAMILY TEAM · 주말·공휴일 가족 미션 */
 .sec-head{flex-wrap:wrap;row-gap:2px}
-#sec3Title{font-size:clamp(12px,2.6vw,15px);line-height:1.25}
+#sec3Title{font-size:clamp(18px,4.6vw,23px);line-height:1.15;letter-spacing:-.03em;font-weight:900}
 .fam-rule{font-size:10.5px;color:var(--muted);font-weight:700;line-height:1.5;margin:-2px 0 8px}
 .fam-rule b{color:var(--soft-ink)}
 .fam-cap{background:var(--row-bg);border:1px solid var(--row-line);border-radius:13px;padding:8px 10px;margin:0 0 9px}
@@ -3257,6 +3271,162 @@ body.mode-kid .brand-sub{color:#6E829B}
 .kidswap .ks-opt[data-kid="jiwoo"][aria-pressed="true"]{background:#EC4899;box-shadow:0 6px 12px -8px rgba(236,72,153,.95)}
 .kidswap .ks-opt[data-kid="all"][aria-pressed="true"]{background:#7C6BF2;box-shadow:0 6px 12px -8px rgba(124,107,242,.95)}
 .kidswap:focus-within{outline:2px solid rgba(124,107,242,.35);outline-offset:2px}
+/* 👀 아빠 관람 — [선우 보기 | 지우 보기] 스위치 (#v32) */
+.dad-kid-wrap{display:flex;align-items:center;gap:8px;margin:2px 2px 10px;padding:6px 10px;border-radius:14px;
+  background:rgba(255,255,255,.9);border:1px solid rgba(120,150,190,.22);box-shadow:0 10px 22px -22px rgba(38,66,110,.9)}
+.dad-kid-wrap[hidden]{display:none}
+.dad-kid-lbl{font-size:10.5px;font-weight:900;color:#6E829B;letter-spacing:-.02em;white-space:nowrap}
+.dad-kid-wrap .kidswap{box-shadow:none;border-color:rgba(120,150,190,.28);margin-left:auto}
+/* 👀 아빠 FAMILY — 참여 방식(함께·스스로·미니알바)별 오늘 스탬프 (#v32) */
+.dadfam{margin:0 0 12px;padding:11px 12px;border-radius:16px;
+  background:linear-gradient(160deg,#F7FBF8,#FFFDF8 60%,#F4FAFF);border:1.5px solid #DDEBE2}
+.dadfam[hidden]{display:none}
+.dadfam-head{display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:900;color:#2F5E45;letter-spacing:-.02em}
+.dadfam-head span{margin-left:auto;font-size:10.5px;font-weight:900;color:#4E7A62;background:#fff;border-radius:999px;padding:2px 9px}
+.dadfam-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;margin:9px 0 8px;padding:3px;border-radius:999px;background:#fff;border:1px solid #E3EFE8}
+.dadfam-tab{border:0;background:transparent;border-radius:999px;padding:7px 2px;font:inherit;font-size:11px;font-weight:900;color:#6E829B;cursor:pointer;min-height:30px}
+.dadfam-tab.on{background:linear-gradient(160deg,#63B48C,#3F9A72);color:#fff;box-shadow:0 6px 14px -10px rgba(63,154,114,.95)}
+.dadfam-list{display:flex;flex-direction:column;gap:6px}
+.dadfam-row{display:flex;align-items:center;gap:8px;padding:7px 9px;border-radius:12px;background:#fff;border:1px solid #E8F1EB}
+.dadfam-row img{width:34px;height:34px;border-radius:50%;object-fit:contain;flex:0 0 auto}
+.dadfam-row .dfr-ico{font-size:17px;flex:0 0 auto}
+.dadfam-row b{font-size:12px;font-weight:900;color:#274A38;letter-spacing:-.02em}
+.dadfam-row small{display:block;font-size:10px;font-weight:800;color:#7A8F84}
+.dadfam-row .dfr-amt{margin-left:auto;font-size:11px;font-weight:900;color:#3F9A72;white-space:nowrap}
+.dadfam-empty{margin:2px 0 0;font-size:11px;font-weight:800;color:#7A8F84;text-align:center;padding:8px 0}
+/* 🎯 주간 스탬프판 3종(HOME 해님 · MY SPACE 별님 · STUDY 책) — 같은 카드·점선 동그라미·찍힌 스티커 (#v32) */
+.morning-board,.mini-board,.hw-board{border-radius:18px;padding:11px 12px 10px}
+.morning-board{background:linear-gradient(168deg,#FFFBF0,#FFFDF8 62%,#FFF7E6);border:1.5px solid #F7E6C4}
+.mini-board{background:linear-gradient(168deg,#FBF8FF,#FEFDFF 62%,#F6F1FF);border:1.5px solid #EADFFB;margin:8px 0 2px}
+.hw-board{background:linear-gradient(168deg,#F5FAFF,#FDFEFF 62%,#EEF7FF);border:1.5px solid #DDEDF9}
+.morning-board .mb-head,.mini-board .mb-head,.hw-board .hwb-head{display:flex;align-items:center;gap:6px;margin:0 0 8px}
+.morning-board .mb-title,.mini-board .mb-head b,.hw-board .hwb-head b{font-size:12.5px;font-weight:900;letter-spacing:-.02em}
+.morning-board .mb-title{color:#8A5A12}
+.mini-board .mb-head b{color:#4B3B7A}
+.hw-board .hwb-head b{color:#2F5E7E}
+.mb-pill,.hwb-head span,.mini-board .mb-head span{margin-left:auto;font-size:11px;font-weight:900;border-radius:999px;
+  padding:3px 11px;background:#fff;border:1px solid rgba(0,0,0,.05);font-variant-numeric:tabular-nums}
+.morning-board .mb-pill{color:#B07A22}
+.mini-board .mb-head span{color:#5B4BC4}
+.hw-board .hwb-head span{color:#2E6E97}
+.mb-days,.hwb-days,.rws-days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;margin:0}
+.hwb-days{grid-template-columns:repeat(5,minmax(0,1fr))}
+.mb-cell{padding:0;background:transparent;border:0}
+.mb-cell,.mb-day,.hwb-day,.rws-day{display:flex;flex-direction:column;align-items:center;gap:3px}
+.stamp-slot .stamp-disc{width:38px;height:38px;max-width:100%;border-radius:50%;border:1.6px dashed #D6CFE6;background:#fff;
+  display:grid;place-items:center;font-style:normal;font-size:14px;line-height:1;color:#B9B2C9}
+.stamp-slot.done .stamp-disc,.stamp-slot .stamp-disc.on{border-style:solid;border-color:#FFEFC6;background:#FFFDF6;
+  box-shadow:0 7px 14px -11px rgba(176,132,32,.85), inset 0 0 0 2px #FFF8E2}
+.stamp-slot .stamp-disc .stamp-img{width:34px;height:34px;max-width:92%;object-fit:contain;display:block;
+  filter:drop-shadow(0 1px 1.5px rgba(90,60,10,.18))}
+.stamp-slot.done .stamp-disc .stamp-img{animation:stampPop .5s cubic-bezier(.2,1.4,.4,1)}
+@keyframes stampPop{0%{transform:scale(.4);opacity:0}70%{transform:scale(1.12);opacity:1}100%{transform:scale(1)}}
+.stamp-slot b,.stamp-slot .mb-dow{font-size:9px;font-weight:900;color:#A29BB0;letter-spacing:-.02em}
+.stamp-slot.done b{color:#5B4E7A}
+.morning-board .stamp-slot.done b{color:#A5762A}
+.hw-board .stamp-slot.done b{color:#2E6E97}
+.mb-foot,.hwb-note,.mini-board .mb-note,.rws-note{margin:8px 0 0;padding:6px 8px;border-radius:12px;text-align:center;
+  font-size:10px;font-weight:900;color:#8A7B5E;background:rgba(255,255,255,.75);border:1px solid rgba(0,0,0,.04)}
+.mb-foot.done{color:#1D6B52;background:#EFFBF3;border-color:#CFEBDA}
+.mini-board .mb-note{color:#5B4E7A}
+.hw-board .hwb-note{color:#2E6E97}
+.rws-days{display:flex;gap:5px}
+.rws-days .rws-day{flex:1 1 0}
+.rws-days .stamp-slot .stamp-disc{width:32px;height:32px}
+.rws-days .stamp-slot .stamp-disc .stamp-img{width:29px;height:29px}
+/* ⭐ FUN MISSION — 오늘의 도전 (#v32) */
+.funm{margin-top:12px;padding:10px 10px 11px;border-radius:20px;
+  background:linear-gradient(170deg,#F4FBEF,#FDFFF8 46%,#F3FAFF);
+  border:1.5px solid #DCEBD0;box-shadow:0 16px 30px -30px rgba(58,96,44,.55)}
+.funm-hero{position:relative;padding:10px 12px 11px;border-radius:16px;
+  background:linear-gradient(150deg,#EAF8DC,#F8FDEB 60%,#E9F6FF);border:1px solid #DDEEC9;overflow:hidden}
+.funm-badge{display:inline-block;font-size:9px;font-weight:900;letter-spacing:.06em;color:#3E7B2B;
+  background:#DFF3C6;border-radius:999px;padding:2px 8px}
+.funm-title{display:block;margin-top:4px;font-size:17px;font-weight:900;color:#2F4A24;letter-spacing:-.03em;line-height:1.2}
+.funm-lead{display:block;margin-top:3px;font-size:10.5px;font-weight:800;color:#5B7A4A;line-height:1.35;max-width:74%}
+.funm-art{position:absolute;right:6px;bottom:-4px;width:56px;height:56px;object-fit:contain;opacity:.95;pointer-events:none}
+.funm-board{margin-top:9px;padding:9px 9px 8px;border-radius:16px;background:#FFFDF6;border:1.5px solid #F0E6C8}
+.funm-board-head{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:900;color:#4A4230}
+.funm-board-head span{margin-left:auto;font-size:12px;font-weight:900;color:#2F7A3A;font-variant-numeric:tabular-nums}
+.funm-strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin:9px 0 0;padding:2px 0 0}
+@media (min-width:520px){.funm-strip{grid-template-columns:repeat(5,minmax(0,1fr))}}
+.funm-card{position:relative;min-height:112px;padding:9px 6px 8px;border-radius:14px;background:#fff;
+  border:1.5px solid #EDE6D8;text-align:center;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;gap:3px;touch-action:manipulation;
+  -webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+.funm-card.pink{background:linear-gradient(170deg,#FFF7FB,#FFFDFE);border-color:#F6DCE9}
+.funm-card.mint{background:linear-gradient(170deg,#F5FCF7,#FDFFFE);border-color:#D8EEDD}
+.funm-card.sky{background:linear-gradient(170deg,#F4FAFF,#FDFEFF);border-color:#DAEBF8}
+.funm-card.cream{background:linear-gradient(170deg,#FFFAF0,#FFFEFB);border-color:#F4E7CB}
+.funm-card.lilac{background:linear-gradient(170deg,#FAF7FF,#FEFDFF);border-color:#E7DEF8}
+.funm-card.done{border-color:#8FCF9B;box-shadow:0 10px 18px -16px rgba(66,150,86,.9)}
+.funm-card .fm-badge{position:absolute;top:-7px;right:-5px;font-size:8px;font-weight:900;letter-spacing:.02em;
+  color:#fff;background:#E9695E;border:1.5px solid #fff;border-radius:999px;padding:1.5px 6px;
+  box-shadow:0 4px 8px -6px rgba(0,0,0,.35)}
+.funm-card.done .fm-badge{background:#4FAE6A}
+.funm-card .fm-ico{font-size:26px;line-height:1.1;margin-top:4px}
+.funm-card .fm-name{font-size:10.5px;font-weight:900;color:#3A3A34;line-height:1.22;letter-spacing:-.02em;
+  word-break:keep-all;overflow-wrap:anywhere}
+.funm-card .fm-sub{font-size:8.5px;font-weight:700;color:#8A8578;line-height:1.22;
+  word-break:keep-all;overflow-wrap:anywhere}
+.funm-card .fm-del{display:none;position:absolute;left:50%;bottom:5px;transform:translateX(-50%);
+  border:0;border-radius:999px;background:#F0544F;color:#fff;font:inherit;font-size:9px;font-weight:900;
+  padding:3px 8px;cursor:pointer;box-shadow:0 6px 12px -8px rgba(200,50,50,.9)}
+.funm-card.lp-on .fm-del{display:block}
+.funm-card.lp-arming{animation:funArm 4s linear}
+@keyframes funArm{0%{transform:scale(1)}100%{transform:scale(.97)}}
+.funm-empty{min-height:112px;border-radius:14px;border:1.5px dashed #DCD6C6;background:#FCFBF6;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;
+  color:#A9A294;font:inherit;-webkit-tap-highlight-color:transparent}
+.funm-empty .fe-plus{font-size:20px;font-weight:900;line-height:1;color:#C3BCAB}
+.funm-empty .fe-txt{font-size:8.5px;font-weight:800;line-height:1.25;text-align:center}
+.funm-tip{margin:7px 0 0;text-align:center;font-size:10px;font-weight:900;color:#3E7B2B;letter-spacing:-.01em}
+.funm-tools{display:flex;gap:6px;margin-top:8px}
+.funm-tool{flex:1 1 0;border:1px solid #DDE7D2;background:#fff;border-radius:10px;padding:6px 4px;
+  font:inherit;font-size:10px;font-weight:900;color:#4B6B3B;cursor:pointer;min-height:30px}
+.funm-tool:active{transform:scale(.98)}
+.funm-chips{display:flex;flex-wrap:wrap;gap:5px;margin:10px 0 0;padding:0 0 3px}
+.funm-chip{flex:0 0 auto;border:1px solid #E4E8DC;background:#fff;border-radius:999px;padding:6px 10px;
+  font:inherit;font-size:10.5px;font-weight:900;color:#6E7A64;cursor:pointer;white-space:nowrap;min-height:30px}
+.funm-chip.on{background:linear-gradient(160deg,#5FAE4F,#3F8F37);border-color:transparent;color:#fff;
+  box-shadow:0 8px 14px -12px rgba(63,143,55,.95)}
+.funm-list{display:flex;flex-direction:column;gap:8px;margin-top:9px}
+.funm-group{border-radius:14px;background:#fff;border:1.5px solid #E7EDDF;overflow:hidden}
+.funm-group-head{padding:6px 10px;font-size:11px;font-weight:900;color:#456A38;background:#F3FAEA;
+  border-bottom:1px solid #E7EDDF;letter-spacing:-.02em}
+.funm-group[data-cat="move"] .funm-group-head{background:#FFF6E8;color:#8A6420;border-bottom-color:#F4E7CB}
+.funm-group[data-cat="make"] .funm-group-head{background:#FFF1F7;color:#8E3A63;border-bottom-color:#F6DCE9}
+.funm-group[data-cat="explore"] .funm-group-head{background:#EFF8FF;color:#2E6288;border-bottom-color:#DAEBF8}
+.funm-group[data-cat="talk"] .funm-group-head{background:#F8F3FF;color:#5B438C;border-bottom-color:#E7DEF8}
+.funm-row{display:flex;align-items:center;gap:7px;padding:7px 9px;border-top:1px solid #F2F5EE;min-height:38px}
+.funm-row:first-of-type{border-top:0}
+.funm-row .fmr-dot{flex:0 0 auto;width:15px;height:15px;border-radius:50%;border:1.5px solid #D6D2C6;background:#fff;
+  display:grid;place-items:center;font-size:9px;font-weight:900;color:#4FAE6A}
+.funm-row.done .fmr-dot{border-color:#8FCF9B;background:#ECF9EF}
+.funm-row .fmr-main{flex:1 1 auto;min-width:0;display:flex;align-items:baseline;gap:5px;flex-wrap:wrap}
+.funm-row .fmr-main b{font-size:11.5px;font-weight:900;color:#333A2E;letter-spacing:-.02em}
+.funm-row .fmr-bar{color:#CFCBBE;font-size:10px}
+.funm-row .fmr-main small{font-size:9.5px;font-weight:700;color:#8A8578;letter-spacing:-.02em;
+  word-break:keep-all;overflow-wrap:anywhere;min-width:0}
+.funm-row.picked{background:#FBFEF7}
+.funm-row .fmr-add{flex:0 0 auto;border:1px solid #CDE6B8;background:#F1FAE7;border-radius:999px;padding:4px 8px;
+  font:inherit;font-size:9.5px;font-weight:900;color:#3E7B2B;cursor:pointer;white-space:nowrap;min-height:26px}
+.funm-row .fmr-add:disabled{opacity:.45;cursor:default}
+.funm-row .fmr-add.on{background:#ECF3FF;border-color:#CFE0F6;color:#39699A}
+.funm-none{margin:0;padding:10px;font-size:11px;font-weight:800;color:#8A8578;text-align:center}
+.funm-foot{display:flex;align-items:center;gap:8px;margin-top:9px;padding:8px 10px;border-radius:14px;
+  background:#FFF9E8;border:1.5px solid #F3E6C4}
+.funm-foot .funm-trophy{font-size:16px}
+.funm-foot-l{display:flex;flex-direction:column;line-height:1.15}
+.funm-foot-l small{font-size:9px;font-weight:800;color:#968A6B}
+.funm-foot-l b{font-size:12px;font-weight:900;color:#6A5320;font-variant-numeric:tabular-nums}
+.funm-foot-note{margin-left:auto;font-size:9px;font-weight:800;color:#A08F63;text-align:right;line-height:1.3;max-width:52%}
+@media (max-width:380px){
+  .funm-card,.funm-empty{min-height:108px}
+  .funm-title{font-size:15.5px}
+  .funm-row .fmr-main b{font-size:11px}
+  .funm-row .fmr-main small{font-size:9px}
+}
 /* ✏️ 「전체 수정 중」 안내 띠 (#6282) */
 .scope-bar{display:flex;align-items:center;gap:7px;margin:0 0 9px;padding:7px 11px;border-radius:13px;
   background:linear-gradient(135deg,rgba(124,107,242,.13),rgba(91,141,239,.13));
@@ -3606,6 +3776,18 @@ body.mode-kid .home-more{display:none}
 .head-reward .tm-label{font-size:8.5px;font-weight:800;letter-spacing:.01em;line-height:1.15}
 .head-reward:hover{background:#F7F2FF;color:#4B3678}
 .head-reward:active{transform:scale(.97)}
+/* ⏱️ 타이머 버튼 — 💎 REWARD 바로 왼쪽 (#v32) */
+.head-timer{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;
+  min-width:52px;padding:3px 9px;border-radius:13px;cursor:pointer;
+  border:1px solid rgba(122,158,196,.28);background:rgba(255,255,255,.72);color:#3F6E8E;
+  -webkit-tap-highlight-color:transparent;transition:transform .12s ease,background .16s ease,color .16s ease}
+.sec-head .head-timer{margin-left:auto;flex:0 0 auto;align-self:center}
+.sec-head .head-timer + .head-reward{margin-left:0}
+.head-timer .tm-ico{font-size:13px;line-height:1.15}
+.head-timer .tm-label{font-size:8.5px;font-weight:800;letter-spacing:.01em;line-height:1.15}
+.head-timer:hover{background:#EEF7FF;color:#2E6E97}
+.head-timer:active{transform:scale(.97)}
+.card.timer.timer-spot{animation:flashFocus 1.6s ease}
 /* REWARD 페이지를 보고 있으면 켜진 모양 */
 .head-reward[aria-current="page"]{background:var(--face);border-color:transparent;color:#fff;box-shadow:0 8px 16px -12px var(--face)}
 .head-reward[aria-current="page"]:hover{background:var(--face);color:#fff}
@@ -3650,6 +3832,68 @@ body.mode-kid .home-more{display:none}
   .menu-tile .mt-ico{width:34px;height:34px;border-radius:11px}
   .menu-tile .mt-ico svg{width:19px;height:19px}
   .menu-tile .mt-title{font-size:9.5px}
+}
+
+/* =========================================================
+   📅 CALENDAR (#v32) — 세로 경계선 없이 칸을 넓게, 글씨는 크게
+   · 칸 안 순서: 날짜 → 이어지는 형광펜 → 기념일 → 괄호 형광펜 바
+   · 기념일은 칸 배경 대신 ㅁ 테두리, 단발 강조 일정은 ( … ) 괄호 바
+   ========================================================= */
+#famCalGrid{display:flex;flex-direction:column;gap:0;background:#fff;border-radius:16px;overflow:hidden;
+  border:1px solid rgba(20,40,70,.08)}
+#famCalGrid .cal-week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:0;position:relative;
+  border-bottom:1px solid rgba(20,40,70,.07);min-height:0;align-items:stretch}
+#famCalGrid .cal-week:last-child{border-bottom:0}
+#famCalGrid .cal-cell{grid-row:1/-1;position:relative;border:0;border-radius:0;background:transparent;
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:2px;
+  padding:6px 2px 7px;min-width:0;min-height:74px;height:100%;box-sizing:border-box;overflow:visible}
+#famCalGrid .cal-cell.empty{justify-content:center;padding-bottom:0}
+#famCalGrid button.cal-cell:active{transform:none;background:transparent}
+#famCalGrid button.cal-cell:hover{background:rgba(120,150,190,.05)}
+#famCalGrid .cal-cell .cal-date{font-size:15px;font-weight:800;line-height:1.15;letter-spacing:-.02em;color:#1F2A37;min-width:0;padding:0}
+#famCalGrid .cal-cell.sun .cal-date{color:#E55353}
+#famCalGrid .cal-cell.sat .cal-date{color:#3B82F6}
+#famCalGrid .cal-cell.hol .cal-date{color:#E55353}
+#famCalGrid .cal-cell.today .cal-date{color:#fff;background:#2F6FB2;border-radius:999px;min-width:24px;padding:1px 5px}
+#famCalGrid .cal-cell.sel{background:rgba(124,107,242,.07)}
+#famCalGrid .cal-cell.sel .cal-date{box-shadow:0 0 0 2px rgba(47,111,178,.38);border-radius:999px}
+#famCalGrid .cal-cell.other{opacity:.26}
+#famCalGrid .cal-cell.other .cal-date{font-size:13px}
+#famCalGrid .cal-cell.bg-winter{background:#FBF3D3}
+#famCalGrid .cal-cell.bg-spring{background:#FCE9F1}
+#famCalGrid .cal-cell.bg-summer{background:#EBF6FD}
+#famCalGrid .cal-cell.bg-winter.today{background:#F7EBBF}
+#famCalGrid .cal-cell.bg-spring.today{background:#F9DCE8}
+#famCalGrid .cal-cell.bg-summer.today{background:#DBEEFB}
+#famCalGrid .cal-cell.has-ann::after{content:'';position:absolute;inset:2px 1px;border:2px solid var(--ann,#D9537E);
+  border-radius:9px;pointer-events:none;opacity:.92}
+#famCalGrid .cal-hol{font-size:8px;font-weight:900;color:#E55353;line-height:1.05;max-width:100%;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#famCalGrid .cal-dots{display:flex;gap:2px;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:1px}
+#famCalGrid .cal-dot{width:5px;height:5px;border-radius:50%}
+#famCalGrid .cal-flow{display:flex;flex-direction:column;align-items:center;gap:2px;pointer-events:none;
+  padding:0 1px;align-self:start;min-width:0;z-index:2}
+#famCalGrid .cal-bday-list{display:flex;flex-direction:column;align-items:center;gap:1px;min-width:0}
+#famCalGrid .cal-bday{display:flex;flex-direction:column;align-items:center;gap:3px;line-height:1.15;min-width:0}
+#famCalGrid .cal-bday-emo{font-size:11px;font-style:normal;line-height:1}
+#famCalGrid .cal-bday-name{font-size:10px;font-weight:900;color:var(--ann,#D9537E);letter-spacing:-.03em;
+  white-space:normal;word-break:keep-all;overflow-wrap:anywhere;text-align:center;line-height:1.15}
+#famCalGrid .cal-paren{display:block;max-width:100%;font-size:9.5px;font-weight:900;color:var(--cat);letter-spacing:-.03em;
+  background:var(--cat-soft);border-radius:999px;padding:1px 6px;line-height:1.2;
+  box-shadow:inset 3px 0 0 var(--cat),inset -3px 0 0 var(--cat);
+  white-space:normal;overflow-wrap:anywhere;word-break:keep-all;text-align:center}
+#famCalGrid .cal-band{display:flex;align-items:center;justify-content:center;align-self:center;height:14px;margin:1px 0 0;
+  padding:0 4px;border-radius:999px;background:var(--cat-soft);color:var(--cat);
+  box-shadow:inset 3px 0 0 var(--cat),inset -3px 0 0 var(--cat);pointer-events:none;z-index:2;min-width:0}
+#famCalGrid .cal-band.cont-l{border-top-left-radius:0;border-bottom-left-radius:0;box-shadow:inset -3px 0 0 var(--cat)}
+#famCalGrid .cal-band.cont-r{border-top-right-radius:0;border-bottom-right-radius:0;box-shadow:inset 3px 0 0 var(--cat)}
+#famCalGrid .cal-band.cont-l.cont-r{box-shadow:none}
+#famCalGrid .cal-band-txt{font-size:9px;font-weight:900;letter-spacing:-.03em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@media (max-width:380px){
+  #famCalGrid .cal-cell .cal-date{font-size:14px}
+  #famCalGrid .cal-bday-name{font-size:9.5px}
+  #famCalGrid .cal-paren{font-size:9px;padding:1px 5px}
+  #famCalGrid .cal-week{min-height:74px}
 }
 </style>
 </head>
@@ -3755,9 +3999,9 @@ body.mode-kid .home-more{display:none}
     <div class="card-head">
       <div>
         <h2>🌱 아침 습관 3가지</h2>
-        <p class="sub" id="homeHabitSub">하나씩 눌러 오늘을 가벼게 열어 봐요</p>
+        <p class="sub" id="homeHabitSub">하나씩 누르면 도장 +1 · 하루 최대 3개</p>
       </div>
-      <span class="habit-pill" id="homeHabitPill">+1 도장</span>
+      <span class="habit-pill" id="homeHabitPill">하나마다 +1 도장</span>
     </div>
     <div class="habit-rounds" id="homeHabitRounds"></div>
     <div id="homeHabitWeek"></div>
@@ -3883,17 +4127,16 @@ body.mode-kid .home-more{display:none}
           <label class="fam-field">시작일<input type="date" id="famEvDate" aria-label="일정 시작일"></label>
           <label class="fam-field">종료일<input type="date" id="famEvEnd" aria-label="일정 종료일 (선택 · 비우면 하루)"></label>
         </div>
-        <div class="fam-form-row">
+        <!-- ⏰ 시간 옆에 표시 방식을 나란히 (#v32) -->
+        <div class="fam-form-row fam-time-row">
           <label class="fam-field">시간<input type="time" id="famEvTime" aria-label="일정 시간 (선택)"></label>
-        </div>
-        <div class="fam-form-row">
-          <label class="fam-field fam-field-wide">표시 방식<select id="famEvDisp" aria-label="달력 표시 방식">
-            <option value="auto">자동 (이어지는 일정·행사는 형광펜)</option>
+          <label class="fam-field">표시 방식<select id="famEvDisp" aria-label="달력 표시 방식">
+            <option value="auto">자동</option>
             <option value="bar">형광펜 바</option>
             <option value="dot">점</option>
-            <option value="summer">방학 바탕 · 여름</option>
-            <option value="winter">방학 바탕 · 겨울</option>
-            <option value="spring">방학 바탕 · 봄</option>
+            <option value="summer">방학 · 여름</option>
+            <option value="winter">방학 · 겨울</option>
+            <option value="spring">방학 · 봄</option>
           </select></label>
         </div>
         <div class="fam-form-row fam-who-row">
@@ -4064,7 +4307,7 @@ body.mode-kid .home-more{display:none}
         </div>
       </div>
       <div class="card">
-        <div class="self-tag space">🏠 내 공간과 내 물건 스스로 관리 · <b>하루 5개 완료 → 스탬프판 ⭕</b></div>
+        <div class="self-tag space">🏠 내 공간과 내 물건 스스로 관리 · <b>하루 5개 완료 → 스탬프판 🌟</b></div>
         <div class="group-head"><span class="gh-title">내 공간 · 생활 습관 체크</span><span class="gh-pill">스스로 체크 · 도장 적립</span></div>
         <div id="spaceWeekBoard"></div>
         <div class="list-tools" data-parent-only="1">
@@ -4080,7 +4323,7 @@ body.mode-kid .home-more{display:none}
           <div class="stamp-challenge" id="stampChallenge">1번째 1,000도장 도전 중!</div>
           <div class="stamp-bar"><i id="stampBar"></i></div>
           <div class="stamp-cycle" id="stampCycle">이번 사이클 <b id="stampCyclePos">0</b> / 1,000 · 누적 도장 <b id="stampTotal">0</b>개</div>
-          <!-- 🌞 아침 미션 스탬프판 — 3/3 완료한 날에 빨간 ⭕, 7일 모두면 보너스 도장 +3 -->
+          <!-- 🌞 아침 미션 스탬프판 — 3/3 완료한 날에 해님 도장, 7일 모두면 보너스 도장 +3 -->
           <div class="morning-board" id="morningBoard"></div>
           <div class="stamp-note" id="stampNote">100 1,000원 → 200 2,000원 → 300 책 1권 → 400 1,000원 → 500 2,000원 → 600 책 1권 → 700 1,000원 → 800 2,000원 → 900 책 1권 → 1,000 FUN PASS 10,000원!</div>
           <div class="stamp-next" id="stampNext">다음 100도장까지 100개 남음 → 1,000원 사용권!</div>
@@ -4134,6 +4377,7 @@ body.mode-kid .home-more{display:none}
     <div class="sec-head">
       <span class="sec-num" aria-hidden="true">📚</span>
       <h2 id="sec4Title">STUDY</h2>
+      <button type="button" class="tab-mini head-timer" data-action="open-timer" aria-label="⏱️ 타이머 열기"><span class="tm-ico" aria-hidden="true">⏱️</span><span class="tm-label">타이머</span></button>
       <button type="button" class="tab-mini head-reward" data-action="tab" data-tab="reward" aria-controls="tabPanel-reward" aria-label="리워드 화면 열기"><span class="tm-ico" aria-hidden="true">💎</span><span class="tm-label">REWARD</span></button>
       <div class="sec-desc">
         <span class="sec-sub">오늘의 학습 · 타이머</span>
@@ -4141,9 +4385,6 @@ body.mode-kid .home-more{display:none}
     </div>
 
     <!-- 🏫 학교 시간표 (#v25) — 「🏫 학교 시간표」 버튼은 SCHEDULE 탭으로 옮겼어요 -->
-
-    <!-- 🎯 오늘의 추가 목표 — 아이 화면에서는 목표가 있을 때만 맨 위에 (#v25) -->
-    <div class="extra-top" id="extraGoalTop" hidden></div>
 
     <div class="study-grid">
       <section class="card missions" id="missionsCard">
@@ -4172,7 +4413,7 @@ body.mode-kid .home-more{display:none}
         <!-- 🌤️ 오늘은 숙제 없는 날 (#v26) — 엄마가 정하면 숙제 목록 자리에 이 카드가 뜬다 -->
         <div class="nohw-card" id="studyNoHwCard" hidden>
           <span class="nohw-ico" aria-hidden="true">🌤️</span>
-          <span class="nohw-txt"><b>오늘은 숙제가 없어요!</b><small>오늘은 숙제 대신 ⭐ 추가 보너스 도전을 해 봐요</small></span>
+          <span class="nohw-txt"><b>오늘은 숙제가 없어요!</b><small>오늘은 숙제 대신 ⭐ FUN MISSION 도전을 해 봐요</small></span>
         </div>
 
         <div class="group-head" id="studyBasicHead">
@@ -4182,12 +4423,6 @@ body.mode-kid .home-more{display:none}
         <div class="study-weekend-note" id="studyWeekendNote" hidden></div>
         <ul class="task-list" id="basicList"></ul>
         <div id="weekendBonusCard" hidden></div>
-
-        <div class="group-head" id="extraGoalHead">
-          <span class="gh-title">오늘의 추가 목표</span>
-          <span class="gh-pill" id="extraHint">부모님이 정할 수 있어요</span>
-        </div>
-        <div id="extraGoalBox"></div>
 
         <div class="mission-foot">
           <span class="hint" id="missionHint">매일 공부를 모두 하면 오늘 500원이 쌓여요 🪙</span>
@@ -4240,6 +4475,29 @@ body.mode-kid .home-more{display:none}
       </section>
     </div>
 
+    <!-- 💯 100점 맞았어요 (#v32 · REWARD → STUDY 하단으로 이동) -->
+    <!-- 💯 100점 맞았어요 · 아빠 보너스 5,000원 (#2532) -->
+    <section class="card hundred" id="hundredCard" aria-label="100점 맞았어요">
+      <div class="card-head">
+        <div>
+          <h2>💯 100점 맞았어요</h2>
+          <p class="sub" id="hundredSub">받아쓰기 · 단원평가 100점을 아빠에게 알려요 (5,000원)</p>
+        </div>
+        <span class="hundred-badge" id="hundredCount">0건</span>
+      </div>
+      <div class="hundred-send" id="hundredSend">
+        <div class="hs-kinds" role="group" aria-label="100점 종류">
+          <button type="button" class="hs-kind on" id="hundredKindWrite" data-action="hundred-kind" data-kind="받아쓰기 100점" aria-pressed="true">📝 받아쓰기 100점</button>
+          <button type="button" class="hs-kind" id="hundredKindTest" data-action="hundred-kind" data-kind="단원평가 100점" aria-pressed="false">🧮 단원평가 100점</button>
+        </div>
+        <div class="hs-row">
+          <input type="text" id="hundredMemo" maxlength="40" placeholder="한마디 (선택) 예: 20개 다 맞았어요!" aria-label="100점 메모">
+          <button type="button" class="btn btn-primary btn-sm" data-action="send-hundred">아빠에게 보내기</button>
+        </div>
+        <p class="hs-hint">아빠가 확인하고 5,000원을 주시면 이번 주 용돈에 더해져요 💛</p>
+      </div>
+      <div class="hundred-list" id="hundredList"></div>
+    </section>
 
   </section>
     </section>
@@ -4268,28 +4526,6 @@ body.mode-kid .home-more{display:none}
          제목은 위 섹션 머리글 한 곳에서만 말해요 (#4470) -->
     <div class="reward-overview" id="rewardOverview" aria-label="리워드 요약"></div>
 
-    <!-- 💯 100점 맞았어요 · 아빠 보너스 5,000원 (#2532) -->
-    <section class="card hundred" id="hundredCard" aria-label="100점 맞았어요">
-      <div class="card-head">
-        <div>
-          <h2>💯 100점 맞았어요</h2>
-          <p class="sub" id="hundredSub">받아쓰기 · 단원평가 100점을 아빠에게 알려요 (5,000원)</p>
-        </div>
-        <span class="hundred-badge" id="hundredCount">0건</span>
-      </div>
-      <div class="hundred-send" id="hundredSend">
-        <div class="hs-kinds" role="group" aria-label="100점 종류">
-          <button type="button" class="hs-kind on" id="hundredKindWrite" data-action="hundred-kind" data-kind="받아쓰기 100점" aria-pressed="true">📝 받아쓰기 100점</button>
-          <button type="button" class="hs-kind" id="hundredKindTest" data-action="hundred-kind" data-kind="단원평가 100점" aria-pressed="false">🧮 단원평가 100점</button>
-        </div>
-        <div class="hs-row">
-          <input type="text" id="hundredMemo" maxlength="40" placeholder="한마디 (선택) 예: 20개 다 맞았어요!" aria-label="100점 메모">
-          <button type="button" class="btn btn-primary btn-sm" data-action="send-hundred">아빠에게 보내기</button>
-        </div>
-        <p class="hs-hint">아빠가 확인하고 5,000원을 주시면 이번 주 용돈에 더해져요 💛</p>
-      </div>
-      <div class="hundred-list" id="hundredList"></div>
-    </section>
   </section>
     </section>
 
@@ -4297,7 +4533,7 @@ body.mode-kid .home-more{display:none}
 <section class="sec" aria-labelledby="sec3Title">
       <div class="sec-head">
         <span class="sec-num" aria-hidden="true">🤝</span>
-        <h2 id="sec3Title">FAMILY TEAM</h2>
+        <h2 id="sec3Title">FAMILY</h2>
         <button type="button" class="tab-mini head-reward" data-action="tab" data-tab="reward" aria-controls="tabPanel-reward" aria-label="리워드 화면 열기"><span class="tm-ico" aria-hidden="true">💎</span><span class="tm-label">REWARD</span></button>
         <div class="sec-desc">
           <span class="sec-lead">주간 최대 3,000원 가족 미션</span>
@@ -4429,6 +4665,19 @@ function ico3d(name, cls){
   if(!src) return '';
   return '<img class="ico3d' + (cls ? ' ' + cls : '') + '" src="' + src + '" alt="" aria-hidden="true">';
 }
+/* 🖼️ 주간 스탬프판 도장 — 🌞 해님 · ⭐ 별님 · 📚 책 스티커 (AF65690D 시안, #v32)
+   HOME · MY SPACE · STUDY · REWARD 네 곳이 같은 도장 그림을 쓴다 */
+var STAMP_ART = {
+  sun:  "data:image/webp;base64,UklGRtIXAABXRUJQVlA4WAoAAAAQAAAAfwAAfwAAQUxQSMMJAAABCgv0/6eRG8k0s7zb5cDslbZ5TGVmzJVpy8xdCHMOUgodhFNmZoYwM8NrmDnZLnc8tvXersf22Jpj+P+liIAo2VbQ5jzoYEYJpgqPy+MH4N+lJmlhxU84ahJryK27RzT/0CLYWmYN7azhT5ziW9LEE8g11ghf+/38fu1Cvvw3JWzH539/bZg10suW1i8Z1CVV8iELjkvql5alM8ddK82G1c+eliYlnNPEs6vRXHkXg6wyrejGkWeilGBGPnJj1DJXsUfWQ+stoNFN4y4UUkJZXMg3RdGC9Q8J1sir2IIWor79xctyEnilMeeyF7lO0cItFYI18vvwFjC28/VrCz0n5Ne+vjNGW9jeJ585+toBY/9HNxd4TFhws9hvWHb6MkfR4F02EM1Dn5S1Vr0gsOyTQyZFG7t4EWtEnj0QBxpHvn0worhWL/HIg9+ioHEceDbCGsePPhwPwi/THjkh5AaKR6b9YtF4Do/mrCHGOoFQM/PxiMsFGBEzuUWdGHsCa5SOO+aEfmThsPYu5wg+bCHqThwbV8qa29Hp1do4oGnP/CmPnZnr9kfwx6bM39NkxVH7aieJMbq9XW/DqNn0zXO3dc7VZEUFBxMcIbfzbc99s6nGsFH/djfW6P5OC9FDK97qc/kJmarwcpnQMk/APm8tPxRt4Z3urHHaB41W/Y5Z4+4/ozjVXme7Sx/tM+bFyRzH9H700naarcrU4jPuHzdrR73V+MFpjKGe/+nBDTj8hva5qTKAUvrI68v31VAH47D6zb5dVQJSam77G4Z/uuEgnq+yhXLGyKnlF5ZkpChE7dh7ToO9BzZiNhOALfbrkv5dwwQwPXJh+dSRZyiMub3Fp3ctDKmCKD3fqrGdCxaggwGYQiBi4wdl2URW1IKupxfLjH2shrisEbj+G5NizECPBtxCnPuIQrgka5wwBmAISPcvGqmhmzQBs2IcYeZFBDTCXk4lOSPqKeoWTdCAm2iMLySaxFhWwqTrLIqGhT4YCMSVFxFZYisjuXdvyxl+WRR/qSQgs3SNQoboNIY+moE4XgaFnayJidQw0VeDGH6ZzUwRVZxAuYU+G+j0h1wp2CS1mA0piIyIHH9IleT4G/DhLlHVQuG0dMzMzcsvLjlBlHbqBu3zVQIhGOJav4/VT275HjW/fTfoVHqCKCnOz8vNTMe0cEhT3V9Lrc2Zl15xXdlddz9U0afv0BfGjB3/6ttvDOkRIhq5N2Y054DSEClEsId44+1Xx48d88LQvn0qHrr7rrLrrrj0zDauPWO4m/hs2txlK3Hdlu1898HDR6prG/a92E3hpOMe06ABAaL2SqIq3V/c11BbfeTwwd3b+ZZ1K3HZ3GmfDe0Wdn242z4xryZmWo6jGWzqWyzJ2fNoDAMzA7e3kaCo7ybHmwEwYzXznmgrexBL+i1tbClBvPGvLw8r5A9UpwFaDN8hSvjyrxuteKMIwJf28yThaO0GrfqVOtre505QSJd608Jg07VEPeG5vehov64a1M7buBjq8uxG3Ql9/u1ZCv+KGhgoJq7JVbJun+98Pxuf7RIi3iz1tFGbnDqYo1O6pJCeukkDNsMaRFK7TDnqNC5vGnVaqnfN5qyJO2LxDV7zWL6sfUNjgYPrS6TCx9aI+Adhx8SzEtCOpIyLX9xl2Kn78NxU8lvdsIIGdVpJ0s77sC7uZ9j14sUZCXXCWZe9ccB2p7BtcFtFewujGDgxnJ8ltR28zX43B964LFFBKOfaj2ziQdMPPdNIhxrLDB4EuIRk9PyhySZZfHRtTsKDbMHNnxwxqbV/TKlKetMYMgDHSaCWjtlvUfPIJy2STcKpsOzbaktffHeWpC6wDBYw8UAOyb57sW5Vf1tWKPuicD84rbb6tR4qObGBsmGWeQ0J9Xitunbagz6p4UrJo7NXVBQK8gg12cDAqUQtqFgx+9ESvzxBftKTI84LKeRtVgBcQOTweSOePEkhflmopFOejLjcI9Dk+WEUTeD1AHcdT5S8TiUhP11NLnFSupd66/SidU1eEXXgFajvSTRJ8dsJVeHyWo/E6nXPPSxw72PPE0FMBDXyqAmenyNEnxvEcVQw9ApgyE+AqcHwZ9TZ4WOFywHwMo2xw8ywBAEwhSV+Csl/A2DhwDK9+sCJt47jjBQJGDglTtP1UPLWOFe+UmQMgCq3iixsWjf3Zx+6AvHz3HVNFNx4MZiKHjPBJW8bWYW9JlYnVgSsnsircOQ2arnwlyBQ4bIax9YDNIwsHzaYP/mqmRjmq09yPkyMbLDAeeCvsOP3uHfKPkcMXFE1ZCAMAtydWMfPmxsGIKpWOD4zFjTdRFTbuOfvuC+FVlPTkSWVQ5tB2JYYvKVlICqXOIP72xPVPu777Pe869h40zr0+6phQ6B8nGElcAggeHlz46p+f8jRYQdcLkvxfo+/fl9faqLz4cCnK8pH7Ej0FDGivIIPdD5Gge84+n0++r0a6dzodk97pn06+2iiHQ8gn/3pNOHSOIA7nf1eH/1+oi538ftNP/s9tw6jptjZ7/d13jPArec3m83ypdsHcPO6PpDUUxznPf7N+zJI53rTYsLtv4Gku837fJv3yuEPqc5C3lhEIq7zXr/m/WmkjOpW4ETx91Kq+7zfL92jQD5uPgO6h7Wnoyfdwz/d50FDBO/z/IWkdPWi+/ime6XNCVz3svZE5Bxvupdvut95sYAR+CTRvOp+vumeE6kebJ6jySledU/fdN+CjUFeYhqHuxLvuq9furdKzj9qBDb9t2LwMFG8696+6f4IvYL7KIovK5rkXff3bd1DEmRCUOqfTn/MInIC6x7+rftIoHxLYwF1+K2J4nXdx28nFHN/oLoVQHlde2ZW/mTI+pZGfa7MiuK6juwsPAKHlEnUNHxedpzWhrAU+SADDGr08xtjiFNzAi+7v5bk6p+pCX71dlj9EJEU5uKOScmbFjWEDyWd4vTTidqc2UtwwwpEPcElWCOKuONphagSc5lrMiLJGLyWouG9AEIg7vrrbwjIqCmEvbiXghAnEKmaTRHRHvbiFvhiIeLaEZ0JaGCLe2Ex7ieSkUIg59JJ+yz7y8113mzI4xaGj71/YxGBcGZc3A+bcU8dclMBIKfnpAV7Glw03/3L3rynldRcyusQH/fEbNxXqzTbL3rCtY+9MPWT6T8B/+aVP5ff1N72dKS1cor7YjXubXlL3FtWKF5ESAlhOD46IpR1onPcG+txfyFVaACKJCOgBgAilOce95cUcY8SAiB4jntM+rjP5I97Tf643+SPe07+uO/kj3tP/rj/5N/3kPz7PpJ+38vfgH0/yb/vKfn3fSX/vrfk3/f3N2Df479JDQAAVlA4IOgNAABwPwCdASqAAIAAPjEWiUMiISEUybYIIAMEtQBpFh8nv+P/ET8L/lorX9V/A35G/HLxSjSdr3637i/hH6nfME/Sr/Af0D+xe0d6uPMb/Kv8J+4nul+iX0AP5f/bv/b2F/7d+wZ5q//A/8f+m+DT9rv2u+Ab9af/11gHC6/zbtx/wn449ep5S9hP3W0Dn3d+4/2H9sPy95//il/c+oR+DfyH+wfkn/Wf3S5NgAf5l/Qv9P9unpBfxnpL4gH8s/n3+f/L71jvCn8f9gX+Xf2D/NeyZ/a/9b/H/kV7evyr/O/83+9/up/fPsE/kX80/yH9l/cz++////zfcN7G/2l9i/9W/v/bopjMb90TvHiL6GOgsByl4Kl4gul5Fjm57l2Senhw//FclzQpcOXO6Xc3fb8NM+ngaOT6rk3Ey9puY0JwsvQvvj6jPQk//ubJ7ze1BPxeT0W57ZDb/GaEkVtkpfwq4KVEi742mXXXSPHlnOu32Ip4eyMhpqJncvBkWF6itdMhRndeJG7EYL5KcpnP0EByo5V7PMAACLZb+ECySxrtuGSr8k1MYBDtUekm67IfIWuqD2UrKPg3ufIRqr9lc4eYbNK0EdL/xJGCmdY6Ixprqa+Hb893UXLtOp6FVs6N1uxmbL03p3txzMirP/QFa78+juh7cxHe48h0reL6or+0ocPdqDgA/v9gGEX4tA7h4fPSSVP8GTtFm/JkOZK97eHqbR1YM5R2PLzTReQZ9kurIVM0Ztqnq1cNEbk4lc+VFxQRo72tBQa8CEQBqmcKQqIn9sDWq/4xseCk0yJqznxiMMyFnKyJsaSaR0z7ESxqUB0AC8qzu5x3Y7M/DV+pB7Ph9yLF4Jid1EvkABSOSvzafvu66lmVO1x0eJepTBj54l0j+y3g5mINGxqbi7CR/rZpI8xdpzsQ3Nd1Sx0tEyhMQKex0wEvF/vqwU9Egq8xsO4GDfM2/lPpKc+N9IHLKdnJTTDmiZyRlTJfj6+HQ79TzQ+2X6m6Zdz//Stvv4GTZcUGrxABnI/z2MxBVYgx5UEQUf4TSA8ilnGvPzdCmWkitBY+7ckx7WJufxf3fZDeTea8QqXfiqBmvUEW4EBUzeNcJ3CfE6fAsGh7i0siPvG+JgJXrSD/LdxE++FSHcC1Wt5h9X69uES+ExcWHTg2FB2EgAsdwz6QtNw5arYdFL2ghgvd576e6AsfgRnypynNERCheeZ5t1+O0SoHHZttX+BDCuOd4s2B9/P9zy1pLiM9HSsTbVX7iSReE9rlAgcvb1/YJC8uMFd79kaenGJGmgSoJpjxW2y3SxxFARDUD3KTNOrUxNf2AV2shkYe3xeTHzaX12HvlkcB6XeGUAi36OUSgJBfmgYgf2FSL8ysd2/WbkoF2BDn23bVHWh7zy/R+TOghDZXNsW30A+5u/4VRffL4YpT8P9jH/5tiGrphjYJfDw+1px5jfeZkSdNyftoXgktwA/9vxDTtOvNQyryfMvHvjtoKsPH1VBVr8mFbMhmjc3fxe679EpDKaaip+7dNJ4JcbU40sG1bCp7O6NPpBrl9yuhe2vOFwDHaSFlamP0bu7/Dt1hrq9n8iGhUGVcLlgzlNtZ9qhlLOm4WoJMce2of4pWO99i6SEpOD8kZFfMg2McFk7FW4VD41vrESrannn0/F62VRuos1j5XthQ5mSr/w7o07GDGDHddC+46Kx8J22QrRT+8vXTnAAwrtcnH/26t553n6vXm0TZyAWflbVmVV1Zb5E1J8S9tXDdt7chCANHHCBeHGq9U42KYC8QP3IIIMR9fs1udgyPq4OItsG3Z7+TVkwoflk1wn+lr6dv9LiOp96SkSiPi1l6JOhTynqKhYHkMP0sUmLZ8JALZwzsVP/SEmZJ4s94O+BvG7OhKQ/0jitq0xhPUnbVWElh45vqqo/9Sv7CKBtbngDUzlt+7fB8eylLFb3gdlgASQyMyxaVQJdFmeNX9wO23UZT8Bf77ExS/bvVe5cR+pqpzYYOAMwmhF38DG2rsvXtNJ7KyOYoQvO4+/uQ9IEoUDhH9F42+2xdSsB5GYGKV4z1TLzlcaCNszfExMZEKmmc4bMTWjvEmHRC/GoDzjbs4HlOLROVoa59PLKYrTI4QpzTorFNBDVOsjv5oEtiUUm1G4EwokvhcnXLfsapjMdv+t+la3ARgwGici+7Pupv9sNn0pqj8wxwpMHk4WPpK6zUrmiRZZm6k9aP+issytUzZHHkAowYL/04IQftrh/dZOGXx2XxbDWsI9T3YoheRQxueu/Z33NAqoH1ApH+dcVmWhgbtnsYOd4MG4PzfMjunX9U9iyN2Q+DvncuwZ043QnM2a2ScZ0f9iB1axQdvZeH7ueC2fk2+W9N6iY5rJfLdN64kropdkdMD0919E/iJDiSbSBtwAdRllrzVFQWwJ/lyd8rTwSDEA/ShIK/wy61ShS/IrC2nm9LYXTjd4Z/CWhIsrolBJrF9DToyZZMXHLbe4nzo9oJuq1gZYaHeYDc7exBC2Su4G1CgMSP/1XRw9qqKJhfrHU49jMVKRrxwsznje5vZjMbnJIlrbYWhsHdfnMfKlzVQsXZJwJKmO5mLzZtNtixhz2TQ/sMxiLVjZ/EQKRRmuJ8HluqhYgmqJKwrmNCoPQuEH1XA23i/pBdz2ieyqM4iHGleXNTe+Tfe4Dty2nR9QD8zVfS/LIvB/cGfjV5t9h2r7ZSsis6A3IkoW4hAF/BLTXN5FrRe3uK6L71ZoxCbXhK71mvEPKL9YUo49/+/Bq9TIrw8SSZK75KurIk5ygvCBXpJ3+91iwtY0GWW/H2xqQVI4JqmsMChUjt3YYo4R43VKx1s8i+TTMODcCn1LeHrdjppID1p4mX1V5VTsvoqLEBwAf78Oq3AZkBydHKMdxPq5m6USgQKJDSRDvEZjlDFzO2At9V+5CxDAXY2RUzbkVxbCOgNnFzf2rTeIF42dbhd1mcb1QFjLoYx9UMQrFfjcgjYT/fP58wcijc5hlRuir/2LI0P0bvy6JXSuTqJk+56eDYX8+PRzihybDn0Wh5MA8MP+ShMcE/5btOcoXz1kdyoQ+/jAzpp2J3wrFFy1yVK44rXkZf7UqdL2ELxp+LmOWMxVk3qb14Ua3Vp4I3xkGrA9GbaTt6k89bbTohYoLydZAGvK+Tv2Gxw+NEbotdXsp/bifRTYKZpfRjEZ04/t3InV24T9qOsBdjub+CuEm34kdecI6WPiXd/4f1SYzgwseFWBo5QjHPLhEfD1oX+7mUvB0B9jEPQ8xLFGPULZuCF5lOgHvrTp+myNFN8mz5+tKAVnNaAIZYKPccl+mPf0P6bLyAX4kvjz+2kWq08lXQ9IYPJiseQqVQbE5lJYDsdDaj8gPG5fLURp49kW3iKcCrDB3NpEq22p3nfP3m3dzBBFU3Y2pHXNZS0WUXgpunaWJmYGVIww/fIe3kzV0f1FwEvovkThnwDoKXz1jkH/uI13IEf/rDPd/EW/GJj/jT5aVXCqYQOJw8RRkCbLkdaeycKVTM+QFVKWHY7cY3x+N/TXK7qa2s1jnQyQQ4miah6GCQz/ECHyXKzu4F3G4xrB9ygU59mRhcOECQhzI/O8XFRTrKM2OchfoGM+WHRAV8Ohgv4eDo7XP529z4z6YDIvLBrcsDnbnHRMW82tDFXO7mcjniRhj+jSi9ER2f286wZwViAuJyBrBvUgzS6uD0ZoGjlqtJ+QicHvRQjxC8NE0BlOS7UXnVQ1umufvQGADgx4QmfotibbpRQKZpv6UiCE9eQBaxtMSHqH8M8rOctuV28gt4/IeDLCCX/+ZJhgUtRoSTS6MmxAm/jEKshWUrwoSTaVqCFbz983ZqcpowOJ0+Z83IZ9wOnENB3p/p3Ps4vyN0HrEs2Oj7G7MpqxrDO4btTzhDzjSP2XxjeNlMCxyJyAcrjeTGJ9hGYrubQGSJF/q5x9hwVv+ANcJGOVVC1QL3oMnkOdAAqvs6uebAjGp2AM4KAOUAYiUPKLBp8LpMIy5wZH8f3ImsDduCIoV77J5u3KYKIeIQyfKBXqu/+Kun/IOHYNLZ+Uw0mWn0jQgP/XgYJMHDY04jM7b4Pnx+6G/Iad8mDLDxMiB39AX7PuHSg3R0+f4SCVWA+dJye97r1rgTpXYT0qWy0hinNESEgf+IG4v7E1jsQSO0LtkuyJv/VLGifvEfeXJUklv4kZLjRIRUgVoZ0Qmet+IJwvl/T9/J1Cz5XdKde2ZI3to2TOsuZ/fv9fzqH3TaBQ9WOyESk2dS5adHkBvMs3jQFLj+hSWnVnV2pQP/NllfX85CaN4tJORjExo7CzR+mHozF0aM2JNpr793+PhEX9xQ0l1lGBRHGgu4GIIwngsfcoGcAse55eGEBwec8p3NxtXpK/Lt9OJuuhP0gV1XXJUjS070vd+jvRA/kbl3NaTeX6Dukd23XemkkjlXpUCvGdswg7W+Q/ziPNZ1T0DYuzXnvweHM7dEVYS8/a/sdIDqKYXqhMHzVFF50Dm6z96tlLy1UYm6ZT8tZqDk2GzasZ/M9jIdKyoTWeHB1Rl/CWAEjoh6AFYiLxLE8R5lXZHKir2K1J5Idqt8SqlFrcCALHEn8gDlw/DDIwI4ANgUjxyH2Y2BqbPporF5VO7QbNTfC6J9J7biuPQIHEu/XZwuaghEwpFBENX7u/WF7XNPnKVHpcBwfq9EptOkaE2ymMbknqBu9KMQeNP9d0Ec4oKTc8keUNMgRs5JD1QAAAAAAA==",
+  star:  ART3D.star,
+  book:  ART3D.book
+};
+/* 도장 한 칸 — 찍히면 반짝이는 스티커, 아직이면 점선 동그라미 */
+function stampDiscHtml(done, art){
+  return '<i class="stamp-disc' + (done ? ' on' : '') + '" aria-hidden="true">' +
+    (done && art ? '<img class="stamp-img" src="' + art + '" alt="" draggable="false">' : '') +
+  '</i>';
+}
 var REWARD_DAILY = 500;   // 매일 공부 완료 하루치 (월~목 각 1번 · 금~일은 합쳐서 1번)
 var REWARD_STREAK = 1000; // 주간 5회 모두 완료 (월~목 4회 + 금~일 통합 1회)
 var REWARD_SELF = 0;      /* #v27: 7일 보너스는 용돈 대신 도장 +5개 (SELF_WEEK_STAMP_BONUS) */
@@ -4463,22 +4712,90 @@ var BASIC_TASKS = [
 ];
 var STUDY_TASK_MAX = 12;   /* 한 아이의 매일 공부 항목은 12개까지 */
 
-/* 🌟 추가 보너스 — 오늘 숙제를 모두 끝내면 평일·주말 모두 열린다 (#study)
-   한 항목 완료할 때마다 +100원 (하루 최대 500원 · 금~일은 한 세트를 함께 쓴다) */
-var WEEKEND_BONUS_ITEMS = [
-  { key:'english', icon:'📘', label:'영어 독서 3권',    sub:'영어책을 3권 읽어요!',      tone:'pink' },
-  { key:'chapter', icon:'📚', label:'줄글책 독서 1권',  sub:'재미있는 줄글책을 읽어요!', tone:'mint' },
-  { key:'picture', icon:'📖', label:'그림책 3권',       sub:'재미있는 그림책을 읽어요!', tone:'lilac' },
-  { key:'piano',   icon:'🎹', label:'피아노 연습 10분', sub:'피아노를 연습해요!',        tone:'sky' },
-  { key:'rope',    icon:'🪢', label:'2단 줄넘기 10분',  sub:'2단 줄넘기를 해요!',        tone:'cream' }
+/* ⭐ FUN MISSION (#v32) — 「오늘의 도전」
+   기본 미션 30가지(5갈래) 풀에서 하루 최대 5개를 골라 도전한다.
+   · 미션 1개 완료 = 도장 +1 (하루 최대 5개 → 펀미션 5도장)
+   · 엄마 화면에서는 목록에 새 미션을 넣거나 기존 미션을 뺄 수 있다
+   · 고른 미션은 그날 기록(d.funSel)에, 완료는 d.bonus 에 남는다 */
+var FUN_CATS = [
+  { key:'read',    label:'📚 독서·글쓰기', chip:'📖 독서', tone:'mint'  },
+  { key:'move',    label:'🎹 운동·음악',   chip:'🎹 운동', tone:'cream' },
+  { key:'make',    label:'🎨 만들기·창작', chip:'🎨 창작', tone:'pink'  },
+  { key:'explore', label:'🔍 탐구·놀이',   chip:'🔍 탐구', tone:'sky'   },
+  { key:'talk',    label:'💌 표현·소통',   chip:'💌 소통', tone:'lilac' }
 ];
-var WEEKEND_BONUS_STAMP = 1;   /* 🌟 추가 보너스 — 한 항목마다 도장 +1 */
-/* ⭐ 추가 보너스 항목 (#v26) — 아이별로 엄마가 넣고 뺀다. 위 5개는 기본값 */
-var BONUS_ITEM_MAX = 12;                                  /* 한 아이가 가질 수 있는 항목 수 */
+var FUN_SEED = [
+  /* 📚 독서·글쓰기 */
+  { key:'english',    cat:'read',    icon:'📘', label:'영어책 읽기 3권',  sub:'영어책 3권을 소리 내어 읽어요!' },
+  { key:'chapter',    cat:'read',    icon:'📚', label:'줄글책 읽기 1권',  sub:'재미있는 줄글책을 읽어요!' },
+  { key:'picture',    cat:'read',    icon:'📖', label:'그림책 낭독하기',  sub:'그림책을 소리 내어 읽어요!' },
+  { key:'booklog',    cat:'read',    icon:'📝', label:'독서록 쓰기',      sub:'읽은 책의 이야기를 남겨요!' },
+  { key:'diary',      cat:'read',    icon:'✏️', label:'일기 쓰기',        sub:'오늘 있었던 일을 일기로 써요!' },
+  /* 🎹 운동·음악 */
+  { key:'piano',      cat:'move',    icon:'🎹', label:'피아노 10분',      sub:'피아노를 10분 연습해요!' },
+  { key:'rope',       cat:'move',    icon:'🪢', label:'2단 줄넘기 10분',  sub:'2단 줄넘기를 10분 해요!' },
+  { key:'hula',       cat:'move',    icon:'🌀', label:'훌라후프 10분',    sub:'훌라후프를 10분 돌려요!' },
+  { key:'stretch',    cat:'move',    icon:'🤸', label:'스트레칭 10분',    sub:'몸을 쭉쭉 늘려봐요!' },
+  { key:'sing',       cat:'move',    icon:'🎵', label:'노래 부르기',      sub:'좋아하는 노래를 한 곡 불러요!' },
+  { key:'rhythm',     cat:'move',    icon:'🥁', label:'리듬 놀이',        sub:'나만의 재미있는 리듬을 만들어요!' },
+  /* 🎨 만들기·창작 */
+  { key:'paper',      cat:'make',    icon:'🧻', label:'색종이 접기',      sub:'색종이로 작품을 만들어요!' },
+  { key:'draw',       cat:'make',    icon:'🎨', label:'그림 그리기',      sub:'내가 그리고 싶은 그림을 그려요!' },
+  { key:'craft',      cat:'make',    icon:'🧵', label:'만들기 활동',      sub:'재료로 나만의 작품을 만들어요!' },
+  { key:'lego',       cat:'make',    icon:'🧱', label:'레고 만들기',      sub:'레고로 재미있는 작품을 만들어요!' },
+  { key:'magic',      cat:'make',    icon:'🪄', label:'마술 연습',        sub:'재미있는 마술 하나를 연습해요!' },
+  /* 🔍 탐구·놀이 */
+  { key:'experiment', cat:'explore', icon:'🧪', label:'실험하기',        sub:'재미있는 실험을 해봐요!' },
+  { key:'puzzle',     cat:'explore', icon:'🧩', label:'퍼즐 맞추기',     sub:'퍼즐이나 큐브를 맞춰봐요!' },
+  { key:'brain',      cat:'explore', icon:'🧠', label:'두뇌게임',        sub:'머리를 쓰는 퍼즐에 도전해요!' },
+  { key:'quiz',       cat:'explore', icon:'❓', label:'퀴즈 풀기',       sub:'퀴즈나 수수께끼 5개를 풀어요!' },
+  { key:'plant',      cat:'explore', icon:'🌿', label:'식물 관찰하기',   sub:'식물을 자세히 살펴봐요!' },
+  { key:'observe',    cat:'explore', icon:'🔍', label:'관찰일지',        sub:'재미있는 것을 찾아 기록해요!' },
+  { key:'map',        cat:'explore', icon:'🗺️', label:'지도 탐험하기',   sub:'지도에서 새로운 곳을 찾아봐요!' },
+  { key:'world',      cat:'explore', icon:'🌏', label:'나라 탐험하기',   sub:'궁금한 나라를 알아봐요!' },
+  { key:'animal',     cat:'explore', icon:'🐾', label:'동물 탐험하기',   sub:'좋아하는 동물을 알아봐요!' },
+  { key:'photo',      cat:'explore', icon:'📷', label:'사진 찍기',       sub:'재미있는 순간을 사진으로 담아요!' },
+  /* 💌 표현·소통 */
+  { key:'letter',     cat:'talk',    icon:'💌', label:'편지 쓰기',       sub:'누군가에게 마음을 담아 편지를 써요!' },
+  { key:'present',    cat:'talk',    icon:'🎤', label:'발표하기',        sub:'내가 좋아하는 것을 소개해봐요!' },
+  { key:'english5',   cat:'talk',    icon:'🗣️', label:'영어 표현 5개',   sub:'영어 표현 5개를 말해봐요!' },
+  { key:'boardgame',  cat:'talk',    icon:'♟️', label:'보드게임',        sub:'보드게임 한 판을 즐겨요!' }
+];
+var FUN_MAX = 5;               /* 하루에 고를 수 있는 미션 수 */
+var WEEKEND_BONUS_STAMP = 1;   /* ⭐ FUN MISSION — 미션 하나마다 도장 +1 */
+var BONUS_ITEM_MAX = FUN_MAX;  /* 고를 수 있는 미션 수(최대 5) */
 var BONUS_TONES = ['pink', 'mint', 'lilac', 'sky', 'cream'];   /* 카드 색 — 차례로 돌려 쓴다 */
+var FUN_POOL_MAX = 60;         /* 엄마가 넣을 수 있는 미션은 모두 60개까지 */
+function funCatDef(key){
+  for(var i = 0; i < FUN_CATS.length; i++){ if(FUN_CATS[i].key === key) return FUN_CATS[i]; }
+  return FUN_CATS[0];
+}
+function funToneOf(cat){ return funCatDef(cat).tone; }
+/* 엄마가 넣고 뺀 미션 — state.funPool { add:[…], del:[키…] } */
+function funCustomPool(){
+  if(!state || typeof state !== 'object') return { add:[], del:[] };
+  if(!state.funPool || typeof state.funPool !== 'object') state.funPool = {};
+  if(!Array.isArray(state.funPool.add)) state.funPool.add = [];
+  if(!Array.isArray(state.funPool.del)) state.funPool.del = [];
+  return state.funPool;
+}
+function funPoolAll(){
+  var p = funCustomPool();
+  var out = [];
+  FUN_SEED.forEach(function(m){
+    if(p.del.indexOf(m.key) >= 0) return;
+    out.push({ key:m.key, cat:m.cat, icon:m.icon, label:m.label, sub:m.sub, tone:funToneOf(m.cat), custom:false });
+  });
+  p.add.forEach(function(m){
+    if(!m || !m.key || !m.label) return;
+    if(p.del.indexOf(m.key) >= 0) return;
+    out.push({ key:m.key, cat:m.cat || 'explore', icon:m.icon || '⭐', label:m.label, sub:m.sub || '', tone:funToneOf(m.cat || 'explore'), custom:true });
+  });
+  return out;
+}
 function defaultBonusItems(){
-  return WEEKEND_BONUS_ITEMS.map(function(r){
-    return { key:r.key, icon:r.icon, label:r.label, sub:r.sub || '', tone:r.tone, off:false };
+  return funPoolAll().map(function(r){
+    return { key:r.key, icon:r.icon, label:r.label, sub:r.sub || '', cat:r.cat, tone:r.tone, off:false };
   });
 }
 
@@ -6907,6 +7224,127 @@ function isParentMode(){ return MODE === 'parent'; }
 function isDadMode(){ return MODE === 'dad'; }
 function isKidMode(){ return MODE === 'seonwoo' || MODE === 'jiwoo'; }
 function canCheck(){ return !isDadMode(); }
+/* 👀 아빠 관람 화면 — 두 아이를 골라 보는 스위치 (#v32)
+   아빠 링크(?mode=dad)로 열면 선우부터 보이고, SCHEDULE · MY SPACE · STUDY · FAMILY
+   위의 [선우 보기 | 지우 보기] 로 화면을 새로고침하지 않고 바로 바꾼다. */
+var DAD_KID = 'seonwoo';
+var DAD_KID_TABS = ['schedule', 'myspace', 'study', 'family'];
+function dadKidNow(){
+  var k = (state && state.dadKid) ? state.dadKid : DAD_KID;
+  return k === 'jiwoo' ? 'jiwoo' : 'seonwoo';
+}
+function setDadKid(k){
+  if(!isDadMode()) return false;
+  var next = (k === 'jiwoo') ? 'jiwoo' : 'seonwoo';
+  DAD_KID = next;
+  state.dadKid = next;      /* 아빠 기기에 「보던 아이」를 기억 (#v32) */
+  state.current = next;
+  DAD_FAM_TAB = 'all';
+  saveState();
+  renderAll();
+  return true;
+}
+/* 머리글(.sec-head) 바로 아래에 붙인다 — 제목 다음에 스위치가 오도록 (#v32) */
+function dadInsertAfterHead(panel, node){
+  var head = panel ? panel.querySelector('.sec-head') : null;
+  if(head && head.parentNode) head.parentNode.insertBefore(node, head.nextSibling);
+  else if(panel) panel.insertBefore(node, panel.firstChild);
+}
+function renderDadKidSwitch(){
+  for(var i = 0; i < DAD_KID_TABS.length; i++){
+    var tab = DAD_KID_TABS[i];
+    var panel = document.querySelector('[data-tab-panel="' + tab + '"]');
+    if(!panel) continue;
+    var bar = document.getElementById('dadKidBar-' + tab);
+    if(!isDadMode()){ if(bar) bar.hidden = true; continue; }
+    if(!bar){
+      bar = document.createElement('div');
+      bar.className = 'dad-kid-wrap';
+      bar.id = 'dadKidBar-' + tab;
+      bar.setAttribute('role', 'group');
+      bar.setAttribute('aria-label', '보는 아이 고르기');
+      dadInsertAfterHead(panel, bar);
+    }
+    bar.hidden = false;
+    var cur = dadKidNow();
+    bar.innerHTML = '<span class="dad-kid-lbl" aria-hidden="true">👀 보는 아이</span>' +
+      '<div class="kidswap">' +
+        ['seonwoo', 'jiwoo'].map(function(k){
+          var kd = kidDef(k);
+          var on = (cur === k);
+          return '<button type="button" class="ks-opt" data-action="dad-kid" data-kid="' + k + '"' +
+            ' aria-pressed="' + (on ? 'true' : 'false') + '">' + (k === 'seonwoo' ? '👦 ' : '👧 ') + esc(kd.name) + ' 보기</button>';
+        }).join('') +
+      '</div>';
+  }
+}
+/* 👀 아빠 FAMILY — 참여 방식별 오늘 찍힌 스탬프 (#v32) */
+var DAD_FAM_TAB = 'all';
+function setDadFamTab(kind){
+  if(!isDadMode()) return false;
+  var v = (kind === 'solo' || kind === 'minijob') ? kind : 'all';
+  if(v === DAD_FAM_TAB) return true;
+  DAD_FAM_TAB = v;
+  renderDadFamView();
+  return true;
+}
+function dadFamTodayItems(kind){
+  var kid = dadKidNow();
+  var day = peekDay(kid, dayKey());
+  var out = [];
+  if(kind === 'minijob'){
+    Object.keys((day && day.vac) || {}).forEach(function(id){
+      if(!day.vac[id]) return;
+      var job = vacationJobOf(id);
+      out.push({ id:id, icon:job ? job.icon : '🌴', label: job ? job.label : '미니알바', amt:100, stamp: mySpaceStampImg(id) });
+    });
+    return out;
+  }
+  var items = (state.kids[kid] && state.kids[kid].self) || [];
+  items.forEach(function(it){
+    if((it.cat || 'space') !== 'family') return;
+    if(!day || !day.self || day.self[it.id] === undefined) return;
+    if(familyTeamKeyOf(day, it.id) !== kind) return;
+    out.push({ id:it.id, icon:it.icon, label:it.label, amt:Number(day.self[it.id]) || 0, stamp: familyStampImg(kind, it.id) });
+  });
+  return out;
+}
+function renderDadFamView(){
+  var host = document.querySelector('[data-tab-panel="family"]');
+  if(!host) return;
+  var box = document.getElementById('dadFamView');
+  if(!isDadMode()){ if(box) box.hidden = true; return; }
+  if(!box){
+    box = document.createElement('div');
+    box.className = 'dadfam';
+    box.id = 'dadFamView';
+    var bar = document.getElementById('dadKidBar-family');
+    if(bar && bar.parentNode) bar.parentNode.insertBefore(box, bar.nextSibling);
+    else host.insertBefore(box, host.firstChild);
+  }
+  box.hidden = false;
+  var kind = DAD_FAM_TAB;
+  var items = dadFamTodayItems(kind);
+  var labels = { all:'👫 함께', solo:'🌟 스스로', minijob:'🪙 미니알바' };
+  var titles = { all:'오늘 함께 참여한 일', solo:'오늘 스스로 해낸 일', minijob:'오늘 한 미니알바' };
+  var kidName = kidDef(dadKidNow()) ? kidDef(dadKidNow()).name : '';
+  box.innerHTML = '<div class="dadfam-head">🤝 ' + titles[kind] + '<span>' + items.length + '개</span></div>' +
+    '<div class="dadfam-tabs" role="group" aria-label="참여 방식 골라 보기">' +
+      ['all', 'solo', 'minijob'].map(function(k){
+        return '<button type="button" class="dadfam-tab' + (kind === k ? ' on' : '') + '" data-action="dad-fam-tab" data-kind="' + k + '"' +
+          ' aria-pressed="' + (kind === k ? 'true' : 'false') + '">' + labels[k] + '</button>';
+      }).join('') +
+    '</div>' +
+    (items.length
+      ? '<div class="dadfam-list">' + items.map(function(it){
+          return '<div class="dadfam-row">' +
+            (it.stamp ? '<img src="' + it.stamp + '" alt="' + esc(it.label) + ' 도장">' : '<span class="dfr-ico" aria-hidden="true">' + esc(it.icon) + '</span>') +
+            '<span><b>' + esc(it.label) + '</b><small>' + labels[kind] + ' · ' + esc(kidName) + '</small></span>' +
+            '<span class="dfr-amt">+' + fmt(Number(it.amt) || 0) + '</span>' +
+          '</div>';
+        }).join('') + '</div>'
+      : '<p class="dadfam-empty">오늘은 아직 ' + (kind === 'minijob' ? '미니알바' : '참여') + ' 기록이 없어요 🌿</p>');
+}
 
 /* =========================================================
    🎨 모드별 얼굴 · 인사말 · 히어로 그림
@@ -7687,19 +8125,31 @@ function flushSync(){
    - 한 번만 들어가고, 지우면 다시 살아나지 않아요 (seedEvents 표시)
    ========================================================= */
 var RECURRING_DEFAULT = [
-  { id:'dad-bday',    name:'아빠 생일',    emoji:'🎂', month:2,  day:11, who:'dad',     category:'dad' },
-  { id:'mom-bday',    name:'엄마 생일',    emoji:'🎂', month:4,  day:26, who:'mom',     category:'mom' },
-  { id:'seonwoo-bday',name:'선우 생일',    emoji:'🎂', month:6,  day:18, who:'seonwoo', category:'seonwoo' },
-  { id:'jiwoo-bday',  name:'지우 생일',    emoji:'🎂', month:12, day:31, who:'jiwoo',   category:'jiwoo' },
-  { id:'wedding',     name:'결혼기념일',   emoji:'💐', month:8,  day:23, who:'all',     category:'family' },
-  { id:'song-i',      name:'송이 이모 생신', emoji:'🎂', month:1, day:2,  who:'all',     category:'family' },
-  { id:'seul-gi',     name:'슬기 이모 생신', emoji:'🎂', month:1, day:25, who:'all',     category:'family' },
-  { id:'jiyoon',      name:'이지윤 생신',  emoji:'🎂', month:5,  day:12, who:'all',     category:'family' },
-  { id:'big-uncle',   name:'큰아빠 생신',  emoji:'🎂', month:11, day:10, who:'all',     category:'family' }
+  { id:'dad-bday',    name:'아빠 생일',    emoji:'🎂', month:2,  day:11, who:'dad',     category:'dad',     kind:'birth' },
+  { id:'mom-bday',    name:'엄마 생일',    emoji:'🎂', month:4,  day:26, who:'mom',     category:'mom',     kind:'birth' },
+  { id:'seonwoo-bday',name:'선우 생일',    emoji:'🎂', month:6,  day:18, who:'seonwoo', category:'seonwoo', kind:'birth' },
+  { id:'jiwoo-bday',  name:'지우 생일',    emoji:'🎂', month:12, day:31, who:'jiwoo',   category:'jiwoo',   kind:'birth' },
+  { id:'wedding',     name:'결혼기념일',   emoji:'💐', month:8,  day:23, who:'all',     category:'family',  kind:'anniv' },
+  { id:'song-i',      name:'송이 이모 생신', emoji:'🎂', month:1, day:2,  who:'all',     category:'family',  kind:'birth' },
+  { id:'seul-gi',     name:'슬기 이모 생신', emoji:'🎂', month:1, day:25, who:'all',     category:'family',  kind:'birth' },
+  { id:'jiyoon',      name:'이지윤 생신',  emoji:'🎂', month:5,  day:12, who:'all',     category:'family',  kind:'birth' },
+  { id:'big-uncle',   name:'큰아빠 생신',  emoji:'🎂', month:11, day:10, who:'all',     category:'family',  kind:'birth' }
+];
+/* 🌙 음력으로 매년 반복하는 생신·기일 (#v32) — 해마다 그해 양력 날짜로 계산해 달력에 올린다.
+   2026~2028년은 이미 넣어 둔 단발 일정과 날짜·이름이 같아 겹쳐 생기지 않는다. */
+var LUNAR_RECURRING_DEFAULT = [
+  { id:'gm-lunar',     name:'외할머니 생신',   emoji:'🎂', month:6,  day:18, who:'all', category:'family', lunar:true, kind:'birth' },
+  { id:'gf-lunar',     name:'외할아버지 생신', emoji:'🎂', month:8,  day:6,  who:'all', category:'family', lunar:true, kind:'birth' },
+  { id:'uncle-lunar',  name:'이모부 생신',     emoji:'🎂', month:6,  day:18, who:'all', category:'family', lunar:true, kind:'birth' },
+  { id:'mem-mom-lunar',name:'어머님 기일',     emoji:'🕯️', month:8,  day:15, who:'all', category:'family', lunar:true, kind:'memorial' },
+  { id:'mem-dad-lunar',name:'아버님 기일',     emoji:'🕯️', month:3,  day:22, who:'all', category:'family', lunar:true, kind:'memorial' }
 ];
 function defaultRecurringAnniversaries(){
-  return RECURRING_DEFAULT.map(function(a){
-    return { id:a.id, name:a.name, emoji:a.emoji, month:a.month, day:a.day, who:a.who, category:a.category };
+  return RECURRING_DEFAULT.concat(LUNAR_RECURRING_DEFAULT).map(function(a){
+    return {
+      id:a.id, name:a.name, emoji:a.emoji, month:a.month, day:a.day, who:a.who, category:a.category,
+      lunar: !!a.lunar, lunarLeap: !!a.lunarLeap, kind: a.kind || ''
+    };
   });
 }
 
@@ -7950,10 +8400,8 @@ function makeDefaultState(){
     bdayShown: {},
     /* 🏫 학교 시간표 — 「요일-교시」 키로 과목 이름 (#v24) · 비어 있으면 기본 시간표로 채워요 */
     schoolTimetable: {},
-    /* 🏫 학교 정보·수업 시간 종류·0교시 (#v31) */
-    schoolInfo: {},
-    schoolStyle: {},
-    schoolZero: {}
+    /* 🏫 학교 정보 — 학교명·학년·반 (표 위 줄에서 고침) */
+    schoolInfo: {}
   };
 }
 
@@ -8435,7 +8883,11 @@ function normalize(raw){
           emoji: (typeof x.emoji === 'string') ? x.emoji.slice(0, 4) : '🎂',
           month: Number(x.month), day: Number(x.day),
           who: ['all', 'seonwoo', 'jiwoo', 'mom', 'dad'].indexOf(x.who) >= 0 ? x.who : 'all',
-          category: ['family', 'seonwoo', 'jiwoo', 'mom', 'dad'].indexOf(x.category) >= 0 ? x.category : 'family'
+          category: ['family', 'seonwoo', 'jiwoo', 'mom', 'dad'].indexOf(x.category) >= 0 ? x.category : 'family',
+          /* 🌙 음력 · 종류(생일·제사·기념일) (#v32) */
+          lunar: !!x.lunar,
+          lunarLeap: !!x.lunarLeap,
+          kind: (x.kind === 'birth' || x.kind === 'memorial' || x.kind === 'anniv') ? x.kind : ''
         };
       });
       return out;
@@ -8496,7 +8948,7 @@ function normalize(raw){
       });
       return out;
     })(raw.schoolTimetable),
-    /* 🏫 학교 정보·수업 시간 종류·0교시 (#v31) — 저장값이 없으면 비워 두고 기본값을 쓴다 */
+    /* 🏫 학교 정보 — 학교명·학년·반 (#v31) */
     schoolInfo: (function(o){
       var out = {};
       if(o && typeof o === 'object'){
@@ -8515,20 +8967,6 @@ function normalize(raw){
       }
       return out;
     })(raw.schoolInfo),
-    schoolStyle: (function(o){
-      var out = {};
-      if(o && typeof o === 'object'){
-        ['seonwoo', 'jiwoo'].forEach(function(k){ if(o[k] === '50') out[k] = '50'; });
-      }
-      return out;
-    })(raw.schoolStyle),
-    schoolZero: (function(o){
-      var out = {};
-      if(o && typeof o === 'object'){
-        ['seonwoo', 'jiwoo'].forEach(function(k){ if(o[k]) out[k] = true; });
-      }
-      return out;
-    })(raw.schoolZero),
     familySeed: FAMILY_SEED_VERSION,
     labelSeed: LABEL_SEED_VERSION,
     spaceSeed: SPACE_SEED_VERSION,
@@ -8538,12 +8976,14 @@ function normalize(raw){
     weekendBonusLabels: (function(raw2){
       var src2 = (raw2 && typeof raw2 === 'object') ? raw2 : {};
       var out2 = {};
-      WEEKEND_BONUS_ITEMS.forEach(function(r){
+      FUN_SEED.forEach(function(r){
         var v = String(src2[r.key] || '').trim().slice(0, 20);
         out2[r.key] = v || r.label;
       });
       return out2;
     })(raw.weekendBonusLabels),
+    annSeed: (typeof raw.annSeed === 'string') ? raw.annSeed : '',
+    dadKid: (raw.dadKid === 'jiwoo') ? 'jiwoo' : 'seonwoo',
     customEmojiMap: cleanEmojiMap(raw.customEmojiMap),
     familyTeam: (FAMILY_TEAM_KEYS.indexOf(raw.familyTeam) >= 0 ? raw.familyTeam : 'all'),
     familyTab: (raw.familyTab === 'minijob') ? 'minijob' : 'mission',
@@ -9296,7 +9736,7 @@ function toggleNoHomework(){
   saveState();
   renderAll();
   var nm = targets.map(function(k){ return kidDef(k).name; }).join('·');
-  toast(!allOn ? ('🌤️ ' + nm + ' 오늘은 숙제 없는 날! ⭐ 추가 보너스 도전이 열려요') : ('🌤️ ' + nm + ' 오늘 숙제를 다시 켰어요'));
+  toast(!allOn ? ('🌤️ ' + nm + ' 오늘은 숙제 없는 날! ⭐ FUN MISSION이 열려요') : ('🌤️ ' + nm + ' 오늘 숙제를 다시 켰어요'));
 }
 /* 주간 공부 완료 횟수 — 월·화·수·목 각 1회 + 금요일 키(금~일 통합) 1회 = 최대 5회 */
 /* 🌟 7일 스탬프판 (아침 미션 · 스스로 체크) — #v25 */
@@ -9306,13 +9746,14 @@ function miniBoardHtml(kidKey, kind){
   var order = (kind === 'morning') ? [days[6], days[0], days[1], days[2], days[3], days[4], days[5]] : days;
   var labels = (kind === 'morning') ? ['일', '월', '화', '수', '목', '금', '토'] : ['월', '화', '수', '목', '금', '토', '일'];
   var n = 0, slots = '';
+  var art = (kind === 'morning') ? STAMP_ART.sun : STAMP_ART.star;
   order.forEach(function(dk, i){
     var done = (kind === 'morning') ? morningAllDone(kidKey, dk) : (selfCheckCountOn(kidKey, dk) > 0);
     if(done) n++;
-    slots += '<span class="mb-day' + (done ? ' on' : '') + '"><i aria-hidden="true">' + (done ? '⭕' : '') + '</i><b>' + labels[i] + '</b></span>';
+    slots += '<span class="mb-day stamp-slot' + (done ? ' on' : '') + '">' + stampDiscHtml(done, art) + '<b>' + labels[i] + '</b></span>';
   });
   var title = (kind === 'morning') ? '🌞 아침 미션 7일 스탬프판' : '🌟 이번 주 스스로 체크 7일 스탬프판';
-  var note = (kind === 'morning') ? '7일 완성 → 보너스 도장 +3개' : '하루 5개 완료 시 오늘 ⭕ · 7일 완성 시 보너스 도장 +' + SELF_WEEK_STAMP_BONUS + '개';
+  var note = (kind === 'morning') ? '7일 완성 → 보너스 도장 +3개' : '하루 5개 완료 시 오늘 🌟 · 7일 완성 시 보너스 도장 +' + SELF_WEEK_STAMP_BONUS + '개';
   return '<div class="mini-board"><div class="mb-head"><b>' + title + '</b><span>' + n + '/7일</span></div>' +
     '<div class="mb-days">' + slots + '</div><p class="mb-note">' + note + '</p></div>';
 }
@@ -9327,7 +9768,12 @@ function renderStudyHwBoard(kidKey){
     var free = noHwOn(kidKey, days[i]);
     var done = basicDone(kidKey, days[i]);
     if(done) n++;
-    html += '<span class="hwb-day' + (done ? ' on' : '') + (free ? ' free' : '') + '"><i aria-hidden="true">' + (free ? '🌤️' : (done ? '⭕' : '')) + '</i><b>' + labels[i] + '</b></span>';
+    /* 🌤️ 숙제 없는 날은 그 칸에만 해를 띄우고, 끝낸 날은 책 스티커 도장 (#v32) */
+    html += '<span class="hwb-day stamp-slot' + (done ? ' on' : '') + (free ? ' free' : '') + '">' +
+      (free
+        ? '<i class="stamp-disc on free" aria-hidden="true">🌤️</i>'
+        : stampDiscHtml(done, STAMP_ART.book)) +
+      '<b>' + labels[i] + '</b></span>';
   }
   box.innerHTML = html;
   var cnt = $('#hwBoardCount');
@@ -9344,17 +9790,10 @@ function studyDoneGoalsOf(kidKey, week){
    · 오늘 숙제(studyDayKey)를 모두 끝내면 카드가 열린다 — 평일은 그 요일, 금~일은 한 세트
    · 5가지 중 한 항목마다 +100원 (최대 500원)
    ========================================================= */
-/* ⭐ 아이가 가진 추가 보너스 항목 — 뺀 항목(off)도 지난 도장을 세려고 함께 남긴다 (#v26) */
-function bonusItemsAllOf(kidKey){
-  var map = (state && state.bonusItems) || {};
-  var list = map[kidKey];
-  if(!Array.isArray(list) || !list.length) return defaultBonusItems();
-  return list;
-}
-function bonusItemsOf(kidKey){
-  return bonusItemsAllOf(kidKey).filter(function(r){ return !r.off; });
-}
-function bonusMaxOf(kidKey){ return Math.max(1, bonusItemsOf(kidKey).length); }
+/* ⭐ FUN MISSION 목록 — 엄마가 넣거나 뺀 것이 반영된 지금의 미션 풀 */
+function bonusItemsAllOf(kidKey){ return funPoolAll(); }
+function bonusItemsOf(kidKey){ return funPoolAll(); }
+function bonusMaxOf(kidKey){ return FUN_MAX; }
 function bonusItemOf(kidKey, key){
   var found = null;
   bonusItemsAllOf(kidKey).forEach(function(r){ if(r.key === key) found = r; });
@@ -9364,30 +9803,37 @@ function bonusLabelOf(key, kidKey){
   var it = bonusItemOf(kidKey || state.current, key);
   return it ? it.label : '';
 }
+/* 오늘 고른 미션 — d.funSel (예전 「추가 보너스」 체크 기록도 그대로 읽는다) */
+function funSelOf(kidKey, key){
+  if(!state || !state.kids) return [];
+  var d = peekDay(kidKey, key || studyKeyNow());
+  if(Array.isArray(d.funSel)) return d.funSel.filter(function(k){ return !!k; }).slice(0, FUN_MAX);
+  var legacy = (d.bonus && typeof d.bonus === 'object') ? Object.keys(d.bonus).filter(function(k){ return d.bonus[k]; }) : [];
+  return legacy.slice(0, FUN_MAX);
+}
+function funSetSel(kidKey, key, list){
+  var d = ensureDay(kidKey, key || studyKeyNow());
+  d.funSel = (list || []).filter(function(k){ return !!k; }).slice(0, FUN_MAX);
+  return d.funSel;
+}
 function bonusCountOf(kidKey, key){
   var d = peekDay(kidKey, key || studyKeyNow());
   var n = 0;
-  bonusItemsAllOf(kidKey).forEach(function(r){ if(d.bonus && d.bonus[r.key]) n++; });
-  return n;
+  if(d.bonus && typeof d.bonus === 'object'){
+    Object.keys(d.bonus).forEach(function(k){ if(d.bonus[k]) n++; });
+  }
+  return Math.min(FUN_MAX, n);
 }
-function bonusStampAmount(count){ return Math.max(0, Math.min(BONUS_ITEM_MAX, Number(count) || 0)) * WEEKEND_BONUS_STAMP; }
-/* ⭐ 추가 보너스 카드 머리글 — 엄마만 ＋ 추가 / ✕ 삭제 / ✏️ 이름 고치기 (#v26) */
-function bonusHeadHtml(){
-  /* 아이·아빠 화면에는 도구 버튼을 아예 그리지 않는다 (#v26) */
-  var tools = isParentMode()
-    ? '<span class="rc-tools">' +
-        '<button type="button" class="rc-tool" data-action="add-bonus-item" data-parent-only="1" aria-label="추가 보너스 항목 추가">＋ 추가</button>' +
-        '<button type="button" class="rc-tool" data-action="del-bonus-item" data-parent-only="1" aria-label="추가 보너스 항목 삭제">✕ 삭제</button>' +
-        '<button type="button" class="rc-edit" data-action="edit-bonus-labels" data-parent-only="1" aria-label="추가 보너스 항목 이름 수정">✏️</button>' +
-      '</span>'
-    : '';
-  return '<div class="rc-head">' +
-      '<span class="rc-title"><span aria-hidden="true">⭐</span> 추가 보너스 도전</span>' +
-      tools +
-    '</div>';
+function bonusStampAmount(count){ return Math.max(0, Math.min(FUN_MAX, Number(count) || 0)) * WEEKEND_BONUS_STAMP; }
+/* ⭐ FUN MISSION 머리글 — 엄마만 ＋ 추가 / ✕ 삭제 (#v32) */
+function funHeadToolsHtml(){
+  if(!isParentMode()) return '';
+  return '<span class="funm-tools">' +
+      '<button type="button" class="funm-tool" data-action="add-bonus-item" aria-label="펀미션 새 미션 추가">＋ 미션 추가</button>' +
+      '<button type="button" class="funm-tool" data-action="del-bonus-item" aria-label="펀미션 목록에서 미션 빼기">✕ 미션 빼기</button>' +
+    '</span>';
 }
-/* 🌟 추가 보너스 — 오늘(studyDayKey 기준: 평일은 그 요일 · 금~일은 한 세트) 숙제를 모두 끝냈을 때만 열린다.
-   숙제를 다 하지 않았으면 카드는 뜨지 않는다. */
+/* FUN MISSION — 오늘(studyDayKey 기준: 평일은 그 요일 · 금~일은 한 세트) 숙제를 모두 끝냈을 때 열린다. */
 function bonusOpenNow(kidKey){
   var key = studyKeyNow();
   return basicDone(kidKey, key);
@@ -9405,18 +9851,190 @@ function weekBonusTotals(kidKey, week){
   return { stamps: stamps, count: count };
 }
 function weekBonusStampsOf(kidKey, week){ return weekBonusTotals(kidKey, week).stamps; }
-function toggleWeekendBonus(key){
+/* ⭐ FUN MISSION — 미션 카드를 한 번 누르면 도장, 두 번 누르면 취소 (#v32) */
+function funMissionDone(kidKey, key, id){
+  var d = peekDay(kidKey, key || studyKeyNow());
+  return !!(d.bonus && d.bonus[id]);
+}
+function funToggleDone(id){
   if(!canCheck()) return;
   var kidKey = state.current;
+  var key = studyKeyNow();
   if(!bonusOpenNow(kidKey)) return;
-  var d = ensureDay(kidKey, studyKeyNow());
+  var sel = funSelOf(kidKey, key);
+  if(sel.indexOf(id) < 0){ toast('⭐ 먼저 오늘의 도전에 담아 주세요'); return; }
+  var d = ensureDay(kidKey, key);
   if(!d.bonus) d.bonus = {};
-  if(d.bonus[key]) delete d.bonus[key];
-  else d.bonus[key] = true;
+  if(d.bonus[id]) return;              /* 이미 찍힌 도장은 한 번 눌러도 풀리지 않는다 */
+  var stampsBefore = totalStamps(kidKey);
+  d.bonus[id] = true;
   saveState();
   renderAll();
-  var n = bonusCountOf(kidKey);
-  if(d.bonus[key]) toast('🌟 ' + bonusLabelOf(key, kidKey) + ' 완료! 도장 +' + WEEKEND_BONUS_STAMP + ' (오늘 ' + n + '개 · 도장 ' + bonusStampAmount(n) + '개)');
+  chime('task');
+  var n = bonusCountOf(kidKey, key);
+  toast('⭐ ' + bonusLabelOf(id, kidKey) + ' 완료! 도장 +' + WEEKEND_BONUS_STAMP + ' (오늘 ' + n + '/' + FUN_MAX + ')');
+  var crossed = stampCrossed(stampsBefore, totalStamps(kidKey));
+  if(crossed && crossed.length) setTimeout(function(){ celebrateStamps(kidKey, crossed); }, 560);
+}
+function funUndoDone(id){
+  if(!canCheck()) return false;
+  var kidKey = state.current;
+  var key = studyKeyNow();
+  var d = ensureDay(kidKey, key);
+  if(!d.bonus || !d.bonus[id]) return false;
+  delete d.bonus[id];
+  saveState();
+  renderAll();
+  toast('⭐ ' + bonusLabelOf(id, kidKey) + ' 도장을 취소했어요');
+  return true;
+}
+
+/* ---------- ⭐ FUN MISSION 화면 (#v32) ---------- */
+var FUN_FILTER_KEY = 'all';
+function setFunFilter(cat){
+  var ok = (cat === 'all');
+  for(var i = 0; i < FUN_CATS.length; i++){ if(FUN_CATS[i].key === cat) ok = true; }
+  FUN_FILTER_KEY = ok ? cat : 'all';
+  renderMissions();
+}
+function funSelect(id){
+  if(!canCheck()) return;
+  var kidKey = state.current, key = studyKeyNow();
+  var sel = funSelOf(kidKey, key);
+  if(sel.indexOf(id) >= 0) return;
+  if(sel.length >= FUN_MAX){ toast('⭐ 오늘의 도전은 ' + FUN_MAX + '개까지 골라요'); return; }
+  sel.push(id);
+  funSetSel(kidKey, key, sel);
+  saveState();
+  renderMissions();
+  toast('⭐ ' + bonusLabelOf(id, kidKey) + ' 도전에 담았어요!');
+}
+function funUnselect(id){
+  if(!canCheck()) return;
+  var kidKey = state.current, key = studyKeyNow();
+  var sel = funSelOf(kidKey, key).filter(function(k){ return k !== id; });
+  funSetSel(kidKey, key, sel);
+  saveState();
+  renderMissions();
+  toast('⭐ 오늘의 도전에서 뺐어요');
+}
+/* 카드 4초 꾹 — 선택 해제 버튼이 카드 위에 뜬다 */
+var FUN_LP_MS = 4000;   /* 4초 꾹 누르면 「✕ 빼기」 (#v32) */
+var FUN_LP_TIMER = null;
+var FUN_LP_ID = '';
+function funLongPressStart(el){
+  if(!el) return;
+  funLongPressEnd();
+  FUN_LP_ID = el.getAttribute('data-id') || '';
+  var lpId = FUN_LP_ID;
+  el.classList.add('lp-arming');
+  FUN_LP_TIMER = setTimeout(function(){
+    FUN_LP_TIMER = null;
+    var card = document.querySelector('.funm-card[data-id="' + lpId + '"]') || el;
+    var all = document.querySelectorAll('.funm-card.lp-on');
+    for(var i = 0; i < all.length; i++) all[i].classList.remove('lp-on', 'lp-arming');
+    card.classList.remove('lp-arming');
+    card.classList.add('lp-on');
+    if(navigator && navigator.vibrate){ try{ navigator.vibrate(12); }catch(e){} }
+    toast('✕ 버튼을 누르면 오늘의 도전에서 뺄 수 있어요');
+  }, FUN_LP_MS);
+}
+function funLongPressEnd(){
+  if(FUN_LP_TIMER){ clearTimeout(FUN_LP_TIMER); FUN_LP_TIMER = null; }
+  var arm = document.querySelectorAll('.funm-card.lp-arming');
+  for(var i = 0; i < arm.length; i++) arm[i].classList.remove('lp-arming');
+  FUN_LP_ID = '';
+}
+document.addEventListener('pointerdown', function(e){
+  if(!e.target || !e.target.closest) return;
+  var card = e.target.closest('.funm-card[data-id]');
+  if(!card) return;
+  if(e.target.closest('.fm-del')) return;
+  funLongPressStart(card);
+}, { passive: true });
+document.addEventListener('pointerup', funLongPressEnd, { passive: true });
+document.addEventListener('pointercancel', funLongPressEnd, { passive: true });
+document.addEventListener('pointerleave', function(e){
+  if(e.target && e.target.closest && e.target.closest('.funm-card')) funLongPressEnd();
+}, { passive: true });
+
+function funCardHtml(m, done){
+  return '<div class="funm-card ' + m.tone + (done ? ' done' : '') + '" role="button" tabindex="0"' +
+    ' data-action="fun-mission" data-id="' + esc(m.key) + '" aria-pressed="' + (done ? 'true' : 'false') + '"' +
+    ' aria-label="' + esc(m.label) + (done ? ' 완료' : ' 도장 찍기') + '">' +
+    '<span class="fm-badge" aria-hidden="true">' + (done ? '✓ 완료' : 'STAMP') + '</span>' +
+    '<span class="fm-ico" aria-hidden="true">' + esc(m.icon) + '</span>' +
+    '<b class="fm-name">' + esc(m.label) + '</b>' +
+    '<small class="fm-sub">' + esc(m.sub || '') + '</small>' +
+    '<button type="button" class="fm-del" data-action="fun-unselect" data-id="' + esc(m.key) + '" aria-label="' + esc(m.label) + ' 오늘의 도전에서 빼기">✕ 빼기</button>' +
+  '</div>';
+}
+function funEmptySlotHtml(){
+  return '<button type="button" class="funm-empty" data-action="fun-scroll-list" aria-label="다른 미션도 선택해보세요">' +
+    '<span class="fe-plus" aria-hidden="true">＋</span>' +
+    '<span class="fe-txt">다른 미션도<br>선택해보세요!</span>' +
+  '</button>';
+}
+function funRowHtml(m, sel, done){
+  var picked = sel.indexOf(m.key) >= 0;
+  return '<div class="funm-row' + (picked ? ' picked' : '') + (done ? ' done' : '') + '" data-cat="' + esc(m.cat) + '">' +
+    '<span class="fmr-dot" aria-hidden="true">' + (done ? '✓' : '') + '</span>' +
+    '<span class="fmr-main"><b>' + esc(m.label) + '</b><span class="fmr-bar" aria-hidden="true">|</span><small>' + esc(m.sub || '') + '</small></span>' +
+    (picked
+      ? '<button type="button" class="fmr-add on" data-action="fun-unselect" data-id="' + esc(m.key) + '" aria-label="' + esc(m.label) + ' 도전에서 빼기">담김</button>'
+      : '<button type="button" class="fmr-add" data-action="fun-select" data-id="' + esc(m.key) + '"' + (sel.length >= FUN_MAX ? ' disabled aria-disabled="true"' : '') + ' aria-label="' + esc(m.label) + ' 도전에 담기">＋ 선택</button>') +
+  '</div>';
+}
+function funMissionHtml(kidKey, key, noHw){
+  var pool = funPoolAll();
+  var byKey = {};
+  pool.forEach(function(m){ byKey[m.key] = m; });
+  var sel = (funSelOf(kidKey, key) || []).map(function(id){ return byKey[id]; }).filter(Boolean);
+  var selIds = sel.map(function(m){ return m.key; });
+  var doneN = bonusCountOf(kidKey, key);
+  var cards = sel.map(function(m){ return funCardHtml(m, funMissionDone(kidKey, key, m.key)); });
+  for(var i = sel.length; i < FUN_MAX; i++) cards.push(funEmptySlotHtml());
+
+  var chips = '<button type="button" class="funm-chip' + (FUN_FILTER_KEY === 'all' ? ' on' : '') + '" data-action="fun-filter" data-cat="all" aria-pressed="' + (FUN_FILTER_KEY === 'all' ? 'true' : 'false') + '">전체</button>' +
+    FUN_CATS.map(function(c){
+      var on = (FUN_FILTER_KEY === c.key);
+      return '<button type="button" class="funm-chip' + (on ? ' on' : '') + '" data-action="fun-filter" data-cat="' + c.key + '" aria-pressed="' + (on ? 'true' : 'false') + '">' + c.chip + '</button>';
+    }).join('');
+
+  var groups = FUN_CATS.filter(function(c){ return FUN_FILTER_KEY === 'all' || FUN_FILTER_KEY === c.key; }).map(function(c){
+    var list = pool.filter(function(m){ return m.cat === c.key; });
+    if(!list.length) return '';
+    return '<div class="funm-group" data-cat="' + c.key + '">' +
+        '<div class="funm-group-head">' + c.label + '</div>' +
+        list.map(function(m){ return funRowHtml(m, selIds, funMissionDone(kidKey, key, m.key)); }).join('') +
+      '</div>';
+  }).join('');
+
+  var lead = noHw
+    ? '오늘은 숙제가 없어요! 하고 싶은 미션을 골라 도전해 봐요 🙂'
+    : (!bonusOpenNow(kidKey) && isParentMode() ? '오늘 숙제를 모두 끝내면 아이 화면에 열려요 · 엄마는 미리 골라 둘 수 있어요' : '하고 싶은 미션을 골라 도전해봐!');
+
+  return '<section class="funm" aria-label="FUN MISSION 오늘의 도전">' +
+    '<div class="funm-hero">' +
+      '<span class="funm-badge">FUN MISSION</span>' +
+      '<b class="funm-title">오늘은 뭐 해볼까?</b>' +
+      '<small class="funm-lead">' + esc(lead) + '</small>' +
+      '<img class="funm-art" src="' + ART3D.star + '" alt="" aria-hidden="true">' +
+    '</div>' +
+    '<div class="funm-board">' +
+      '<div class="funm-board-head"><b>⭐ 오늘의 도전</b><span class="funm-count">' + sel.length + ' / ' + FUN_MAX + '</span></div>' +
+      '<div class="funm-strip">' + cards.join('') + '</div>' +
+      '<p class="funm-tip">✨ 1~5개까지 자유롭게 선택해요! ✨</p>' +
+      funHeadToolsHtml() +
+    '</div>' +
+    '<div class="funm-chips" role="group" aria-label="미션 갈래 고르기">' + chips + '</div>' +
+    '<div class="funm-list">' + (groups || '<p class="funm-none">미션이 없어요. 엄마가 ＋ 미션 추가로 넣어 줄 수 있어요.</p>') + '</div>' +
+    '<div class="funm-foot">' +
+      '<span class="funm-trophy" aria-hidden="true">🏆</span>' +
+      '<span class="funm-foot-l"><small>오늘 모은 도장</small><b>' + doneN + ' / ' + FUN_MAX + '개</b></span>' +
+      '<span class="funm-foot-note">미션 하나 완료할 때마다 도장 +' + WEEKEND_BONUS_STAMP + '개</span>' +
+    '</div>' +
+  '</section>';
 }
 function selfCount(kidKey, key){
   var d = peekDay(kidKey, key);
@@ -9460,9 +10078,11 @@ function selfChecksOn(kidKey, key){
   return n;
 }
 var STAMP_DAILY_MAX = 5;          /* MY SPACE 하루 최대 5도장 */
-var MORNING_STAMP_BONUS = 1;      /* ☀️ 아침 습관 3가지 모두 완료 → +1도장 (참 잘했어요!) */
+var MORNING_STAMP_BONUS = 1;      /* ☀️ 아침 습관 하나마다 +1도장 (#v32) */
+var MORNING_DAILY_MAX = 3;        /* ☀️ 아침 습관 3가지 → 하루 최대 3도장 */
 var MORNING_WEEK_BONUS = 3;       /* ☀️ 아침 습관 월~일 7일 모두 3/3 → 보너스 +3도장 */
-var STAMP_DAY_CAP = STAMP_DAILY_MAX + MORNING_STAMP_BONUS;   /* 하루 최대 6도장 */
+/* 하루 모을 수 있는 도장 — 아침 3 + 스스로 5 + 펀미션 5 = 13개 (주간 보너스는 따로) */
+var STAMP_DAY_CAP = MORNING_DAILY_MAX + STAMP_DAILY_MAX + FUN_MAX;   /* 13 */
 function spaceCheckedOn(kidKey, key){
   var d = peekDay(kidKey, key);
   var n = 0;
@@ -9483,15 +10103,26 @@ function morningAllDone(kidKey, key){
   for(var i = 0; i < items.length; i++){ if(d.self[items[i].id] === undefined) return false; }
   return true;
 }
-function morningStampOn(kidKey, key){ return morningAllDone(kidKey, key) ? MORNING_STAMP_BONUS : 0; }
+/* ☀️ 아침 습관은 하나를 누를 때마다 도장 1개 (#v32) — 3가지면 하루 3개 */
+function morningCheckedOn(kidKey, key){
+  var items = morningItemsOf(kidKey);
+  var d = peekDay(kidKey, key || dayKey());
+  var n = 0;
+  for(var i = 0; i < items.length; i++){ if(d.self[items[i].id] !== undefined) n++; }
+  return Math.min(MORNING_DAILY_MAX, n);
+}
+function morningStampOn(kidKey, key){ return morningCheckedOn(kidKey, key) * MORNING_STAMP_BONUS; }
 /* 월~일 7일 모두 3/3 이면 보너스 3도장 — 하루라도 빠지면 0 */
 function morningWeekBonus(kidKey, week){
   var days = weekDays(week || weekStartKey(new Date()));
   for(var i = 0; i < days.length; i++){ if(!morningAllDone(kidKey, days[i])) return 0; }
   return MORNING_WEEK_BONUS;
 }
+/* 그날 찍은 도장 — 아침(최대 3) + 스스로(최대 5) + 펀미션(최대 5) = 최대 13 */
 function dayStamps(kidKey, key){
-  return Math.min(STAMP_DAILY_MAX, spaceCheckedOn(kidKey, key)) + morningStampOn(kidKey, key);
+  return Math.min(STAMP_DAILY_MAX, spaceCheckedOn(kidKey, key)) +
+    morningStampOn(kidKey, key) +
+    bonusStampAmount(bonusCountOf(kidKey, key));
 }
 function totalStamps(kidKey){
   var k = state.kids[kidKey];
@@ -10283,7 +10914,7 @@ function applyMode(){
   document.body.setAttribute('data-face', MODE);
   applyHomeLayout();
   if(isKidMode()) state.current = MODE;
-  if(isDadMode()) state.current = 'seonwoo';
+  if(isDadMode()) state.current = dadKidNow();
 
   var title = $('#brandTitle');
   var sub = $('#brandSub');
@@ -10712,7 +11343,8 @@ function showMorningStampSlam(){
 function choreStampImg(cat, it, d){
   var c = cat || 'space';
   if(c === 'family') return familyStampImg(familyTeamKeyOf(d, it.id), it.id);
-  if(c === 'space') return mySpaceStampImg(it.id);
+  /* ✨ MY SPACE · ☀️ 아침 습관 — MY SPACE 도장 중 하나가 찍힌다 (#v32) */
+  if(c === 'space' || c === 'morning') return mySpaceStampImg(it.id);
   return '';
 }
 var _teamPick = {};
@@ -10781,7 +11413,7 @@ function renderChoreList(box, kidKey, cat, d){
   }
   box.innerHTML = items.map(function(it){ return choreCardHtml(it, d); }).join('');
 }
-/* 🌞 아침 미션 스탬프판 — 월~일 7칸, 3/3 완료한 날은 빨간 ⭕ */
+/* 🌞 아침 미션 스탬프판 — 월~일 7칸, 3/3 완료한 날은 반짝이는 해님 도장 (#v32) */
 function renderMorningBoard(kidKey){
   var box = $('#morningBoard');
   if(!box) return;
@@ -10791,15 +11423,15 @@ function renderMorningBoard(kidKey){
   var cells = days.map(function(k, i){
     var done = morningAllDone(kidKey, k);
     if(done) doneDays++;
-    var cls = 'mb-cell' + (done ? ' done' : '') + (k === todayK ? ' today' : '') + (k > todayK ? ' ahead' : '');
+    var cls = 'mb-cell stamp-slot' + (done ? ' done' : '') + (k === todayK ? ' today' : '') + (k > todayK ? ' ahead' : '');
     return '<div class="' + cls + '">' +
-      '<span class="mb-dow">' + WEEK[i] + '</span>' +
-      '<span class="mb-mark" aria-label="' + WEEK[i] + '요일 ' + (done ? '3/3 완료' : '아직') + '">' + (done ? '⭕' : '·') + '</span>' +
+      stampDiscHtml(done, STAMP_ART.sun) +
+      '<b class="mb-dow">' + WEEK[i] + '</b>' +
     '</div>';
   }).join('');
   var bonus = morningWeekBonus(kidKey);
   box.innerHTML =
-    '<div class="mb-head"><span class="mb-title">🌞 아침 미션 스탬프판</span>' +
+    '<div class="mb-head"><span class="mb-title">🌞 아침 미션 7일 스탬프판</span>' +
       '<span class="mb-pill">' + doneDays + '/7일</span></div>' +
     '<div class="mb-days">' + cells + '</div>' +
     '<div class="mb-foot' + (bonus ? ' done' : '') + '">' +
@@ -10812,7 +11444,6 @@ function renderMissions(){
   /* 금·토·일은 한 묶음 — 같은 금요일 기록을 본다 (#study) */
   var key = studyKeyNow();
   var d = peekDay(kidKey, key);            /* 매일 공부(금~일은 금요일 묶음) */
-  var dToday = peekDay(kidKey, dayKey());  /* 오늘의 추가 목표는 그날 그대로 */
   var done = basicCount(kidKey, key);
   var total = studyTaskCount(kidKey);
   var pct = total ? Math.round(done / total * 100) : 0;
@@ -10921,91 +11552,24 @@ function renderMissions(){
     noHwBtn.innerHTML = noHw ? '🌤️ 숙제 없는 날 ✓' : '🌤️ 오늘은 숙제 없는 날';
   }
 
-  /* 🌟 추가 보너스 도전 — 오늘 숙제를 모두 끝냈거나 숙제 없는 날이면 열린다
-     한 항목마다 도장 +1 · 항목은 엄마가 ＋추가 / ✕삭제 / ✏️수정 (#v26) */
+  /* ⭐ FUN MISSION — 오늘의 도전 (#v32)
+     숙제를 모두 끝냈거나 숙제 없는 날이면 열린다 (평일은 그 요일 · 금~일은 한 세트) */
   var rBox = $('#weekendBonusCard');
   if(rBox){
-    var bItems = bonusItemsOf(kidKey);
-    if(!bItems.length){
-      /* 항목을 모두 뺀 경우 — 엄마는 여기서 다시 넣을 수 있다 */
-      if(isParentMode()){
-        rBox.hidden = false;
-        rBox.innerHTML = bonusHeadHtml() +
-          '<p class="rc-lead">⭐ 추가 보너스 도전 항목이 없어요. 엄마가 ＋ 추가로 넣어 줄 수 있어요.</p>';
-      }else{
-        rBox.hidden = true;
-        rBox.innerHTML = '';
-      }
-    }else if(!bonusOpenNow(kidKey)){
+    if(!bonusOpenNow(kidKey) && !isParentMode()){
       rBox.hidden = true;
       rBox.innerHTML = '';
     }else{
-      var rCount = bonusCountOf(kidKey, key);
-      var rStamp = rCount * WEEKEND_BONUS_STAMP;
       rBox.hidden = false;
-      rBox.innerHTML = bonusHeadHtml() +
-        '<p class="rc-lead">' + (noHw
-          ? '오늘은 숙제가 없어요! 원하는 추가 보너스 도전을 해 보세요. 🙂'
-          : '오늘 숙제를 모두 완료했어요! 원하는 도전을 해보세요. 🙂') + '</p>' +
-        '<div class="rc-pill"><span aria-hidden="true">⭐</span> <b>' + rCount + ' / ' + bItems.length + '</b> · 최대 +' + (WEEKEND_BONUS_STAMP * bItems.length) + '도장</div>' +
-        '<div class="rc-rows">' +
-          bItems.map(function(r){
-            var on = !!(d.bonus && d.bonus[r.key]);
-            return '<button type="button" class="rc-row ' + r.tone + (on ? ' done' : '') + '" data-action="toggle-weekend-bonus" data-key="' + r.key + '"' +
-              ' aria-pressed="' + (on ? 'true' : 'false') + '" aria-label="' + esc(r.label) + ' 완료 표시">' +
-              '<span class="rc-ico" aria-hidden="true">' + r.icon + '</span>' +
-              '<span class="rc-main">' +
-                '<span class="rc-label">' + esc(r.label) + '</span>' +
-                '<span class="rc-sub">' + esc(r.sub || '') + '</span>' +
-              '</span>' +
-              '<span class="rc-reward">+' + WEEKEND_BONUS_STAMP + ' 도장</span>' +
-              '<span class="rc-mark" aria-hidden="true">' + (on ? '✓' : '') + '</span>' +
-            '</button>';
-          }).join('') +
-        '</div>' +
-        '<div class="rc-foot">' +
-          '<span class="rc-trophy" aria-hidden="true">🏆</span>' +
-          '<span class="rc-foot-l"><small>모은 도장</small><b>' + rStamp + '개</b></span>' +
-          '<span class="rc-foot-note">한 가지씩 완료할 때마다 도장 ' + WEEKEND_BONUS_STAMP + '개가 쌓여요!</span>' +
-        '</div>';
+      rBox.innerHTML = funMissionHtml(kidKey, key, noHw);
     }
   }
 
-  // 오늘의 추가 목표 — 아이 화면: 목표가 있을 때만 STUDY 맨 위에 / 엄마·아빠: 제자리
-  var extraBox = $('#extraGoalBox');
-  var extraTop = $('#extraGoalTop');
-  var extraHead = $('#extraGoalHead');
-  if(extraBox){
-    var ex = dToday.extra || { text:'', done:false };
-    var kidView = isKidMode();
-    var target = (kidView && extraTop) ? extraTop : extraBox;
-    if(extraHead) extraHead.hidden = kidView;
-    if(extraBox) extraBox.hidden = kidView;
-    if(extraTop) extraTop.hidden = true;
-    if(ex.text){
-      extraBox.innerHTML = '<div class="extra-row filled' + (ex.done ? ' done' : '') + '">' +
-        '<button class="check" data-action="toggle-extra" aria-pressed="' + (ex.done ? 'true' : 'false') + '" aria-label="추가 목표 완료 표시">✓</button>' +
-        '<span class="t-icon" aria-hidden="true">🎯</span>' +
-        '<span class="extra-main"><b>' + esc(ex.text) + '</b><small>오늘의 추가 목표</small></span>' +
-        '<button class="extra-edit" data-action="edit-extra" data-parent-only="1" aria-label="추가 목표 수정">✏️</button>' +
-        '<span class="t-badge st-complete">' + (ex.done ? 'COMPLETE!' : '') + '</span>' +
-        '<span class="stamp-pop st-complete" aria-hidden="true">COMPLETE!</span>' +
-      '</div>';
-      target.innerHTML = extraBox.innerHTML;
-      if(kidView && extraTop){ extraTop.hidden = false; extraBox.innerHTML = ''; }
-    }else{
-      extraBox.innerHTML = '<div class="extra-row">' +
-        '<span class="t-icon" aria-hidden="true">🎯</span>' +
-        '<span class="extra-main"><b>추가 목표를 정해 주세요</b><small>부모님이 오늘의 목표를 적어 줄 수 있어요</small></span>' +
-        '<button class="btn btn-ghost btn-sm" data-action="edit-extra" data-parent-only="1">정하기</button>' +
-      '</div>';
-    }
-  }
-  var extraHint = $('#extraHint');
-  if(extraHint) extraHint.textContent = (dToday.extra && dToday.extra.text) ? '오늘의 목표' : '부모님이 정할 수 있어요';
+  /* 🎯 추가 목표(#v32) — 설정해도 아이들에게 보이지 않아 화면에서 완전히 뺐어요 */
 
   // 1) 아침 습관 / 2) MY SPACE / 3) FAMILY TEAM
   var st = weekStats(kidKey);
+  var dToday = peekDay(kidKey, dayKey());
   var swb = $('#spaceWeekBoard');
   if(swb) swb.innerHTML = miniBoardHtml(kidKey, 'self');
   renderChoreList($('#routineList'), kidKey, 'morning', dToday);
@@ -11150,7 +11714,7 @@ function renderMissions(){
 
   var hint = $('#missionHint');
   if(hint){
-    if(noHwOn(kidKey, key)) hint.textContent = '🌤️ 숙제 없는 날 — ⭐ 추가 보너스 도전으로 도장을 모아요';
+    if(noHwOn(kidKey, key)) hint.textContent = '🌤️ 숙제 없는 날 — ⭐ FUN MISSION으로 도장을 모아요';
     else if(!total) hint.textContent = '엄마가 ＋ 추가로 숙제를 정해 주면 여기에 하나씩 쌓여요 🪙';
     else if(done === total){
       hint.textContent = weekend
@@ -11464,9 +12028,14 @@ function rwdStampRowsForDay(kidKey, dk, add){
     add(dk, it ? (it.icon || '✅') : '⭐', it ? it.label : 'MY SPACE 도장', 'MY SPACE 스스로 체크', 1,
       it ? { type:'space', day:dk, id:it.id } : { type:'space', day:dk, id:'' });
   }
-  if(morningAllDone(kidKey, dk)) add(dk, '☀️', '아침 습관 3가지 완료', '보너스 도장', MORNING_STAMP_BONUS, { type:'morning', day:dk });
-  bonusItemsAllOf(kidKey).forEach(function(r){
-    if(d.bonus && d.bonus[r.key]) add(dk, '🌟', r.label, '추가 보너스', WEEKEND_BONUS_STAMP, { type:'bonusItem', day:dk, key:r.key });
+  /* ☀️ 아침 습관 — 누른 것 하나마다 도장 1개 (#v32) */
+  morningItemsOf(kidKey).forEach(function(it){
+    if(d.self[it.id] === undefined) return;
+    if(d.morningOff) return;
+    add(dk, '☀️', it.label, '아침 습관 도장', MORNING_STAMP_BONUS, { type:'morning', day:dk, id:it.id });
+  });
+  funPoolAll().forEach(function(r){
+    if(d.bonus && d.bonus[r.key]) add(dk, '⭐', r.label, 'FUN MISSION 도장', WEEKEND_BONUS_STAMP, { type:'bonusItem', day:dk, key:r.key });
   });
 }
 function rwdDetailRows(kind, kidKey){
@@ -11525,7 +12094,7 @@ function rwdDetailRows(kind, kidKey){
 }
 function rwdDetailValue(kind, kidKey){
   if(kind === 'today-earn') return fmt(todayWonOf(kidKey));
-  if(kind === 'today-stamp') return numFmt(dayStamps(kidKey, dayKey()) + bonusStampAmount(bonusCountOf(kidKey, dayKey()))) + '개';
+  if(kind === 'today-stamp') return numFmt(dayStamps(kidKey, dayKey())) + '개';
   if(kind === 'month-earn') return fmt(monthEarnedOf(kidKey).total);
   if(kind === 'month-use') return fmt(monthPaidOf(kidKey));
   if(kind === 'balance') return fmt(balanceOf(kidKey));
@@ -11637,10 +12206,15 @@ function rwdDeleteItem(kind, kidKey, del){
     };
   }else if(type === 'morning'){
     var md2 = k.days && k.days[del.day];
-    if(!md2 || !morningAllDone(kidKey, del.day)) return;
-    label = '아침 습관 보너스 도장 ' + numFmt(MORNING_STAMP_BONUS) + '개';
-    body = '<b>' + esc(kd.name) + '</b> ' + esc(rwdRowDate(del.day)) + ' <b>아침 습관 3가지 보너스 도장 ' + numFmt(MORNING_STAMP_BONUS) + '개</b>를 취소할까요?<br><small>그날 체크는 그대로 두고 도장만 빠져요.</small>';
-    run = function(){ md2.morningOff = true; };
+    if(!md2) return;
+    var mIt = del.id ? morningItemsOf(kidKey).filter(function(x){ return x.id === del.id; })[0] : null;
+    if(del.id && (!mIt || md2.self[del.id] === undefined)) return;
+    label = (mIt ? mIt.label : '아침 습관') + ' 도장 ' + numFmt(MORNING_STAMP_BONUS) + '개';
+    body = '<b>' + esc(kd.name) + '</b> ' + esc(rwdRowDate(del.day)) + ' <b>' + esc(mIt ? mIt.label : '아침 습관') + ' 도장 ' + numFmt(MORNING_STAMP_BONUS) + '개</b>를 취소할까요?<br><small>그날 아침 습관 체크도 함께 풀려요.</small>';
+    run = function(){
+      if(del.id) delete md2.self[del.id];
+      else md2.morningOff = true;
+    };
   }else if(type === 'bonusItem'){
     var bd = k.days && k.days[del.day];
     if(!bd || !bd.bonus || !bd.bonus[del.key]) return;
@@ -11890,7 +12464,7 @@ function rewardGuideHtml(kidKey){
         ruleRow('🌟', '스스로 체크 7일 모두', 'MY SPACE · 아침 · 함께', '+' + SELF_WEEK_STAMP_BONUS + '개') +
         ruleRow('⭐', '추가 보너스 ' + bonusItemsOf(kidKey).length + '가지', '항목당 도장 +' + WEEKEND_BONUS_STAMP + '개', '최대 +' + (WEEKEND_BONUS_STAMP * bonusMaxOf(kidKey)) + '개') +
         ruleRow('✨', 'MY SPACE 5가지', '하루 스스로 체크', '+' + STAMP_DAILY_MAX + '개') +
-        '<div class="rgd-grp-note">도장 모으는 곳 — 하루 최대 ' + (STAMP_DAY_CAP + WEEKEND_BONUS_STAMP * bonusMaxOf(kidKey)) + '도장 (MY SPACE ' + STAMP_DAILY_MAX + ' + 아침 미션 ' + MORNING_STAMP_BONUS + ' + 추가 보너스 최대 ' + (WEEKEND_BONUS_STAMP * bonusMaxOf(kidKey)) + ') · 주간 완성 보너스 (아침 7일 +' + MORNING_WEEK_BONUS + '도장 · 스스로 7일 +' + SELF_WEEK_STAMP_BONUS + '도장) · 도장은 보상을 받아도 차감되지 않아요</div>' +
+        '<div class="rgd-grp-note">도장 모으는 곳 — 하루 최대 ' + STAMP_DAY_CAP + '도장 (아침 습관 ' + MORNING_DAILY_MAX + ' + MY SPACE ' + STAMP_DAILY_MAX + ' + 펀미션 최대 ' + (WEEKEND_BONUS_STAMP * bonusMaxOf(kidKey)) + ') · 주간 완성 보너스 (아침 7일 +' + MORNING_WEEK_BONUS + '도장 · 스스로 7일 +' + SELF_WEEK_STAMP_BONUS + '도장) · 도장은 보상을 받아도 차감되지 않아요</div>' +
       '</div>' +
       /* 💰 용돈 규칙끼리 한 묶음 */
       '<div class="rgd-grp money">' +
@@ -12235,7 +12809,7 @@ function rewardKidCardHtml(kidKey, primary, multi){
       '<div class="rwd-stat lilac" role="button" tabindex="0" data-action="rwd-detail" data-kind="today-stamp" data-kid="' + kidKey + '" aria-label="' + name + ' 오늘 모은 스탬프 내역 보기"><span class="rs-ico" aria-hidden="true">' + ico3d('medal','i3d-34') + '</span><span class="rs-label">오늘 모은 스탬프</span>' +
         '<strong class="rs-val">' + numFmt(todayStamps) + '개</strong>' +
         /* 아침 1 + MY SPACE 5 + 추가 보너스 N개 (#v27) */
-        '<small class="rs-sub">오늘 최대 ' + (STAMP_DAY_CAP + WEEKEND_BONUS_STAMP * bonusMaxOf(kidKey)) + '개</small></div>' +
+        '<small class="rs-sub">오늘 최대 ' + STAMP_DAY_CAP + '개</small></div>' +
       '<div class="rwd-stat mint" role="button" tabindex="0" data-action="rwd-detail" data-kind="month-earn" data-kid="' + kidKey + '" aria-label="' + name + ' 이번 달 받은 용돈 내역 보기"><span class="rs-ico" aria-hidden="true">' + ico3d('calendar','i3d-34') + '</span><span class="rs-label">이번 달 받은 용돈</span>' +
         '<strong class="rs-val" id="' + kidId('monthMoney') + '">' + fmt(me.total) + '</strong>' +
         '<small class="rs-sub" id="' + kidId('monthDetail') + '">' + monthLabel(me.month) + ' · ' + me.weeks + '주 합계</small></div>' +
@@ -12455,10 +13029,10 @@ function parentKidCardHtml(kidKey){
    selfCheckCountOn · morningAllDone · basicDone
    ========================================================= */
 var RWS_WD = ['월', '화', '수', '목', '금', '토', '일'];
-function rwsDayCell(done, label, dk, free){
-  var cls = 'rws-day' + (done ? ' on' : '') + (free ? ' free' : '') + (dk === dayKey() ? ' today' : '');
-  var mark = free ? '🌤️' : (done ? '⭕' : '');
-  return '<span class="' + cls + '"><i aria-hidden="true">' + mark + '</i><b>' + label + '</b></span>';
+function rwsDayCell(done, label, dk, free, art){
+  var cls = 'rws-day stamp-slot' + (done ? ' on' : '') + (free ? ' free' : '') + (dk === dayKey() ? ' today' : '');
+  if(free) return '<span class="' + cls + '"><i class="stamp-disc on free" aria-hidden="true">🌤️</i><b>' + label + '</b></span>';
+  return '<span class="' + cls + '">' + stampDiscHtml(done, art || STAMP_ART.star) + '<b>' + label + '</b></span>';
 }
 function rwsPageOf(kidKey, page){
   var days = weekDays(weekStartKey(new Date()));
@@ -12470,7 +13044,7 @@ function rwsPageOf(kidKey, page){
     days.forEach(function(dk, i){
       var done = morningAllDone(kidKey, dk);
       if(done) n++;
-      slots += rwsDayCell(done, RWS_WD[i], dk, false);
+      slots += rwsDayCell(done, RWS_WD[i], dk, false, STAMP_ART.sun);
     });
   }else if(page === 2){
     title = '🌟 스스로 체크 7일 스탬프판';
@@ -12478,7 +13052,7 @@ function rwsPageOf(kidKey, page){
     days.forEach(function(dk, i){
       var done = selfCheckCountOn(kidKey, dk) > 0;
       if(done) n++;
-      slots += rwsDayCell(done, RWS_WD[i], dk, false);
+      slots += rwsDayCell(done, RWS_WD[i], dk, false, STAMP_ART.star);
     });
   }else{
     title = '📚 숙제 5일 스탬프판';
@@ -12488,7 +13062,7 @@ function rwsPageOf(kidKey, page){
       var free = noHwOn(kidKey, days[i]);
       var done = basicDone(kidKey, days[i]);
       if(done) n++;
-      slots += rwsDayCell(done, labels[i], days[i], free);
+      slots += rwsDayCell(done, labels[i], days[i], free, STAMP_ART.book);
     }
   }
   return { n:n, total:total, html:
@@ -13521,6 +14095,164 @@ function familyEvents(){
   if(!Array.isArray(state.familyEvents)) state.familyEvents = [];
   return state.familyEvents;
 }
+/* =========================================================
+   🌙 음력 → 양력 (#v32)
+   ---------------------------------------------------------
+   한국천문연구원이 쓰는 규칙 그대로 계산한다.
+   · 한국 표준시(KST, UTC+9)로 날짜를 센다
+   · 삭(朔, 새 달)이 드는 날이 그 달의 1일
+   · 동지(겨울 12월 21일 무렵)가 든 달이 11월
+   · 11월부터 다음 11월까지 13달이면, 중기(中氣)가 없는 달이 윤달
+   계산은 Meeus의 삭(朔) 공식과 태양 겉보기 황경으로 하며,
+   2026~2035년 설날·추석·부처님오신날·가족 음력 생신(8.15·3.22·6.18·8.6)을 모두 맞춰 확인했다.
+   ========================================================= */
+function ljdFromYmd(y, m, d){
+  var a = Math.floor((14 - m) / 12), yy = y + 4800 - a, mm = m + 12 * a - 3;
+  return d + Math.floor((153 * mm + 2) / 5) + 365 * yy + Math.floor(yy / 4) - Math.floor(yy / 100) + Math.floor(yy / 400) - 32045 - 0.5;
+}
+function ljdToYmd(jd){
+  var z = Math.floor(jd + 0.5), f = (jd + 0.5) - z;
+  var a = z;
+  if(z >= 2299161){
+    var alpha = Math.floor((z - 1867216.25) / 36524.25);
+    a = z + 1 + alpha - Math.floor(alpha / 4);
+  }
+  var b = a + 1524, c = Math.floor((b - 122.1) / 365.25), d = Math.floor(365.25 * c), e = Math.floor((b - d) / 30.6001);
+  var day = b - d - Math.floor(30.6001 * e) + f;
+  var month = (e < 14) ? (e - 1) : (e - 13);
+  var year = (month > 2) ? (c - 4716) : (c - 4715);
+  return { y: year, m: month, d: Math.floor(day), frac: day - Math.floor(day) };
+}
+function lunarNewMoonJde(k){
+  var T = k / 1236.85;
+  var jde = 2451550.09766 + 29.530588861 * k + 0.00015437 * T * T - 0.000000150 * T * T * T + 0.00000000073 * T * T * T * T;
+  var E = 1 - 0.002516 * T - 0.0000074 * T * T;
+  function rad(deg){ return (deg % 360) * Math.PI / 180; }
+  var M  = rad(2.5534 + 29.10535670 * k - 0.0000014 * T * T - 0.00000011 * T * T * T);
+  var Mp = rad(201.5643 + 385.81693528 * k + 0.0107582 * T * T + 0.00001238 * T * T * T - 0.000000058 * T * T * T * T);
+  var F  = rad(160.7108 + 390.67050284 * k - 0.0016118 * T * T - 0.00000227 * T * T * T + 0.000000011 * T * T * T * T);
+  var Om = rad(124.7746 - 1.56375588 * k + 0.0020672 * T * T + 0.00000215 * T * T * T);
+  var corr = -0.40720 * Math.sin(Mp) + 0.17241 * E * Math.sin(M) + 0.01608 * Math.sin(2 * Mp) + 0.01039 * Math.sin(2 * F)
+    + 0.00739 * E * Math.sin(Mp - M) - 0.00514 * E * Math.sin(Mp + M) + 0.00208 * E * E * Math.sin(2 * M)
+    - 0.00111 * Math.sin(Mp - 2 * F) - 0.00057 * Math.sin(Mp + 2 * F) + 0.00056 * E * Math.sin(2 * Mp + M)
+    - 0.00042 * Math.sin(3 * Mp) + 0.00042 * E * Math.sin(M + 2 * F) + 0.00038 * E * Math.sin(M - 2 * F)
+    - 0.00024 * E * Math.sin(2 * Mp - M) - 0.00017 * Math.sin(Om) - 0.00007 * Math.sin(Mp + 2 * M)
+    + 0.00004 * Math.sin(2 * Mp - 2 * F) + 0.00004 * Math.sin(3 * M) + 0.00003 * Math.sin(Mp + M - 2 * F)
+    + 0.00003 * Math.sin(2 * Mp + 2 * F) - 0.00003 * Math.sin(Mp + M + 2 * F) + 0.00003 * Math.sin(Mp - M + 2 * F)
+    - 0.00002 * Math.sin(Mp - M - 2 * F) - 0.00002 * Math.sin(3 * Mp + M) + 0.00002 * Math.sin(4 * Mp);
+  return jde + corr;
+}
+function lunarDeltaT(y){
+  if(y >= 2005 && y <= 2050){ var t = y - 2000; return 62.92 + 0.32217 * t + 0.005589 * t * t; }
+  return 69;
+}
+/* KST 기준 그 삭이 드는 '날짜' — 양력 연·월·일 */
+function lunarNewMoonDay(k){
+  var jde = lunarNewMoonJde(k);
+  var jdUt = jde - lunarDeltaT(ljdToYmd(jde).y) / 86400;
+  var jdKst = jdUt + 9 / 24;
+  var t = ljdToYmd(jdKst);
+  return { jd: Math.floor(jdKst + 0.5) - 0.5, y: t.y, m: t.m, d: t.d };
+}
+function lunarSunLong(jde){
+  var T = (jde - 2451545.0) / 36525.0;
+  var L0 = 280.46646 + 36000.76983 * T + 0.0003032 * T * T;
+  var M = (357.52911 + 35999.05029 * T - 0.0001537 * T * T) % 360;
+  var Mr = M * Math.PI / 180;
+  var C = (1.914602 - 0.004817 * T - 0.000014 * T * T) * Math.sin(Mr) + (0.019993 - 0.000101 * T) * Math.sin(2 * Mr) + 0.000289 * Math.sin(3 * Mr);
+  var Om = (125.04 - 1934.136 * T) % 360;
+  var app = L0 + C - 0.00569 - 0.00478 * Math.sin(Om * Math.PI / 180);
+  app = app % 360;
+  return app < 0 ? app + 360 : app;
+}
+/* 그 달(1일~다음 달 1일 전날)에 중기(30° 배수)가 드는가 */
+function lunarHasMajorTerm(d1, d2){
+  var j = ljdFromYmd(d1.y, d1.m, d1.d), jend = ljdFromYmd(d2.y, d2.m, d2.d);
+  var prev = -1, steps = 0;
+  while(j < jend && steps < 40){
+    var idx = Math.floor(lunarSunLong(j) / 30);
+    if(prev >= 0 && idx !== prev) return true;
+    prev = idx;
+    j += 1; steps++;
+  }
+  return false;
+}
+function lunarKForJd(jd){ return Math.round((jd - 2451550.09766) / 29.530588861); }
+/* 해 Y의 12월 동지가 든 11월(삭) */
+function lunarMonth11Start(y){
+  var k = lunarKForJd(ljdFromYmd(y, 12, 21));
+  var best = null;
+  for(var i = -2; i <= 1; i++){
+    var nm = lunarNewMoonDay(k + i);
+    if(ljdFromYmd(nm.y, nm.m, nm.d) <= ljdFromYmd(y, 12, 21)){
+      if(!best || ljdFromYmd(nm.y, nm.m, nm.d) > ljdFromYmd(best.y, best.m, best.d)) best = nm;
+    }
+  }
+  if(!best) best = lunarNewMoonDay(k);
+  return { k: k, nm: best };
+}
+/* 음력 해 ly의 '11월부터 10월까지' 달 목록 (11·12월은 그 앞 해 것) */
+var LUNAR_MONTHS_CACHE = {};
+function lunarRawMonths(ly){
+  var key = 'y' + ly;
+  if(LUNAR_MONTHS_CACHE[key]) return LUNAR_MONTHS_CACHE[key];
+  var st0 = lunarMonth11Start(ly - 1), st1 = lunarMonth11Start(ly);
+  /* 동지가 든 11월의 삭을 정확히 다시 찾는다 */
+  var k0 = null, k1 = null, i, nm;
+  for(i = -2; i <= 2; i++){
+    nm = lunarNewMoonDay(st0.k + i);
+    if(ljdFromYmd(nm.y, nm.m, nm.d) <= ljdFromYmd(ly - 1, 12, 21)) k0 = st0.k + i;
+  }
+  for(i = -2; i <= 2; i++){
+    nm = lunarNewMoonDay(st1.k + i);
+    if(ljdFromYmd(nm.y, nm.m, nm.d) <= ljdFromYmd(ly, 12, 21)) k1 = st1.k + i;
+  }
+  if(k0 == null) k0 = st0.k;
+  if(k1 == null) k1 = st1.k;
+  var starts = [];
+  for(var kk = k0; kk <= k1; kk++) starts.push(lunarNewMoonDay(kk));
+  var leap = (k1 - k0) === 13, leapDone = false;
+  var out = [], num = 11, lastNum = 11;
+  for(var idx = 0; idx < starts.length - 1; idx++){
+    var a = starts[idx], b = starts[idx + 1];
+    var isLeap = false;
+    if(leap && !leapDone && idx > 0 && !lunarHasMajorTerm(a, b)){
+      isLeap = true; leapDone = true;
+    }
+    if(isLeap) out.push({ y:a.y, m:a.m, d:a.d, num:lastNum, leap:true });
+    else { out.push({ y:a.y, m:a.m, d:a.d, num:num, leap:false }); lastNum = num; num++; if(num > 12) num = 1; }
+  }
+  LUNAR_MONTHS_CACHE[key] = out;
+  return out;
+}
+/* 음력 (해, 달, 날, 윤달?) → 양력 날짜 키 'YYYY-MM-DD' */
+function lunarToSolarKey(ly, lm, ld, leap){
+  ly = Number(ly); lm = Number(lm); ld = Number(ld);
+  if(!(ly > 1900 && ly < 2200) || !(lm >= 1 && lm <= 12) || !(ld >= 1 && ld <= 30)) return '';
+  var list = lunarRawMonths(lm >= 11 ? ly + 1 : ly);
+  var hit = null;
+  for(var i = 0; i < list.length; i++){
+    if(list[i].num === lm && !!list[i].leap === !!leap){ hit = list[i]; break; }
+  }
+  if(!hit){
+    for(var j = 0; j < list.length; j++){ if(list[j].num === lm){ hit = list[j]; break; } }
+  }
+  if(!hit) return '';
+  var jd = ljdFromYmd(hit.y, hit.m, hit.d) + (ld - 1);
+  var t = ljdToYmd(jd);
+  return t.y + '-' + pad2(t.m) + '-' + pad2(t.d);
+}
+/* 음력 달의 날수 (달력에 음력 30일까지 있는지 확인용) */
+function lunarMonthDays(ly, lm, leap){
+  var list = lunarRawMonths(lm >= 11 ? ly + 1 : ly);
+  for(var i = 0; i < list.length - 1; i++){
+    if(list[i].num === lm && !!list[i].leap === !!leap){
+      return Math.round(ljdFromYmd(list[i+1].y, list[i+1].m, list[i+1].d) - ljdFromYmd(list[i].y, list[i].m, list[i].d));
+    }
+  }
+  return 30;
+}
+
 /* ---------- 🎂 매년 반복하는 생일·기념일 (#v25) ----------
    양력 생일·기념일은 해마다 같은 날짜라, 2029년 이후 어느 해로 넘겨도
    달력이 그 해 일정을 만들어 칸 배경 + 이모지 이름표로 보여 준다.
@@ -13531,7 +14263,39 @@ function recurringAnniversaries(){
     return a && typeof a === 'object' && a.name && Number(a.month) >= 1 && Number(a.month) <= 12 && Number(a.day) >= 1 && Number(a.day) <= 31;
   });
 }
-function recAnnDate(a, y){ return y + '-' + pad2(Number(a.month)) + '-' + pad2(Number(a.day)); }
+/* 🎂 종류 — 생일 · 제사 · 기념일 (#v32) */
+var ANN_TYPES = [
+  { key:'birth',    label:'🎂 생일',   emoji:'🎂', color:'#D9537E', soft:'#FFF2F7', line:'#F6CBD9' },
+  { key:'memorial', label:'🕯️ 제사',   emoji:'🕯️', color:'#7C6A9B', soft:'#F5F2FC', line:'#DFD6F1' },
+  { key:'anniv',    label:'💐 기념일', emoji:'💐', color:'#C08828', soft:'#FFF8E9', line:'#F1E0BC' }
+];
+function annTypeDef(key){
+  for(var i = 0; i < ANN_TYPES.length; i++){ if(ANN_TYPES[i].key === key) return ANN_TYPES[i]; }
+  return ANN_TYPES[0];
+}
+/* 저장된 기념일의 종류 — 없으면 이모지·이름으로 짐작한다 */
+function annKindOf(a){
+  if(!a) return 'birth';
+  if(a.kind === 'birth' || a.kind === 'memorial' || a.kind === 'anniv') return a.kind;
+  var e = String(a.emoji || ''), n = String(a.name || '');
+  if(/🎂/.test(e)) return 'birth';
+  if(/🕯/.test(e)) return 'memorial';
+  if(/💐/.test(e)) return 'anniv';
+  if(/기일|제사/.test(n)) return 'memorial';
+  if(/생일|생신/.test(n)) return 'birth';
+  return 'anniv';
+}
+/* 그 해의 양력 날짜 — 음력이면 그해 음력→양력으로 계산 (#v32) */
+function recAnnDate(a, y){
+  if(a && (a.lunar || a.lunarLeap)){
+    return lunarToSolarKey(y, Number(a.month), Number(a.day), !!a.lunarLeap);
+  }
+  return y + '-' + pad2(Number(a.month)) + '-' + pad2(Number(a.day));
+}
+function annLunarLabel(a){
+  if(!a || !(a.lunar || a.lunarLeap)) return '';
+  return '음력 ' + Number(a.month) + '.' + Number(a.day) + (a.lunarLeap ? ' (윤달)' : '');
+}
 function recDateValid(date){
   var p = String(date || '').split('-');
   if(p.length !== 3) return false;
@@ -13542,7 +14306,7 @@ function recYearOf(y, anns){
   var list = familyEvents();
   (anns || recurringAnniversaries()).forEach(function(a){
     var date = recAnnDate(a, y);
-    if(!recDateValid(date)) return;
+    if(!date || !recDateValid(date)) return;
     if(date < CAL_DATA_FROM) return;   /* 2026년 11월 이전은 달력에 안 보인다 (#v25) */
     var nm = String(a.name || '').trim();
     var dup = list.some(function(e){
@@ -13551,10 +14315,31 @@ function recYearOf(y, anns){
     if(dup) return;
     list.push({
       id: 'rec-' + a.id + '-' + y, date: date, end: '', time: '', emoji: a.emoji || '🎂',
-      title: nm, who: a.who || 'all', category: a.category || 'family', note: '', disp: 'bar',
-      rec: true, recId: a.id
+      title: nm, who: a.who || 'all', category: a.category || 'family',
+      note: (a.lunar || a.lunarLeap) ? ('음력 ' + Number(a.month) + '.' + Number(a.day) + (a.lunarLeap ? ' 윤달' : '')) : '',
+      disp: 'bar', rec: true, recId: a.id, annKind: annKindOf(a)
     });
   });
+}
+/* 🎂 v32 — 이미 쓰던 저장본에도 음력 생신·기일 규칙을 한 번만 더해 준다 (지운 것은 살리지 않는다) */
+var ANN_SEED_VERSION = 'v32';
+function ensureAnniversarySeeds(){
+  if(!state || !state.kids) return false;
+  if(state.annSeed === ANN_SEED_VERSION) return false;
+  var have = {}, tombstones = deletedAnniversaryKeys(), added = 0;
+  recurringAnniversaries().forEach(function(a){ have[a.id] = true; });
+  var add = [];
+  defaultRecurringAnniversaries().forEach(function(d){
+    if(have[d.id]) return;
+    if(tombstones.indexOf(annTombKey(d.month, d.day, d.name)) >= 0) return;
+    add.push(d);
+  });
+  if(add.length){
+    state.recurringAnniversaries = recurringAnniversaries().concat(add);
+    added = add.length;
+  }
+  state.annSeed = ANN_SEED_VERSION;
+  return added > 0;
 }
 function ensureRecurringAnniversaries(){
   var anns = recurringAnniversaries();
@@ -13579,6 +14364,7 @@ function removeAnniversaryEvents(a){
   state.familyEvents = familyEvents().filter(function(e){
     if(!e) return false;
     if(e.recId && a.id && e.recId === a.id) return false;
+    if(a.lunar && nm && calSplitLeadEmoji(e.title).name.trim() === nm) return false;   /* 음력은 날짜가 해마다 달라 이름으로 지운다 */
     return !(String(e.date || '').slice(5) === mmdd && calSplitLeadEmoji(e.title).name.trim() === nm);
   });
 }
@@ -13590,6 +14376,7 @@ function removeAnniversaryEvents(a){
    · 음력 생신·기일처럼 해마다 날짜만 달라지는 일정은 이름으로 묶어 한 줄로 보여 주고,
      ✕ 삭제하면 그 이름의 모든 해(과거·미래) 일정이 달력에서 함께 사라진다. */
 var ANN_EDIT_ID = '';
+var ANN_EDIT_TYPE = 'birth';   /* 🎂 생일 · 🕯️ 제사 · 💐 기념일 (#v32) */
 /* 지운 기념일 표시 — 예전 저장본이 올라오며 시드를 다시 합쳐도 지운 것이 살아나지 않게 */
 var ANN_TOMBSTONES = [];
 function annNormName(s){ return String(s == null ? '' : s).replace(/\s+/g, ' ').trim(); }
@@ -13614,6 +14401,14 @@ function annWhoLabel(who){
   return who === 'seonwoo' ? '선우' : who === 'jiwoo' ? '지우' : who === 'mom' ? '엄마' : who === 'dad' ? '아빠' : '가족';
 }
 /* 목록 차례를 정할 «오늘부터 가장 가까운 그 기념일» (2월 29일은 다음 윤년까지) */
+function annNextRealOf(a){
+  var y = Number(dayKey().slice(0, 4));
+  for(var i = 0; i < 4; i++){
+    var d = recAnnDate(a, y + i);
+    if(d && d >= dayKey()) return d;
+  }
+  return recAnnDate(a, y) || annNextDate(a.month, a.day);
+}
 function annNextDate(month, day){
   var today = dayKey();
   var y = Number(today.slice(0, 4));
@@ -13674,6 +14469,8 @@ function openAnniversaryManager(){
   var anns = recurringAnniversaries();
   var ed = ANN_EDIT_ID ? anns.filter(function(a){ return a.id === ANN_EDIT_ID; })[0] : null;
   if(ANN_EDIT_ID && !ed) ANN_EDIT_ID = '';
+  ANN_EDIT_TYPE = ed ? annKindOf(ed) : (ANN_EDIT_TYPE || 'birth');
+  var tDef = annTypeDef(ANN_EDIT_TYPE);
   /* 한 목록 — 오늘부터 가까운 날 차례대로, 같은 날이면 매년 반복이 먼저 */
   var items = [];
   var seenRec = {};
@@ -13681,13 +14478,22 @@ function openAnniversaryManager(){
     var k = pad2(Number(a.month)) + '-' + pad2(Number(a.day)) + '|' + annNormName(a.name);
     if(seenRec[k]) return;
     seenRec[k] = true;
-    items.push({ sort: annNextDate(a.month, a.day), rank: 0, html:
-      '<li class="ann-row">' +
-        '<span class="ann-emo" aria-hidden="true">' + esc(a.emoji || '🎂') + '</span>' +
-        '<span class="ann-main"><b>' + esc(a.name) + '</b><small>' + Number(a.month) + '월 ' + Number(a.day) + '일 · 매년 · ' + esc(annWhoLabel(a.who)) + '</small></span>' +
+    var kind = annKindOf(a);
+    var kd = annTypeDef(kind);
+    var lunar = !!(a.lunar || a.lunarLeap);
+    var thisY = Number(dayKey().slice(0, 4));
+    var solar = recAnnDate(a, thisY);
+    var sub = lunar
+      ? (annLunarLabel(a) + ' → ' + thisY + '년 양력 ' + (solar || '-') + ' · 매년 · ' + annWhoLabel(a.who))
+      : (Number(a.month) + '월 ' + Number(a.day) + '일 · 매년 · ' + annWhoLabel(a.who));
+    items.push({ sort: annNextRealOf(a), rank: 0, html:
+      '<li class="ann-row ' + kd.key + '">' +
+        '<span class="ann-emo" aria-hidden="true">' + esc(a.emoji || kd.emoji) + '</span>' +
+        '<span class="ann-main"><b>' + esc(a.name) + '</b><small>' + esc(sub) + '</small></span>' +
+        '<span class="ann-kindpill ' + kd.key + '">' + kd.label + '</span>' +
         (editable
-          ? '<button type="button" class="ann-btn" data-action="ann-edit" data-id="' + esc(a.id) + '">✏️ 수정</button>' +
-            '<button type="button" class="ann-btn del" data-action="ann-del" data-id="' + esc(a.id) + '">✕ 삭제</button>'
+          ? '<button type="button" class="ann-btn" data-action="ann-edit" data-id="' + esc(a.id) + '">✏️</button>' +
+            '<button type="button" class="ann-btn del" data-action="ann-del" data-id="' + esc(a.id) + '">✕</button>'
           : '') +
       '</li>'
     });
@@ -13698,8 +14504,8 @@ function openAnniversaryManager(){
         '<span class="ann-emo" aria-hidden="true">' + esc(g.emo) + '</span>' +
         '<span class="ann-main"><b>' + esc(g.name) + '</b><small>' + esc(g.next) + ' · ' + esc(annWhoLabel(g.category)) + (g.note ? ' · ' + esc(g.note) : '') + '</small></span>' +
         (editable
-          ? (g.editId ? '<button type="button" class="ann-btn" data-action="edit-family-event" data-id="' + esc(g.editId) + '">✏️ 수정</button>' : '') +
-            '<button type="button" class="ann-btn del" data-action="ann-del-one" data-key="' + esc(g.key) + '">✕ 삭제</button>'
+          ? (g.editId ? '<button type="button" class="ann-btn" data-action="edit-family-event" data-id="' + esc(g.editId) + '">✏️</button>' : '') +
+            '<button type="button" class="ann-btn del" data-action="ann-del-one" data-key="' + esc(g.key) + '">✕</button>'
           : '') +
       '</li>'
     });
@@ -13709,22 +14515,39 @@ function openAnniversaryManager(){
     return x.sort < y.sort ? -1 : 1;
   });
   var rows = items.map(function(it){ return it.html; }).join('');
-  var dval = ed ? ('2026-' + pad2(Number(ed.month)) + '-' + pad2(Number(ed.day))) : '';
+  var dval = '';
+  if(ed){
+    var yy = Number(dayKey().slice(0, 4));
+    /* 음력은 «음력 달·날»을 그대로 채운다 (#v32) */
+    dval = yy + '-' + pad2(Number(ed.month)) + '-' + pad2(Number(ed.day));
+  }
   var whoOpts = [['all', '🏠 가족'], ['seonwoo', '선우'], ['jiwoo', '지우'], ['mom', '엄마'], ['dad', '아빠']].map(function(o){
     return '<option value="' + o[0] + '"' + ((ed ? ed.who : 'all') === o[0] ? ' selected' : '') + '>' + o[1] + '</option>';
   }).join('');
+  var tabs = ANN_TYPES.map(function(t){
+    var on = (ANN_EDIT_TYPE === t.key);
+    return '<button type="button" class="ann-tab ' + t.key + (on ? ' on' : '') + '" role="tab"' +
+      ' data-action="ann-type" data-type="' + t.key + '" aria-selected="' + (on ? 'true' : 'false') + '">' + t.label + '</button>';
+  }).join('');
   var form = editable ? (
-    '<div class="ann-form">' +
+    '<div class="ann-form ' + tDef.key + '" id="annFormBox" data-type="' + tDef.key + '">' +
       '<b class="ann-sec-t">' + (ed ? '✏️ 기념일 고치기' : '＋ 생일·기념일 추가') + '</b>' +
+      '<div class="ann-tabs" role="tablist" aria-label="기념일 종류 고르기">' + tabs + '</div>' +
+      /* 이름 → 이모지 순서 (#v32) */
       '<div class="ann-form-row name-row">' +
         '<label class="ann-field">이름<input type="text" id="annName" maxlength="20" value="' + esc(ed ? ed.name : '') + '" placeholder="예: 할머니 생신"></label>' +
-        '<label class="ann-field">이모지<input type="text" id="annEmoji" maxlength="4" value="' + esc(ed ? (ed.emoji || '🎂') : '🎂') + '"></label>' +
+        '<label class="ann-field emoji-field">이모지<input type="text" id="annEmoji" maxlength="4" value="' + esc(ed ? (ed.emoji || tDef.emoji) : tDef.emoji) + '"></label>' +
       '</div>' +
-      '<div class="ann-form-row">' +
+      /* 날짜 · 대상 — 두 칸이 겹치지 않게 (#v32) */
+      '<div class="ann-form-row date-row">' +
         '<label class="ann-field">날짜<input type="date" id="annDate" value="' + esc(dval) + '"></label>' +
         '<label class="ann-field">대상<select id="annWho">' + whoOpts + '</select></label>' +
       '</div>' +
-      '<label class="ann-check"><input type="checkbox" id="annRepeat"' + (ed ? ' checked' : ' checked') + '><span>매년 반복</span></label>' +
+      '<div class="ann-checks">' +
+        '<label class="ann-check"><input type="checkbox" id="annRepeat" checked><span>매년</span></label>' +
+        '<label class="ann-check lunar"><input type="checkbox" id="annLunar"' + (ed && ed.lunar ? ' checked' : '') + '><span>(음력)</span></label>' +
+      '</div>' +
+      '<p class="ann-preview" id="annPreview"></p>' +
       '<div class="ann-form-actions">' +
         (ed ? '<button type="button" class="btn btn-ghost btn-sm" data-action="ann-cancel">취소</button>' : '') +
         '<button type="button" class="btn btn-primary btn-sm" data-action="ann-save">' + (ed ? '저장' : '＋ 추가') + '</button>' +
@@ -13733,36 +14556,72 @@ function openAnniversaryManager(){
   ) : '<p class="ann-readonly">👀 보기만 해요 · 엄마 화면에서 고칠 수 있어요</p>';
   openModal(
     '<h2 class="modal-title">🎂 생일·기념일 관리</h2>' +
-    '<p class="ann-sub">매년 반복하는 기념일은 해마다 같은 날 달력이 채워져요 · 목록에서 지우면 그 이름의 모든 해 달력에서 함께 사라져요</p>' +
+    '<p class="ann-sub">매년 반복하는 기념일은 해마다 같은 날 달력이 채워져요 · (음력)을 고르면 그해 양력 날짜로 계산해요 · 목록에서 지우면 그 이름의 모든 해 달력에서 함께 사라져요</p>' +
     '<div class="ann-sec"><b class="ann-sec-t">등록된 기념일</b><ul class="ann-list">' + (rows || '<li class="ann-empty">아직 없어요</li>') + '</ul></div>' +
     form +
     '<div class="modal-actions"><button type="button" class="btn btn-ghost" data-action="close-modal">닫기</button></div>'
   );
+  paintAnnPreview();
+}
+/* 날짜·음력·종류를 고칠 때마다 아래에 «그해 양력 날짜»를 보여 준다 */
+function paintAnnPreview(){
+  var box = $('#annPreview');
+  if(!box) return;
+  var dateEl = $('#annDate'), lunEl = $('#annLunar'), repEl = $('#annRepeat');
+  var v = dateEl ? String(dateEl.value || '') : '';
+  var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(v);
+  var lunar = !!(lunEl && lunEl.checked);
+  var repeat = !(repEl && !repEl.checked);
+  if(!m){ box.textContent = repeat ? '날짜를 고르면 달력에 표시되는 날을 알려 줄게요' : '그날 하루 일정으로 들어가요'; return; }
+  var mm = Number(m[2]), dd = Number(m[3]);
+  if(lunar){
+    var y = Number(dayKey().slice(0, 4));
+    var solar = lunarToSolarKey(y, mm, dd, false);
+    var days = lunarMonthDays(y, mm, false);
+    if(dd > days){ box.textContent = '음력 ' + mm + '월은 ' + days + '일까지예요 — 날짜를 다시 골라 주세요'; return; }
+    box.textContent = '🌙 음력 ' + mm + '.' + dd + (repeat ? ' · ' + y + '년 양력 ' + (solar || '-') : ' · 그날 하루');
+  }else{
+    box.textContent = repeat ? '☀️ 양력 ' + mm + '월 ' + dd + '일 · 매년 같은 날' : '☀️ 양력 ' + mm + '월 ' + dd + '일 · 그날 하루';
+  }
 }
 function annSave(){
   if(!isParentMode()) return;
-  var nameEl = $('#annName'), emoEl = $('#annEmoji'), dateEl = $('#annDate'), whoEl = $('#annWho'), repEl = $('#annRepeat');
+  var nameEl = $('#annName'), emoEl = $('#annEmoji'), dateEl = $('#annDate'), whoEl = $('#annWho'), repEl = $('#annRepeat'), lunEl = $('#annLunar');
   var name = String((nameEl && nameEl.value) || '').replace(/\s+/g, ' ').trim().slice(0, 20);
   if(!name){ toast('이름을 넣어 주세요'); return; }
   var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String((dateEl && dateEl.value) || ''));
   if(!m){ toast('날짜를 골라 주세요'); return; }
-  var y = m[1], mm = Number(m[2]), dd = Number(m[3]);
-  var emoji = String((emoEl && emoEl.value) || '').trim().slice(0, 4) || '🎂';
+  var y0 = Number(m[1]), mm = Number(m[2]), dd = Number(m[3]);
+  var lunar = !!(lunEl && lunEl.checked);
+  var kind = (ANN_EDIT_TYPE === 'memorial' || ANN_EDIT_TYPE === 'anniv') ? ANN_EDIT_TYPE : 'birth';
+  var tDef = annTypeDef(kind);
+  var emoji = String((emoEl && emoEl.value) || '').trim().slice(0, 4) || tDef.emoji;
+  /* 🎂 이모지를 고르면 이름에 「생일」이 없어도 생일로 인식 (#v32) */
+  if(/🎂/.test(emoji)) kind = 'birth';
+  if(/🕯/.test(emoji)) kind = 'memorial';
+  if(/💐/.test(emoji)) kind = 'anniv';
   var who = (whoEl && whoEl.value) || 'all';
   var cat = who === 'all' ? 'family' : who;
   var repeat = !!(repEl && repEl.checked);
   var anns = recurringAnniversaries();
   var old = ANN_EDIT_ID ? anns.filter(function(a){ return a.id === ANN_EDIT_ID; })[0] : null;
+  if(lunar){
+    var mdays = lunarMonthDays(y0, mm, false);
+    if(dd > mdays){ toast('음력 ' + mm + '월은 ' + mdays + '일까지예요'); return; }
+  }
   if(!repeat){
     /* 반복하지 않으면 그 날 하루 일정으로 넣는다 (고치던 반복 규칙은 걷어 낸다) */
-    var date = y + '-' + m[2] + '-' + m[3];
-    if(!recDateValid(date)){ toast('날짜를 다시 골라 주세요'); return; }
+    var date = lunar ? lunarToSolarKey(y0, mm, dd, false) : (y0 + '-' + pad2(mm) + '-' + pad2(dd));
+    if(!date || !recDateValid(date)){ toast('날짜를 다시 골라 주세요'); return; }
     if(old){
       removeAnniversaryEvents(old);
       state.recurringAnniversaries = anns.filter(function(x){ return x.id !== old.id; });
       markAnniversaryDeleted(old.month, old.day, old.name);
     }
-    familyEvents().push({ id: uid(), date: date, end: '', time: '', emoji: emoji, title: name, who: who, category: cat, note: '', disp: 'bar' });
+    familyEvents().push({
+      id: uid(), date: date, end: '', time: '', emoji: emoji, title: name, who: who, category: cat,
+      note: lunar ? ('음력 ' + mm + '.' + dd) : '', disp: 'bar', annKind: kind
+    });
     state.familyEvents = familyEvents();
     state.calMonth = date.slice(0, 7);
     state.calDay = date;
@@ -13770,18 +14629,19 @@ function annSave(){
     saveState();
     renderFamilyCalendar();
     openAnniversaryManager();
-    toast('🎂 ' + name + ' · ' + mm + '월 ' + dd + '일로 넣었어요');
+    toast(tDef.emoji + ' ' + name + ' · ' + mm + '월 ' + dd + '일로 넣었어요');
     return;
   }
   if(old){
     removeAnniversaryEvents(old);
-    if(Number(old.month) !== mm || Number(old.day) !== dd || annNormName(old.name) !== name){
+    if(Number(old.month) !== mm || Number(old.day) !== dd || annNormName(old.name) !== name || !!old.lunar !== lunar){
       markAnniversaryDeleted(old.month, old.day, old.name);   /* 옛 날짜 시드가 되살아나지 않게 */
     }
   }
   var list = state.recurringAnniversaries;
   var item = old || { id: 'ann-' + uid() };
   item.name = name; item.emoji = emoji; item.month = mm; item.day = dd; item.who = who; item.category = cat;
+  item.lunar = lunar; item.lunarLeap = false; item.kind = kind;
   if(!old) list.push(item);
   unmarkAnniversaryDeleted(mm, dd, name);
   /* 이미 만들어 둔 해(2026~2028 등)에도 바로 반영 */
@@ -13791,7 +14651,7 @@ function annSave(){
   saveState();
   renderFamilyCalendar();
   openAnniversaryManager();
-  toast((old ? '✏️ ' : '🎂 ') + name + ' ' + (old ? '기념일을 고쳤어요' : '기념일을 넣었어요'));
+  toast((old ? '✏️ ' : tDef.emoji + ' ') + name + ' ' + (old ? '기념일을 고쳤어요' : (lunar ? '음력 ' : '') + '기념일을 넣었어요'));
 }
 function annDelete(id){
   if(!isParentMode()) return;
@@ -13926,11 +14786,24 @@ function calEventIsBg(e){
   var d = calEventDisp(e);
   return d === 'summer' || d === 'winter' || d === 'spring';
 }
-/* 생일·생신·결혼기념일은 형광펜 바 대신 날짜 칸 전체를 연한 파스텔로 칠한다 (#v25) */
-var CAL_CELL_FILL_WORDS = /생일|생신|기념일/;
-function calEventCellFill(e){
-  return CAL_CELL_FILL_WORDS.test(String((e && e.title) || ''));
+/* 🎂 기념일(생일·제사·기념일) 판별 (#v32)
+   이모지·이름·저장된 종류를 보고 정한다 — 🎂 이모지를 고르면 이름에 「생일」이 없어도 기념일로 본다. */
+var CAL_ANN_WORDS = /생일|생신|기념일|기일|제사/;
+function calEventKindOf(e){
+  if(!e) return '';
+  if(e.annKind === 'birth' || e.annKind === 'memorial' || e.annKind === 'anniv') return e.annKind;
+  var t = String(e.title || ''), emo = String(e.emoji || '');
+  if(/🎂/.test(emo) || /🎂/.test(t)) return 'birth';
+  if(/🕯/.test(emo) || /🕯/.test(t)) return 'memorial';
+  if(/💐/.test(emo) || /💐/.test(t)) return 'anniv';
+  if(/기일|제사/.test(t)) return 'memorial';
+  if(/생일|생신/.test(t)) return 'birth';
+  if(/기념일/.test(t)) return 'anniv';
+  return '';
 }
+function calEventIsAnniv(e){ return !!calEventKindOf(e); }
+/* 옛 이름 — 기념일이면 바 대신 ㅁ 테두리 + 이름표로 보여 준다 */
+function calEventCellFill(e){ return calEventIsAnniv(e); }
 /* 그 날이 이 일정의 기간 안인가 (하루짜리도 true) */
 function calEventCovers(e, dk){
   if(!e || !e.date || !dk) return false;
@@ -13980,6 +14853,7 @@ function calRangeLabel(s, en){
 function renderFamilyCalendar(){
   var grid = $('#famCalGrid');
   if(!grid) return;
+  if(ensureAnniversarySeeds()) saveState();
   ensureRecurringAnniversaries();
   renderCalCycleBtn();
   renderFamPills();
@@ -13992,6 +14866,7 @@ function renderFamilyCalendar(){
   var firstDow = new Date(y, m - 1, 1).getDay();
   var dim = new Date(y, m, 0).getDate();
   var prevDim = new Date(y, m - 1, 0).getDate();
+  var mFirst = mk + '-01', mLast = mk + '-' + pad2(dim);
 
   var titleEl = $('#famCalMonth');
   if(titleEl) titleEl.textContent = y + '년 ' + m + '월';
@@ -14001,7 +14876,6 @@ function renderFamilyCalendar(){
   var headCnt = $('#famCalHeadCount');
   if(headCnt) headCnt.textContent = '이번 달 가족 일정 ' + allCount + '개';
 
-  /* 개수는 위 CALENDAR 머리 셋째 줄에 한 번만 (#5152) — 여기서는 거르는 중일 때만 알려 준다 */
   var subEl = $('#famCalSub');
   if(subEl){
     var shown = calEventsInMonth(mk, true).length;
@@ -14013,17 +14887,17 @@ function renderFamilyCalendar(){
   var evsInMonth = calEventsInMonth(mk, true);
   var dotByDate = {};
   var bgByDate = {};
-  var bdayByDate = {};   /* 생일·생신·기념일: 바 대신 날짜 칸 전체를 칠한다 (#v25) */
+  var annByDate = {};     /* 기념일 — 날짜 칸 ㅁ 테두리 + 이모지 이름표 (#v32) */
   evsInMonth.forEach(function(e){
-    /* 생일·생신·기념일은 점도 바도 아니고 날짜 칸 배경 + 이름표 */
-    if(calEventCellFill(e)){
+    if(calEventIsAnniv(e)){
       var rngB = calRangeDaysInMonth(e, mk, dim);
       if(!rngB) return;
-      var startD = e.date < mFirst ? 1 : Number(String(e.date).slice(8, 10));
       for(var db = rngB.from; db <= rngB.to; db++){
         var kbd = mk + '-' + pad2(db);
-        if(!bdayByDate[kbd]) bdayByDate[kbd] = { e: e, list: [] };
-        if(db === startD) bdayByDate[kbd].list.push(e);
+        if(!annByDate[kbd]) annByDate[kbd] = [];
+        /* 여러 날 기념일도 이름표는 첫날에만 */
+        if(!e.end || db === Number(String(e.date).slice(8, 10))) annByDate[kbd].push(e);
+        else if(calRangeDaysInMonth(e, mk, dim).from === db) annByDate[kbd].push(e);
       }
       return;
     }
@@ -14036,24 +14910,23 @@ function renderFamilyCalendar(){
     if(disp === 'summer' || disp === 'winter' || disp === 'spring'){
       var rng = calRangeDaysInMonth(e, mk, dim);
       if(!rng) return;
-      for(var dd = rng.from; dd <= rng.to; dd++){
-        var bk = mk + '-' + pad2(dd);
-        if(!bgByDate[bk]) bgByDate[bk] = disp;
-      }
+      for(var dd = rng.from; dd <= rng.to; dd++) bgByDate[mk + '-' + pad2(dd)] = disp;
     }
   });
-  /* 형광펜 바: 이번 달과 겹치는 날만 잘라 주(週)별 조각으로 나누고 레인을 빈다 */
-  var barEvs = evsInMonth.filter(function(e){ return !calEventCellFill(e) && calEventDisp(e) === 'bar'; });
+
+  /* 형광펜 바 — 이어지는 일정은 주마다 잘라 레인을 잡고, 하루짜리는 괄호 바 (#v32) */
+  var barEvs = evsInMonth.filter(function(e){ return !calEventIsAnniv(e) && calEventDisp(e) === 'bar'; });
   var weeks = Math.ceil((firstDow + dim) / 7);
   var weekSegs = [];
+  var singleByDate = {};
   for(var wi = 0; wi < weeks; wi++) weekSegs.push([]);
-  var mFirst = mk + '-01', mLast = mk + '-' + pad2(dim);
   barEvs.forEach(function(e){
-    var s = e.date < mFirst ? mFirst : e.date;
-    var en = calEventEnd(e) || e.date;
-    if(en > mLast) en = mLast;
-    if(en < mFirst || s > mLast) return;
-    var sIdx = firstDow + Number(s.slice(8, 10)) - 1;
+    var en0 = calEventEnd(e);
+    if(!en0){ singleByDate[e.date] = singleByDate[e.date] || []; singleByDate[e.date].push(e); return; }
+    var s0 = e.date < mFirst ? mFirst : e.date;
+    var en = en0 > mLast ? mLast : en0;
+    if(en < mFirst || s0 > mLast) return;
+    var sIdx = firstDow + Number(s0.slice(8, 10)) - 1;
     var eIdx = firstDow + Number(en.slice(8, 10)) - 1;
     var wFrom = Math.floor(sIdx / 7), wTo = Math.floor(eIdx / 7);
     for(var w = wFrom; w <= wTo; w++){
@@ -14066,10 +14939,10 @@ function renderFamilyCalendar(){
       });
     }
   });
-
-  var outHtml = [];
-  for(var wk = 0; wk < weeks; wk++){
-    var segs = weekSegs[wk] || [];
+  /* 같은 주에 이어지는 바가 여럿이면 위아래 줄(레인)로 나눈다 */
+  var weekLanes = [];
+  for(var wq = 0; wq < weeks; wq++){
+    var segs = weekSegs[wq] || [];
     var laneEnd = [];
     segs.slice().sort(function(a, b){ return (a.col0 - b.col0) || ((b.col1 - b.col0) - (a.col1 - a.col0)); }).forEach(function(sg){
       var lane = 0;
@@ -14077,85 +14950,108 @@ function renderFamilyCalendar(){
       sg.lane = lane;
       laneEnd[lane] = sg.col1;
     });
-    var lanes = laneEnd.length;
-    /* 하루짜리 바만 이모지·제목을 두 줄로 적는다 (#v25 · 주 경계 1칸 바는 얇은 1줄 · #v28) → 그 주만 레인을 넉넉히 */
-    var twoLine = segs.some(function(sg){ return sg.col1 === sg.col0 && !calEventEnd(sg.e); });
+    weekLanes.push(laneEnd.length);
+  }
+
+  var outHtml = [];
+  for(var wk = 0; wk < weeks; wk++){
+    var wsegs = weekSegs[wk] || [];
+    var L = weekLanes[wk] || 0;
+    var weekDays = [];
+    for(var c0 = 0; c0 < 7; c0++){
+      var ix = wk * 7 + c0;
+      if(ix < firstDow || ix >= firstDow + dim) continue;
+      weekDays.push(ix - firstDow + 1);
+    }
+    var anyBday = weekDays.some(function(dn){ return !!annByDate[mk + '-' + pad2(dn)]; });
+    /* 이어지는 바가 3줄 이상이면 기념일을 가운데(2줄 뒤)에 둔다 (#v32) */
+    var bdayMiddle = anyBday && L >= 3;
+    var laneRowOf = function(laneIdx){ return 2 + laneIdx + (bdayMiddle && laneIdx >= 2 ? 1 : 0); };
     var cellsHtml = [];
-    var weekHasHol = false;
+    var overlayHtml = [];
+    var extraRows = 0;   /* 기념일·괄호 바가 들어갈 줄 */
     for(var c = 0; c < 7; c++){
       var idx = wk * 7 + c;
       if(idx < firstDow){
-        cellsHtml.push('<span class="cal-cell other" aria-hidden="true"><span class="cal-date">' + (prevDim - (firstDow - 1 - idx)) + '</span></span>');
+        cellsHtml.push('<span class="cal-cell other" style="grid-column:' + (c + 1) + ';grid-row:1/-1" aria-hidden="true"><span class="cal-date">' + (prevDim - (firstDow - 1 - idx)) + '</span></span>');
         continue;
       }
       if(idx >= firstDow + dim){
-        cellsHtml.push('<span class="cal-cell other" aria-hidden="true"><span class="cal-date">' + (idx - firstDow - dim + 1) + '</span></span>');
+        cellsHtml.push('<span class="cal-cell other" style="grid-column:' + (c + 1) + ';grid-row:1/-1" aria-hidden="true"><span class="cal-date">' + (idx - firstDow - dim + 1) + '</span></span>');
         continue;
       }
       var d = idx - firstDow + 1;
       var dk = mk + '-' + pad2(d);
       var dow = new Date(y, m - 1, d).getDay();
       var dots = dotByDate[dk] || [];
-      var bd = bdayByDate[dk];
-      var bdList = bd ? bd.list : [];
+      var anns = annByDate[dk] || [];
       var hol = kpHolidayOf(dk);
-      if(hol) weekHasHol = true;
       var bg = bgByDate[dk] || '';
+      /* 이 칸을 지나가는 이어지는 바 */
+      var cover = wsegs.filter(function(sg){ return sg.col0 <= c && c <= sg.col1; });
+      var maxLane = cover.length ? Math.max.apply(null, cover.map(function(sg){ return sg.lane; })) : -1;
+      var singles = singleByDate[dk] || [];
+      var hasFlow = !!(anns.length || singles.length);
       var cls = 'cal-cell';
       if(dow === 0) cls += ' sun';
       else if(dow === 6) cls += ' sat';
       if(hol) cls += ' hol';
       if(bg) cls += ' bg-' + bg;
-      if(bd){ cls += ' bday cal-c-' + (bd.e && bd.e.category || 'family'); }
+      if(anns.length){ cls += ' has-ann ann-' + calEventKindOf(anns[0]); }
       if(dk === todayK) cls += ' today';
       if(dk === sel) cls += ' sel';
-      var evN = dots.length + bdList.length;
+      if(!anns.length && !singles.length && !cover.length && !hol) cls += ' empty';
+      var evN = dots.length + anns.length + singles.length + cover.length;
       var aria = m + '월 ' + d + '일 ' + WEEK[dow] + '요일' + (hol ? ', ' + hol : '') + (evN ? ', 일정 ' + evN + '개' : ', 일정 없음');
+      var annVar = anns.length ? ('--ann:' + annColorOf(calEventKindOf(anns[0])) + ';') : '';
       cellsHtml.push('<button type="button" class="' + cls + '" data-action="cal-pick" data-date="' + dk + '"' +
-        (bd ? ' style="background:var(--cat-soft,#FDF0F6)"' : '') +
-        ' aria-pressed="' + (dk === sel ? 'true' : 'false') + '" aria-label="' + esc(aria) + '">' +
+        ' style="' + annVar + 'grid-column:' + (c + 1) + ';grid-row:1/-1" aria-pressed="' + (dk === sel ? 'true' : 'false') + '" aria-label="' + esc(aria) + '">' +
         '<span class="cal-date">' + d + '</span>' +
         (hol ? '<span class="cal-hol">' + esc(hol) + '</span>' : '') +
-        (bdList.length ? '<span class="cal-bday-list">' + bdList.map(function(e){
+        (dots.length ? '<span class="cal-dots">' + dots.slice(0, 3).map(function(e){ return '<i class="cal-dot cal-c-' + e.category + '"></i>'; }).join('') +
+          (dots.length > 3 ? '<b class="cal-more">+' + (dots.length - 3) + '</b>' : '') + '</span>' : '') +
+      '</button>');
+      /* 칸 안 흐름 — 기념일(이모지+이름) → 괄호 형광펜 바 (위에서부터 빈틈없이) */
+      var flow = '';
+      if(anns.length){
+        flow += '<span class="cal-bday-list">' + anns.map(function(e){
           var bp = calBarParts(e);
           return '<span class="cal-bday">' + (bp.emo ? '<i class="cal-bday-emo" aria-hidden="true">' + esc(bp.emo) + '</i>' : '') +
             '<b class="cal-bday-name">' + esc(bp.name) + '</b></span>';
-        }).join('') + '</span>' : '') +
-        /* 생일 칸에 다른 일정이 없으면 빈 점 줄을 그리지 않는다 (#v27 · 칸 높이를 고르게) */
-        ((dots.length || !bdList.length) ? '<span class="cal-dots">' +
-          dots.slice(0, 3).map(function(e){ return '<i class="cal-dot cal-c-' + e.category + '"></i>'; }).join('') +
-          (dots.length > 3 ? '<b class="cal-more">+' + (dots.length - 3) + '</b>' : '') +
-        '</span>' : '') +
-        (dots.length && !lanes ? '<span class="cal-mini-list">' + dots.slice(0, 2).map(function(e){
-          return '<span class="cal-mini cal-c-' + e.category + '" title="' + esc(e.title) + '">' + esc(e.title) + '</span>';
-        }).join('') + (dots.length > 2 ? '<span class="cal-mini cal-c-all">+' + (dots.length - 2) + '</span>' : '') + '</span>' : '') +
-      '</button>');
+        }).join('') + '</span>';
+      }
+      if(singles.length){
+        flow += singles.slice(0, 4).map(function(e){
+          var parts = calBarParts(e);
+          return '<span class="cal-paren cal-c-' + e.category + '" title="' + esc(parts.full) + '">' + esc(parts.full) + '</span>';
+        }).join('') + (singles.length > 4 ? '<span class="cal-paren cal-c-all">+' + (singles.length - 4) + '</span>' : '');
+      }
+      if(flow){
+        var rowStart = (maxLane < 0) ? 2 : (laneRowOf(maxLane) + 1);
+        if(bdayMiddle && anns.length && maxLane >= 2) rowStart = laneRowOf(1) + 1;
+        extraRows = Math.max(extraRows, rowStart + 1);
+        overlayHtml.push('<span class="cal-flow" style="grid-column:' + (c + 1) + ';grid-row:' + rowStart + '">' + flow + '</span>');
+      }
     }
-    var barsHtml = '';
-    if(lanes){
-      barsHtml = '<div class="cal-bars" style="grid-template-rows:repeat(' + lanes + ',var(--cal-lane))">' +
-        segs.map(function(sg){
-          var ev = sg.e;
-          /* 주가 바뀌어도 이어지는 바는 같은 이름을 다시 보여 준다 (참고 이미지와 같게).
-             하루짜리 바는 이모지·제목을 두 줄로, 여러 날 바는 한 줄 가운데로 적는다. */
-          var parts = calBarParts(ev);
-          /* 1칸 폭 — 하루짜리 일정은 이모지·제목 두 줄(#v27),
-             주 경계에서 끊긴 이어지는 일정은 얇은 1줄로 앞/뒤를 나눠 잇는다 (#v28) */
-          var oneCell = (sg.col1 === sg.col0);
-          var solo = oneCell && !calEventEnd(ev);
-          var inner = oneCell
-            ? (solo
-                ? (parts.emo ? '<span class="cb-emo" aria-hidden="true">' + esc(parts.emo) + '</span>' : '') +
-                  '<span class="cb-name">' + esc(parts.name) + '</span>'
-                : esc(calBarJoinText(ev, !!sg.contL)))
-            : esc(parts.full);
-          return '<span class="cal-bar cal-c-' + ev.category + (solo ? ' solo' : '') + (oneCell && !solo ? ' wrap' : '') + (sg.contL ? ' cont-l' : '') + (sg.contR ? ' cont-r' : '') + '"' +
-            ' style="grid-column:' + (sg.col0 + 1) + ' / span ' + (sg.col1 - sg.col0 + 1) + ';grid-row:' + (sg.lane + 1) + '"' +
-            ' title="' + esc(parts.full) + '"><span class="cb-txt' + (solo ? ' cb-two' : '') + '">' + inner + '</span></span>';
-        }).join('') + '</div>';
-    }
-    outHtml.push('<div class="cal-week' + (lanes ? ' has-bars' : '') + (weekHasHol ? ' has-hol' : '') + (twoLine ? ' two-line' : '') + '" style="--lanes:' + lanes + ';--extra:' + Math.max(0, lanes - 1) + '">' +
-      '<div class="cal-cells">' + cellsHtml.join('') + '</div>' + barsHtml + '</div>');
+    /* 이어지는 바 조각들 */
+    var bandHtml = wsegs.map(function(sg){
+      var ev = sg.e;
+      var parts = calBarParts(ev);
+      var row = laneRowOf(sg.lane);
+      extraRows = Math.max(extraRows, row + 1);
+      /* 이름표는 그 주 조각의 가운데 칸에만 — 나머지 칸은 색만 이어 준다 */
+      var labelCol = (sg.col0 + sg.col1) >> 1;
+      var showLabel = (labelCol === (sg.col0 + sg.col1) / 2) ? true : false;
+      /* 여러 날 이어지는 바는 제목만 (이모지는 첫 조각에 붙는다) */
+      var text = (ev.end && String(ev.end) && String(ev.end) > String(ev.date)) ? esc(parts.name) : esc(parts.full);
+      return '<span class="cal-band cal-c-' + ev.category + (sg.contL ? ' cont-l' : '') + (sg.contR ? ' cont-r' : '') +
+        '" style="grid-column:' + (sg.col0 + 1) + '/span ' + (sg.col1 - sg.col0 + 1) + ';grid-row:' + row + '" title="' + esc(parts.full) + '">' +
+        '<span class="cal-band-txt">' + text + '</span></span>';
+    }).join('');
+    var rows = Math.max(1 + L + (extraRows > 2 + L ? extraRows - (2 + L) : 0), extraRows, 2 + L);
+    var styleRows = 'grid-template-rows:auto' + (rows > 1 ? ' repeat(' + (rows - 1) + ',minmax(var(--cal-lane),auto))' : '');
+    outHtml.push('<div class="cal-week" data-rows="' + rows + '" style="' + styleRows + '">' +
+      cellsHtml.join('') + bandHtml + overlayHtml.join('') + '</div>');
   }
   grid.innerHTML = outHtml.join('');
 
@@ -14165,6 +15061,12 @@ function renderFamilyCalendar(){
   if(form) form.hidden = !isParentMode();
   var dateEl = $('#famEvDate');
   if(dateEl && !dateEl.value) dateEl.value = sel;
+}
+/* 기념일 종류별 색 — 🎂 핑크 · 🕯️ 보라 · 💐 금색 (#v32) */
+function annColorOf(kind){
+  if(kind === 'memorial') return 'var(--ann-memorial,#7C6A9B)';
+  if(kind === 'anniv') return 'var(--ann-anniv,#C08828)';
+  return 'var(--ann-birth,#D9537E)';
 }
 function renderFamCalDay(sel){
   var box = $('#famCalDay');
@@ -14298,7 +15200,8 @@ function renderFamPills(){
 }
 /* ---------- 일정 이모지 빠른 고르기 (#4641 · #4653) ---------- */
 var EV_ICONS = [
-  ['✈️','여행'], ['🧘','운동'], ['🏥','병원'], ['🔭','천문대'], ['💇','미용실'], ['🦷','치과'],
+  ['💯','시험'], ['☕️','커피'], ['🛍️','쇼핑'], ['🎡','놀이동산'], ['🚘','여행'], ['✈️','해외'], ['🍿','영화관'],
+  ['🧘','운동'], ['🏥','병원'], ['🔭','천문대'], ['💇','미용실'], ['🦷','치과'],
   ['🎂','생일'], ['🏫','학교'], ['🍽️','외식'], ['🏃','운동회'], ['🧺','소풍'], ['🎒','체험학습'],
   ['🩺','건강검진'], ['💐','기념일'], ['👓','안과'], ['👫','친구'], ['🍻','회식'], ['📌','마감'],
   ['🏊','수영'], ['⛷️','스키']
@@ -14360,7 +15263,14 @@ function learnedIcon(text){
   return best;
 }
 var EV_ICON_HINTS = [
-  [/여행|캠핑|출장/, '✈️'],
+  /* ✨ v32 — 시험 · 커피 · 쇼핑 · 놀이동산 · 여행 · 해외 · 영화관 */
+  [/시험|단원평가|학력평가|모의고사/, '💯'],
+  [/커피|카페|스타벅스/, '☕️'],
+  [/쇼핑|백화점|아울렛|장보기/, '🛍️'],
+  [/놀이동산|놀이공원|에버랜드|롯데월드|테마파크/, '🎡'],
+  [/영화|영화관|극장/, '🍿'],
+  [/해외|출국|비행기|공항/, '✈️'],
+  [/여행|캠핑|출장|드라이브/, '🚘'],
   [/운동|필라테스|헬스|태권|축구|복싱|요가/, '🧘'],
   [/치과/, '🦷'],
   [/안과|안경/, '👓'],
@@ -14597,33 +15507,24 @@ function deleteFamilyEvent(id){
 
 /* =========================================================
    🏫 학교 시간표 (#v24)
-   · STUDY 탭의 「🏫 학교 시간표」 버튼 → 팡업
-   · 아이 · 아빠 화면: 보기만 / 엄마 화면: 선우·지우 전환 · 칸 클릭 수정 · 꾹 눌러(0.38초) 자리 바꾸기
+   · SCHEDULE 탭의 「🏫 학교 시간표」 버튼 → 팡업 (#v25)
+   · 표 위 「🏫 양원숲초등학교 3학년 4반」 줄: 엄마는 눌러서 고침 · 아이·아빠는 보기만
+   · 아이 · 아빠 화면: 보기만 / 엄마 화면: 선우·지우 전환 · 칸 클릭 글씨 수정 · 꾹 눌러(0.38초) 자리 바꾸기
    ========================================================= */
 var TT_DAYS = [
   { d:1, label:'월' }, { d:2, label:'화' }, { d:3, label:'수' }, { d:4, label:'목' }, { d:5, label:'금' }
 ];
-/* 🏫 학교 정보 · 수업 시간 종류 (#v31)
-   · 엄마가 「🏫 학교 시간표」 모달에서 학교급·학년·반·학교명과 수업 시간 종류를 고친다
-   · state.schoolInfo / schoolStyle / schoolZero 에 저장돼 Firebase 로 함께 동기화된다 */
+/* 🏫 학교 정보 — 표 바로 위 「🏫 양원숲초등학교 3학년 4반」 줄을 엄마가 눌러 고친다
+   · state.schoolInfo 에 저장돼 Firebase 로 함께 동기화된다 */
 var SCHOOL_DEFAULT_INFO = {
   seonwoo: { level:'초', grade:'3', cls:'4', name:'양원숲초등학교', lunchAfter:4 },
   jiwoo:   { level:'초', grade:'2', cls:'6', name:'양원숲초등학교', lunchAfter:3 }
 };
-var TT_STYLES = [
-  { key:'40', label:'40분 수업 · 10분 휴식' },
-  { key:'50', label:'50분 수업 · 10분 휴식' }
-];
 /* 40분 수업 — 점심은 선우 4교시 뒤(12:20~13:00) · 지우 3교시 뒤(11:20~12:10) */
 var TT_40_TIMES = {
   seonwoo: ['09:00~09:40','09:50~10:30','10:40~11:20','11:30~12:10','12:20~13:00','13:00~13:40','13:50~14:30','14:40~15:20','15:30~16:10'],
   jiwoo:   ['09:00~09:40','09:50~10:30','10:40~11:20','11:20~12:10','12:10~12:50','13:00~13:40','13:50~14:30','14:40~15:20','15:30~16:10']
 };
-/* 50분 수업 — 점심은 4교시 뒤(12:50~13:30) */
-var TT_50_TIMES = ['09:00~09:50','10:00~10:50','11:00~11:50','12:00~12:50','12:50~13:30','13:30~14:20','14:30~15:20','15:30~16:20','16:30~17:20'];
-var TT_ZERO_TIME = { '40':'08:10~08:50', '50':'08:00~08:50' };
-/* 과목 고르기 칩 — 모자라면 「직접입력」으로 */
-var TT_SUBJECTS = ['국어','영어','수학','과학','사회','미술','음악','체육','도덕','창체','통합'];
 /* 키는 「요일-교시」 — 1-1 은 월요일 1교시 */
 var TT_DEFAULT = {
   seonwoo: {
@@ -14656,49 +15557,26 @@ function schoolInfoOf(kid){
   });
   return cur;
 }
-function schoolStyleOf(kid){
-  var m = (state.schoolStyle && typeof state.schoolStyle === 'object') ? state.schoolStyle : {};
-  return m[ttKidKey(kid)] === '50' ? '50' : '40';
-}
-function schoolZeroOf(kid){
-  var m = (state.schoolZero && typeof state.schoolZero === 'object') ? state.schoolZero : {};
-  return !!m[ttKidKey(kid)];
-}
 function schoolGradeText(kid){
   var i = schoolInfoOf(kid);
   var t = String(i.grade || '') + '학년';
   if(String(i.cls || '')) t += ' ' + String(i.cls) + '반';
   return t;
 }
-function schoolLevelText(kid){ var i = schoolInfoOf(kid); return String(i.level || '초') + '등학교'; }
 function schoolNameOf(kid){ return String(schoolInfoOf(kid).name || SCHOOL_INFO.name); }
 function schoolLunchAfter(kid){ var i = schoolInfoOf(kid); return Number(i.lunchAfter) || SCHOOL_DEFAULT_INFO[ttKidKey(kid)].lunchAfter; }
-/* 교시 줄 — 0교시(켜면) · 1~8교시 · 점심시간 (#v31) */
-function ttRowsOf(kid, opts){
+/* 교시 줄 — 1~8교시 · 점심시간 (40분 수업) */
+function ttRowsOf(kid){
   var k = ttKidKey(kid);
-  var o = opts || {};
-  var style = o.style || schoolStyleOf(k);
   var rows = [];
-  if(o.zero === undefined ? schoolZeroOf(k) : !!o.zero){
-    rows.push({ k:'0', name:'0교시', time: TT_ZERO_TIME[style] });
-  }
-  if(style === '50'){
-    var n50 = 0;
-    TT_50_TIMES.forEach(function(t, i){
-      if(i === 4){ rows.push({ lunch:true, name:'점심시간', time:t }); return; }
-      n50++;
-      rows.push({ k:String(n50), name:n50 + '교시', time:t });
-    });
-  }else{
-    var times = TT_40_TIMES[k];
-    var lunchAfter = schoolLunchAfter(k);
-    var n = 0;
-    times.forEach(function(t, i){
-      if(i === lunchAfter){ rows.push({ lunch:true, name:'점심시간', time:t }); return; }
-      n++;
-      rows.push({ k:String(n), name:n + '교시', time:t });
-    });
-  }
+  var times = TT_40_TIMES[k];
+  var lunchAfter = schoolLunchAfter(k);
+  var n = 0;
+  times.forEach(function(t, i){
+    if(i === lunchAfter){ rows.push({ lunch:true, name:'점심시간', time:t }); return; }
+    n++;
+    rows.push({ k:String(n), name:n + '교시', time:t });
+  });
   return rows;
 }
 function ttEndOfPeriod(kid, period){
@@ -14774,42 +15652,50 @@ function ttCellHtml(kid, day, period, editable, grid){
   }
   return '<span class="tt-cell' + (v ? '' : ' empty') + '" data-tt-kid="' + kid + '" data-tt-key="' + key + '" aria-label="' + esc(lab) + '">' + inner + '</span>';
 }
-/* 학교 정보 줄 — 엄마는 고치고, 아이·아빠는 보기만 (#v31) */
-function ttInfoHtml(who, editable){
-  var info = schoolInfoOf(who);
-  if(!editable){
-    return '<div class="tt-info"><div class="tt-info-line">' + esc(schoolLevelText(who)) + ' · <b>' + esc(schoolGradeText(who)) + '</b> · ' + esc(schoolNameOf(who)) +
-      '<small>' + esc(schoolStyleOf(who)) + '분 수업' + (schoolZeroOf(who) ? ' · 0교시' : '') + '</small></div></div>';
+/* 🏫 학교 줄 — 표 바로 위 「🏫 양원숲초등학교 3학년 4반」
+   · 엄마는 이 줄을 눌러 학교명·학년·반을 바로 고치고, 아이·아빠는 보기만 한다 */
+var TT_INFO_EDIT = '';
+function ttSchoolLineHtml(who, editable){
+  var k = ttKidKey(who);
+  var info = schoolInfoOf(k);
+  var name = schoolNameOf(k);
+  var grade = schoolGradeText(k);
+  if(editable && TT_INFO_EDIT === k){
+    return '<div class="tt-school-form" id="ttSchoolForm">' +
+      '<label class="tt-school-name"><span aria-hidden="true">🏫</span>' +
+        '<input id="ttName" type="text" maxlength="20" value="' + esc(name) + '" aria-label="학교명"></label>' +
+      '<div class="tt-school-nums">' +
+        '<label><span>학년</span><input id="ttGrade" type="number" inputmode="numeric" min="1" max="6" value="' + esc(info.grade) + '" aria-label="학년"></label>' +
+        '<label><span>반</span><input id="ttCls" type="number" inputmode="numeric" min="1" max="20" value="' + esc(info.cls) + '" aria-label="반"></label>' +
+        '<button type="button" class="btn btn-primary btn-sm" data-action="tt-info-save">저장</button>' +
+        '<button type="button" class="btn btn-ghost btn-sm" data-action="tt-info-cancel">취소</button>' +
+      '</div>' +
+    '</div>';
   }
-  var levels = ['초','중','고'].map(function(l){
-    return '<option value="' + l + '"' + (String(info.level) === l ? ' selected' : '') + '>' + l + '</option>';
-  }).join('');
-  var styles = TT_STYLES.map(function(s){
-    return '<button type="button" class="tt-style' + (schoolStyleOf(who) === s.key ? ' on' : '') + '" data-action="tt-style" data-tt-kid="' + who + '" data-style="' + s.key + '" aria-pressed="' + (schoolStyleOf(who) === s.key ? 'true' : 'false') + '">' + s.label + '</button>';
-  }).join('');
-  return '<div class="tt-info">' +
-    '<div class="tt-info-row">' +
-      '<label class="tt-field">학교급<select id="ttLevel" data-tt-kid="' + who + '">' + levels + '</select></label>' +
-      '<label class="tt-field">학년<input id="ttGrade" type="number" inputmode="numeric" min="1" max="6" value="' + esc(info.grade) + '"></label>' +
-      '<label class="tt-field">반<input id="ttCls" type="number" inputmode="numeric" min="1" max="20" value="' + esc(info.cls) + '"></label>' +
-    '</div>' +
-    '<label class="tt-field">학교명<input id="ttName" type="text" maxlength="20" value="' + esc(info.name) + '"></label>' +
-    '<div class="tt-style-row" role="group" aria-label="수업 시간 고르기">' + styles + '</div>' +
-    '<div><button type="button" class="tt-zero' + (schoolZeroOf(who) ? ' on' : '') + '" data-action="tt-zero" data-tt-kid="' + who + '" aria-pressed="' + (schoolZeroOf(who) ? 'true' : 'false') + '">' + (schoolZeroOf(who) ? '✓ ' : '+ ') + '0교시</button></div>' +
-  '</div>';
+  var body = '<span aria-hidden="true">🏫</span><b>' + esc(name) + '</b>' +
+    '<span class="tt-school-g">' + esc(grade) + '</span>';
+  if(!editable) return '<p class="tt-school">' + body + '</p>';
+  return '<button type="button" class="tt-school" data-action="tt-info-edit" aria-label="' + esc(name + ' ' + grade + ' 고치기') + '">' + body +
+    '<span class="tt-pen" aria-hidden="true">✏️</span></button>';
 }
-function ttPickHtml(who, editable){
-  if(!editable) return '';
-  var chips = TT_SUBJECTS.map(function(s){
-    return '<button type="button" class="tt-sub" data-action="tt-sub" data-sub="' + esc(s) + '">' + esc(s) + '</button>';
-  }).join('');
-  return '<div class="tt-pick" id="ttPick" hidden>' +
-    '<div class="tt-pick-head" id="ttPickHead">과목 고르기</div>' +
-    '<div class="tt-pick-row">' + chips +
-      '<button type="button" class="tt-sub" data-action="tt-sub-free">＋ 직접입력</button>' +
-      '<button type="button" class="tt-sub" data-action="tt-sub-clear">비우기</button>' +
-    '</div>' +
-  '</div>';
+function ttInfoSave(who){
+  var k = ttKidKey(who || TT_INFO_EDIT);
+  var nm = document.getElementById('ttName');
+  var gr = document.getElementById('ttGrade');
+  var cl = document.getElementById('ttCls');
+  var patch = {};
+  if(nm && String(nm.value || '').trim()) patch.name = nm.value;
+  if(gr) patch.grade = gr.value;
+  if(cl) patch.cls = cl.value;
+  ttSetInfo(k, patch);
+  TT_INFO_EDIT = '';
+  renderSchoolTimetable(k);
+  renderAcademy();
+  renderWeek();
+  renderGlance();
+  renderHome();
+  toast('🏫 ' + schoolNameOf(k) + ' ' + schoolGradeText(k) + '으로 저장했어요');
+  return true;
 }
 function renderSchoolTimetable(kid){
   var who = isKidMode() ? MODE : ttKidKey(kid || TT_KID);
@@ -14837,19 +15723,30 @@ function renderSchoolTimetable(kid){
   }).join('');
   openModal(
     '<h2 class="modal-title">🏫 학교 시간표</h2>' +
-    ttModalTabs(who, schoolGradeText(who)) +
-    ttInfoHtml(who, editable) +
+    ttModalTabs(who) +
+    ttSchoolLineHtml(who, editable) +
     '<div class="tt-wrap"><table class="tt-table" data-tt-kid="' + who + '"><thead>' + head + '</thead><tbody>' + body + '</tbody></table></div>' +
-    ttPickHtml(who, editable) +
     '<p class="tt-hint" id="ttHint">' + (editable
-      ? '칸을 눌러 과목을 고르고, 꾹 눌러(0.4초) 다른 칸으로 옮겨요'
+      ? '칸을 눌러 글씨를 고치고, 꾹 눌러(0.4초) 다른 칸으로 옮겨요'
       : '보기만 해요 · 엄마 화면에서 고칠 수 있어요') + '</p>' +
     '<p class="tt-foot">※ 시간표는 학교 사정에 따라 바뀔 수 있어요 · 하교 시간은 「🕒 SCHEDULE」에 바로 반영돼요</p>' +
     '<div class="modal-actions"><button type="button" class="btn btn-ghost" data-action="close-modal">닫기</button></div>'
   );
+  /* 학교 줄을 고치는 중 — Enter 로 저장, 이름 칸에 바로 커서 */
+  if(editable && TT_INFO_EDIT === who){
+    var form = document.getElementById('ttSchoolForm');
+    if(form){
+      form.addEventListener('keydown', function(ev){
+        if((ev.key || '') === 'Enter'){ if(ev.preventDefault) ev.preventDefault(); ttInfoSave(who); }
+      });
+      var nmIn = document.getElementById('ttName');
+      try{ if(nmIn){ nmIn.focus(); nmIn.select(); } }catch(e){}
+    }
+  }
 }
 function openSchoolTimetable(kid){
   TT_MODAL_TAB = 'school';
+  TT_INFO_EDIT = '';
   renderSchoolTimetable(kid || (isKidMode() ? MODE : (state.current || TT_KID)));
 }
 /* 🎨 학원 시간표 — SCHEDULE 머리글의 「🎨 학원 시간표」 버튼이 바로 연다 (#v28) */
@@ -14860,17 +15757,15 @@ function openAcademyTimetable(kid){
    모달 안에서는 아이(선우·지우) 전환만 남긴다 */
 var TT_MODAL_TAB = 'school';
 var TT_MODAL_KID = '';
-/* 고른 칸 — 과목 고르기 칸(#ttPick)이 어느 칸을 고치는지 (#v31) */
-var TT_PICK = null;
-function ttModalTabs(who, grade){
+function ttModalTabs(who){
   var kidMode = isKidMode();
   if(kidMode){
-    return '<p class="tt-who">' + personIconHtml(who, 'tt-av') + ' <b>' + esc(kidDef(who).name) + '</b>' + (grade ? ' · ' + esc(grade) : '') + '</p>';
+    return '<p class="tt-who">' + personIconHtml(who, 'tt-av') + ' <b>' + esc(kidDef(who).name) + '</b></p>';
   }
   return '<div class="tt-switch" role="group" aria-label="아이 시간표 고르기">' + ['seonwoo', 'jiwoo'].map(function(k){
     var on = (k === who);
     return '<button type="button" class="' + (on ? 'on' : '') + '" data-action="tt-kid" data-kid="' + k + '" aria-pressed="' + (on ? 'true' : 'false') + '">' +
-      '<span>' + esc(kidDef(k).name) + '</span><small>' + esc(schoolGradeText(k)) + '</small></button>';
+      '<span>' + esc(kidDef(k).name) + '</span></button>';
   }).join('') + '</div>';
 }
 /* 🎨 학원 시간표 — 이번 달 시간표를 월~금 가로 5열 표로 (각 열은 시간순 아래로 · #v28)
@@ -14937,7 +15832,7 @@ var SCHOOL_END = { '4교시': '12:50', '5교시': '13:40', '6교시': '14:30' };
 function schoolEndOf(label, kid){
   var key = String(label || '').trim();
   var m = key.match(/^(\d)\s*교시/);
-  /* 그 아이의 시간표에서 그 교시가 끝나는 시각 (#v31) — 50분 수업이면 시각도 달라진다 */
+  /* 그 아이의 시간표에서 그 교시가 끝나는 시각 (#v31) */
   if(m && kid){
     var t = ttEndOfPeriod(kid, m[1]);
     if(t) return t;
@@ -15025,32 +15920,7 @@ function ttSwap(kid, a, b){
   saveState();
   return true;
 }
-/* 수업 시간 종류(40분·50분) · 0교시 · 학교 정보 (#v31) */
-function ttSetStyle(kid, style){
-  if(!isParentMode()) return false;
-  var k = ttKidKey(kid);
-  if(style !== '40' && style !== '50') return false;
-  if(!state.schoolStyle || typeof state.schoolStyle !== 'object') state.schoolStyle = {};
-  state.schoolStyle[k] = style;
-  syncSchoolDismissals(k);
-  saveState();
-  renderSchoolTimetable(k);
-  renderAcademy();
-  renderWeek();
-  renderGlance();
-  renderHome();
-  toast('🏫 ' + style + '분 수업 시간으로 바꿨어요');
-  return true;
-}
-function ttToggleZero(kid){
-  if(!isParentMode()) return false;
-  var k = ttKidKey(kid);
-  if(!state.schoolZero || typeof state.schoolZero !== 'object') state.schoolZero = {};
-  state.schoolZero[k] = !state.schoolZero[k];
-  saveState();
-  renderSchoolTimetable(k);
-  return true;
-}
+/* 학교 정보(학교명·학년·반) — 표 위 줄에서 바로 저장 */
 function ttSetInfo(kid, patch){
   if(!isParentMode()) return false;
   var k = ttKidKey(kid);
@@ -15075,18 +15945,6 @@ function ttBeginEdit(cell){
   if(!kid || !key) return;
   var grid = schoolTimetableOf(kid);
   var cur = grid[key] || '';
-  /* 🏫 과목 고르기 칸을 함께 연다 (#v31) */
-  TT_PICK = { kid: kid, key: key };
-  var pick = document.getElementById('ttPick');
-  if(pick){
-    pick.hidden = false;
-    var head = document.getElementById('ttPickHead');
-    var p = String(key).split('-');
-    if(head) head.textContent = schoolGradeText(kid) + ' ' + WEEK[Number(p[0])] + '요일 ' + p[1] + '교시 과목';
-    Array.prototype.forEach.call(pick.querySelectorAll('.tt-sub[data-sub]'), function(ch){
-      ch.classList.toggle('on', ch.getAttribute('data-sub') === cur.replace(/\n.*$/, ''));
-    });
-  }
   cell.classList.add('editing');
   cell.innerHTML = '<input class="tt-in" type="text" maxlength="20" value="' + esc(cur) + '" aria-label="과목 이름">';
   var inp = cell.querySelector('.tt-in');
@@ -15130,7 +15988,7 @@ function ttDragEnd(){
   if(d.timer) clearTimeout(d.timer);
   if(d.cell) d.cell.classList.remove('tt-dragging');
   var hint = document.getElementById('ttHint');
-  if(hint) hint.textContent = '칸을 눌러 과목을 고치고, 꾹 눌러(0.4초) 다른 칸으로 옮겨요';
+  if(hint) hint.textContent = '칸을 눌러 글씨를 고치고, 꾹 눌러(0.4초) 다른 칸으로 옮겨요';
   document.removeEventListener('pointermove', ttPointerMove);
   document.removeEventListener('pointerup', ttPointerUp);
   document.removeEventListener('pointercancel', ttDragEnd);
@@ -15559,9 +16417,9 @@ function renderHome(){
     var hbw = $('#homeHabitWeek');
     if(hbw) hbw.innerHTML = miniBoardHtml(kk2, 'morning');
     var hp = $('#homeHabitPill');
-    if(hp) hp.textContent = (mItems2.length && mDone2 >= mItems2.length) ? '참 잘했어요!' : '+1 도장';
+    if(hp) hp.textContent = (mItems2.length && mDone2 >= mItems2.length) ? '참 잘했어요!' : '하나마다 +1 도장';
     var hsub = $('#homeHabitSub');
-    if(hsub) hsub.textContent = mItems2.length ? ('오늘 ' + mDone2 + '/' + mItems2.length + ' · 3가지 모두 하면 도장 +1') : '설정에서 아침 습관을 정해요';
+    if(hsub) hsub.textContent = mItems2.length ? ('오늘 ' + mDone2 + '/' + mItems2.length + ' · 하나씩 누르면 도장 +' + MORNING_STAMP_BONUS + ' (하루 최대 ' + MORNING_DAILY_MAX + ')') : '설정에서 아침 습관을 정해요';
 
     var tasks2 = studyTasksOf(kk2);
     var sKey2 = studyKeyNow();
@@ -15667,6 +16525,8 @@ function renderAll(){
   renderTopAvatar();
   renderFamilyPick();
   renderSubReward();
+  renderDadKidSwitch();
+  renderDadFamView();
   renderMissions();
   renderWallet();
   renderRewardStampCards();
@@ -15718,7 +16578,7 @@ function markRow(selector, cls){
   row.classList.add(cls || 'just-done');
   setTimeout(function(){ row.classList.remove(cls || 'just-done'); }, 1600);
 }
-function toggleBasic(id){
+function toggleBasic(id, undo){
   if(!canCheck()) return;
   var kidKey = state.current;
   /* 금·토·일은 한 묶음 — 세 날 모두 같은 금요일 기록을 쓴다 (#study) */
@@ -15726,8 +16586,13 @@ function toggleBasic(id){
   var d = ensureDay(kidKey, key);
   var wasAll = basicDone(kidKey, key);
   var prev = weekStats(kidKey);
-  if(d.basic[id]) delete d.basic[id];
-  else d.basic[id] = true;
+  if(d.basic[id]){
+    /* 한 번 누르기로는 이미 찍힌 도장이 풀리지 않는다 — 두 번 누를 때만 취소 (#v32) */
+    if(!undo) return;
+    delete d.basic[id];
+  }else{
+    d.basic[id] = true;
+  }
   /* 마지막으로 체크한 공부 항목 — 모두 채우면 그 항목에 CLEAR! (#3836 · #3847) */
   if(d.basic[id]) d.basicLast = id;
   else if(d.basicLast === id) delete d.basicLast;
@@ -15794,7 +16659,7 @@ function setTeam(id, team){
   var t = familyTeamDef(team);
   if(t) toast(t.icon + ' ' + item.label + ' · ' + t.withLabel + '!');
 }
-function toggleSelf(id){
+function toggleSelf(id, undo){
   if(!canCheck()) return;
   var kidKey = state.current;
   var key = dayKey();
@@ -15809,6 +16674,8 @@ function toggleSelf(id){
   var morningWeekBefore = isMorning ? morningWeekBonus(kidKey) : 0;
   /* 🤝 주간 상한은 오직 금액(3,000원) — 횟수로 막지 않는다 (#v27) */
   if(d.self[id] !== undefined){
+    /* 한 번 누르기로는 이미 찍힌 도장이 풀리지 않는다 — 두 번 누를 때만 취소 (#v32) */
+    if(!undo) return;
     delete d.self[id];
     if(isFam && d.team) delete d.team[id];
   }else{
@@ -15843,13 +16710,13 @@ function toggleSelf(id){
         ? '🤝 ' + item.label + ' · ' + tDef.withLabel + ' 참여 완료! 이번 주 용돈은 최대 ' + fmt(FAMILY_WEEK_MAX) + '까지 인정돼요'
         : '🤝 ' + item.label + ' · ' + tDef.withLabel + ' 참여 완료! +' + fmt(familyMissionAmount(item, familyTeamKeyOf(d, id))) + ' 용돈');
     }else if(isMorning){
-      /* ☀️ 아침 습관 3가지를 다 채운 순간 — 「참 잘했어요!」 도장 +1 */
+      /* ☀️ 아침 습관 — 하나마다 도장 +1, 3가지를 다 채운 순간엔 「참 잘했어요!」 해님 도장 (#v32) */
       if(morningAfter && !morningBefore){
         showMorningStampSlam();
-        toast('☀️ 아침 습관 3가지 완료! 참 잘했어요! 도장 +' + MORNING_STAMP_BONUS + ' 적립 (오늘 ' + dayStamps(kidKey, key) + '/' + STAMP_DAY_CAP + ')');
+        toast('🌞 아침 습관 3가지 완료! 도장 +' + MORNING_STAMP_BONUS + '개씩 총 ' + morningStampOn(kidKey, key) + '개 (오늘 ' + dayStamps(kidKey, key) + '/' + STAMP_DAY_CAP + ')');
         burstCoins(document.querySelector('.chore-card[data-id="' + id + '"], .tm-item[data-id="' + id + '"]'), 4);
       }else{
-        toast('☀️ ' + item.label + ' 완료! 아침 습관 ' + morningProgress(kidKey).done + '/3');
+        toast('☀️ ' + item.label + ' 완료! 도장 +' + MORNING_STAMP_BONUS + ' (아침 ' + morningProgress(kidKey).done + '/3 · 오늘 ' + dayStamps(kidKey, key) + '/' + STAMP_DAY_CAP + ')');
       }
     }else{
       var sc = spaceCheckedOn(kidKey, key);
@@ -15863,8 +16730,8 @@ function toggleSelf(id){
       setTimeout(function(){ celebrateStamps(kidKey, crossed); }, 560);
     }
   }else if(isMorning && morningBefore && !morningAfter){
-    /* 3/3 → 2/3 이 되면 아침 보너스 도장도 함께 빠진다 */
-    toast('☀️ 아침 습관 ' + morningProgress(kidKey).done + '/3 — 보너스 도장 +' + MORNING_STAMP_BONUS + '도 함께 빠졌어요');
+    /* 3/3 → 2/3 이 되면 그 습관의 도장도 함께 빠진다 */
+    toast('☀️ 아침 습관 ' + morningProgress(kidKey).done + '/3 — 그 습관 도장 ' + MORNING_STAMP_BONUS + '개도 함께 빠졌어요');
   }
   /* ☀️ 월~일 7일 모두 3/3 — 보너스 도장 +3 */
   if(isMorning && morningAfter && !morningWeekBefore){
@@ -15874,54 +16741,6 @@ function toggleSelf(id){
     }
   }
   checkWeeklyBonuses(prev);
-}
-function toggleExtra(){
-  if(!canCheck()) return;
-  var kidKey = state.current;
-  var key = dayKey();
-  var d = ensureDay(kidKey, key);
-  if(!d.extra.text){ toast('부모님이 추가 목표를 먼저 정해 주세요'); return; }
-  var prev = weekStats(kidKey);
-  d.extra.done = !d.extra.done;
-  saveState();
-  renderAll();
-  if(d.extra.done){
-    chime('task');
-    burstCoins($('#extraGoalBox'), 4);
-    toast('🎯 추가 목표 완료!');
-  }
-  checkWeeklyBonuses(prev);
-}
-function editExtraModal(){
-  if(!isParentMode()) return;
-  var kidKey = state.current;
-  var d = ensureDay(kidKey, dayKey());
-  openModal(
-    '<h2 class="modal-title">🎯 오늘의 추가 목표</h2>' +
-    '<p class="modal-sub">' + kidDef(kidKey).name + ' · ' + (new Date().getMonth() + 1) + '월 ' + new Date().getDate() + '일</p>' +
-    '<div class="set-section">' +
-      '<label class="set-field">오늘의 목표<input type="text" id="extraInput" maxlength="40" value="' + esc(d.extra.text) + '" placeholder="예: 피아노 20분 연습하기"></label>' +
-      '<div class="set-hint" style="margin-top:6px">비워 두면 목표가 지워져요. 완료하면 스스로 체크 1회로 쌓여요.</div>' +
-    '</div>' +
-    '<div class="modal-actions">' +
-      '<button class="btn btn-ghost" data-action="close-modal">취소</button>' +
-      '<button class="btn btn-primary" data-action="save-extra">저장</button>' +
-    '</div>'
-  );
-  var inp = $('#extraInput');
-  if(inp){ try{ inp.focus(); inp.select(); }catch(e){} }
-}
-function saveExtra(){
-  if(!isParentMode()) return;
-  var inp = $('#extraInput');
-  var text = inp ? String(inp.value || '').trim().slice(0, 40) : '';
-  var d = ensureDay(state.current, dayKey());
-  if(text !== d.extra.text) d.extra.done = false;
-  d.extra.text = text;
-  saveState();
-  closeModal();
-  renderAll();
-  toast(text ? '오늘의 추가 목표를 정했어요' : '추가 목표를 지웠어요');
 }
 var pendingSelfCat = 'family';
 function addSelfModal(cat){
@@ -16458,16 +17277,19 @@ function paintBonusIconRow(){
 function addBonusItemModal(){
   if(!isParentMode()) return;
   BONUS_EDIT_ICON = '⭐';
-  var targets = scopeKidKeys();
-  var items = bonusItemsOf(scopedKidKey());
-  if(items.length >= BONUS_ITEM_MAX){ toast('추가 보너스 항목은 ' + BONUS_ITEM_MAX + '개까지 넣을 수 있어요'); return; }
+  var pool = funPoolAll();
+  if(pool.length >= FUN_POOL_MAX){ toast('펀미션은 ' + FUN_POOL_MAX + '개까지 넣을 수 있어요'); return; }
+  var catOpts = FUN_CATS.map(function(c){
+    return '<option value="' + c.key + '">' + c.label + '</option>';
+  }).join('');
   openModal(
-    '<h2 class="modal-title">＋ ⭐ 추가 보너스 항목</h2>' +
-    '<p class="modal-sub">' + esc(studyScopeNames(targets)) + ' · 항목마다 도장 +' + WEEKEND_BONUS_STAMP + '개</p>' +
+    '<h2 class="modal-title">＋ ⭐ 펀미션 미션 추가</h2>' +
+    '<p class="modal-sub">아이들이 오늘의 도전에서 고를 수 있는 미션이에요 · 미션마다 도장 +' + WEEKEND_BONUS_STAMP + '개</p>' +
     '<div class="set-section">' +
+      '<label class="set-field">갈래<select id="funNewCat">' + catOpts + '</select></label>' +
       bonusIconRowHtml(BONUS_EDIT_ICON) +
-      '<label class="set-field">항목 이름<input type="text" id="bonusNewLabel" maxlength="20" placeholder="예: 한자 10자 쓰기"></label>' +
-      '<label class="set-field">부제목 (선택)<input type="text" id="bonusNewSub" maxlength="30" placeholder="예: 오늘의 한자를 10자 써요!"></label>' +
+      '<label class="set-field">미션 이름<input type="text" id="bonusNewLabel" maxlength="20" placeholder="예: 한자 10자 쓰기"></label>' +
+      '<label class="set-field">설명 (선택)<input type="text" id="bonusNewSub" maxlength="30" placeholder="예: 오늘의 한자를 10자 써요!"></label>' +
     '</div>' +
     '<div class="modal-actions">' +
       '<button class="btn btn-ghost" data-action="close-modal">취소</button>' +
@@ -16481,69 +17303,69 @@ function createBonusItem(){
   if(!isParentMode()) return;
   var inp = $('#bonusNewLabel');
   var label = inp ? String(inp.value || '').trim().slice(0, 20) : '';
-  if(!label){ toast('항목 이름을 적어 주세요'); if(inp) inp.focus(); return; }
+  if(!label){ toast('미션 이름을 적어 주세요'); if(inp) inp.focus(); return; }
   var subEl = $('#bonusNewSub');
   var sub = subEl ? String(subEl.value || '').trim().slice(0, 30) : '';
   var freeEl = $('#bonusIconFree');
   var icon = (freeEl ? String(freeEl.value || '').trim().slice(0, 4) : '') || BONUS_EDIT_ICON || '⭐';
-  var targets = scopeKidKeys();
-  if(!state.bonusItems || typeof state.bonusItems !== 'object') state.bonusItems = {};
-  var newKey = 'b' + uid().replace(/[^a-zA-Z0-9]/g, '').slice(0, 10);
-  var added = 0;
-  targets.forEach(function(k){
-    var list = bonusItemsAllOf(k);
-    if(list.length >= BONUS_ITEM_MAX) return;
-    var dup = false;
-    list.forEach(function(it){ if(!it.off && selfLabelKey(it.label) === selfLabelKey(label)) dup = true; });
-    if(dup) return;
-    if(!Array.isArray(state.bonusItems[k])) state.bonusItems[k] = list;
-    list.push({ key: newKey, icon: icon, label: label, sub: sub, tone: BONUS_TONES[list.length % BONUS_TONES.length], off: false });
-    added++;
-  });
-  if(!added){ toast('이미 같은 이름의 항목이 있어요'); return; }
+  var catEl = $('#funNewCat');
+  var cat = catEl ? String(catEl.value || '') : 'explore';
+  if(!funCatDef(cat) || funCatDef(cat).key !== cat) cat = 'explore';
+  var pool = funPoolAll();
+  var dup = false;
+  pool.forEach(function(it){ if(selfLabelKey(it.label) === selfLabelKey(label)) dup = true; });
+  if(dup){ toast('이미 같은 이름의 미션이 있어요'); return; }
+  var p = funCustomPool();
+  var key = 'f' + uid().replace(/[^a-zA-Z0-9]/g, '').slice(0, 10);
+  p.add.push({ key:key, cat:cat, icon:icon, label:label, sub:sub });
   saveState();
   closeModal();
-  renderAll();
-  toast('⭐ "' + label + '" 항목을 ' + (added > 1 ? studyScopeNames(targets) + '에게 ' : '') + '추가했어요');
+  renderMissions();
+  toast('⭐ "' + label + '" 미션을 넣었어요');
 }
+/* ✕ 빼기 — 뺄 미션을 고르는 모달 (지난 도장은 남긴다) */
 /* ✕ 삭제 — 뺄 항목을 고르는 모달 (지난 도장은 남긴다) (#v26) */
 function openBonusDeleteModal(){
   if(!isParentMode()) return;
-  var kidKey = scopedKidKey();
-  var items = bonusItemsOf(kidKey);
-  var targets = scopeKidKeys();
+  var pool = funPoolAll();
   openModal(
-    '<h2 class="modal-title">✕ ⭐ 추가 보너스 삭제</h2>' +
-    '<p class="modal-sub">' + esc(studyScopeNames(targets)) + ' · 뺄 항목을 골라 주세요. 지난 도장은 그대로 남아요</p>' +
+    '<h2 class="modal-title">✕ ⭐ 펀미션 미션 빼기</h2>' +
+    '<p class="modal-sub">목록에서 뺄 미션을 골라 주세요. 지난 도장은 그대로 남아요</p>' +
     '<div class="set-section">' +
-      '<div class="rc-rows">' +
-        (items.length ? items.map(function(r){
-          return '<div class="rc-row ' + r.tone + '">' +
-            '<span class="rc-ico" aria-hidden="true">' + r.icon + '</span>' +
-            '<span class="rc-main"><span class="rc-label">' + esc(r.label) + '</span>' +
-              '<span class="rc-sub">' + esc(r.sub || '') + '</span></span>' +
-            '<button type="button" class="rc-del" data-action="del-bonus-item" data-key="' + r.key + '" aria-label="' + esc(r.label) + ' 빼기">✕ 빼기</button>' +
-          '</div>';
-        }).join('') : '<p class="modal-sub" style="margin:0">뺄 항목이 없어요.</p>') +
-      '</div>' +
+      FUN_CATS.map(function(c){
+        var list = pool.filter(function(m){ return m.cat === c.key; });
+        return list.length
+          ? '<div class="funm-group-head">' + c.label + '</div>' +
+            list.map(function(r){
+              return '<div class="rc-row ' + r.tone + '">' +
+                '<span class="rc-ico" aria-hidden="true">' + esc(r.icon) + '</span>' +
+                '<span class="rc-main"><span class="rc-label">' + esc(r.label) + '</span>' +
+                  '<span class="rc-sub">' + esc(r.sub || '') + '</span></span>' +
+                '<button type="button" class="rc-del" data-action="del-bonus-item" data-key="' + esc(r.key) + '" aria-label="' + esc(r.label) + ' 빼기">✕ 빼기</button>' +
+              '</div>';
+            }).join('')
+          : '';
+      }).join('') || '<p class="modal-sub" style="margin:0">뺄 미션이 없어요.</p>' +
     '</div>' +
     '<div class="modal-actions">' +
       '<button class="btn btn-ghost" data-action="close-modal">닫기</button>' +
     '</div>'
   );
 }
-/* 뺀 항목은 지우지 않고 off 로 남겨, 그날 받은 도장이 사라지지 않게 한다 */
+/* 뺀 미션은 풀에서만 사라지고, 그날 받은 도장은 남는다 */
 function removeBonusItem(key){
   if(!isParentMode()) return;
-  var targets = scopeKidKeys();
-  var name = '';
-  targets.forEach(function(k){
-    bonusItemsAllOf(k).forEach(function(it){ if(it.key === key){ it.off = true; if(!name) name = it.label; } });
-  });
+  var pool = funPoolAll();
+  var name = '', custom = false;
+  pool.forEach(function(it){ if(it.key === key){ name = it.label; custom = !!it.custom; } });
+  if(!name){ closeModal(); return; }
+  var p = funCustomPool();
+  if(custom) p.add = p.add.filter(function(m){ return m.key !== key; });
+  else if(p.del.indexOf(key) < 0) p.del.push(key);
   saveState();
   closeModal();
-  renderAll();
-  toast('⭐ "' + (name || '항목') + '"을(를) 뺐어요 · 지난 도장은 그대로예요');
+  renderMissions();
+  toast('⭐ "' + name + '" 미션을 목록에서 뺐어요 · 지난 도장은 그대로예요');
 }
 
 
@@ -17649,6 +18471,71 @@ function expandTimer(on){
   document.body.classList.toggle('timer-open', timer.expanded);
   renderTimer();
 }
+/* ⏱️ STUDY 제목 줄의 타이머 버튼 (#v32)
+   기존 타이머 카드를 그 자리에서 열어 준다 — STUDY가 아닐 땐 STUDY로 먼저 갔다가
+   타이머 카드로 부드럽게 데려가 잠깐 반짝인다. */
+function openTimerPanel(){
+  if(currentTab() !== 'study') setActiveTab('study');
+  var card = $('#timerCard');
+  if(!card) return;
+  try{
+    if(card.scrollIntoView) card.scrollIntoView({ behavior:'smooth', block:'center' });
+  }catch(e){}
+  card.classList.remove('timer-spot');
+  void card.offsetWidth;
+  card.classList.add('timer-spot');
+  setTimeout(function(){ card.classList.remove('timer-spot'); }, 1900);
+}
+
+/* =========================================================
+   👆 도장 찍기 · 취소 (#v32)
+   한 번 누르면 도장을 찍고(이미 찍힌 도장은 그대로), 두 번 빠르게 누르면 취소한다.
+   한 번 누르기가 바로 찍히므로 기다리는 시간이 없고, 두 번째 누르기가
+   TAP_WINDOW 안에 들어오면 그때 취소한다 — iPhone Safari 터치에서도 그대로 동작한다.
+   대상: 🏠 HOME 아침 습관 · ✨ MY SPACE · 📚 STUDY 숙제·펀미션 · 🤝 FAMILY
+   ========================================================= */
+var TAP_WINDOW = 380;
+var _lastTapKey = '';
+var _lastTapAt = 0;
+function stampTapHit(el){
+  if(!el || !el.closest) return null;
+  var inner = el.closest('[data-action]');
+  var card = el.closest('[data-action="toggle-self"]');
+  if(card) return (inner && inner !== card) ? null : { kind:'self', id:card.getAttribute('data-id') || '', el:card };
+  var fun = el.closest('[data-action="fun-mission"]');
+  if(fun) return (inner && inner !== fun) ? null : { kind:'fun', id:fun.getAttribute('data-id') || '', el:fun };
+  var row = el.closest('[data-basic-id]');
+  if(row){
+    /* 행 안의 ○ 버튼(toggle-basic)은 행과 같은 것으로 본다 — ✏️·✕ 도구만 빠진다 (#v32) */
+    var act = inner ? inner.getAttribute('data-action') : '';
+    if(inner && inner !== row && act !== 'toggle-basic') return null;
+    return { kind:'basic', id:row.getAttribute('data-basic-id') || '', el:row };
+  }
+  return null;
+}
+document.addEventListener('click', function(e){
+  if(dragSuppressClick) return;
+  var hit = stampTapHit(e.target);
+  if(!hit || !hit.id) return;
+  if(e.preventDefault) e.preventDefault();
+  if(e.stopPropagation) e.stopPropagation();
+  if(e.stopImmediatePropagation) e.stopImmediatePropagation();
+  var now = Date.now();
+  var key = hit.kind + '|' + hit.id;
+  var dt = now - _lastTapAt;
+  var dbl = (key === _lastTapKey) && dt >= 0 && dt <= TAP_WINDOW;
+  _lastTapKey = dbl ? '' : key;
+  _lastTapAt = now;
+  if(dbl){
+    if(hit.kind === 'self') toggleSelf(hit.id, true);
+    else if(hit.kind === 'basic') toggleBasic(hit.id, true);
+    else funUndoDone(hit.id);
+    return;
+  }
+  if(hit.kind === 'self') toggleSelf(hit.id, false);
+  else if(hit.kind === 'basic') toggleBasic(hit.id, false);
+  else funToggleDone(hit.id);
+}, true);
 
 /* =========================================================
    이벤트
@@ -17773,6 +18660,9 @@ document.addEventListener('click', function(e){
     case 'set-team': setTeam(target.getAttribute('data-id'), target.getAttribute('data-team')); break;
     case 'pick-family-team': setFamilyTeam(target.getAttribute('data-team')); break;
     case 'pick-family-view': setFamilyView(target.getAttribute('data-view')); break;
+    /* 👀 아빠 관람 — 보는 아이 · 참여 방식별 오늘 스탬프 (#v32) */
+    case 'dad-kid': setDadKid(target.getAttribute('data-kid')); break;
+    case 'dad-fam-tab': setDadFamTab(target.getAttribute('data-kind')); break;
     case 'open-tuition': openTuitionModal(); break;
     case 'rwd-money-page': setRewardMoneyPage(target.getAttribute('data-kid') || scopedKidKey(), Number(target.getAttribute('data-page'))); break;
     case 'open-academy-tt': openAcademyTimetable(); break;
@@ -17796,9 +18686,6 @@ document.addEventListener('click', function(e){
     case 'tuition-status': toggleTuitionStatus(target.getAttribute('data-tk'), target.getAttribute('data-ti')); break;
     case 'add-tuition': addTuition(target.getAttribute('data-tk')); break;
     case 'del-tuition': delTuition(target.getAttribute('data-tk'), target.getAttribute('data-ti')); break;
-    case 'toggle-extra': toggleExtra(); break;
-    case 'edit-extra': editExtraModal(); break;
-    case 'save-extra': saveExtra(); break;
     case 'add-self': addSelfModal(target.getAttribute('data-cat') || 'family'); break;
     /* 📚 매일 공부 3분류 — 엄마가 직접 넣고 고치고 지운다 (#study) */
     case 'add-study': addStudyModal(target.getAttribute('data-cat') || 'school'); break;
@@ -17817,7 +18704,15 @@ document.addEventListener('click', function(e){
       STUDY_EDIT_MANUAL = true;
       paintStudyIconRow();
       break;
-    case 'toggle-weekend-bonus': toggleWeekendBonus(target.getAttribute('data-key')); break;
+    /* ⭐ FUN MISSION (#v32) — 오늘의 도전 담기·빼기·갈래 거르기 */
+    case 'fun-select': funSelect(target.getAttribute('data-id') || ''); break;
+    case 'fun-unselect': funUnselect(target.getAttribute('data-id') || ''); break;
+    case 'fun-filter': setFunFilter(target.getAttribute('data-cat') || 'all'); break;
+    case 'fun-scroll-list': {
+      var funList = document.querySelector('.funm-list');
+      if(funList && funList.scrollIntoView){ try{ funList.scrollIntoView({ behavior:'smooth', block:'center' }); }catch(e){} }
+      break;
+    }
     case 'edit-bonus-labels': editBonusLabelsModal(); break;
     case 'save-bonus-labels': saveBonusLabels(); break;
     /* ⭐ 추가 보너스 항목 ＋추가 / ✕삭제 (#v26) */
@@ -17907,6 +18802,22 @@ document.addEventListener('click', function(e){
     /* 🎂 생일·기념일 관리 (#v25) */
     case 'open-ann-manager': ANN_EDIT_ID = ''; openAnniversaryManager(); break;
     case 'ann-edit': ANN_EDIT_ID = target.getAttribute('data-id') || ''; openAnniversaryManager(); break;
+    case 'ann-type': {
+      ANN_EDIT_TYPE = (target.getAttribute('data-type') === 'memorial' || target.getAttribute('data-type') === 'anniv') ? target.getAttribute('data-type') : 'birth';
+      var td = annTypeDef(ANN_EDIT_TYPE);
+      var emoIn = $('#annEmoji');
+      if(emoIn) emoIn.value = td.emoji;
+      var fbox = $('#annFormBox');
+      if(fbox){ fbox.setAttribute('data-type', td.key); fbox.className = 'ann-form ' + td.key; }
+      var tabs = document.querySelectorAll('#modalRoot .ann-tab');
+      for(var ti = 0; ti < tabs.length; ti++){
+        var onT = tabs[ti].getAttribute('data-type') === td.key;
+        tabs[ti].classList.toggle('on', onT);
+        tabs[ti].setAttribute('aria-selected', onT ? 'true' : 'false');
+      }
+      paintAnnPreview();
+      break;
+    }
     case 'ann-cancel': ANN_EDIT_ID = ''; openAnniversaryManager(); break;
     case 'ann-save': annSave(); break;
     case 'ann-del': annDelete(target.getAttribute('data-id')); break;
@@ -17931,21 +18842,16 @@ document.addEventListener('click', function(e){
       break;
     }
     case 'tt-cell': ttBeginEdit(ttCellOf(target) || target); break;
-    /* 🏫 학교 시간표 — 수업 시간 종류 · 0교시 · 과목 칩 (#v31) */
-    case 'tt-style': ttSetStyle(target.getAttribute('data-tt-kid') || TT_MODAL_KID, target.getAttribute('data-style')); break;
-    case 'tt-zero': ttToggleZero(target.getAttribute('data-tt-kid') || TT_MODAL_KID); break;
-    case 'tt-sub':
-      if(TT_PICK) ttSetCell(TT_PICK.kid, TT_PICK.key, target.getAttribute('data-sub') || '');
+    /* 🏫 학교 줄 — 엄마가 학교명·학년·반을 고친다 */
+    case 'tt-info-edit':
+      TT_INFO_EDIT = TT_MODAL_KID || TT_KID;
+      renderSchoolTimetable(TT_MODAL_KID || TT_KID);
       break;
-    case 'tt-sub-clear':
-      if(TT_PICK) ttSetCell(TT_PICK.kid, TT_PICK.key, '');
+    case 'tt-info-save': ttInfoSave(TT_MODAL_KID || TT_KID); break;
+    case 'tt-info-cancel':
+      TT_INFO_EDIT = '';
+      renderSchoolTimetable(TT_MODAL_KID || TT_KID);
       break;
-    case 'tt-sub-free': {
-      if(!TT_PICK) break;
-      var tc = document.querySelector('#modalRoot .tt-cell[data-tt-key="' + TT_PICK.key + '"]');
-      if(tc) ttBeginEdit(tc);
-      break;
-    }
     case 'preview-mode': setPreviewMode(target.getAttribute('data-mode')); break;
     case 'select-month':
       state.month = target.getAttribute('data-month');
@@ -17972,6 +18878,7 @@ document.addEventListener('click', function(e){
     case 'timer-toggle': if(timer.running) pauseTimer(false); else startTimer(); break;
     case 'timer-reset': resetTimer(); break;
     case 'timer-expand': expandTimer(true); break;
+    case 'open-timer': openTimerPanel(); break;
     case 'timer-collapse': expandTimer(false); break;
     case 'timer-alarm-off': alarmOff(); break;
     default: break;
@@ -18243,6 +19150,17 @@ document.addEventListener('touchend', function(e){
 document.addEventListener('input', function(e){
   var t = e.target;
   if(!t || !t.id) return;
+  /* 🎂 기념일 관리 — 날짜·음력·매년을 고치면 그해 양력 날짜를 바로 보여 준다 (#v32) */
+  if(t.id === 'annDate' || t.id === 'annLunar' || t.id === 'annRepeat'){ paintAnnPreview(); return; }
+  if(t.id === 'annEmoji'){
+    var ev = String(t.value || '');
+    var wantType = /🎂/.test(ev) ? 'birth' : (/🕯/.test(ev) ? 'memorial' : (/💐/.test(ev) ? 'anniv' : ''));
+    if(wantType && wantType !== ANN_EDIT_TYPE){
+      var tab = document.querySelector('#modalRoot .ann-tab[data-type="' + wantType + '"]');
+      if(tab) tab.click();
+    }
+    return;
+  }
   if(t.id === 'acName' && isParentMode()) syncAcFormHome();
   if(!isParentMode()) return;
   /* 이름을 적으면 어울리는 이모지를 먼저 골라 준다 (#4829 · #4850) */
@@ -18283,18 +19201,6 @@ document.addEventListener('change', function(e){
   /* 학원 동선: 갈 때·올 때를 고르면 학원차 승·하차 칸이 나타난다 (#3631 · #v31) */
   if((t.id === 'acMove' || t.id === 'acBackMove') && isParentMode()){ syncAcFormMove(); return; }
   if((t.id === 'editAcMove' || t.id === 'editAcBackMove') && isParentMode()){ acBusSync('edit'); return; }
-  /* 🏫 학교 시간표 — 학교급·학년·반·학교명을 바로 저장 (#v31) */
-  if((t.id === 'ttLevel' || t.id === 'ttGrade' || t.id === 'ttCls' || t.id === 'ttName') && isParentMode()){
-    var patch = {};
-    patch[t.id === 'ttLevel' ? 'level' : (t.id === 'ttGrade' ? 'grade' : (t.id === 'ttCls' ? 'cls' : 'name'))] = t.value;
-    ttSetInfo(TT_MODAL_KID || TT_KID, patch);
-    renderSchoolTimetable(TT_MODAL_KID || TT_KID);
-    renderAcademy();
-    renderWeek();
-    renderGlance();
-    renderHome();
-    return;
-  }
   /* 공유 달력: 종류를 고르면 대상을 같은 사람으로 맞춰 준다 */
   if(t.id === 'famEvCat' && isParentMode()){
     var whoEl = $('#famEvWho');
@@ -18422,7 +19328,7 @@ function checkDayChange(){
 function boot(){
   state = loadState();
   /* 🎂 매년 반복하는 생일·기념일 — 오늘·보고 있는 해의 일정을 미리 만들어 둔다 (#v25) */
-  try{ ensureRecurringAnniversaries(); }catch(e) { if(window.console) console.error(e); }
+  try{ if(ensureAnniversarySeeds()) saveState(); ensureRecurringAnniversaries(); }catch(e) { if(window.console) console.error(e); }
   /* 🔥 가족 로그인 게이트 · 실시간 동기화 (#1317)
      http(s) + Firebase SDK 가 실제로 있을 때만 잠그고,
      file:// · 테스트(jsdom) · CDN 차단 시에는 이 기기 저장 모드로 연다 */
@@ -18477,10 +19383,9 @@ function boot(){
       schoolTimetable: function(kid){ return JSON.parse(JSON.stringify(schoolTimetableOf(kid || TT_KID))); },
       schoolTimetableSet: function(kid, key, v){ return ttSetCell(kid, key, v); },
       schoolTimetableSwap: function(kid, a, b){ return ttSwap(kid, a, b); },
-      /* 🏫 학교 정보·수업 시간·0교시·하교 안내 (#v31) */
+      /* 🏫 학교 정보·하교 안내 (#v24 · #v31) */
       schoolInfo: function(kid){ return JSON.parse(JSON.stringify(schoolInfoOf(kid || TT_KID))); },
-      schoolStyle: function(kid){ return schoolStyleOf(kid || TT_KID); },
-      schoolZero: function(kid){ return schoolZeroOf(kid || TT_KID); },
+      schoolInfoSet: function(kid, patch){ return ttSetInfo(kid || TT_KID, patch); },
       schoolRows: function(kid){ return JSON.parse(JSON.stringify(ttRowsOf(kid || TT_KID))); },
       schoolDismissal: function(kid, dateKey){
         var dk = /^\d{4}-\d{2}-\d{2}$/.test(dateKey || '') ? dateKey : dayKey();
@@ -18489,6 +19394,10 @@ function boot(){
         return r ? r.text : '';
       },
       openSchoolTimetable: function(kid){ openSchoolTimetable(kid); },
+      /* 🌙 음력 → 양력 (#v32) — 테스트·디버깅용 */
+      lunar: function(ly, lm, ld, leap){ return lunarToSolarKey(ly, lm, ld, !!leap); },
+      lunarMonthDays: function(ly, lm, leap){ return lunarMonthDays(ly, lm, !!leap); },
+      anniversaries: function(){ return JSON.parse(JSON.stringify(recurringAnniversaries())); },
       /* 🎂 생일 축하 팡업 (#v24) */
       birthdayOf: function(dk){ return calBdayOf(dk); },
       birthdayShown: function(who){ return bdayShownOn(who, dayKey()); },
