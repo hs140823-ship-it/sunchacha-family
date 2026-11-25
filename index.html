@@ -716,10 +716,25 @@ body[data-face="jiwoo"] .tt-dial{--tt:#EC4899;--tt2:#F472B6}
   border-radius:999px;padding:2px 7px;
 }
 .ac-del{
-  flex:0 0 auto;width:26px;height:26px;border-radius:8px;
-  color:#A9BED6;font-size:11px;display:grid;place-items:center;
+  flex:0 0 auto;width:28px;height:28px;border-radius:999px;
+  color:#D0573B;background:#FFF1EC;border:1px solid #F6D3C9;
+  font-size:12px;font-weight:900;line-height:1;display:grid;place-items:center;
 }
-.ac-del:hover{background:#fff;color:#D0573B}
+.ac-del:hover{background:#FFE3DA;color:#B8432A;border-color:#F0BFAF}
+.ac-del:active{transform:scale(.94)}
+/* 🗓 SCHEDULE 요일 바 (#v36) — 월~일 한 줄, 기본은 오늘 */
+.ac-daybar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;margin:0 0 11px}
+.ac-day{position:relative;height:40px;border-radius:13px;border:1.5px solid var(--line-strong);background:var(--row-bg);
+  color:var(--soft-ink);font:inherit;font-size:12.5px;font-weight:900;cursor:pointer;padding:0;letter-spacing:-.02em}
+.ac-day:active{transform:scale(.97)}
+.ac-day.on{background:linear-gradient(160deg,var(--btn1),var(--btn2));border-color:var(--btn2);color:#fff;box-shadow:var(--btn-shadow)}
+.ac-day.today i{position:absolute;left:50%;bottom:3px;width:4px;height:4px;margin-left:-2px;border-radius:50%;background:#F0A63C}
+.ac-day.on.today i{background:#FFE7B8}
+/* 🗓️ 학원 시간표 팝업 — 달 고르기 (#v36) */
+.tt-months{display:flex;gap:5px;flex-wrap:wrap;margin:2px 0 8px}
+.tt-month{min-height:30px;padding:4px 12px;border-radius:999px;border:1.5px solid var(--line-strong);background:var(--row-bg);
+  color:var(--soft-ink);font:inherit;font-size:11.5px;font-weight:900;cursor:pointer}
+.tt-month.on{background:linear-gradient(160deg,var(--btn1),var(--btn2));border-color:var(--btn2);color:#fff;box-shadow:var(--btn-shadow)}
 .ac-done-note{font-size:11.5px;color:var(--muted);margin-top:9px;text-align:center}
 .empty:not(.cal-cell){
   margin-top:12px;padding:18px 12px;text-align:center;
@@ -1957,10 +1972,10 @@ body.drag-active,body.drag-active *{-webkit-user-select:none;user-select:none;-w
 .fam-rule b{color:var(--soft-ink)}
 .fam-cap{background:var(--row-bg);border:1px solid var(--row-line);border-radius:13px;padding:8px 10px;margin:0 0 9px}
 /* 참여 방식 선택 — 미션 카드 위 한 곳에서 (#4962) */
-.fam-add-tools{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:6px;margin:2px 0 9px;width:100%}
+.fam-add-tools{display:flex;align-items:center;gap:5px;margin-left:auto;flex:0 0 auto;width:auto}
 .fam-add-tools .btn{width:auto}
-.fam-add-tools .hint{margin-top:0}
 .fam-pick-bar{margin:2px 0 10px}
+.fam-pick-hint{display:block;margin:6px 2px 0;font-size:10.5px;font-weight:800;letter-spacing:-.02em}
 .fpb-title{display:block;font-size:11.5px;font-weight:900;color:var(--ink);margin:0 0 6px 2px;letter-spacing:-.01em}
 .fpb-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
 .fpb-grid .fpb-btn{min-width:0;font-size:11.5px;padding:0 4px;white-space:nowrap}
@@ -1979,84 +1994,133 @@ body.drag-active,body.drag-active *{-webkit-user-select:none;user-select:none;-w
 .fam-cap-bar i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--done1),var(--mint));transition:width .45s ease}
 .fam-cap-note{font-size:10px;font-weight:800;color:var(--soft-ink);margin-top:5px;line-height:1.4}
 .fam-cap-note[hidden]{display:none}
-/* 📢 FAMILY 규칙 안내 버튼 + 🤝 이번 주 가족 참여도 카드 (#v35 · 시안 8863228F) */
-.famrule-btn{display:flex;align-items:center;gap:7px;width:auto;max-width:100%;margin:2px 2px 10px;padding:8px 13px;border-radius:999px;
-  background:linear-gradient(150deg,#FFFDF6,#F7FCF4);border:1.5px solid #E4EFD9;box-shadow:0 10px 20px -24px rgba(58,96,44,.85);
-  font:inherit;font-size:12.5px;font-weight:900;color:#3E5E36;cursor:pointer}
+/* 🎨 FAMILY 일러스트 스프라이트 (#v36) — index.html 안에 한 벌만 두고 <use>로 함께 써요 */
+.fam-sprite{position:absolute;width:0;height:0;overflow:hidden;pointer-events:none}
+.fam-art{display:block;width:100%;height:auto}
+/* 📢 미션 규칙 안내 + 엄마 수정 버튼 한 줄 (#v36) */
+.fam-topbar{display:flex;align-items:center;gap:6px;flex-wrap:wrap;row-gap:6px;margin:2px 0 11px}
+.famrule-btn{display:inline-flex;align-items:center;gap:5px;flex:0 0 auto;max-width:100%;padding:6px 10px 6px 9px;border-radius:999px;
+  background:linear-gradient(150deg,#FFFDF6,#F7FCF4);border:1.5px solid #E4EFD9;box-shadow:0 10px 20px -22px rgba(58,96,44,.9);
+  font:inherit;font-size:11.5px;font-weight:900;color:#3E5E36;cursor:pointer;white-space:nowrap;letter-spacing:-.02em}
 .famrule-btn:active{transform:scale(.985)}
-.famrule-btn .frb-ico{font-size:15px;line-height:1}
-.famrule-btn .frb-chev{margin-left:2px;font-size:16px;font-weight:900;color:#8FA57F;line-height:1}
-.famjoin{position:relative;padding:12px 13px 11px;border-radius:20px;overflow:hidden;
-  background:linear-gradient(168deg,#F4FBF2,#FFFDF6 58%,#F1FAFF);border:1.5px solid #DCEBD3;
+.famrule-btn .frb-ico{font-size:14px;line-height:1}
+.famrule-btn .frb-chev{margin-left:1px;font-size:15px;font-weight:900;color:#8FA57F;line-height:1}
+.fam-add-tools{display:flex;align-items:center;gap:5px;margin-left:auto}
+.fam-add-tools .btn{border-radius:999px;font-size:11.5px;font-weight:900;padding:5px 9px;min-height:31px;white-space:nowrap;letter-spacing:-.02em}
+.famjoin{position:relative;padding:13px 14px 12px;border-radius:22px;overflow:hidden;
+  background:linear-gradient(168deg,#F3FBF1 0%,#FFFDF6 56%,#F0F9FF 100%);border:1.5px solid #DCEBD3;
   box-shadow:0 18px 32px -34px rgba(58,96,44,.65)}
-.fj-people{position:absolute;right:10px;top:8px;display:none;font-size:22px;line-height:1;letter-spacing:-6px}
-.fj-title{display:flex;align-items:center;gap:6px;font-size:15.5px;font-weight:900;color:#2C4A34;letter-spacing:-.03em}
-.fj-title span{font-size:19px;line-height:1}
-.fj-count{margin:9px 0 0;padding:6px 11px;border-radius:999px;background:rgba(255,255,255,.82);border:1px solid rgba(120,160,120,.16);
-  font-size:11.5px;font-weight:800;color:#4A6350;line-height:1.35}
+.famjoin::after{content:'';position:absolute;left:7px;right:7px;top:7px;bottom:7px;border-radius:17px;
+  border:1px dashed rgba(146,188,134,.34);pointer-events:none}
+.fj-body{position:relative;z-index:1;display:flex;align-items:flex-start;gap:2px}
+.fj-main{flex:1 1 auto;min-width:0;padding-top:2px}
+.fj-art{flex:0 0 106px;width:106px;margin:-9px -6px 0 0}
+.fj-art .fam-art{filter:drop-shadow(0 6px 10px rgba(120,150,110,.16))}
+.fj-title{display:flex;align-items:center;gap:5px;font-size:15.5px;font-weight:900;color:#2C4A34;letter-spacing:-.035em;line-height:1.25}
+.fj-title>span{font-size:19px;line-height:1}
+.fj-spark{width:15px;height:15px;flex:0 0 auto;color:#FFC94D}
+.fj-spark.s2{width:10px;height:10px;margin-left:-1px;margin-top:-7px;opacity:.9}
+.fj-count{margin:9px 0 0;padding:6px 11px;border-radius:999px;background:rgba(255,255,255,.86);border:1px solid rgba(120,160,120,.18);
+  font-size:11px;font-weight:800;color:#4A6350;line-height:1.35;letter-spacing:-.02em}
 .fj-count b{font-size:13px;font-weight:900;color:#1F5E3A}
-.fj-money{margin:6px 0 0;padding:6px 11px;border-radius:999px;background:#F1F9E8;border:1px solid #DFEDCB;
-  font-size:11.5px;font-weight:800;color:#4F6B3C;line-height:1.35}
+.fj-money{position:relative;z-index:1;margin:8px 0 0;padding:6px 11px;border-radius:999px;background:#F0F9E6;border:1px solid #DFEDCB;
+  font-size:10.5px;font-weight:800;color:#4F6B3C;line-height:1.35;letter-spacing:-.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .fj-money b{font-size:13.5px;font-weight:900;color:#2F7D4F}
 .fj-money em{font-style:normal;font-weight:800;color:#8A9B7C}
-.fj-gauge{display:flex;align-items:center;gap:7px;margin-top:22px}
-.fj-jar{font-size:26px;line-height:1;flex:0 0 auto;filter:drop-shadow(0 2px 3px rgba(150,120,20,.22))}
-.fj-track{position:relative;flex:1 1 auto;min-width:0;height:14px;border-radius:99px;background:#E7EDE4;overflow:visible}
-.fj-track i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#8FD3A2,#4FAE6A);transition:width .5s ease}
-.fj-bubble{position:absolute;left:0;bottom:calc(100% + 4px);transform:translateX(0);white-space:nowrap;
+.fj-gauge{position:relative;z-index:1;display:flex;align-items:center;gap:8px;margin-top:18px}
+.fj-jar{flex:0 0 38px;width:38px;margin:-4px 0 -2px;filter:drop-shadow(0 4px 5px rgba(140,170,190,.3))}
+.fj-track{position:relative;flex:1 1 auto;min-width:0;height:15px;border-radius:99px;background:#E9EFE4;
+  box-shadow:inset 0 1px 2px rgba(90,120,80,.12);overflow:visible}
+.fj-track i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#A4DBAC,#4FAE6A);transition:width .5s ease}
+.fj-bubble{position:absolute;left:0;bottom:calc(100% + 5px);transform:translateX(0);white-space:nowrap;
   font-size:10px;font-weight:900;color:#2F7D4F;background:#FFFFFF;border:1px solid #CDE7D2;border-radius:999px;padding:2px 8px;
   box-shadow:0 6px 12px -12px rgba(46,120,70,.9)}
+.fj-bubble::after{content:'';position:absolute;left:14px;top:100%;width:0;height:0;
+  border-left:4px solid transparent;border-right:4px solid transparent;border-top:4px solid #CDE7D2}
 .fj-cap{flex:0 0 auto;font-size:11px;font-weight:900;color:#5C6F58;font-variant-numeric:tabular-nums}
-.fj-hist{margin-top:12px;padding:7px 10px;border-radius:999px;background:#FFF6D9;border:1px solid #F2E3B2;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.fj-hist{position:relative;z-index:1;margin-top:12px;padding:6px;border-radius:15px;background:#FFF8E3;border:1px solid #F2E3B2}
 .fj-hist[hidden]{display:none}
-.fj-hist .fwl-list{display:flex;flex-wrap:nowrap;align-items:center;gap:0}
-.fj-hist .fwl-pill{display:inline-flex;align-items:center;gap:3px;background:transparent;border:0;border-radius:0;padding:0 8px;
-  font-size:10.5px;font-weight:800;color:#6B5216;white-space:nowrap;line-height:1.5}
-.fj-hist .fwl-pill + .fwl-pill{border-left:1px solid #E4D093}
-.fj-hist .fwl-pill i{font-style:normal;font-weight:800;color:#8A6A22}
-.fj-hist .fwl-pill b{font-weight:900;color:#5A4512;max-width:none}
-.fj-hist .fwl-pill em{font-style:normal;font-weight:900;color:#2F7D4F}
-/* 💎 FAMILY 규칙 팝업 (#v35 · 시안 DD709D2C) */
-.famrules{margin:-2px 0 10px}
-.fr-hero{display:flex;align-items:center;gap:8px;padding:11px 13px;border-radius:16px;
-  background:linear-gradient(150deg,#4E9E6E,#2F7D4F);color:#fff;box-shadow:0 14px 26px -24px rgba(30,90,55,.95)}
-.fr-hero-ico{font-size:18px;line-height:1}
-.fr-hero b{font-size:17px;font-weight:900;letter-spacing:-.02em}
-.fr-hero-money{margin-left:auto;font-size:10.5px;font-weight:900;background:rgba(255,255,255,.22);border-radius:999px;padding:4px 10px;white-space:nowrap}
-.fr-hero-money em{font-style:normal;font-size:14px}
-.fr-cols{display:grid;grid-template-columns:minmax(0,1fr);gap:9px;margin-top:10px}
-@media (min-width:520px){ .fr-cols{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr)} }
+.fj-hist .fwl-list{display:flex;flex-direction:column;gap:4px}
+.fj-hist .fwl-pill{display:flex;align-items:center;gap:6px;width:100%;min-width:0;background:rgba(255,255,255,.82);
+  border:1px solid #F1E4BE;border-radius:10px;padding:4px 8px;font-size:10.5px;font-weight:800;line-height:1.45;color:#5A4512}
+.fj-hist .fwl-pill i{flex:0 0 auto;font-style:normal;font-weight:800;font-size:9.5px;color:#9A7A2A;font-variant-numeric:tabular-nums}
+.fj-hist .fwl-pill b{flex:1 1 auto;min-width:0;font-weight:900;color:#5A4512;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fj-hist .fwl-pill em{flex:0 0 auto;font-style:normal;font-weight:800;font-size:9px;color:#8A6A3A;background:#FBF0CF;border:1px solid #F0DFB0;border-radius:999px;padding:0 5px;line-height:1.5}
+.fj-hist .fwl-pill strong{flex:0 0 auto;font-weight:900;font-size:10.5px;color:#2F7D4F;font-variant-numeric:tabular-nums}
+.fj-hist .fwl-more{display:block;padding:3px 2px 0;font-size:9px;font-weight:800;color:#9A7A3A;text-align:right}
+.fj-hist .fwl-more[hidden]{display:none}
+@media (max-width:380px){
+  .famrule-btn{font-size:11px;padding:5px 9px 5px 8px;gap:4px}
+  .famrule-btn .frb-ico{font-size:13px}
+  .fam-add-tools{gap:4px}
+  .fam-add-tools .btn{font-size:10.5px;padding:5px 7px;min-height:30px}
+  .fj-art{flex-basis:94px;width:94px}
+  .fj-title{font-size:14.5px}
+}
+/* 💎 FAMILY 규칙 팝업 (#v36 · 시안 DD709D2C) */
+.famrules{margin:-4px 0 8px}
+.fr-top{position:relative;padding:0 106px 0 0;min-height:96px}
+.fr-hero{position:relative;z-index:2;display:inline-flex;align-items:center;gap:6px;padding:8px 15px 8px 12px;border-radius:999px;
+  background:linear-gradient(150deg,#5CB07F,#2F7D4F);color:#fff;box-shadow:0 14px 24px -20px rgba(30,90,55,.95)}
+.fr-hero-ico{font-size:16px;line-height:1}
+.fr-hero b{font-size:16px;font-weight:900;letter-spacing:-.02em}
+.fr-cap{position:relative;z-index:2;display:inline-flex;align-items:center;gap:6px;margin-top:8px;padding:4px 14px 4px 6px;border-radius:999px;
+  background:linear-gradient(140deg,#FFFBEC,#FFF2D4);border:1.5px solid #F1E0AC;box-shadow:0 10px 18px -18px rgba(180,140,40,.95)}
+.fr-cap svg{width:32px;height:28px;flex:0 0 32px}
+.fr-cap span{font-size:11px;font-weight:900;color:#7A5A20;letter-spacing:-.02em;white-space:nowrap}
+.fr-cap em{font-style:normal;font-size:19px;font-weight:900;color:#1F7A47;letter-spacing:-.04em;margin-left:2px}
+.fr-top-art{position:absolute;right:-3px;top:24px;width:104px;z-index:1;pointer-events:none}
+.fr-cols{display:grid;grid-template-columns:minmax(0,1fr);gap:9px;margin-top:12px}
+@media (min-width:520px){ .fr-cols{grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr)} }
 .fr-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
-.fr-list li{display:flex;gap:7px;padding:7px 9px;border-radius:12px;background:#F5FBF4;border:1px solid #E1EFDD}
-.fr-chk{width:16px;height:16px;border-radius:50%;background:#4FAE6A;color:#fff;font-size:10px;font-weight:900;display:grid;place-items:center;flex:0 0 auto;margin-top:1px}
-.fr-list b{display:block;font-size:11.5px;font-weight:900;color:#2F4A34;line-height:1.3}
-.fr-list small{display:block;margin-top:2px;font-size:9.5px;font-weight:700;color:#6E8570;line-height:1.3}
-.fr-stamp{padding:9px 10px;border-radius:14px;background:linear-gradient(165deg,#F7FCF2,#FFFDF4);border:1.5px solid #DCEBD3}
-.fr-stamp-h{display:inline-block;font-size:10px;font-weight:900;color:#3E6B44;background:#E6F5DC;border-radius:999px;padding:3px 9px}
-.fr-days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px;margin-top:8px}
+.fr-list li{display:flex;gap:7px;padding:8px 10px;border-radius:14px;background:linear-gradient(160deg,#FBFEF9,#F4FBF1);border:1px solid #E3EFDD}
+.fr-chk{width:17px;height:17px;border-radius:50%;background:linear-gradient(150deg,#6FC183,#3E9A5E);color:#fff;font-size:10px;font-weight:900;
+  display:grid;place-items:center;flex:0 0 auto;margin-top:1px;box-shadow:0 3px 6px -4px rgba(40,110,60,.9)}
+.fr-list b{display:block;font-size:11.5px;font-weight:900;color:#2F4A34;line-height:1.35;letter-spacing:-.02em}
+.fr-list small{display:block;margin-top:2px;font-size:9.5px;font-weight:700;color:#6E8570;line-height:1.35}
+.fr-stamp{position:relative;padding:14px 10px 10px;border-radius:16px;
+  background:linear-gradient(165deg,#F6FCEE,#FFFDF2);border:1.5px solid #D8EACB}
+.fr-stamp-h{position:absolute;left:50%;top:-9px;transform:translateX(-50%);white-space:nowrap;
+  font-size:9.5px;font-weight:900;color:#3E6B44;background:#E9F7DC;border:1px solid #D6EBC4;border-radius:999px;padding:3px 10px;
+  box-shadow:0 4px 8px -8px rgba(60,110,60,.8)}
+.fr-days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:2px;margin-top:6px;padding:7px 5px 5px;
+  border-radius:12px;background:rgba(255,255,255,.72);border:1px dashed #DCEBCF}
 .fr-day{display:flex;flex-direction:column;align-items:center;gap:3px}
-.fr-disc{width:26px;height:26px;max-width:100%;border-radius:50%;border:1.5px dashed #CFE0C6;background:#fff;
-  display:grid;place-items:center;font-size:12px;font-style:normal;color:#B9C9B2}
-.fr-day.on .fr-disc{border-style:solid;border-color:#8FD3A2;background:#F1FBEF}
+.fr-disc{width:25px;height:25px;max-width:100%;border-radius:50%;border:1.5px dashed #CBDCC2;background:#fff;
+  display:grid;place-items:center;font-size:12px;font-style:normal;color:#B9C9B2;line-height:1}
+.fr-day.on .fr-disc{border-style:solid;border-color:#F0C454;background:#FFF9E4;color:#E8AE24}
 .fr-day b{font-size:9px;font-weight:900;color:#8A9A84}
-.fr-stamp-note{margin:8px 0 0;font-size:9.5px;font-weight:800;color:#4F6B3C;line-height:1.45;text-align:center}
-.fr-stamp-no{margin:6px 0 0;padding:5px 8px;border-radius:999px;background:#FFF3F0;border:1px solid #F6D9D2;
-  font-size:9px;font-weight:900;color:#B4543E;text-align:center}
-.fr-mini{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:10px;padding:9px 11px;border-radius:14px;
-  background:#F4FAF0;border:1.5px solid #DDEDD2}
-.fr-mini b{font-size:12px;font-weight:900;color:#2F7D4F}
-.fr-mini p{flex:1 1 100%;margin:2px 0 0;font-size:10px;font-weight:800;color:#5A7350;line-height:1.4}
-.fr-card{margin-top:9px;padding:11px 13px;border-radius:16px;border:1.5px solid}
-.fr-card.basic{background:linear-gradient(160deg,#EFF5FE,#FBFDFF);border-color:#D3E4F7}
-.fr-card.vac{background:linear-gradient(160deg,#FFF4E2,#FFFCF4);border-color:#F6DFB8}
-.fr-card b{font-size:11.5px;font-weight:900;color:#2E4A66}
-.fr-card.vac b{color:#9A5A12}
-.fr-card p{margin:3px 0 0;font-size:13px;font-weight:900;color:#2F4A66}
-.fr-card.vac p{color:#8A4A0C}
-.fr-card p em{font-style:normal;font-size:18px;color:#1F5FA8}
-.fr-card.vac p em{color:#D2540F}
-.fr-card small{display:block;margin-top:3px;font-size:9.5px;font-weight:700;color:#6C7F96;line-height:1.4}
-.fr-card.vac small{color:#8A7250}
+.fr-stamp-note{margin:8px 0 0;font-size:9.5px;font-weight:800;color:#4F6B3C;line-height:1.45;text-align:center;letter-spacing:-.02em}
+.fr-stamp-no{display:flex;align-items:center;justify-content:center;gap:4px;margin:7px auto 0;padding:4px 6px;border-radius:999px;
+  background:#FFF4F0;border:1px solid #F7DCD3;font-size:9px;font-weight:900;color:#B4543E;text-align:center;max-width:100%}
+.fr-stamp-no svg{width:14px;height:14px;flex:0 0 14px}
+.fr-mini{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:11px;padding:9px 11px;border-radius:16px;
+  background:linear-gradient(150deg,#F5FBEF,#FDFEF9);border:1.5px solid #DDEDD2}
+.fr-mini-art{width:34px;flex:0 0 34px}
+.fr-mini-pill{font-size:11.5px;font-weight:900;color:#2F7D4F;background:#E4F4D6;border:1px solid #D2E9BE;border-radius:999px;padding:4px 12px;white-space:nowrap}
+.fr-mini p{flex:1 1 100%;margin:0 0 0 2px;font-size:10px;font-weight:800;color:#5A7350;line-height:1.45;letter-spacing:-.02em;word-break:keep-all}
+.fr-mini p b{color:#2F7D4F}
+.fr-card{position:relative;margin-top:10px;padding:12px 13px;border-radius:18px;border:1.5px solid;overflow:hidden}
+.fr-card.basic{background:linear-gradient(160deg,#EDF4FE,#FBFDFF 70%);border-color:#D3E4F7}
+.fr-card.vac{background:linear-gradient(160deg,#FFF3DE,#FFFCF5 72%);border-color:#F5DDB4}
+.fr-card-head{display:flex;align-items:center;gap:6px}
+.fr-badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:900;border-radius:999px;padding:3px 11px;white-space:nowrap}
+.fr-card.basic .fr-badge{background:linear-gradient(150deg,#3E6FA8,#2C5486);color:#fff;box-shadow:0 6px 12px -10px rgba(30,70,120,.95)}
+.fr-card.vac .fr-badge{background:linear-gradient(150deg,#FFB35C,#F08A2A);color:#fff;box-shadow:0 6px 12px -10px rgba(200,110,20,.95)}
+.fr-card-body{display:flex;align-items:center;gap:6px;margin-top:7px}
+.fr-card-art{flex:0 0 46px;width:46px}
+.fr-card-txt{min-width:0;flex:1 1 auto}
+.fr-card-txt p{margin:0;font-size:12.5px;font-weight:900;color:#2F4A66;line-height:1.3;letter-spacing:-.03em}
+.fr-card.vac .fr-card-txt p{color:#8A4A0C}
+.fr-card-txt p em{font-style:normal;font-size:19px;font-weight:900;color:#1F5FA8;letter-spacing:-.04em;
+  background:linear-gradient(transparent 62%,#D8E9FF 62%);padding:0 1px}
+.fr-card.vac .fr-card-txt p em{color:#D2540F;background:linear-gradient(transparent 62%,#FFE3BC 62%)}
+.fr-card-txt small{display:block;margin-top:4px;font-size:9.5px;font-weight:700;color:#6C7F96;line-height:1.45;letter-spacing:-.02em;word-break:keep-all}
+.fr-card.vac .fr-card-txt small{color:#8A7250}
+.fr-card-coins{position:absolute;right:8px;bottom:6px;width:38px;opacity:.95}
+.fr-card.basic .fr-card-txt{padding-right:36px}
+.fr-card.vac .fr-card-art{flex-basis:84px;width:84px}
+.fr-card.vac .fr-card-txt{padding-right:2px}
 /* 🤝 이번 주 이미 찍힌 도장 — 이번 주 완료 배지 */
 .team-status.week{background:#F1F9E8;border-color:#DFEDCB;color:#4F6B3C}
 .chore-card.week-done{background:#F7FBF4;border-color:#DFEDCB}
@@ -2115,17 +2179,20 @@ body.drag-active,body.drag-active *{-webkit-user-select:none;user-select:none;-w
 .mjb-hero-txt b em{font-style:normal;font-size:16px;color:#8B5CF6}
 .mjb-hero-txt small{display:block;margin-top:2px;font-size:10px;font-weight:800;color:#8A7AA0}
 .mjb-hero-art{margin-left:auto;font-size:20px;letter-spacing:-2px;opacity:.9}
-.mjb-week{margin-bottom:9px}
-.mjw-head{display:flex;align-items:center;gap:6px;margin:0 0 6px}
-.mjw-head b{font-size:11.5px;font-weight:900;color:#4B3B7A}
+.mjb-week{margin:0 0 10px;padding:9px 10px 10px;border-radius:17px;
+  background:linear-gradient(160deg,#FFF9EA,#FCF8FF 70%);border:1.5px solid #F2E4C4;box-shadow:0 10px 22px -26px rgba(140,110,40,.8)}
+.mjw-head{display:flex;align-items:center;gap:6px;margin:0 0 7px}
+.mjw-head b{font-size:11.5px;font-weight:900;color:#6A4E86}
 .mjw-head small{margin-left:auto;font-size:10px;font-weight:900;color:#7C6AA0}
-.mjw-list{display:flex;gap:5px;overflow-x:auto;overflow-y:hidden;padding-bottom:2px;-webkit-overflow-scrolling:touch}
-.mjw-list::-webkit-scrollbar{display:none}
-.mjw-pill{flex:0 0 auto;display:inline-flex;align-items:center;gap:4px;max-width:74%;white-space:nowrap;
-  padding:4px 9px;border-radius:999px;background:#F3EEFF;border:1px solid #E4D9FB}
-.mjw-pill b{font-size:10px;font-weight:900;color:#4B3B7A;overflow:hidden;text-overflow:ellipsis}
-.mjw-pill i{font-style:normal;font-size:9px;font-weight:800;color:#8A7AA8}
-.mjw-pill em{font-style:normal;font-size:9.5px;font-weight:900;color:#7C55E8}
+.mjw-list{display:flex;flex-direction:column;gap:4px}
+.mjw-pill{display:flex;align-items:center;gap:6px;width:100%;min-width:0;background:#fff;border:1px solid #EAE2F8;
+  border-radius:11px;padding:5px 9px;font-size:10px;font-weight:900;color:#4B3B7A;line-height:1.5;white-space:nowrap}
+.mjw-pill .mjw-ico{flex:0 0 auto;font-size:12px;line-height:1}
+.mjw-main{flex:1 1 auto;min-width:0;display:flex;align-items:baseline;gap:4px}
+.mjw-main b{flex:0 1 auto;min-width:0;max-width:56%;font-size:10px;font-weight:900;color:#4B3B7A;overflow:hidden;text-overflow:ellipsis}
+.mjw-main small{flex:1 1 0;min-width:0;font-size:9px;font-weight:700;color:#8A7AA8;overflow:hidden;text-overflow:ellipsis}
+.mjw-pill i{flex:0 0 auto;font-style:normal;font-size:9px;font-weight:800;color:#8A7AA8;background:#F1ECFB;border-radius:999px;padding:0 6px}
+.mjw-pill em{flex:0 0 auto;font-style:normal;font-size:10px;font-weight:900;color:#7C55E8;font-variant-numeric:tabular-nums}
 .mjw-empty{padding:8px 10px;border-radius:12px;background:#F6F3FF;border:1px dashed #DED3F8;
   font-size:10.5px;font-weight:800;color:#8A7AA8;text-align:center}
 .mjb-cats{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:4px;margin-bottom:9px}
@@ -2164,6 +2231,7 @@ body.drag-active,body.drag-active *{-webkit-user-select:none;user-select:none;-w
   font-size:11.5px;font-weight:800;color:var(--muted);text-align:center}
 .vac-notice[hidden]{display:none}
 .vac-head{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.vac-order-hint{margin:5px 2px 7px;font-size:9.5px;font-weight:800;color:#8A7AA8;letter-spacing:-.02em}
 .vac-head b{font-size:12.5px;font-weight:900;color:#0E7C43}
 .vac-badge{font-size:9.5px;font-weight:900;border-radius:999px;padding:2px 8px;white-space:nowrap}
 .vac-badge.on{color:#0E7C43;background:#E4F7EC;border:1px solid #C8ECDA}
@@ -4089,7 +4157,7 @@ body.mode-kid .home-more{display:none}
    · 이어지는 일정은 매끄러운 하이라이트 바(1~4줄), 단일 형광펜은 ( ) 강조
    · 생일은 ㅁ 테두리 대신 부드러운 파스텔 알약
    ========================================================= */
-#famCalGrid{--cal-line:21px;--cal-dateh:23px;--cal-lane:17px;
+#famCalGrid{--cal-line:12.5px;--cal-dateh:20px;--cal-lane:11px;
   display:flex;flex-direction:column;gap:0;background:#fff;border-radius:16px;overflow:hidden;
   border:1px solid rgba(20,40,70,.08)}
 #famCalGrid .cal-week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:0;position:relative;
@@ -4099,13 +4167,13 @@ body.mode-kid .home-more{display:none}
 #famCalGrid .cal-week:last-child{border-bottom:0}
 #famCalGrid .cal-cell{grid-row:1/-1;position:relative;border:0;border-radius:0;background:transparent;
   display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:1px;
-  padding:3px 5px 5px;min-width:0;min-height:0;height:100%;box-sizing:border-box;overflow:hidden;
+  padding:2px 4px 3px;min-width:0;min-height:0;height:100%;box-sizing:border-box;overflow:hidden;
   border-right:1px solid rgba(20,40,70,.06);text-align:left}
 #famCalGrid .cal-cell:last-child{border-right:0}
 #famCalGrid button.cal-cell:active{transform:none;background:transparent}
 #famCalGrid button.cal-cell:hover{background:rgba(120,150,190,.05)}
 #famCalGrid .cal-head-line{display:flex;align-items:baseline;gap:3px;min-width:0;width:100%;line-height:1.1}
-#famCalGrid .cal-cell .cal-date{font-size:15px;font-weight:800;line-height:1.1;letter-spacing:-.02em;color:#1F2A37;
+#famCalGrid .cal-cell .cal-date{font-size:13px;font-weight:800;line-height:1.05;letter-spacing:-.02em;color:#1F2A37;
   min-width:0;padding:0;flex:0 0 auto}
 #famCalGrid .cal-cell.sun .cal-date{color:#E55353}
 #famCalGrid .cal-cell.sat .cal-date{color:#3B82F6}
@@ -4127,17 +4195,17 @@ body.mode-kid .home-more{display:none}
 #famCalGrid .cal-cell.bg-summer.today{background:#DBEEFB}
 #famCalGrid .cal-hol{font-size:8px;font-weight:900;color:#E55353;line-height:1.05;min-width:0;flex:0 1 auto;
   overflow:hidden;text-overflow:clip;white-space:nowrap}
-#famCalGrid .cal-dots{display:flex;gap:2px;align-items:center;justify-content:flex-start;flex-wrap:nowrap;
+#famCalGrid .cal-dots{display:flex;gap:2px;align-items:center;justify-content:center;flex-wrap:nowrap;
   margin-top:auto;padding-top:2px;min-height:7px;width:100%;overflow:hidden}
 #famCalGrid .cal-dot{width:5px;height:5px;border-radius:50%;flex:0 0 auto}
 #famCalGrid .cal-more{font-size:8px;font-weight:900;color:#7A8CA3;line-height:1}
 /* 이어지는 일정 — 양쪽 ( ) 없이 매끄러운 하이라이트 바 */
-#famCalGrid .cal-band{display:flex;align-items:center;justify-content:center;align-self:center;height:15px;margin:1px 1px 0;
-  padding:0 4px;border-radius:5px;background:var(--cat-soft);color:var(--cat);
+#famCalGrid .cal-band{display:flex;align-items:center;justify-content:center;align-self:center;height:10px;margin:0 1px;
+  padding:0 3px;border-radius:4px;background:var(--cat-soft);color:var(--cat);
   box-shadow:none;pointer-events:none;z-index:2;min-width:0;overflow:hidden}
 #famCalGrid .cal-band.cont-l{border-top-left-radius:0;border-bottom-left-radius:0;margin-left:0}
 #famCalGrid .cal-band.cont-r{border-top-right-radius:0;border-bottom-right-radius:0;margin-right:0}
-#famCalGrid .cal-band .cal-band-txt{font-size:9px;font-weight:900;letter-spacing:-.03em;white-space:nowrap;
+#famCalGrid .cal-band .cal-band-txt{font-size:8px;font-weight:900;letter-spacing:-.04em;white-space:nowrap;
   overflow:hidden;text-overflow:clip}
 /* 단일 형광펜 — ( ) 강조는 그대로 */
 #famCalGrid .cal-band.paren{background:var(--cat-soft);border-radius:999px;
@@ -4145,20 +4213,170 @@ body.mode-kid .home-more{display:none}
 /* 생일 · 기념일 — 부드러운 파스텔 알약 */
 #famCalGrid .cal-band.bday{background:var(--ann-soft,#FDEEF3);color:var(--ann,#D9537E);border-radius:999px;
   box-shadow:none;font-weight:900}
-#famCalGrid .cal-band.bday .cal-band-txt{font-size:8.5px;letter-spacing:-.04em}
-#famCalGrid .cal-band.one .cal-band-txt{font-size:8.5px}
+#famCalGrid .cal-band.bday .cal-band-txt{font-size:8px;letter-spacing:-.04em}
+#famCalGrid .cal-band.one .cal-band-txt{font-size:8px}
+/* 🎂 생일·기념일 · 🏫 단일 행사 — 칸 가운데 2줄 알약 (#v36) */
+#famCalGrid .cal-chips{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;width:100%;min-width:0;
+  flex:1 1 auto;margin-top:calc(var(--used-lanes,0) * var(--cal-lane));z-index:3;pointer-events:none}
+#famCalGrid .cal-chip{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;
+  width:auto;max-width:100%;min-width:0;padding:1px 3px 2px;border-radius:8px;
+  background:var(--cat-soft,#FDEDF3);color:var(--cat,#D9537E);overflow:hidden;text-align:center}
+#famCalGrid .cal-chip i{font-style:normal;font-size:9px;line-height:1.05}
+#famCalGrid .cal-chip b{max-width:100%;font-size:7.5px;font-weight:900;line-height:1.12;letter-spacing:-.045em;
+  word-break:keep-all;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+#famCalGrid .cal-chip-more{font-style:normal;font-size:7px;font-weight:900;color:#7A8CA3;line-height:1}
 @media (max-width:430px){
-  #famCalGrid{--cal-line:19px;--cal-dateh:21px;--cal-lane:15px}
-  #famCalGrid .cal-cell{padding:2px 3px 4px}
-  #famCalGrid .cal-cell .cal-date{font-size:13.5px}
-  #famCalGrid .cal-hol{font-size:7px}
-  #famCalGrid .cal-band{height:13px;padding:0 2px;margin:1px 0 0}
-  #famCalGrid .cal-band .cal-band-txt{font-size:8px;letter-spacing:-.05em}
+  #famCalGrid{--cal-line:12px;--cal-dateh:19px;--cal-lane:10px}
+  #famCalGrid .cal-cell{padding:2px 3px 3px}
+  #famCalGrid .cal-cell .cal-date{font-size:12.5px}
+  #famCalGrid .cal-hol{font-size:6.5px}
+  #famCalGrid .cal-band{height:9px;padding:0 2px;margin:0}
+  #famCalGrid .cal-band .cal-band-txt{font-size:7.5px;letter-spacing:-.05em}
   #famCalGrid .cal-band.bday .cal-band-txt{font-size:7.5px}
+  #famCalGrid .cal-chip{padding:1px 2px 1px;border-radius:7px}
+  #famCalGrid .cal-chip i{font-size:8.5px}
+  #famCalGrid .cal-chip b{font-size:7px}
 }
 </style>
 </head>
 <body>
+
+<!-- 🎨 FAMILY 아기자기 일러스트 (#v36 · 시안 8863228F · DD709D2C)
+     화면 곳곳에서 <use>로 함께 쓰는 그림 한 벌이에요 (파일 하나로 끝나게 인라인 SVG). -->
+<svg class="fam-sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<symbol id="famArtFamily" viewBox="0 0 240 186">
+  <g fill="#FFD75E">
+    <path d="M16 34c1.6-7 3.4-8.8 10.4-10.4-7-1.6-8.8-3.4-10.4-10.4-1.6 7-3.4 8.8-10.4 10.4 7 1.6 8.8 3.4 10.4 10.4z"/>
+    <path d="M224 30c1.2-5.2 2.6-6.6 7.8-7.8-5.2-1.2-6.6-2.6-7.8-7.8-1.2 5.2-2.6 6.6-7.8 7.8 5.2 1.2 6.6 2.6 7.8 7.8z"/>
+    <path d="M206 44c.8-3.4 1.7-4.3 5.1-5.1-3.4-.8-4.3-1.7-5.1-5.1-.8 3.4-1.7 4.3-5.1 5.1 3.4.8 4.3 1.7 5.1 5.1z" fill="#FFE79B"/>
+  </g>
+  <path d="M116 20c-4-7-15-6-15 3 0 7 10 12 15 16 5-4 15-9 15-16 0-9-11-10-15-3z" fill="#F7A8BE" stroke="#E487A0" stroke-width="2.4"/>
+  <g transform="translate(156 62) scale(.94)">
+    <path d="M-31 76C-31 42-23 27 0 27c23 0 31 15 31 49z" fill="#A9C8EC" stroke="#5E4638" stroke-width="3.2" stroke-linejoin="round"/>
+    <path d="M16 34c10 2 15-4 16-16" fill="none" stroke="#A9C8EC" stroke-width="13" stroke-linecap="round"/>
+    <circle cx="33" cy="12" r="8" fill="#FFE4CD" stroke="#5E4638" stroke-width="3"/>
+    <path d="M-18 40c-9 4-12 12-12 20" fill="none" stroke="#A9C8EC" stroke-width="13" stroke-linecap="round"/>
+    <circle cx="0" cy="0" r="23" fill="#FFE4CD" stroke="#5E4638" stroke-width="3.2"/>
+    <path d="M-23 -4C-24-22-12-27 0-27c13 0 24 5 23 23-6-9-13-12-23-12s-17 3-23 12z" fill="#6E4A33" stroke="#5E4638" stroke-width="3" stroke-linejoin="round"/>
+    <ellipse cx="-9" cy="0" rx="2.6" ry="3.4" fill="#3C2B22"/>
+    <ellipse cx="9" cy="0" rx="2.6" ry="3.4" fill="#3C2B22"/>
+    <path d="M-6 9q6 6 12 0q-6 4-12 0z" fill="#C0604F"/>
+    <ellipse cx="-15" cy="7" rx="3.6" ry="2.4" fill="#F49AA8" opacity=".6"/>
+    <ellipse cx="15" cy="7" rx="3.6" ry="2.4" fill="#F49AA8" opacity=".6"/>
+  </g>
+  <g transform="translate(70 84)">
+    <path d="M-33 80C-33 44-24 29 0 29c24 0 33 15 33 51z" fill="#F6B3C8" stroke="#5E4638" stroke-width="3.2" stroke-linejoin="round"/>
+    <path d="M-17 37c-11 1-16-6-17-19" fill="none" stroke="#F6B3C8" stroke-width="13" stroke-linecap="round"/>
+    <circle cx="-35" cy="12" r="8" fill="#FFE4CD" stroke="#5E4638" stroke-width="3"/>
+    <path d="M18 38c9 5 11 13 11 21" fill="none" stroke="#F6B3C8" stroke-width="13" stroke-linecap="round"/>
+    <circle cx="0" cy="0" r="23" fill="#FFE4CD" stroke="#5E4638" stroke-width="3.2"/>
+    <circle cx="0" cy="-29" r="9" fill="#7C5238" stroke="#5E4638" stroke-width="3"/>
+    <path d="M-23 -2C-24-23-12-27 0-27c13 0 24 4 23 25-5-10-12-13-23-13s-18 3-23 13z" fill="#7C5238" stroke="#5E4638" stroke-width="3" stroke-linejoin="round"/>
+    <ellipse cx="-9" cy="0" rx="2.6" ry="3.4" fill="#3C2B22"/>
+    <ellipse cx="9" cy="0" rx="2.6" ry="3.4" fill="#3C2B22"/>
+    <path d="M-6 9q6 6 12 0q-6 4-12 0z" fill="#C0604F"/>
+    <ellipse cx="-15" cy="7" rx="3.6" ry="2.4" fill="#F49AA8" opacity=".6"/>
+    <ellipse cx="15" cy="7" rx="3.6" ry="2.4" fill="#F49AA8" opacity=".6"/>
+  </g>
+  <g transform="translate(126 108) scale(.9)">
+    <path d="M-32 84C-32 46-23 30 0 30c23 0 32 16 32 54z" fill="#A8D89C" stroke="#5E4638" stroke-width="3.2" stroke-linejoin="round"/>
+    <ellipse cx="0" cy="28" rx="17" ry="8" fill="#8CC47F" stroke="#5E4638" stroke-width="2.6"/>
+    <path d="M17 40c10 1 14-6 15-18" fill="none" stroke="#A8D89C" stroke-width="13" stroke-linecap="round"/>
+    <circle cx="32" cy="15" r="8" fill="#FFE4CD" stroke="#5E4638" stroke-width="3"/>
+    <path d="M-18 40c-9 5-11 13-11 21" fill="none" stroke="#A8D89C" stroke-width="13" stroke-linecap="round"/>
+    <circle cx="0" cy="0" r="23" fill="#FFE4CD" stroke="#5E4638" stroke-width="3.2"/>
+    <path d="M-23 -3C-24-23-12-27 0-27c13 0 24 5 23 24-6-10-13-13-23-13s-17 3-23 13z" fill="#6E4A33" stroke="#5E4638" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M-14 -25l-3-8 9 4z" fill="#6E4A33" stroke="#5E4638" stroke-width="2.4" stroke-linejoin="round"/>
+    <ellipse cx="-9" cy="0" rx="2.6" ry="3.4" fill="#3C2B22"/>
+    <ellipse cx="9" cy="0" rx="2.6" ry="3.4" fill="#3C2B22"/>
+    <path d="M-6 9q6 6 12 0q-6 4-12 0z" fill="#C0604F"/>
+    <ellipse cx="-15" cy="7" rx="3.6" ry="2.4" fill="#F49AA8" opacity=".6"/>
+    <ellipse cx="15" cy="7" rx="3.6" ry="2.4" fill="#F49AA8" opacity=".6"/>
+  </g>
+  <g transform="translate(196 124) scale(.84)">
+    <path d="M-32 86C-32 48-23 30 0 30c23 0 32 18 32 56z" fill="#F7DC8E" stroke="#5E4638" stroke-width="3.2" stroke-linejoin="round"/>
+    <path d="M17 40c10 1 14-6 15-18" fill="none" stroke="#F7DC8E" stroke-width="13" stroke-linecap="round"/>
+    <circle cx="32" cy="15" r="8" fill="#FFE4CD" stroke="#5E4638" stroke-width="3"/>
+    <path d="M-18 40c-9 5-11 13-11 21" fill="none" stroke="#F7DC8E" stroke-width="13" stroke-linecap="round"/>
+    <circle cx="0" cy="0" r="23" fill="#FFE4CD" stroke="#5E4638" stroke-width="3.2"/>
+    <path d="M-23 2C-25-24-10-27 0-27c14 0 25 6 23 29-3-14-11-18-23-18s-20 4-23 18z" fill="#7C5238" stroke="#5E4638" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M20 -12c7-3 11 1 10 7" fill="#7C5238" stroke="#5E4638" stroke-width="3" stroke-linejoin="round"/>
+    <circle cx="19" cy="-19" r="5.4" fill="#F6A9C0" stroke="#5E4638" stroke-width="2.2"/>
+    <path d="M15 -19h8M19 -23v8" stroke="#E487A0" stroke-width="1.8"/>
+    <ellipse cx="-9" cy="0" rx="2.6" ry="3.4" fill="#3C2B22"/>
+    <ellipse cx="9" cy="0" rx="2.6" ry="3.4" fill="#3C2B22"/>
+    <path d="M-6 9q6 6 12 0q-6 4-12 0z" fill="#C0604F"/>
+    <ellipse cx="-15" cy="7" rx="3.6" ry="2.4" fill="#F49AA8" opacity=".6"/>
+    <ellipse cx="15" cy="7" rx="3.6" ry="2.4" fill="#F49AA8" opacity=".6"/>
+  </g>
+</symbol>
+<symbol id="famArtJar" viewBox="0 0 72 84">
+  <rect x="17" y="5" width="38" height="11" rx="5.5" fill="#B7D3E8" stroke="#7E93A6" stroke-width="2.4"/>
+  <path d="M14 17h44v45a13 13 0 0 1-13 13H27a13 13 0 0 1-13-13z" fill="#E9F5FB" stroke="#8FA8B8" stroke-width="2.6"/>
+  <path d="M22 24v34" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".9"/>
+  <circle cx="28" cy="67" r="8" fill="#FFD75E" stroke="#C99A22" stroke-width="1.8"/>
+  <circle cx="44" cy="67" r="8" fill="#FFD75E" stroke="#C99A22" stroke-width="1.8"/>
+  <circle cx="36" cy="58" r="8" fill="#FFE07A" stroke="#C99A22" stroke-width="1.8"/>
+  <path d="M36 36l3.4 6.9 7.6 1.1-5.5 5.4 1.3 7.6-6.8-3.6-6.8 3.6 1.3-7.6-5.5-5.4 7.6-1.1z" fill="#FFD75E" stroke="#C99A22" stroke-width="1.8" stroke-linejoin="round"/>
+</symbol>
+<symbol id="famArtTarget" viewBox="0 0 76 76">
+  <circle cx="34" cy="42" r="30" fill="#F4705F" stroke="#D4503F" stroke-width="2.4"/>
+  <circle cx="34" cy="42" r="23" fill="#FFF9F2" stroke="#E8C9B8" stroke-width="1.6"/>
+  <circle cx="34" cy="42" r="16" fill="#F4705F"/>
+  <circle cx="34" cy="42" r="9" fill="#FFF9F2"/>
+  <circle cx="34" cy="42" r="4" fill="#E2503F"/>
+  <path d="M62 12l-24 24" stroke="#7C5238" stroke-width="3.2" stroke-linecap="round"/>
+  <path d="M62 12l4-5M62 12l5 4" stroke="#E2503F" stroke-width="3.2" stroke-linecap="round"/>
+  <path d="M66 6c3 0 5 2 5 5-3 0-5-2-5-5z" fill="#E2503F"/>
+</symbol>
+<symbol id="famArtBeach" viewBox="0 0 150 120">
+  <circle cx="126" cy="20" r="11" fill="#FFD75E" stroke="#E7B23C" stroke-width="2.2"/>
+  <g stroke="#F3B24A" stroke-width="2.8" stroke-linecap="round">
+    <path d="M126 3v-2M143 20h2M109 20h-2M139 7l2-2M113 33l-2 2M139 33l2 2"/>
+  </g>
+  <path d="M16 110c-4-22 4-38 14-56" fill="none" stroke="#B98A5A" stroke-width="7" stroke-linecap="round"/>
+  <g fill="#7CBF7A" stroke="#4E8F52" stroke-width="2" stroke-linejoin="round">
+    <path d="M33 52C19 42 9 44 5 50c8 8 20 8 28 2z"/>
+    <path d="M33 52C25 36 27 26 33 22c6 8 6 22 0 30z"/>
+    <path d="M33 52c10-10 20-10 26-4-8 8-18 8-26 4z"/>
+    <path d="M33 52c-12-4-18 2-18 10 10 2 16-4 18-10z"/>
+    <path d="M33 52c6 12 14 16 22 14-4-10-12-14-22-14z"/>
+  </g>
+  <circle cx="31" cy="50" r="3.2" fill="#B98A5A"/>
+  <path d="M102 54v50" stroke="#8A6A4A" stroke-width="3.4" stroke-linecap="round"/>
+  <path d="M80 54a22 22 0 0 1 44 0z" fill="#F4705F" stroke="#D4503F" stroke-width="2.2" stroke-linejoin="round"/>
+  <path d="M102 54l-15.6-15.6A22 22 0 0 0 80 54z" fill="#FFF6EC" stroke="#D4503F" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M102 54l15.6-15.6A22 22 0 0 1 124 54z" fill="#FFF6EC" stroke="#D4503F" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M102 30v-5" stroke="#8A6A4A" stroke-width="3" stroke-linecap="round"/>
+  <path d="M2 108c14-7 30-7 44 0 14-7 32-7 46 0 12-5 28-5 40 0v9H2z" fill="#BFE3F5" stroke="#8FC4DE" stroke-width="2" stroke-linejoin="round"/>
+  <ellipse cx="66" cy="104" rx="13" ry="6" fill="#fff" stroke="#E2503F" stroke-width="2.2"/>
+  <ellipse cx="66" cy="104" rx="6" ry="2.6" fill="#BFE3F5"/>
+</symbol>
+<symbol id="famArtMega" viewBox="0 0 44 40">
+  <path d="M6 16h9l16-9v26l-16-9H6z" fill="#F4705F" stroke="#C9503F" stroke-width="2.2" stroke-linejoin="round"/>
+  <path d="M31 7c6 2 6 22 0 24z" fill="#FFE07A" stroke="#C99A22" stroke-width="1.8"/>
+  <rect x="8" y="24" width="7" height="12" rx="3.5" fill="#E2503F" stroke="#C9503F" stroke-width="2"/>
+  <path d="M39 4l4-3M41 12h5M39 20l4 3" stroke="#F3B24A" stroke-width="2.6" stroke-linecap="round"/>
+</symbol>
+<symbol id="famArtCoins" viewBox="0 0 54 46">
+  <ellipse cx="27" cy="38" rx="20" ry="7" fill="#FFD75E" stroke="#C99A22" stroke-width="2"/>
+  <ellipse cx="27" cy="31" rx="20" ry="7" fill="#FFE07A" stroke="#C99A22" stroke-width="2"/>
+  <ellipse cx="27" cy="24" rx="20" ry="7" fill="#FFD75E" stroke="#C99A22" stroke-width="2"/>
+  <ellipse cx="27" cy="17" rx="20" ry="7" fill="#FFE79B" stroke="#C99A22" stroke-width="2"/>
+  <ellipse cx="27" cy="17" rx="11" ry="3.6" fill="#FFD75E" stroke="#C99A22" stroke-width="1.4"/>
+</symbol>
+<symbol id="famArtSpark" viewBox="0 0 24 24">
+  <path d="M12 0c1.4 6.6 5.4 10.6 12 12-6.6 1.4-10.6 5.4-12 12-1.4-6.6-5.4-10.6-12-12C6.6 10.6 10.6 6.6 12 0z" fill="currentColor"/>
+</symbol>
+<symbol id="famArtNoStar" viewBox="0 0 24 24">
+  <circle cx="12" cy="12" r="11" fill="#FDE9E4" stroke="#E2503F" stroke-width="2"/>
+  <path d="M12 5.4l2 4.1 4.5.6-3.3 3.2.8 4.5-4-2.1-4 2.1.8-4.5-3.3-3.2 4.5-.6z" fill="#FFC94D" stroke="#D4922A" stroke-width="1.2" stroke-linejoin="round"/>
+  <path d="M4.5 19.5L19.5 4.5" stroke="#fff" stroke-width="5.4" stroke-linecap="round"/>
+  <path d="M4.5 19.5L19.5 4.5" stroke="#E2503F" stroke-width="2.6" stroke-linecap="round"/>
+</symbol>
+</defs>
+</svg>
 
 <!-- 🔒 가족 로그인 게이트 (#1317) · 공개 가입 버튼은 없어요 (부모님이 콘솔에서 계정 추가) -->
 <div class="auth-gate" id="authGate" hidden>
@@ -4183,7 +4401,7 @@ body.mode-kid .home-more{display:none}
   <div class="topbar-inner">
     <div class="brand">
       <!-- 👩‍💼 엄마 화면 왼쪽 동그란 얼굴 — 누르면 보는 사람 바꾸기 (#4367) -->
-      <button type="button" class="top-av" id="topAvatarBtn" data-action="open-user-menu" aria-haspopup="menu" aria-expanded="false" aria-controls="userSwitchMenu" aria-label="엄마 화면 · 보는 사람 바꾸기" hidden><img id="topAvatarImg" src="" alt=""></button>
+      <button type="button" class="top-av" id="topAvatarBtn" data-action="open-user-menu" aria-haspopup="menu" aria-expanded="false" aria-controls="userSwitchMenu" aria-label="엄마 화면 · 보는 사람 바꾸기" hidden><img id="topAvatarImg" alt=""></button>
       <div class="brand-text">
         <h1 id="brandTitle">우리집 공부 대시보드</h1>
         <p class="brand-sub" id="brandSub">선우 · 지우의 오늘</p>
@@ -4435,15 +4653,16 @@ body.mode-kid .home-more{display:none}
     </section>
 
     <section class="tab-panel" id="tabPanel-schedule" role="tabpanel" aria-labelledby="tabBtn-schedule" data-tab-panel="schedule" hidden>
-  <!-- ========== SCHEDULE — 학원 시간표 · 오늘의 학원/동선 · 한눈에 보기 (#4267) ========== -->
+  <!-- ========== SCHEDULE — 오늘의 학원/동선 · 학교 시간표 · 학원비 (#v36) ========== -->
   <section class="sec" aria-labelledby="secSchedTitle">
     <div class="sec-head">
       <span class="sec-num" aria-hidden="true">🕒</span>
       <h2 id="secSchedTitle">SCHEDULE</h2>
       <button type="button" class="tab-mini head-sched" data-action="open-school-tt" aria-haspopup="dialog" aria-label="🏫 학교 시간표 열기"><span class="tm-ico" aria-hidden="true">🏫</span><span class="tm-label">학교 시간표</span></button>
+      <button type="button" class="tab-mini head-sched" data-action="open-academy-tt" aria-haspopup="dialog" aria-label="🗓️ 학원 시간표 열기"><span class="tm-ico" aria-hidden="true">🗓️</span><span class="tm-label">학원 시간표</span></button>
       <button type="button" class="tab-mini head-sched tuition-btn" data-action="open-tuition" aria-haspopup="dialog" aria-label="💳 학원비 정산 열기"><span class="tm-ico" aria-hidden="true">💳</span><span class="tm-label">학원비</span></button>
       <div class="sec-desc">
-        <span class="sec-sub">학원 시간표 · 동선 · 학원비</span>
+        <span class="sec-sub">오늘의 학원 · 동선 · 학원비</span>
       </div>
     </div>
 
@@ -4451,9 +4670,11 @@ body.mode-kid .home-more{display:none}
       <div class="card-head">
         <div>
           <h2>🏫 오늘의 학원<small class="ac-date" id="acTodayDate" aria-live="polite"></small></h2>
-          <p class="sub" id="academySub">요일별 시간표도 아래에서 볼 수 있어요</p>
+          <p class="sub" id="academySub">요일별 시간표는 아래 ＋로 넣고 ✏️로 고쳐요</p>
         </div>
       </div>
+      <!-- 🗓 월~일 요일 바 — 기본은 오늘, 누르면 이번 주 그 요일 동선 (#v36) -->
+      <div class="ac-daybar" id="acDayBar" role="group" aria-label="동선 볼 요일 고르기"></div>
       <div id="todayRoute"></div>
       <div id="todayAcademy"></div>
       <p class="ac-admin-hint" data-parent-only="1">🧡 엄마는 아래 「학원 · 셔틀 동선 추가」와 ✏️로 학원 시간표·셔틀 픽업 동선을 직접 넣고 고치고 지울 수 있어요</p>
@@ -4528,20 +4749,6 @@ body.mode-kid .home-more{display:none}
           <button class="btn btn-primary btn-sm" data-action="add-academy">학원 · 동선 추가</button>
         </div>
       </details>
-    </section>
-
-    <section class="card week">
-      <div class="card-head">
-        <div>
-          <h2>🗓 학원 시간표</h2>
-          <p class="sub" id="weekSub">월을 고르고 요일 칸의 ＋로 바로 추가할 수 있어요</p>
-        </div>
-        <div class="month-chips" id="monthChips" role="group" aria-label="학원 시간표 월 선택"></div>
-      </div>
-      <p class="week-lock" id="weekLock" hidden></p>
-      <div class="week-scroll">
-        <div class="week-grid" id="weekGrid"></div>
-      </div>
     </section>
 
   </section>
@@ -4769,18 +4976,31 @@ body.mode-kid .home-more{display:none}
         </div>
       </div>
       <div class="card">
-        <!-- 📢 FAMILY 규칙 안내 (#v35) — 시안 DD709D2C -->
-        <button type="button" class="famrule-btn" data-action="open-family-rules" aria-haspopup="dialog" aria-label="FAMILY 규칙 안내 열기">
-          <span class="frb-ico" aria-hidden="true">📢</span><b>미션 규칙 안내</b><span class="frb-chev" aria-hidden="true">›</span>
-        </button>
-        <!-- 🤝 이번 주 가족 참여도 (#v35 · 시안 8863228F) -->
+        <!-- 📢 미션 규칙 안내 + 엄마 수정 버튼 한 줄 (#v36) -->
+        <div class="fam-topbar">
+          <button type="button" class="famrule-btn" data-action="open-family-rules" aria-haspopup="dialog" aria-label="FAMILY 규칙 안내 열기">
+            <span class="frb-ico" aria-hidden="true">📢</span><b>미션 규칙 안내</b><span class="frb-chev" aria-hidden="true">›</span>
+          </button>
+          <span class="fam-add-tools" data-parent-only="1">
+            <button class="btn btn-ghost btn-sm" data-action="add-self" data-cat="family">＋ 가족 미션 추가</button>
+            <button class="btn btn-ghost btn-sm" data-action="vac-add">＋ 미니알바 추가</button>
+          </span>
+        </div>
+        <!-- 🤝 이번 주 가족 참여도 (#v36 · 시안 8863228F) -->
         <div class="famjoin" id="familyJoinCard" aria-label="이번 주 가족 참여도">
-          <div class="fj-people" aria-hidden="true"><i>👩</i><i>🧔</i><i>👦</i><i>👧</i></div>
-          <div class="fj-title"><span aria-hidden="true">🤝</span> 이번 주 가족 참여도</div>
-          <p class="fj-count" id="familyLimit">이번 주 가족 미션 <b id="familyCount">0</b>건 · 최대 3,000원</p>
+          <div class="fj-body">
+            <div class="fj-main">
+              <div class="fj-title"><span aria-hidden="true">🤝</span> 이번 주 가족 참여도
+                <svg class="fj-spark" viewBox="0 0 24 24" aria-hidden="true"><use href="#famArtSpark" xlink:href="#famArtSpark"/></svg>
+                <svg class="fj-spark s2" viewBox="0 0 24 24" aria-hidden="true"><use href="#famArtSpark" xlink:href="#famArtSpark"/></svg>
+              </div>
+              <p class="fj-count" id="familyLimit">이번 주 가족 미션 <b id="familyCount">0</b>건 · 최대 3,000원</p>
+            </div>
+            <div class="fj-art" aria-hidden="true"><svg class="fam-art" viewBox="0 0 240 186"><use href="#famArtFamily" xlink:href="#famArtFamily"/></svg></div>
+          </div>
           <p class="fj-money"><span aria-hidden="true">🪙</span> 이번 주 가족 미션 용돈 <b id="familyEarned">0원</b> <em>| 최대 <span id="familyMaxMoney">3,000원</span></em></p>
           <div class="fj-gauge">
-            <span class="fj-jar" aria-hidden="true">🫙</span>
+            <span class="fj-jar" aria-hidden="true"><svg class="fam-art" viewBox="0 0 72 84"><use href="#famArtJar" xlink:href="#famArtJar"/></svg></span>
             <div class="fj-track"><i id="familyCapBar"></i><span class="fj-bubble" id="familyBubble">이번 주 0원 달성!</span></div>
             <b class="fj-cap" id="familyMaxCap">3,000원</b>
           </div>
@@ -4790,26 +5010,19 @@ body.mode-kid .home-more{display:none}
         <div class="fam-pick-bar" id="familyPickBar">
           <span class="fpb-title">참여 방식 선택</span>
           <div class="fpb-grid" id="familyPickGrid" role="group" aria-label="참여 방식 선택"></div>
-        </div>
-        <div class="list-tools fam-add-tools" data-parent-only="1">
-          <button class="btn btn-ghost btn-sm" data-action="add-self" data-cat="family">＋ 가족 미션 추가</button>
-          <button class="btn btn-ghost btn-sm" data-action="vac-add">＋ 미니알바 추가</button>
-          <span class="hint" id="familyTeamHint">👫 함께 · 🙋 스스로 중에서 골라요</span>
+          <span class="hint fam-pick-hint" id="familyTeamHint">👫 함께 · 🙋 스스로 · 🪙 미니알바 중에서 골라요</span>
         </div>
         <div class="chore-grid" id="familyList"></div>
 
         <!-- 🪙 100원 미니알바 — 6개 분류 · 상시 활동 (#v35 · 시안 B00F4DD4) -->
         <div class="vac-box" id="vacationMiniJobsBox" hidden>
-          <div class="mjb-hero" aria-label="우리 가족을 위한 미니알바">
-            <div class="mjb-hero-txt"><b>우리 가족을 위한<br><em>미니알바!</em></b><small>작은 도움도 소중해요!</small></div>
-            <span class="mjb-hero-art" aria-hidden="true">👦👧🏠</span>
-          </div>
           <div class="mjb-week" id="miniWeekDone"></div>
           <div class="mjb-cats" id="miniCatChips" role="group" aria-label="미니알바 분류"></div>
           <div class="vac-head">
             <b>🪙 100원 미니알바</b>
             <span class="vac-badge on" id="vacationBadge">🪙 오늘 0건 · 주 3,000원 안에서</span>
           </div>
+          <p class="vac-order-hint" data-parent-only="1">✋ 카드를 꾹 누르면 순서를 바꿀 수 있어요</p>
           <div class="vac-grid" id="vacationMiniJobsList"></div>
         </div>
       </div>
@@ -5225,7 +5438,7 @@ function familyWeekLog(kidKey, wk){
 }
 /* =========================================================
    🌴 방학 미니알바 (#v27)
-   · 달력의 방학 기간(여름·겨울 12/24~2/1 · 봄 2/13~2/28, 제목에 「방학」이 든 기간)에만 열린다
+   · 달력의 방학 기간(여름·겨울 12/25~1/31 · 봄 2/13~3/1, 제목에 「방학」이 든 기간)에만 열린다
    · 방학 중: 아이·부모 모두 100원 미션을 체크해 FAMILY 이번 주 용돈에 함께 쌓는다
    · 학기 중: 아이·아빠 화면은 숨기고, 엄마는 미리 넣고 고치고 지울 수 있다 (🔒 배지)
    ========================================================= */
@@ -5362,9 +5575,9 @@ function isVacationDate(ymd){
     return e.date <= dk && dk <= end;
   });
   if(hit) return true;
-  /* 달력에 방학 일정이 아직 없어도 학사일정대로 안다: 겨울 12/24~2/1 · 봄 2/13~2/28 */
+  /* 달력에 방학 일정이 아직 없어도 학사일정대로 안다: 겨울 12/25~1/31 · 봄 2/13~3/1 (#v36) */
   var md = dk.slice(5);
-  return (md >= '12-24' || md <= '02-01') || (md >= '02-13' && md <= '02-28');
+  return (md >= '12-25' || md <= '01-31') || (md >= '02-13' && md <= '03-01');
 }
 /* 🪙 100원 미니알바 — 평일 포함 상시 활동 (#v35)
    · 「공휴일·주말·방학에만 오픈」·「방학 하루 5건」 규칙은 없앴다
@@ -5497,8 +5710,10 @@ function renderVacationMiniJobs(){
         '<div class="mjw-list">' + log.map(function(x){
           var j = vacationJobOf(x.id) || { icon: '🪙', label: x.id };
           return '<span class="mjw-pill" data-mjw-id="' + esc(x.id) + '">' +
-            '<b>' + esc(j.icon || '🪙') + ' ' + esc(j.label) + '</b>' +
-            '<i>' + x.count + '번</i><em>+' + fmt(x.amount) + '</em></span>';
+            '<span class="mjw-ico" aria-hidden="true">' + esc(j.icon || '🪙') + '</span>' +
+            '<span class="mjw-main"><b>' + esc(j.label) + '</b>' +
+              (j.desc ? '<small>(' + esc(j.desc) + ')</small>' : '') + '</span>' +
+            '<em>+' + fmt(x.amount) + '</em><i>' + x.count + '회</i></span>';
         }).join('') + '</div>'
       : '<div class="mjw-empty">🌟 아직 이번 주에 한 일이 없어요 — 아래에서 도장을 찍어 보세요!</div>';
   }
@@ -5515,6 +5730,13 @@ function renderVacationMiniJobs(){
   var list = $('#vacationMiniJobsList');
   if(!list) return;
   var shown = jobs.filter(function(j){ return miniJobCatDef(j.cat).key === VAC_CAT; });
+  /* 🪙 엄마가 꾹 눌러 바꾼 순서대로 (#v36) */
+  var orderNow = Array.isArray(state.miniJobOrder) ? state.miniJobOrder : [];
+  shown.sort(function(a, b){
+    var ia = orderNow.indexOf(a.id), ib = orderNow.indexOf(b.id);
+    if(ia < 0) ia = 9999; if(ib < 0) ib = 9999;
+    return ia - ib;
+  });
   list.innerHTML = shown.length ? shown.map(function(j){
     var nToday = vacCountOn(kidKey, dayKey(), j.id);
     var nWeek = 0, amtWeek = 0;
@@ -8474,7 +8696,24 @@ function defaultRecurringAnniversaries(){
   });
 }
 
-var SEED_EVENT_VERSION = 'v3'; /* v3: 2027-03-02 개학식 · 2028년 가족·음력 일정 시드 추가 (#v25) */
+var SEED_EVENT_VERSION = 'v4'; /* v4: 학사일정 메모·봄방학 3/1까지·3/2 시업식 (#v36) */
+/* 🏫 v4 — 이미 저장된 학사일정도 새 안내(급식·시업식)로 한 번만 맞춘다 */
+function patchSchoolEventsV4(list){
+  var fix = {
+    'seed2-sc-20261224-winter-s': { note: '5교시, 급식실시' },
+    'seed2-sc-20270212-last':    { note: '2교시, 급식미실시' },
+    'seed2-sc-20270213-spring':  { end: '2027-03-01' },
+    'seed3-sc-20270302-open':    { title: '시업식' }
+  };
+  (list || []).forEach(function(e){
+    var f = e && fix[e.id];
+    if(!f) return;
+    Object.keys(f).forEach(function(k){
+      if(e[k] !== f[k]){ e[k] = f[k]; NORMALIZE_DIRTY = true; }
+    });
+  });
+  return list;
+}
 /* 📅 달력은 2026년 11월부터 (#v25) — 그 이전 일정은 시드·저장본 모두에서 덜어 낸다 */
 var CAL_DATA_FROM = '2026-11-01';
 var SEED_FAMILY_EVENTS = [
@@ -8518,11 +8757,11 @@ var SEED_FAMILY_EVENTS_V2 = [
   { id:'seed2-sc-20260819-open2',   date:'2026-08-19', end:'',            title:'개학식',                 who:'seonwoo', category:'seonwoo', note:'' },
   { id:'seed2-sc-20260928-off',     date:'2026-09-28', end:'',            title:'자율휴업일',             who:'seonwoo', category:'seonwoo', note:'' },
   { id:'seed2-sc-20261006-swim',    date:'2026-10-06', end:'2026-10-27',   title:'수영교육(6회)',          who:'seonwoo', category:'seonwoo', note:'' },
-  { id:'seed2-sc-20261224-winter-s',date:'2026-12-24', end:'',            title:'겨울 방학식',            who:'seonwoo', category:'seonwoo', note:'' },
+  { id:'seed2-sc-20261224-winter-s',date:'2026-12-24', end:'',            title:'겨울 방학식',            who:'seonwoo', category:'seonwoo', note:'5교시, 급식실시' },
   { id:'seed2-sc-20261225-winter',  date:'2026-12-25', end:'2027-01-31',   title:'겨울방학',               who:'seonwoo', category:'seonwoo', note:'', disp:'winter' },
   { id:'seed2-sc-20270201-open3',   date:'2027-02-01', end:'',            title:'개학식',                 who:'seonwoo', category:'seonwoo', note:'' },
-  { id:'seed2-sc-20270212-last',    date:'2027-02-12', end:'',            title:'종업식',                 who:'seonwoo', category:'seonwoo', note:'' },
-  { id:'seed2-sc-20270213-spring',  date:'2027-02-13', end:'2027-02-28',   title:'봄방학',                 who:'seonwoo', category:'seonwoo', note:'', disp:'spring' },
+  { id:'seed2-sc-20270212-last',    date:'2027-02-12', end:'',            title:'종업식',                 who:'seonwoo', category:'seonwoo', note:'2교시, 급식미실시' },
+  { id:'seed2-sc-20270213-spring',  date:'2027-02-13', end:'2027-03-01',   title:'봄방학',                 who:'seonwoo', category:'seonwoo', note:'', disp:'spring' },
 
   /* ── 🎂 가족 생일(양력) · 결혼기념일 ── */
   { id:'seed2-fam-20260211-dad',    date:'2026-02-11', end:'',            title:'🎂 아빠 생일',           who:'dad',     category:'dad',     note:'', disp:'bar' },
@@ -8559,10 +8798,10 @@ var SEED_FAMILY_EVENTS_V2 = [
 ];
 
 /* ── v3 시드 (#v25) ──
-   · 2027-03-02 개학식 (봄방학 2027-02-13~02-28 다음 날)
+   · 2027-03-02 시업식 (봄방학 2027-02-13~03-01 다음 날)
    · 2028년 가족 생일·결혼기념일·친척 생신(양력)과 음력 생신·기일 (한국천문연구원 달력자료) */
 var SEED_FAMILY_EVENTS_V3 = [
-  { id:'seed3-sc-20270302-open',    date:'2027-03-02', end:'',            title:'개학식',                 who:'seonwoo', category:'seonwoo', note:'', disp:'bar' },
+  { id:'seed3-sc-20270302-open',    date:'2027-03-02', end:'',            title:'시업식',                 who:'seonwoo', category:'seonwoo', note:'', disp:'bar' },
 
   /* 2028 · 양력 가족 생일·기념일 · 친척 생신 */
   { id:'seed3-rel-20280102-song',   date:'2028-01-02', end:'',            title:'송이 이모 생신',         who:'all',     category:'family',  note:'', disp:'bar' },
@@ -9191,7 +9430,7 @@ function normalize(raw){
       var purged = list.filter(function(e){ return e && String(e.end || e.date) >= CAL_DATA_FROM; });
       /* 처음 열 때는 시드 전부, v1 저장본에서는 v2 시드만 더한다 — 저장된 일정은 그대로 */
       if(!seeded) return seedFamilyEvents(purged);
-      if(seeded !== SEED_EVENT_VERSION) return seedFamilyEventsV3(seedFamilyEventsV2(purged));
+      if(seeded !== SEED_EVENT_VERSION) return patchSchoolEventsV4(seedFamilyEventsV3(seedFamilyEventsV2(purged)));
       return purged;
     })(),
     examSubjects: (function(){
@@ -9627,6 +9866,16 @@ function normalize(raw){
             if(amt > 0) rvac[vk] = amt;
           });
           if(Object.keys(rvac).length) days[k].vac = rvac;
+          /* 몇 번 했는지(vacN)도 같이 살린다 — 숨기면 새로 열 때마다 1번으로 돌아간다 (#v36) */
+          if(d.vacN && typeof d.vacN === 'object'){
+            var rvn = {};
+            Object.keys(d.vacN).forEach(function(vk){
+              if(!rvac[vk]) return;
+              var n = num(d.vacN[vk], 0, 0, 99);
+              if(n > 0) rvn[vk] = n;
+            });
+            if(Object.keys(rvn).length) days[k].vacN = rvn;
+          }
         }
         if(d.bonus && typeof d.bonus === 'object'){
           var rd = {};
@@ -9765,6 +10014,8 @@ function normalize(raw){
   /* 🤝 FAMILY 미션 목록은 선우·지우가 늘 같게 (순서까지) — #v29
      · 엄마가 꾹 눌러 바꾼 순서(s.familyOrder)는 그대로 지킨다 (#v35) */
   s.familyOrder = Array.isArray(raw.familyOrder) ? raw.familyOrder.filter(function(x){ return typeof x === 'string' && x; }).slice(0, 80) : [];
+  /* 🪙 미니알바도 엄마가 꾹 눌러 바꾼 순서를 그대로 지킨다 (#v36) */
+  s.miniJobOrder = Array.isArray(raw.miniJobOrder) ? raw.miniJobOrder.filter(function(x){ return typeof x === 'string' && x; }).slice(0, 200) : [];
   if(alignFamilyMissionLists(s)) NORMALIZE_DIRTY = true;
   return s;
 }
@@ -10941,7 +11192,8 @@ function adjustSumOf(kidKey, kind, month){
 }
 /* 지급 기록을 빼기 전의 잔액 — 직접 맞추기의 차이값을 정확히 계산하려고 쓴다 */
 function balanceRaw(kidKey){
-  return totalEarned(kidKey) + adjustSumOf(kidKey, 'money') - (Number(state.kids[kidKey].paidOut) || 0);
+  /* 💯 100점 현금은 아빠가 그 자리에서 현금으로 주므로, 이미 준 만큼은 남은 용돈에서 뺀다 (#v36) */
+  return totalEarned(kidKey) + adjustSumOf(kidKey, 'money') - (Number(state.kids[kidKey].paidOut) || 0) - hundredPaidTotalOf(kidKey);
 }
 function monthEarnedOf(kidKey, mk){
   var month = mk || currentMonthKey();
@@ -12140,22 +12392,25 @@ function renderMissions(){
     famNoteEl.hidden = !famMsg;
     famNoteEl.textContent = famMsg;
   }
-  /* 이번 주 실제 내역 — 하단 노란 캡슐 바 (날짜 · 미션 · 함께/스스로 · 금액) */
+  /* 이번 주 실제 내역 — 날짜 · 미션 · 함께/스스로 · 금액을 한 줄씩 차곡차곡 (#v36) */
   var famLogEl = $('#familyWeekLog');
   var famLogList = $('#familyWeekLogList');
   if(famLogEl && famLogList){
     var famLog = familyWeekLog(kidKey);
+    var famShow = famLog.slice(-5).reverse();
     famLogEl.hidden = !famLog.length;
-    famLogList.innerHTML = famLog.map(function(x){
+    famLogList.innerHTML = famShow.map(function(x){
       var md = Number(x.day.slice(5, 7)) + '/' + Number(x.day.slice(8));
       var tdef = familyTeamDef(x.team);
       var amtTxt = '+' + fmt(x.amt);
       return '<span class="fwl-pill" data-fwl-id="' + x.id + '" data-fwl-team="' + x.team + '">' +
         '<i>' + md + '</i>' +
         '<b>' + esc(x.icon || '🤝') + ' ' + esc(x.label) + '</b>' +
-        (x.vac ? '' : '<i>' + esc(tdef.label) + '</i>') +
-        '<em>' + amtTxt + '</em></span>';
-    }).join('');
+        (x.vac ? '<em>미니알바</em>' : '<em>' + esc(tdef.label) + '</em>') +
+        '<strong>' + amtTxt + '</strong></span>';
+    }).join('') + (famLog.length > famShow.length
+      ? '<span class="fwl-more" id="familyWeekLogMore">그 외 ' + (famLog.length - famShow.length) + '건 더 있어요</span>'
+      : '<span class="fwl-more" id="familyWeekLogMore" hidden></span>');
   }
 
   var hint = $('#missionHint');
@@ -12432,6 +12687,20 @@ function rwdWeekMoneyRows(kidKey, month, add){
     var dad = weekSumOfMap(k.dadBonusAmount, w);
     if(mom) add(w, '👩‍💼', '엄마 보너스', '주간 보너스', mom, { type:'bonus', who:'mom', week:w });
     if(dad) add(w, '🧔', '아빠 보너스', '주간 보너스', dad, { type:'bonus', who:'dad', week:w });
+    /* 💯 100점 현금 — 지급일 기준으로 그 주에 들어온 만큼 (「이번 달 벌은 용돈」 합계와 똑같이) (#v36) */
+    var hundredRows = 0;
+    hundredRequests().forEach(function(r){
+      if(!r || r.kid !== kidKey || r.status === 'canceled') return;
+      var pd = hundredPaidDate(r);
+      if(!pd || weekStartKey(fromKey(pd)) !== w) return;
+      hundredRows += Number(r.amount) || HUNDRED_AMOUNT;
+      add(pd, '💯', '100점 현금', hundredKindLabel(r.kind) + ' · 지급일 기준', Number(r.amount) || HUNDRED_AMOUNT, null);
+    });
+    /* 예전 저장본은 금액표만 있어요 — 요청 기록이 없는 주는 금액표로 보여 줌 */
+    if(!hundredRows){
+      var legacyHundred = weekSumOfMap(k.hundredBonusAmount, w);
+      if(legacyHundred) add(w, '💯', '100점 현금', '지급일 기준 보너스', legacyHundred, null);
+    }
     /* 가족 미션 · 미니알바 — 체크한 날짜 그대로 한 줄씩
        같은 미션을 한 주에 두 번 했으면 첫날만 금액이 인정되고, 둘째 줄은 +0으로 날짜를 남긴다 */
     var seen = {};
@@ -12509,11 +12778,20 @@ function rwdDetailRows(kind, kidKey){
   }else if(kind === 'month-earn'){
     rwdWeekMoneyRows(kidKey, month, add);
   }else if(kind === 'balance'){
-    /* 남은 용돈 — 받은 용돈 전부 + 직접 맞춘 기록 - 정산 지급 */
+    /* 남은 용돈 — 벌은 용 전부 + 직접 맞춘 기록 - 정산 지급 - 이미 받은 100점 현금 */
     rwdWeekMoneyRows(kidKey, null, add);
     (k.payouts || []).forEach(function(p, i){
       add(p.date, '💸', '용돈 정산 지급', payMethodLabel(p.method) + (p.memo ? ' · ' + p.memo : ''), -(Number(p.amount) || 0), { type:'payout', index:i });
     });
+    /* 💯 100점 현금은 아빠가 바로 현금으로 줘서 「받은 용돈」에 이미 들어 있어요 — 남은 용돈에서는 빠져요 (#v36) */
+    hundredRequests().forEach(function(r){
+      if(!r || r.kid !== kidKey || r.status === 'canceled') return;
+      var pd = hundredPaidDate(r);
+      if(!pd) return;
+      add(pd, '💯', '100점 현금 지급 완료', hundredKindLabel(r.kind) + ' · 이미 받았어요', -(Number(r.amount) || HUNDRED_AMOUNT), null);
+    });
+    var legacyHundredTotal = hundredPaidTotalOf(kidKey) - hundredBonusOf(kidKey);
+    if(legacyHundredTotal > 0) add('', '💯', '100점 현금 지급 완료', '이미 받은 보너스', -legacyHundredTotal, null);
   }else if(kind === 'month-use'){
     (k.payouts || []).forEach(function(p, i){
       if(String(p.date || '').slice(0, 7) !== month) return;
@@ -12908,7 +13186,7 @@ function rewardGuideHtml(kidKey){
 
   /* 2장 — 🏅 도장 모으기 / 💰 용돈 모으기 두 묶음 (#v28) */
   var rules = '<div class="rgd-rules">' +
-      '<div class="rgd-rules-h">' + ico3d('clipboard','i3d-22') + '<b>보상 규칙 한눈에</b></div>' +
+      '<div class="rgd-rules-h">' + ico3d('checklist','i3d-22') + '<b>보상 규칙 한눈에</b></div>' +
       /* 🏅 도장 규칙끼리 한 묶음 */
       '<div class="rgd-grp">' +
         '<div class="rgd-grp-h"><span aria-hidden="true">🏅</span>도장 모으기</div>' +
@@ -13107,6 +13385,26 @@ function hundredBonusOf(kidKey){
     if(r && r.kid === kidKey && r.status !== 'canceled' && hundredIsPaid(r)) sum += Number(r.amount) || HUNDRED_AMOUNT;
   });
   return sum;
+}
+/* 💯 이미 현금으로 준 100점 보너스 — 남은 용돈·월말 정산에서 빼서 두 번 주지 않는다 (#v36)
+   · 주별 「이번 주 용돈」에 더한 것과 똑같은 기준(hundredPaidInWeek)으로 세어 금액이 어긋나지 않게 해요 */
+function hundredPaidTotalOf(kidKey){
+  var sum = 0;
+  allWeeks(kidKey).forEach(function(w){ sum += hundredPaidInWeek(kidKey, w); });
+  return sum;
+}
+function hundredPaidInMonthOf(kidKey, mk){
+  var sum = 0;
+  allWeeks(kidKey).forEach(function(w){
+    if(String(w).slice(0, 7) !== mk) return;
+    sum += hundredPaidInWeek(kidKey, w);
+  });
+  return sum;
+}
+/* 그 달에 실제로 더 줄 정산 금액 — 이미 받은 100점 현금은 빼고 (#v36) */
+function monthSettleAmountOf(kidKey, mk){
+  var month = mk || currentMonthKey();
+  return Math.max(0, monthEarnedOf(kidKey, month).total - hundredPaidInMonthOf(kidKey, month));
 }
 function sendHundredRequest(){
   if(isDadMode()) return;
@@ -13601,12 +13899,13 @@ function settlementBoxHtml(){
   var mk = prevMonthKey();
   var rows = [];
   ['seonwoo', 'jiwoo'].forEach(function(k){
-    var amount = monthEarnedOf(k, mk).total;
+    var amount = monthSettleAmountOf(k, mk);
     var done = settleInfoOf(k, mk);
     if(!done && amount <= 0) return;
-    rows.push({ kid:k, amount:amount, done:done });
+    rows.push({ kid:k, amount:amount, done:done, hundred:hundredPaidInMonthOf(k, mk) });
   });
   if(!rows.length) return '';
+  var deducted = rows.some(function(r){ return r.hundred > 0; });
   var body = rows.map(function(r){
     var kd = kidDef(r.kid);
     if(r.done){
@@ -13622,12 +13921,12 @@ function settlementBoxHtml(){
       '</span></div>';
   }).join('');
   return '<div class="pm-settle" aria-label="전달 모인 용돈 정산">' +
-      '<div class="pms-h"><span aria-hidden="true">📅</span><b>전달 모인 용돈 정산</b><small>' + monthLabelShort(mk) + '에 모인 용돈이에요</small></div>' + body + '</div>';
+      '<div class="pms-h"><span aria-hidden="true">📅</span><b>전달 모인 용돈 정산</b><small>' + monthLabelShort(mk) + '에 모인 용돈' + (deducted ? ' · 💯 100점 현금 빼고' : '') + '이에요</small></div>' + body + '</div>';
 }
 function settleMonth(kidKey, mk, method){
   if(!(isParentMode() || isDadMode())) return;
   if(kidKey !== 'seonwoo' && kidKey !== 'jiwoo') return;
-  var amount = monthEarnedOf(kidKey, mk).total;
+  var amount = monthSettleAmountOf(kidKey, mk);
   if(amount <= 0) return;
   if(!state.monthlySettlement || typeof state.monthlySettlement !== 'object') state.monthlySettlement = {};
   if(!state.monthlySettlement[kidKey]) state.monthlySettlement[kidKey] = {};
@@ -14244,18 +14543,46 @@ function acViaHtml(e, isLast){
   return '<li class="ac-thin stop via">' + ico + ' <span>' + esc(e.via) + '</span>' +
     (e.viaNote ? '<small>' + esc(e.viaNote) + '</small>' : '') + '</li>';
 }
+/* 🗓 SCHEDULE 요일 바 (#v36) — 화면에서만 쓰는 값, 새로 열면 오늘로 돌아온다 */
+var AC_VIEW_DAY = new Date().getDay();
+/* 이번 주(월~일) 그 요일의 날짜 — 월요일을 이번 주 시작으로 */
+function acWeekDateOf(day, base){
+  var d = new Date((base || new Date()).getTime());
+  d.setHours(0, 0, 0, 0);
+  var dow = d.getDay();
+  var monday = new Date(d.getTime());
+  monday.setDate(d.getDate() + (dow === 0 ? -6 : 1 - dow));
+  var out = new Date(monday.getTime());
+  out.setDate(monday.getDate() + (Number(day) === 0 ? 6 : Number(day) - 1));
+  return out;
+}
+function renderAcademyDayBar(todayDow, viewDow){
+  var bar = $('#acDayBar');
+  if(!bar) return;
+  bar.innerHTML = DAY_ORDER.map(function(d){
+    var on = d === viewDow, isToday = d === todayDow;
+    return '<button type="button" class="ac-day' + (on ? ' on' : '') + (isToday ? ' today' : '') + '"' +
+      ' data-action="ac-day" data-day="' + d + '" aria-pressed="' + (on ? 'true' : 'false') + '"' +
+      ' aria-label="' + WEEK[d] + '요일 동선"><span>' + WEEK[d] + '</span>' +
+      (isToday ? '<i aria-hidden="true"></i>' : '') + '</button>';
+  }).join('');
+}
 function renderAcademy(){
   var kidKey = state.current;
   var kd = kidDef(kidKey);  var now = new Date();
-  var dow = now.getDay();
-  var mk = monthKeyOf(now);
+  var todayDow = now.getDay();
+  var dow = (AC_VIEW_DAY === 0 || AC_VIEW_DAY) && AC_VIEW_DAY >= 0 && AC_VIEW_DAY <= 6 ? Number(AC_VIEW_DAY) : todayDow;
+  var viewDate = acWeekDateOf(dow, now);
+  var isTodayView = (dow === todayDow);
+  var mk = monthKeyOf(viewDate);
   var md = monthData(kidKey, mk);
   var nowMin = now.getHours() * 60 + now.getMinutes();
   var todayList = dayEntries(kidKey, mk, dow);
   var school = (md.school && md.school[dow]) || '';
   /* 🏖️ 쉬는 날(토·일·공휴일)에는 학교 대신 집 (#5524) */
-  var offKey = dayKey(now);
+  var offKey = dayKey(viewDate);
   var off = isSchoolOffDay(offKey);
+  renderAcademyDayBar(todayDow, dow);
 
   var routeEl = $('#todayRoute');
   if(routeEl){
@@ -14266,9 +14593,9 @@ function renderAcademy(){
 
   var box = $('#todayAcademy');
   if(!box) return;
-  /* 🕒 「🏫 오늘의 학원」 옆에 오늘 날짜 (#v31) */
+  /* 🕒 「🏫 오늘의 학원」 옆에 보고 있는 날짜 (#v31 · #v36) */
   var dateEl = $('#acTodayDate');
-  if(dateEl) dateEl.textContent = now.getFullYear() + '.' + pad2(now.getMonth() + 1) + '.' + pad2(now.getDate()) + ' (' + WEEK[dow] + ')';
+  if(dateEl) dateEl.textContent = viewDate.getFullYear() + '.' + pad2(viewDate.getMonth() + 1) + '.' + pad2(viewDate.getDate()) + ' (' + WEEK[dow] + ')';
   var dismiss = off ? null : schoolDismissalOf(kidKey, mk, dow);
   var html = '';
 
@@ -14277,7 +14604,7 @@ function renderAcademy(){
     html += '<ul class="ac-list"><li class="ac-thin school">' + (off
       ? '🏠 집 · ' + esc(schoolOffName(offKey))
       : '🏫 ' + esc(schoolNameOf(kidKey)) + (dismiss ? '<small>' + esc(dismiss.text) + '</small>' : '')) + '</li></ul>';
-    html += '<div class="empty"><span class="empty-emoji">🎈</span><p><b>오늘은 학원이 없어요.</b></p>';
+    html += '<div class="empty"><span class="empty-emoji">🎈</span><p><b>' + (isTodayView ? '오늘은' : WEEK[dow] + '요일은') + ' 학원이 없어요.</b></p>';
     if(next) html += '<p class="muted">다음 학원은 ' + WEEK[next.day] + '요일 ' + fmtTime(next.start) + ' ' + esc(next.name) + '</p>';
     else html += '<p class="muted">학원 시간표·동선을 추가하거나 차차에게 알려주세요!</p>';
     html += '</div>';
@@ -14317,7 +14644,7 @@ function renderAcademy(){
       }else if(inKey){
         html += acVehLegHtml(inKey, a);
       }
-      var isNext = !marked && toMin(a.start) >= nowMin;
+      var isNext = isTodayView && !marked && toMin(a.start) >= nowMin;
       if(isNext) marked = true;
       /* 🏫 방과후 · 🅿️ 주차장 · 📍 장소 — 얇은 한 줄 박스 (#v31) */
       if(a.stop === 'school'){
@@ -14380,7 +14707,7 @@ function renderAcademy(){
   box.innerHTML = html;
 
   var sub = $('#academySub');
-  if(sub) sub.textContent = kd.name + ' · ' + (todayList.length ? todayList.length + '개 일정' : '오늘은 일정 없음');
+  if(sub) sub.textContent = kd.name + ' · ' + (todayList.length ? todayList.length + '개 일정' : '이 날은 일정 없음') + (isTodayView ? ' · 오늘' : ' · ' + WEEK[dow] + '요일');
   /* ➕ 추가 폼의 이모지·프리셋 칩과 조건부 학원차 칸 (#v31) */
   renderAcEmojiRow();
   renderAcStopRow();
@@ -15609,6 +15936,7 @@ function renderFamilyCalendar(){
      · 단발 점(•)은 칸 맨 아랫줄에 가지런히 */
   var lanesMax = 4;
   var singleByDate = {};
+  var cellChips = {};   /* 칸 안 가운데 2줄 알약 — 생일·행사·1칸짜리 일정 (#v36) */
   var barEvs = evsInMonth.filter(function(e){ return !calEventIsAnniv(e) && calEventDisp(e) === 'bar'; });
   var weeks = Math.ceil((firstDow + dim) / 7);
   var weekItems = [];
@@ -15627,42 +15955,54 @@ function renderFamilyCalendar(){
     var eIdx = firstDow + Number(en.slice(8, 10)) - 1;
     var wFrom = Math.floor(sIdx / 7), wTo = Math.floor(eIdx / 7);
     for(var w = wFrom; w <= wTo; w++){
+      var col0 = Math.max(sIdx, w * 7) - w * 7;
+      var col1 = Math.min(eIdx, w * 7 + 6) - w * 7;
+      /* 1칸 폭으로 끊긴 조각(주 경계 포함)은 글자가 잘리지 않게 칸 안 두 줄 알약으로 (#v36) */
+      if(col0 === col1){
+        var pieceDay = w * 7 + col0 - firstDow + 1;
+        if(pieceDay >= 1 && pieceDay <= dim){
+          var pieceK = mk + '-' + pad2(pieceDay);
+          (cellChips[pieceK] = cellChips[pieceK] || []).push({ e: e, kind: 'day' });
+          continue;
+        }
+      }
       weekItems[w].push({
         kind: 'bar', e: e, text: String(e.title || ''),
-        col0: Math.max(sIdx, w * 7) - w * 7,
-        col1: Math.min(eIdx, w * 7 + 6) - w * 7,
+        col0: col0, col1: col1,
         contL: sIdx < w * 7,
         contR: eIdx > w * 7 + 6
       });
     }
   });
-  /* 생일 · 기념일 — 칸 안의 파스텔 알약 */
+  /* 생일 · 기념일 · 단일 형광펜 — 칸 안 가운데 2줄 알약으로 (#v36)
+     1줄 이모지 / 2줄 이름 · 칸 폭을 넘지 않고 두 줄까지 줄바꿈 */
   Object.keys(annByDate).forEach(function(dk){
-    var varDay = Number(String(dk).slice(8, 10));
-    var idxA = firstDow + varDay - 1;
-    var wA = Math.floor(idxA / 7), cA = idxA % 7;
-    if(!weekItems[wA]) return;
     annByDate[dk].forEach(function(e){
-      var bp = calBarParts(e);
-      weekItems[wA].push({
-        kind: 'bday', e: e, text: (bp.emo ? bp.emo + ' ' : '') + bp.name,
-        col0: cA, col1: cA, contL: false, contR: false
-      });
+      (cellChips[dk] = cellChips[dk] || []).push({ e: e, kind: 'ann' });
     });
   });
-  /* 단일 형광펜 — 「( )」 강조 그대로 한 칸 */
   Object.keys(singleByDate).forEach(function(dk){
-    var varDay = Number(String(dk).slice(8, 10));
-    var idxS = firstDow + varDay - 1;
-    var wS = Math.floor(idxS / 7), cS = idxS % 7;
-    if(!weekItems[wS]) return;
     singleByDate[dk].forEach(function(e){
-      var parts = calBarParts(e);
-      weekItems[wS].push({ kind: 'paren', e: e, text: parts.full, col0: cS, col1: cS, contL: false, contR: false });
+      (cellChips[dk] = cellChips[dk] || []).push({ e: e, kind: 'day' });
     });
   });
+  /* 단일 행사는 그 날 칸에만 — 이어지는 일정과 같은 칸에 겹칠 때는 레인 아래로 (#v36) */
+  function calChipHtml(chip){
+    var e = chip.e;
+    var p = calBarParts(e);
+    var emo = p.emo;
+    if(!emo && /개학|방학|종업|입학|종강|졸업/.test(String(e.title || '') + String(p.name || ''))) emo = '🏫';
+    if(!emo) emo = '📌';
+    if(chip.kind === 'ann'){
+      var kindB = calEventKindOf(e);
+      return '<span class="cal-chip ann" style="--cat:' + annColorOf(kindB) + ';--cat-soft:' + annSoftOf(kindB) + '" title="' + esc(p.full) + '">' +
+        '<i aria-hidden="true">' + esc(emo) + '</i><b>' + esc(p.name) + '</b></span>';
+    }
+    return '<span class="cal-chip day cal-c-' + esc(e.category || 'family') + '" title="' + esc(p.full) + '">' +
+      '<i aria-hidden="true">' + esc(emo) + '</i><b>' + esc(p.name) + '</b></span>';
+  }
   /* 1~4줄로 차례차례 — 긴 일정이 먼저 자리를 잡고, 넘치면 4번째 줄에 모인다 */
-  weekItems.forEach(function(items){
+/**/  weekItems.forEach(function(items){
     items.sort(function(a, b){
       if(a.col0 !== b.col0) return a.col0 - b.col0;
       return (b.col1 - b.col0) - (a.col1 - a.col0);
@@ -15675,6 +16015,12 @@ function renderFamilyCalendar(){
       it.lane = lane;
       laneEnd[lane] = Math.max(laneEnd[lane] === undefined ? -1 : laneEnd[lane], it.col1);
     });
+  });
+  /* 그 주에 쓴 레인 수 — 칸 안 알약은 레인 아래부터 시작 */
+  var lanesUsed = weekItems.map(function(items){
+    var mx = 0;
+    items.forEach(function(it){ mx = Math.max(mx, (Number(it.lane) || 0) + 1); });
+    return mx;
   });
 
   var outHtml = [];
@@ -15711,6 +16057,9 @@ function renderFamilyCalendar(){
         ' style="grid-column:' + (c + 1) + ';grid-row:1/-1" aria-pressed="' + (dk === sel ? 'true' : 'false') + '" aria-label="' + esc(aria) + '">' +
         '<span class="cal-head-line"><span class="cal-date">' + d + '</span>' +
           (hol ? '<span class="cal-hol">' + esc(hol.length > 7 ? '대체공휴일' : hol) + '</span>' : '') + '</span>' +
+        (cellChips[dk] && cellChips[dk].length ? '<span class="cal-chips" style="--used-lanes:' + (lanesUsed[wk] || 0) + '">' +
+          cellChips[dk].slice(0, 2).map(calChipHtml).join('') +
+          (cellChips[dk].length > 2 ? '<em class="cal-chip-more">+' + (cellChips[dk].length - 2) + '</em>' : '') + '</span>' : '') +
         (dots.length ? '<span class="cal-dots">' + dots.slice(0, 4).map(function(e){ return '<i class="cal-dot cal-c-' + e.category + '"></i>'; }).join('') +
           (dots.length > 4 ? '<b class="cal-more">+' + (dots.length - 4) + '</b>' : '') + '</span>' : '') +
       '</button>');
@@ -16514,12 +16863,15 @@ function openSchoolTimetable(kid){
 }
 /* 🎨 학원 시간표 — SCHEDULE 머리글의 「🎨 학원 시간표」 버튼이 바로 연다 (#v28) */
 function openAcademyTimetable(kid){
+  /* 🗓️ 학원 시간표 팝업 — 열 때는 이번 달부터 (#v36) */
+  TT_MODAL_MONTH = currentMonthKey();
   renderAcademyTimetable(kid || (isKidMode() ? MODE : (state.current || TT_KID)));
 }
 /* 🏫 학교 시간표 | 🎨 학원 시간표 — 이제 SCHEDULE 머리글의 버튼이 각 모달을 바로 연다 (#v28)
    모달 안에서는 아이(선우·지우) 전환만 남긴다 */
 var TT_MODAL_TAB = 'school';
 var TT_MODAL_KID = '';
+var TT_MODAL_MONTH = '';
 function ttModalTabs(who){
   var kidMode = isKidMode();
   if(kidMode){
@@ -16534,13 +16886,13 @@ function ttModalTabs(who){
 /* 🎨 학원 시간표 — 이번 달 시간표를 월~금 가로 5열 표로 (각 열은 시간순 아래로 · #v28)
    🏠 「집」 정류장은 동선(🏫 오늘의 학원 · 👀 한눈에 보기)에서만 보이고,
    이 표에는 실제 학원 일정만 넣는다 (#v30) */
-function academyTimetableHtml(kidKey){
-  var mk = state.month || currentMonthKey();
+function academyTimetableHtml(kidKey, mkArg){
+  var mk = mkArg || TT_MODAL_MONTH || currentMonthKey();
   var md = monthData(kidKey, mk);
   /* 집에 들렀다 가는 시간은 학원 일정이 아니라 동선이라 표에서 뺀다 (#v30) */
   var entries = (md.entries || []).filter(function(en){ return !isHomeStop(en.name) && en.stop !== 'school'; });
   if(!entries.length){
-    return '<p class="tt-hint">🎨 이번 달 학원 시간표가 아직 없어요 · 아래 「🗓 학원 시간표」에서 넣을 수 있어요</p>';
+    return '<p class="tt-hint">🎨 이번 달 학원 시간표가 아직 없어요 · 아래 「➕ 학원 · 셔틀 동선 추가」에서 넣을 수 있어요</p>';
   }
   var byDay = {};
   entries.forEach(function(en){
@@ -16580,11 +16932,21 @@ function renderAcademyTimetable(kid){
   var who = ttKidKey(kid || TT_MODAL_KID || (isKidMode() ? MODE : (state.current || TT_KID)));
   TT_MODAL_KID = who;
   TT_MODAL_TAB = 'academy';
+  var mk = TT_MODAL_MONTH || currentMonthKey();
+  var months = monthKeys();
+  if(months.indexOf(mk) < 0) mk = currentMonthKey();
+  var monthBar = months.length > 1
+    ? '<div class="tt-months" role="group" aria-label="학원 시간표 달 고르기">' + months.map(function(m){
+        return '<button type="button" class="tt-month' + (m === mk ? ' on' : '') + '" data-action="tt-month" data-month="' + m + '"' +
+          ' aria-pressed="' + (m === mk ? 'true' : 'false') + '">' + monthLabel(m) + '</button>';
+      }).join('') + '</div>'
+    : '';
   openModal(
     '<h2 class="modal-title">🎨 학원 시간표</h2>' +
     ttModalTabs(who, '') +
-    academyTimetableHtml(who) +
-    '<p class="tt-hint">' + (isParentMode() ? '아래 「🗓 학원 시간표」에서 시간·요일을 고칠 수 있어요' : '보기만 해요 · 엄마 화면에서 고칠 수 있어요') + '</p>' +
+    monthBar +
+    academyTimetableHtml(who, mk) +
+    '<p class="tt-hint">' + (isParentMode() ? '아래 「➕ 학원 · 셔틀 동선 추가」나 카드의 ✏️로 시간·요일을 고칠 수 있어요' : '보기만 해요 · 엄마 화면에서 고칠 수 있어요') + '</p>' +
     '<div class="modal-actions"><button type="button" class="btn btn-ghost" data-action="close-modal">닫기</button></div>'
   );
 }
@@ -17414,7 +17776,7 @@ function renderFamilyPick(){
     ' aria-pressed="' + (tab === 'minijob' ? 'true' : 'false') + '">🪙 미니알바</button>';
   box.innerHTML = html;
 }
-/* 📢 FAMILY 규칙 안내 팝업 — 시안 DD709D2C (#v35) */
+/* 📢 FAMILY 규칙 안내 팝업 — 시안 DD709D2C (#v36 아기자기 일러스트) */
 function openFamilyRules(){
   var capNow = familyWeekCap();
   var days = ['월','화','수','목','금','토','일'];
@@ -17423,12 +17785,16 @@ function openFamilyRules(){
   familyWeekLog(scopedKidKey(), week).forEach(function(x){ if(!x.vac) stamped[x.day] = true; });
   var cells = weekDays(week).map(function(k, i){
     var on = !!stamped[k];
-    return '<span class="fr-day' + (on ? ' on' : '') + '"><i class="fr-disc" aria-hidden="true">' + (on ? '⭐' : '') + '</i><b>' + days[i] + '</b></span>';
+    return '<span class="fr-day' + (on ? ' on' : '') + '"><i class="fr-disc" aria-hidden="true">★</i><b>' + days[i] + '</b></span>';
   }).join('');
   openModal(
     '<div class="famrules">' +
-      '<div class="fr-hero"><span class="fr-hero-ico" aria-hidden="true">💎</span><b>FAMILY 규칙</b>' +
-        '<span class="fr-hero-money">주 최대 <em>' + fmt(capNow) + '</em></span></div>' +
+      '<div class="fr-top">' +
+        '<div class="fr-hero"><span class="fr-hero-ico" aria-hidden="true">💎</span><b>FAMILY 규칙</b></div>' +
+        '<div class="fr-cap"><svg viewBox="0 0 54 46" aria-hidden="true"><use href="#famArtCoins" xlink:href="#famArtCoins"/></svg>' +
+          '<span>주 최대 <em>' + fmt(capNow) + '</em></span></div>' +
+        '<div class="fr-top-art" aria-hidden="true"><svg class="fam-art" viewBox="0 0 240 186"><use href="#famArtFamily" xlink:href="#famArtFamily"/></svg></div>' +
+      '</div>' +
       '<div class="fr-cols">' +
         '<ul class="fr-list">' +
           '<li><span class="fr-chk" aria-hidden="true">✓</span><span><b>동일 미션은 주 1회 적립</b><small>같은 일을 반복해도 중복 보상 없음!!</small></span></li>' +
@@ -17440,15 +17806,30 @@ function openFamilyRules(){
           '<div class="fr-stamp-h">이번 주 미션 스탬프 예시!</div>' +
           '<div class="fr-days">' + cells + '</div>' +
           '<p class="fr-stamp-note">같은 테마에선 <b>일주일에 1번만!</b><br>(함께 1번 · 스스로 1번 가능) · <b>월요일 자정 리셋!</b></p>' +
-          '<p class="fr-stamp-no"><span aria-hidden="true">🚫</span> 같은 항목은 그 주에 다시 찍히지 않아요</p>' +
+          '<p class="fr-stamp-no"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#famArtNoStar" xlink:href="#famArtNoStar"/></svg>' +
+            '<span>같은 항목은 그 주에 다시 찍히지 않아요</span></p>' +
         '</div>' +
       '</div>' +
-      '<div class="fr-mini"><span class="fr-mini-ico" aria-hidden="true">📢</span><b>미니알바</b>' +
-        '<p>평일·주말·방학 언제든 <b>상시 활동</b>으로 열려 있어요! (여는 시점·건수 제한 없음)</p></div>' +
-      '<div class="fr-card basic"><b>★ 기본규칙</b><p>평소에는 통합 주 <em>' + fmt(FAMILY_WEEK_MAX) + '</em> 한도!</p>' +
-        '<small>함께 + 스스로 + 미니알바의 모든 적립금을 합산해 주당 최대 ' + fmt(FAMILY_WEEK_MAX) + '까지 지급해요.</small></div>' +
-      '<div class="fr-card vac"><b>🏖️ 방학 DOUBLE CHANCE</b><p>방학에는 통합 주 <em>' + fmt(FAMILY_WEEK_VACATION_MAX) + '</em> 한도!</p>' +
-        '<small>방학 주에는 함께 + 스스로 + 미니알바를 합쳐 주당 최대 ' + fmt(FAMILY_WEEK_VACATION_MAX) + '까지 지급해요.</small></div>' +
+      '<div class="fr-mini"><span class="fr-mini-art" aria-hidden="true"><svg class="fam-art" viewBox="0 0 44 40"><use href="#famArtMega" xlink:href="#famArtMega"/></svg></span>' +
+        '<span class="fr-mini-pill">미니알바</span>' +
+        '<p>평일·주말·방학 언제든 <b>상시 활동</b>이에요! 여는 시점·건수 제한 없이 마음껏 도와요.</p></div>' +
+      '<div class="fr-card basic">' +
+        '<div class="fr-card-head"><span class="fr-badge">★ 기본규칙</span></div>' +
+        '<div class="fr-card-body">' +
+          '<span class="fr-card-art" aria-hidden="true"><svg class="fam-art" viewBox="0 0 76 76"><use href="#famArtTarget" xlink:href="#famArtTarget"/></svg></span>' +
+          '<div class="fr-card-txt"><p>평소에는 통합 주 <em>' + fmt(FAMILY_WEEK_MAX) + '</em> 한도!</p>' +
+            '<small>함께 + 스스로 + 미니알바의 모든 적립금을 합산해 주당 최대 ' + fmt(FAMILY_WEEK_MAX) + '까지 지급해요.</small></div>' +
+        '</div>' +
+        '<span class="fr-card-coins" aria-hidden="true"><svg class="fam-art" viewBox="0 0 54 46"><use href="#famArtCoins" xlink:href="#famArtCoins"/></svg></span>' +
+      '</div>' +
+      '<div class="fr-card vac">' +
+        '<div class="fr-card-head"><span class="fr-badge">🏖️ 방학 DOUBLE CHANCE</span></div>' +
+        '<div class="fr-card-body">' +
+          '<span class="fr-card-art" aria-hidden="true"><svg class="fam-art" viewBox="0 0 150 120"><use href="#famArtBeach" xlink:href="#famArtBeach"/></svg></span>' +
+          '<div class="fr-card-txt"><p>방학에는 통합 주 <em>' + fmt(FAMILY_WEEK_VACATION_MAX) + '</em> 한도!</p>' +
+            '<small>방학 주에는 함께 + 스스로 + 미니알바를 합쳐 주당 최대 ' + fmt(FAMILY_WEEK_VACATION_MAX) + '까지 지급해요.</small></div>' +
+        '</div>' +
+      '</div>' +
     '</div>' +
     '<div class="modal-actions"><button type="button" class="btn btn-primary" data-action="close-modal">알겠어요!</button></div>'
   );
@@ -18215,6 +18596,7 @@ function payKid(kidKey, reopen){
   if(bal <= 0){ toast(kd.name + '에게 지급할 용돈이 아직 없어요'); return; }
   var me = monthEarnedOf(kidKey);
   var st = weekStats(kidKey);
+  var hp = hundredPaidInMonthOf(kidKey, currentMonthKey());
   payDraft = { method:'bank', kid:kidKey, reopen:!!reopen };
   openModal(
     '<h2 class="modal-title">💸 용돈 정산</h2>' +
@@ -18223,6 +18605,7 @@ function payKid(kidKey, reopen){
       '<div class="pay-now">' +
         '<div class="pay-now-row"><span>미지급 누적 용돈</span><b>' + fmt(bal) + '</b></div>' +
         '<div class="pay-now-row"><span>이번 달 모은 용돈</span><b>' + fmt(me.total) + '</b></div>' +
+        (hp ? '<div class="pay-now-row"><span>💯 100점 현금 (이미 받음)</span><b>-' + fmt(hp) + '</b></div>' : '') +
         '<div class="pay-now-row"><span>이번 주 용돈</span><b>' + fmt(st.grand) + '</b></div>' +
       '</div>' +
       '<label class="set-field">지급 금액 (원)' +
@@ -19594,6 +19977,7 @@ document.addEventListener('click', function(e){
     case 'open-tuition': openTuitionModal(); break;
     case 'rwd-money-page': setRewardMoneyPage(target.getAttribute('data-kid') || scopedKidKey(), Number(target.getAttribute('data-page'))); break;
     case 'open-academy-tt': openAcademyTimetable(); break;
+    case 'tt-month': TT_MODAL_MONTH = target.getAttribute('data-month'); renderAcademyTimetable(); break;
     case 'tt-tab': {
       var tb = target.getAttribute('data-tab');
       if(tb === 'academy') renderAcademyTimetable(TT_MODAL_KID || '');
@@ -19728,6 +20112,14 @@ document.addEventListener('click', function(e){
     case 'edit-academy': editAcademyModal(target.getAttribute('data-id')); break;
     case 'save-academy': saveAcademyEdit(target.getAttribute('data-id')); break;
     case 'del-academy': deleteAcademy(target.getAttribute('data-id')); break;
+    /* 🗓️ 요일 바 — 이번 주 그 요일 동선 보기 (#v36) */
+    case 'ac-day':
+      AC_VIEW_DAY = Number(target.getAttribute('data-day'));
+      if(!(AC_VIEW_DAY >= 0 && AC_VIEW_DAY <= 6)) AC_VIEW_DAY = new Date().getDay();
+      var acDaySel = $('#acDay');
+      if(acDaySel) acDaySel.value = String(AC_VIEW_DAY);
+      renderAcademy();
+      break;
     case 'quick-add': quickAdd(Number(target.getAttribute('data-day'))); break;
     case 'cal-prev': shiftCalMonth(-1); break;
     case 'cal-next': shiftCalMonth(1); break;
@@ -19855,6 +20247,13 @@ function dragTargetOf(el){
       card: card, container: card.parentNode, kind: 'self',
       cat: (card.parentNode.id === 'familyList') ? 'family' : 'space',
       idAttr: 'data-id', selector: '.chore-card[data-id]'
+    };
+  }
+  var vcard = el.closest('.vac-card[data-id]');
+  if(vcard && vcard.parentNode && vcard.parentNode.id === 'vacationMiniJobsList'){
+    return {
+      card: vcard, container: vcard.parentNode, kind: 'vac', cat: 'minijob',
+      idAttr: 'data-id', selector: '.vac-card[data-id]'
     };
   }
   var row = el.closest('.task-row[data-basic-id]');
@@ -20036,6 +20435,25 @@ function dragCollectIds(ds){
   });
   return ids;
 }
+/* 🪙 미니알바 순서 저장 — 지금 보이는 분류 안의 순서만 바꾸고 나머지는 그대로 (#v36) */
+function reorderVacationJobs(ids){
+  if(!Array.isArray(ids) || !ids.length) return false;
+  var all = vacationJobs().map(function(j){ return j.id; });
+  var prev = (Array.isArray(state.miniJobOrder) && state.miniJobOrder.length) ? state.miniJobOrder.slice() : all.slice();
+  all.forEach(function(id){ if(prev.indexOf(id) < 0) prev.push(id); });
+  var set = {};
+  ids.forEach(function(id){ set[id] = 1; });
+  var next = [], k = 0;
+  prev.forEach(function(id){
+    if(set[id]){ if(k < ids.length) next.push(ids[k++]); return; }
+    if(all.indexOf(id) < 0) return;   /* 지운 항목은 뺀다 */
+    next.push(id);
+  });
+  while(k < ids.length) next.push(ids[k++]);
+  var changed = next.join('|') !== prev.join('|');
+  state.miniJobOrder = next;
+  return changed;
+}
 function dragPointerUp(e){
   var ds = dragState;
   if(!ds) return;
@@ -20048,7 +20466,8 @@ function dragPointerUp(e){
   dragSuppressClick = true;
   setTimeout(function(){ dragSuppressClick = false; }, 700);
   if(!ids.length) return;
-  var changed = (kind === 'basic') ? reorderBasicForScope(kid, ids, cat) : reorderSelfForScope(kid, cat, ids);
+  var changed = (kind === 'basic') ? reorderBasicForScope(kid, ids, cat)
+    : (kind === 'vac' ? reorderVacationJobs(ids) : reorderSelfForScope(kid, cat, ids));
   if(changed){
     saveState();
     renderAll();
@@ -20357,6 +20776,11 @@ function boot(){
       getState: function(){ return JSON.parse(JSON.stringify(state)); },
       /* 🛠️ 용돈·도장 직접 맞추기 (#v29) — 테스트·디버깅용 */
       balance: function(kid){ return balanceOf(kid || state.current); },
+      /* 💯 100점 현금 정산 확인용 (#v36) */
+      monthEarn: function(kid, mk){ return monthEarnedOf(kid || state.current, mk).total; },
+      monthPaid: function(kid, mk){ return monthPaidOf(kid || state.current, mk); },
+      settleAmount: function(kid, mk){ return monthSettleAmountOf(kid || state.current, mk); },
+      hundredPaid: function(kid){ return hundredPaidTotalOf(kid || state.current); },
       totalStamps: function(kid){ return totalStamps(kid || state.current); },
       adjustments: function(kid){ return JSON.parse(JSON.stringify(adjustmentsOf(kid || state.current))); },
       affirmations: function(){ return AFFIRMATIONS.slice(); },
