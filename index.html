@@ -725,6 +725,16 @@ body[data-face="jiwoo"] .tt-dial{--tt:#EC4899;--tt2:#F472B6}
 .ac-main small{font-size:11px;color:#6F8CAD;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 /* 📍 장소·메모 줄은 길면 두 줄까지 — 동선 칩이 아니라 글자만 (#13558) */
 .ac-main small.ac-place{white-space:normal;line-height:1.25;font-weight:700;color:#5C7898;word-break:keep-all;overflow-wrap:break-word}
+/* 🏠🅿️📍 중간 장소 카드 — [시간 알약] · [큰 아이콘 + 이름] · [메모] · [다음·✕] 를 슬림한 한 줄에 (#13971 · #13982 · #13991)
+   · 집·지하주차장·장소가 모두 같은 모양 — 두 줄로 두툼해지지 않는다 (메모가 아주 길 때만 자연스럽게 줄바꿈) */
+.ac-item.stop-card{padding:7px 9px;gap:7px}
+.ac-item.place-stop{background:#FBFDFF;border-style:dashed;border-color:var(--line-strong)}
+.ac-item.home-stop .ac-main,
+.ac-item.place-stop .ac-main{flex-direction:row;align-items:center;gap:6px;flex-wrap:wrap}
+.ac-item.home-stop .ac-main b,
+.ac-item.place-stop .ac-main b{flex:0 0 auto;color:var(--ink-2)}
+.ac-item.home-stop .ac-main small.ac-place,
+.ac-item.place-stop .ac-main small.ac-place{flex:1 1 auto;min-width:0;line-height:1.3}
 .ac-badge{
   flex:0 0 auto;font-size:10px;font-weight:900;color:#fff;
   background:linear-gradient(160deg,#67A8F0,#3D7FD8);
@@ -1279,12 +1289,13 @@ body.mode-kid .cal-tools{display:none !important}
 .mnb-amt{flex:0 0 auto;font-size:11px;font-weight:900;color:#9A93B8;white-space:nowrap}
 .mnb-row.done .mnb-amt{color:#2F8F62}
 .mnb-foot{margin:7px 1px 0;font-size:9.5px;color:#8B84A8}
-/* 📈 도장판 아래 「이번 달 보너스」 진행바 한 줄 (#13783 · #13787) */
-.mnb-inline{margin-top:9px;padding:8px 10px;border-radius:12px;border:1px dashed #DCD3F4;background:#FBFAFF}
-.mnb-inline.done{border-color:#BFE7D2;background:#F5FDF9}
+/* 📈 도장판 가운데 「이번 달 보너스」 진행바 한 줄 (#13783 · #13787 · #14106 테두리·배경 박스 없이 진행바만) */
+.mnb-inline{margin:9px 1px 0;padding:0;border:0;border-radius:0;background:none}
+.mnb-inline.done{background:none}
 .mnb-inline-h{display:flex;align-items:baseline;gap:6px;font-size:10.5px;font-weight:900;color:#4B3E7A;letter-spacing:-.01em}
 .mnb-inline-h .mnb-inline-n{margin-left:auto;font-size:10px;font-weight:900;color:#6A45D8;background:#F1EBFF;border-radius:999px;padding:1px 8px;white-space:nowrap}
 .mnb-inline.done .mnb-inline-n{color:#1F7A55;background:#E4F7ED}
+.mnb-inline .mnb-track{height:7px;margin:5px 0 4px;background:#EEE9F8}
 .mnb-inline-f{display:flex;align-items:baseline;gap:6px}
 .mnb-inline-f small{flex:1 1 auto;min-width:0;font-size:9px;font-weight:800;color:#7C74A0;line-height:1.35}
 .mnb-inline-f b{flex:0 0 auto;font-size:10.5px;font-weight:900;color:#9A93B8;white-space:nowrap}
@@ -1307,8 +1318,9 @@ body.mode-kid .cal-tools{display:none !important}
 
 /* 🌤️ 오늘은 숙제 없는 날 (#v26) */
 .mf-tools{display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:flex-end;margin-left:auto}
-/* STUDY 상단 한 줄 — 숙제 없는 날 · 공부 항목 추가 (#13107 · #13121) */
-.study-quick-tools{display:flex;align-items:center;gap:6px;flex-wrap:nowrap;justify-content:center;margin:-2px 0 10px}
+/* STUDY 상단 한 줄 — 숙제 없는 날 · 공부 항목 추가 (#13107 · #13121)
+   오른쪽 끝을 위 제목줄의 ⏱️ 타이머·💎 REWARD 버튼과 딱 맞춘다 (#14207) */
+.study-quick-tools{display:flex;align-items:center;gap:6px;flex-wrap:nowrap;justify-content:flex-end;margin:-9px 0 10px;padding:0 2px}
 .study-quick-tools[hidden]{display:none !important}
 .study-quick-tools .nohw-toggle{flex:0 1 auto;min-width:0;justify-content:center;white-space:nowrap;font-size:11px;padding:6px 8px}
 .study-quick-tools .btn{flex:0 0 auto;white-space:nowrap;font-size:11px;padding:6px 9px;min-height:36px;border-radius:999px}
@@ -2036,7 +2048,7 @@ body.drag-active,body.drag-active *{-webkit-user-select:none;user-select:none;-w
 /* 참여 방식 선택 — 미션 카드 위 한 곳에서 (#4962) */
 .fam-add-tools{display:flex;align-items:center;gap:5px;margin-left:auto;flex:0 0 auto;width:auto}
 .fam-add-tools .btn{width:auto}
-.fam-pick-bar{margin:2px 0 10px}
+.fam-pick-bar{margin:16px 0 10px}
 .fam-pick-hint{display:block;margin:6px 2px 0;font-size:10.5px;font-weight:800;letter-spacing:-.02em;text-align:center;color:#7C8770}
 .fpb-title{display:block;font-size:11.5px;font-weight:900;color:var(--ink);margin:0 0 6px 2px;letter-spacing:-.01em}
 .fpb-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
@@ -2108,8 +2120,10 @@ body.drag-active,body.drag-active *{-webkit-user-select:none;user-select:none;-w
 .fj-hist .fwl-all{margin-left:auto;display:inline-flex;align-items:center;gap:2px;min-height:22px;padding:1px 8px;border-radius:999px;
   border:1px solid #EADFC0;background:rgba(255,255,255,.9);color:#8A6A2A;font-size:9.5px;font-weight:900;cursor:pointer}
 .fj-hist .fwl-all:hover{border-color:#DCC894;background:#FFFDF4}
-/* 네 줄 높이로 고정하고 카드 안에서 스크롤 (#12889) */
-.fj-hist .fwl-list{display:flex;flex-direction:column;gap:3px;max-height:108px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;padding-right:1px}
+/* 네 줄 높이로 고정하고 카드 안에서 이번 주 내역 전체를 위아래로 스크롤 (#12889 · #14102)
+   flex-wrap:nowrap 이 없으면 칸을 넘길 때 옆으로 다음 열이 생겨 스크롤이 안 된다 */
+.fj-hist .fwl-list{display:flex;flex-direction:column;flex-wrap:nowrap;gap:3px;max-height:108px;overflow-y:auto;overflow-x:hidden;
+  overscroll-behavior:contain;-webkit-overflow-scrolling:touch;touch-action:pan-y;scrollbar-width:thin;padding-right:1px}
 .fj-hist .fwl-list::-webkit-scrollbar{width:4px}
 .fj-hist .fwl-list::-webkit-scrollbar-thumb{background:#E4D4A6;border-radius:99px}
 .fj-hist .fwl-pill,.fwl-modal .fwl-pill{display:flex;align-items:center;gap:6px;width:100%;min-width:0;background:rgba(255,255,255,.82);
@@ -2120,6 +2134,12 @@ body.drag-active,body.drag-active *{-webkit-user-select:none;user-select:none;-w
 .fj-hist .fwl-pill strong,.fwl-modal .fwl-pill strong{flex:0 0 auto;font-weight:900;font-size:10.5px;color:#2F7D4F;font-variant-numeric:tabular-nums}
 .fj-hist .fwl-more{display:block;padding:3px 2px 0;font-size:9px;font-weight:800;color:#9A7A3A;text-align:right}
 .fj-hist .fwl-more[hidden]{display:none}
+/* 🕐 「전체보기」 — 이번 주 미션·알바별 누적 (#14113) */
+.fwm-sum{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:2px 0 6px;padding:9px 13px;border-radius:14px;
+  background:linear-gradient(160deg,#FFF8E3,#FFFDF6);border:1px solid #F2E3B2;font-size:11px;font-weight:900;color:#8A6A2A}
+.fwm-sum b{font-size:15px;font-weight:900;color:#2F7D4F;font-variant-numeric:tabular-nums}
+.fwm-split{margin:0 0 9px;font-size:10px;font-weight:800;color:#8A7A58;text-align:center}
+.fwm-pill i{font-weight:900;color:#9A7A2A}
 @media (max-width:380px){
   .famrule-btn{font-size:11px;padding:5px 9px 5px 8px;gap:4px}
   .famrule-btn .frb-ico{font-size:13px}
@@ -2252,12 +2272,15 @@ body.drag-active,body.drag-active *{-webkit-user-select:none;user-select:none;-w
 .mjb-hero-art{margin-left:auto;font-size:20px;letter-spacing:-2px;opacity:.9}
 /* 「전체보기」 팝업 목록은 화면 높이의 절반까지 한 줄씩 (#12889) */
 .fwl-modal{max-height:52vh}
-.fwl-list.fwl-modal{display:flex;flex-direction:column;gap:4px}
+.fwl-list.fwl-modal{display:flex;flex-direction:column;flex-wrap:nowrap;gap:4px}
 .fwl-empty{font-size:11.5px;font-weight:800;color:#8A7AA8;text-align:center;padding:10px 4px}
 /* 📅 미니알바 목록 카드 — 제목 + 6개 분류 + 100원 미니알바 (#12925) */
-.mjl-head{display:flex;align-items:center;gap:6px;margin:0 1px 8px}
+.mjl-head{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin:0 1px 8px}
 .mjl-head b{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:900;color:#6A4E86;letter-spacing:-.02em}
 .mjl-head b span{font-size:14px}
+/* ⓘ 중복 적립 안내 — 제목 오른쪽, 카드 안쪽 (#14260) */
+.mjl-hint{display:inline-flex;align-items:center;gap:2px;margin-left:auto;font-size:8.5px;font-weight:800;letter-spacing:-.03em;
+  color:#7C6AA0;background:#F7F3FF;border:1px solid #E8DEFB;border-radius:999px;padding:1px 6px;white-space:nowrap}
 .mjb-cats{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:4px;margin-bottom:9px}
 .mjc-btn{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 1px;border-radius:11px;
   border:1.5px solid #E7E2F4;background:#fff;color:#5B4A86;font:inherit;cursor:pointer}
@@ -2265,9 +2288,14 @@ body.drag-active,body.drag-active *{-webkit-user-select:none;user-select:none;-w
 .mjc-btn b{font-size:9px;font-weight:900;letter-spacing:-.03em}
 .mjc-btn.on{background:linear-gradient(160deg,#B49BF7,#8B5CF6);border-color:#8B5CF6;color:#fff;
   box-shadow:0 6px 12px -10px rgba(139,92,246,.95)}
-/* 이번 주 N회 완료 배지 — +100원 자리에 들어간다 (#12925) */
-.vac-week{flex:0 0 auto;font-style:normal;font-size:9.5px;font-weight:900;color:#0E7C43;background:#E7F7EE;
-  border:1px solid #C1E8D3;border-radius:999px;padding:1px 7px;line-height:1.5;white-space:nowrap}
+/* 이번 주 N회 · 오늘 M회 두 줄 배지 — +100원 자리에 들어간다 (#12925 · #14229) */
+.vac-week{flex:0 0 auto;display:flex;flex-direction:column;align-items:flex-end;gap:2px;font-style:normal;
+  font-size:8.5px;font-weight:900;line-height:1.15;letter-spacing:-.02em;white-space:nowrap}
+.vac-week b{display:block;font-weight:900;color:#0E7C43;background:#E7F7EE;border:1px solid #C1E8D3;
+  border-radius:999px;padding:0 6px}
+.vac-week i{display:block;font-style:normal;font-weight:900;color:#fff;background:#4FAE6A;border:1px solid #4FAE6A;
+  border-radius:999px;padding:0 6px}
+.vac-week i.zero{color:#8A97A6;background:#F1F4F7;border-color:#E1E7ED}
 .vac-stamp-btn{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;
   width:44px;height:44px;border-radius:50%;border:1.5px solid #E4DCF6;background:#fff;color:#B9AEDA;
   font:inherit;cursor:pointer;line-height:1}
@@ -2600,9 +2628,8 @@ body.mode-viewer .rl-form{display:none !important}
 .rwd-stat.lilac{background:linear-gradient(150deg,#F6F3FF,#FFFFFF)}
 .rwd-stat.mint{background:linear-gradient(150deg,#EFFAF4,#FFFFFF)}
 .rwd-stat.peach{background:linear-gradient(150deg,#FFF6EC,#FFFFFF)}
-/* 🎯 이번 달 용돈 목표 게이지 (#13828) */
-.rwd-goal{margin-top:10px;padding:11px 12px 10px;border-radius:16px;border:1.5px solid #E7E1FB;
-  background:linear-gradient(150deg,#F7F4FF,#FFFFFF);box-shadow:0 10px 22px -22px rgba(90,60,180,.85)}
+/* 🎯 이번 달 용돈 목표 게이지 (#13828 · #14106 맨 위로 · 흰 박스 없이 배경에 녹아들게) */
+.rwd-goal{margin:0 2px 12px;padding:0;border:0;border-radius:0;background:none;box-shadow:none}
 .rwd-goal-h{display:flex;align-items:baseline;gap:6px;font-size:11px;font-weight:900;color:#4B3E7A;letter-spacing:-.01em}
 .rwd-goal-h b{margin-left:auto;font-size:10.5px;font-weight:900;color:#6A45D8;background:#F1EBFF;border-radius:999px;padding:2px 9px;white-space:nowrap}
 .rwd-goal-nums{display:flex;align-items:baseline;gap:5px;margin-top:4px;flex-wrap:wrap}
@@ -2613,7 +2640,8 @@ body.mode-viewer .rl-form{display:none !important}
 .rwd-goal-foot{display:flex;flex-direction:column;gap:1px}
 .rwd-goal-foot small{font-size:10.5px;font-weight:900;color:#5B4E8C}
 .rwd-goal-foot em{font-style:normal;font-size:8.5px;font-weight:700;color:#8B84A8;line-height:1.35}
-.rwd-goal.done{border-color:#BFE7D2;background:linear-gradient(150deg,#F2FDF7,#FFFFFF)}
+.rwd-goal-foot em.rwd-goal-extra{font-weight:900;color:#7A6BA8}   /* 💯 100점 현금 · 🎁 엄마·아빠 보너스 별도 (#14279) */
+.rwd-goal-foot em.rwd-goal-sub{color:#9A93B8}   /* 매달 최대 금액이 달라져요 (#14290) */
 .rwd-goal.done .rwd-goal-h b{color:#1F7A55;background:#E4F7ED}
 .rwd-goal.done .rwd-goal-bar i{background:linear-gradient(90deg,#7CD8A8,#3FB37B)}
 .rwd-high{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
@@ -2787,8 +2815,13 @@ body.mode-viewer .rl-form{display:none !important}
 .rgd-grp.money .rgd-rule{background:#FFFEFA;border-color:#F7EDDA}
 .rgd-grp.money .rgd-rule-ico{background:#FFF6E6}
 .rgd-grp.money .rgd-rule-val{color:#8A5A11;background:#FDEED3}
-.rgd-grp-note{margin:6px 0 0;padding:6px 8px;border-radius:11px;background:#fff;border:1px dashed rgba(140,110,220,.3);
-  font-size:9.5px;font-weight:700;color:#6F6488;line-height:1.45}
+.rgd-grp-note{margin:5px 0 0;padding:7px 9px;border-radius:11px;background:#fff;border:1px dashed rgba(140,110,220,.3);
+  font-size:9.5px;font-weight:700;color:#6F6488;line-height:1.5;word-break:keep-all;overflow-wrap:anywhere}
+.rgd-grp-note b{font-weight:900;color:#4B3B7A}
+.rgd-grp.money .rgd-grp-note b{color:#8A5A11}
+.rgd-grp-note small{display:inline-block;margin-top:2px;font-size:8.5px;font-weight:800;color:#9A93B8}
+.rgd-hl{font-style:normal;font-weight:900;color:#B45309;background:#FFF3D6;border-radius:5px;padding:0 3px}
+.rgd-rule-txt small .rgd-sub2{display:block;white-space:normal;line-height:1.32;text-overflow:clip}
 .rgd-grp.money .rgd-grp-note{border-color:rgba(190,150,70,.32);color:#806A45}
 .rgd-grp.money .rgd-fam{margin-top:6px;background:#fff;border-color:rgba(190,150,70,.24)}
 .rgd-rules{margin:4px 0 10px}
@@ -2906,8 +2939,11 @@ body.mode-viewer .rl-form{display:none !important}
 .rgd-cum-n{margin-left:auto;font-size:18px;font-weight:900;color:#5B21B6;white-space:nowrap}
 
 .rgd-foot{display:flex;align-items:center;gap:8px;margin-top:10px;flex-wrap:wrap}
-.rgd-fam{display:flex;align-items:flex-start;gap:7px;flex:1 1 190px;min-width:0;padding:9px 10px;border-radius:16px;
+/* 가족 미션 · 정산 설명 카드 — 아래 안내 박스와 같은 폭으로 꽉 차게, 아이콘은 규칙 줄과 같은 크기 (#14319 · #14330 · #14341) */
+.rgd-fam{display:flex;align-items:center;gap:8px;width:100%;box-sizing:border-box;min-width:0;padding:9px 10px;border-radius:14px;
   background:linear-gradient(135deg,#F7EEFF,#FFF1F6);border:1.5px solid rgba(168,120,220,.22)}
+.rgd-fam > div{flex:1 1 auto;min-width:0;text-align:left}
+.rgd-fam .ico3d{flex:0 0 auto;width:26px;height:26px}
 .rgd-fam b{font-size:11.5px;font-weight:900;color:#5B3A8E}
 .rgd-fam p{margin:2px 0 0;font-size:9.5px;font-weight:700;color:#7A6A94;line-height:1.4}
 .rgd-fam-kid{width:52px;height:52px;border-radius:50%;object-fit:cover;flex:0 0 auto;border:2.5px solid #fff;
@@ -3490,6 +3526,9 @@ body.mode-parent .ac-ro-hint{display:none}
   border:1px solid rgba(15,23,42,.06);border-left:3px solid var(--cat);border-right:3px solid var(--cat);
   background:#fff;min-width:0;
 }
+/* 🎂 생일 괄호·이름표는 진빨강으로 확실히 (#14167) */
+.home-ev.ann-birth,.cal-ev.ann-birth{--cat:#B91C1C;--cat-soft:#FEF2F2}
+.home-ev.ann-birth .he-badge{color:#B91C1C}
 .home-ev .he-badge{
   font-size:9.5px;font-weight:900;color:var(--cat);
   background:#F8FAFC;border-radius:999px;padding:1px 7px;flex:0 0 auto;
@@ -3750,9 +3789,7 @@ body.mode-kid .brand-sub{color:#6E829B}
 .rws-days .stamp-slot .stamp-disc{width:32px;height:32px}
 .rws-days .stamp-slot .stamp-disc .stamp-img{width:29px;height:29px}
 /* ⭐ FUN MISSION — 오늘의 도전 (#v32) */
-.funm{margin-top:0;padding:12px 11px 13px;border-radius:22px;
-  background:linear-gradient(170deg,#F4FBEF,#FDFFF8 46%,#F3FAFF);
-  border:1.5px solid #DCEBD0;box-shadow:0 16px 30px -30px rgba(58,96,44,.55)}
+.funm{margin-top:0;padding:0;border:0;border-radius:0;background:none;box-shadow:none}
 .funm-hero{position:relative;padding:14px 15px 15px;border-radius:18px;min-height:96px;
   background:linear-gradient(150deg,#EAF8DC,#F8FDEB 60%,#E9F6FF);border:1px solid #DDEEC9;overflow:hidden}
 .funm-badge{display:inline-block;font-size:9px;font-weight:900;letter-spacing:.06em;color:#3E7B2B;
@@ -4104,6 +4141,12 @@ body.mode-kid .home-more{display:none}
 .ha-item b{font-size:11.5px;font-weight:800;color:#33445A}
 .ha-item small{font-size:10px;color:#7A8DA4}
 .ha-route{font-size:10px;font-weight:700;color:#8598AE;margin-top:4px;padding-top:4px;border-top:1px dashed rgba(120,150,190,.2)}
+/* 🏫 HOME 오늘의 시간표 — 실제 학원 줄만 은은한 파스텔로 (집·중간 장소 줄은 그대로) (#14018) */
+#homeAcademy .ha-item.is-academy{padding:2px 8px 2px 7px;margin:1px 0;border-radius:10px;
+  background:linear-gradient(100deg,rgba(234,246,255,.95),rgba(247,252,255,.7));
+  box-shadow:inset 3px 0 0 rgba(126,192,244,.7)}
+#homeAcademy .ha-item.is-academy b{color:#2E5F92;font-weight:900}
+#homeAcademy .ha-item.is-academy .ha-time{background:#fff;border:1px solid #CFE7FB;color:#3D6FA8}
 
 /* ---------- 우리 가족 오늘 / 우리 가족 메뉴 ---------- */
 #homeRoutineCard[hidden]{display:none}
@@ -4217,8 +4260,8 @@ body.mode-kid .home-more{display:none}
   min-width:52px;padding:3px 9px;border-radius:13px;cursor:pointer;
   border:1px solid rgba(122,158,196,.28);background:rgba(255,255,255,.72);color:#3F6E8E;
   -webkit-tap-highlight-color:transparent;transition:transform .12s ease,background .16s ease,color .16s ease}
-.sec-head .head-timer{margin-left:auto;flex:0 0 auto;align-self:center}
-.sec-head .head-timer + .head-reward{margin-left:0}
+.sec-head .head-timer{margin-left:auto;flex:0 0 auto;align-self:center;position:relative;top:10px}   /* 아래 버튼 줄에 살짝 가까이 (#14207) */
+.sec-head .head-timer + .head-reward{margin-left:0;position:relative;top:10px}
 .head-timer .tm-ico{font-size:13px;line-height:1.15}
 .head-timer .tm-label{font-size:8.5px;font-weight:800;letter-spacing:.01em;line-height:1.15}
 .head-timer:hover{background:#EEF7FF;color:#2E6E97}
@@ -4351,15 +4394,16 @@ body.mode-kid .home-more{display:none}
 #famCalGrid .cal-band.bday.cont-l.cont-r{box-shadow:0 0 0 1px rgba(255,255,255,.9)}
 /* 🎂 생일은 진한 빨강 채움 + 흰 글씨, 💐 기념일은 노란 파스텔, 🕯️ 제사는 연회색 (#13318) */
 #famCalGrid .cal-band.bday.ann-birth{background:#EF4444;color:#fff;
-  box-shadow:inset 2px 0 0 #FCA5A5,inset -2px 0 0 #FCA5A5,0 0 0 1px rgba(255,255,255,.9)}
+  box-shadow:inset 2px 0 0 #B91C1C,inset -2px 0 0 #B91C1C,0 0 0 1px rgba(255,255,255,.9)}
 /* 🎂 생일 글씨는 더 또렷하게 (#13680) */
 #famCalGrid .cal-band.bday.ann-birth .cal-band-txt{font-weight:900;text-shadow:0 0 .5px rgba(255,255,255,.55)}
-/* 💐 기념일 바 — 산뜻한 노랑 채움 + 진한 주황 글씨 (#13642) */
-#famCalGrid .cal-band.bday.ann-anniv{background:#FFE45C;color:#7A3200}
+/* 💐 기념일 바 — 겨울방학 배경보다 진한 연노랑 채움 + 개나리 괄호 + 진한 검정 글씨 (#14036 · #14045) */
+#famCalGrid .cal-band.bday.ann-anniv{background:#FEF08A;color:#111827}
+#famCalGrid .cal-band.bday.ann-anniv .cal-band-txt{font-weight:900}
 #famCalGrid .cal-band.bday .cal-band-txt{font-size:8.5px;letter-spacing:-.04em}
 #famCalGrid .cal-band.one .cal-band-txt{font-size:8px;letter-spacing:-.05em}
-/* 주 경계 1칸 조각 — 나뉜 낱말 하나가 한 줄에 쏙 들어간다 (#v37 · #12856) */
-#famCalGrid .cal-band.one{padding:0 2px}
+/* 주 경계 1칸 조각 — 앞에서부터 보여 주고 넘치는 부분만 잘라 이모지가 가려지지 않게 (#v37 · #12856 · #14187) */
+#famCalGrid .cal-band.one{justify-content:flex-start;padding:0 3px}
 /* 🎂 생일·기념일 · 🏫 단일 행사 — 칸 가운데 2줄 알약 (#v36) */
 #famCalGrid .cal-chips{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;width:100%;min-width:0;
   flex:1 1 auto;min-height:0;overflow:hidden;
@@ -4376,13 +4420,13 @@ body.mode-kid .home-more{display:none}
   box-shadow:0 0 0 1px rgba(255,255,255,.9);
   /* 양쪽 끝 괄호 테두리 — 홈 「오늘의 일정」 강조 카드처럼 (#13066) */
   border-left:2.5px solid var(--cat,#D9537E);border-right:2.5px solid var(--cat,#D9537E)}
-/* 🎂 생일 — 진한 빨강 채움 + 흰 글씨, 괄호는 연빨강 (#13318 · #13669 · #13680) */
+/* 🎂 생일 — 진한 빨강 채움 + 흰 글씨, 괄호는 진빨강 (#13318 · #13669 · #13680 · #14036) */
 #famCalGrid .cal-chip.ann.birth{background:#EF4444;color:#fff;
-  border-left-color:#FCA5A5;border-right-color:#FCA5A5;border-left-width:2.5px;border-right-width:2.5px}
+  border-left-color:#B91C1C;border-right-color:#B91C1C;border-left-width:2.5px;border-right-width:2.5px}
 #famCalGrid .cal-chip.ann.birth b{font-weight:900;text-shadow:0 0 .5px rgba(255,255,255,.55)}
-/* 💐 기념일 — 산뜻한 노랑 채움 + 선명한 주황 괄호 (#13642) */
-#famCalGrid .cal-chip.ann.anniv{background:#FFE45C;color:#7A3200;
-  border-left-color:#F97316;border-right-color:#F97316;border-left-width:3px;border-right-width:3px}
+/* 💐 기념일 — 겨울방학 배경보다 진한 연노랑 채움 + 개나리 괄호 + 검정 글씨 (#14036 · #14045) */
+#famCalGrid .cal-chip.ann.anniv{background:#FEF08A;color:#111827;
+  border-left-color:#FACC15;border-right-color:#FACC15;border-left-width:3px;border-right-width:3px}
 /* 🕯️ 제사 — 차분한 연회색 + 진회색 괄호 (#13318) */
 #famCalGrid .cal-chip.ann.memorial{background:#F1F2F4;color:#4B5563;
   border-left-color:#6B7280;border-right-color:#6B7280}
@@ -5034,8 +5078,8 @@ body.mode-kid .home-more{display:none}
         <div class="hw-board" id="studyHwBoard">
           <div class="hwb-head"><b>📚 이번 주 숙제 5회 스탬프판</b><span id="hwBoardCount">0/5회</span></div>
           <div class="hwb-days" id="hwBoardDays"></div>
-          <p class="hwb-note">월 15회 +1,000원 · 20회 +2,000원 보너스 🎉</p>
           <div id="hwBoardMonth"></div>
+          <p class="hwb-note">월 15회 +1,000원 · 20회 +2,000원 보너스 🎉</p>
         </div>
 
         <!-- 📋 알림장 검사 안내 — 아이 STUDY 화면에 늘 보인다 (#study) -->
@@ -5201,7 +5245,9 @@ body.mode-kid .home-more{display:none}
 
         <!-- 📅 미니알바 목록 — 6개 분류 · 100원 미니알바 (#12925) -->
         <div class="vac-box" id="vacationMiniJobsBox" hidden>
-          <div class="mjl-head"><b><span aria-hidden="true">📅</span> 미니알바 목록</b></div>
+          <div class="mjl-head"><b><span aria-hidden="true">📅</span> 미니알바 목록</b>
+            <span class="mjl-hint" id="miniJobHint"><span aria-hidden="true">ⓘ</span> 미니알바는 중복 적립할 수 있어요!</span>
+          </div>
           <div class="mjb-cats" id="miniCatChips" role="group" aria-label="미니알바 분류"></div>
           <div class="vac-head">
             <b>🪙 100원 미니알바</b>
@@ -5829,21 +5875,28 @@ function toggleVacationJob(id, undo){
   if(!d.vacN) d.vacN = {};
   var amt = Number(job.amount) || 100;
   var n = vacCountOn(kidKey, dayKey(), id);
-  /* 🪙 한 번 누르면 도장 하나 더, 두 번 누르면 하나 취소 (#v35 — 같은 항목 여러 번 가능) */
+  /* 🪙 한 번 누르면 도장 하나 더, 두 번 누르면 오늘 것을 취소 (#v35 — 같은 항목 여러 번 가능 · #14106)
+     undo 에 숫자를 주면 그만큼 한번에 뺀다 (더블탭 = 방금 더한 1개 + 원래 1개) */
   if(undo){
+    var steps = (typeof undo === 'number') ? Math.max(1, Math.min(5, Math.round(undo))) : 1;
     if(n <= 0) return;
-    n -= 1;
+    var totalBefore = Number(d.vac[id]) || 0;
+    var eachBefore = Math.round(totalBefore / n);
+    n = Math.max(0, n - steps);
     if(n <= 0){
       delete d.vac[id];
       delete d.vacN[id];
       if(d.vacMeta) delete d.vacMeta[id];
     }else{
+      var leftAmt = Math.max(0, totalBefore - eachBefore * steps);
       d.vacN[id] = n;
-      d.vac[id] = Math.max(0, (Number(d.vac[id]) || 0) - amt);
+      d.vac[id] = leftAmt;
+      if(d.vacMeta && d.vacMeta[id]) d.vacMeta[id].amount = leftAmt;
     }
     saveState();
     renderAll();
-    toast(n > 0 ? ('🪙 ' + job.label + ' 도장 하나를 취소했어요 (오늘 ' + n + '번)') : ('🪙 ' + job.label + ' 도장을 취소했어요'));
+    toast(n > 0 ? ('🪙 ' + job.label + ' 도장' + (steps > 1 ? ' ' + steps + '개' : ' 하나') + '를 취소했어요 (오늘 ' + n + '번)')
+                : ('🪙 ' + job.label + ' 오늘 도장을 취소했어요'));
     return;
   }
   /* 💰 주간 한도를 다 채웠으면 +0원으로 찍히지 않게 미리 막는다 (#v35) */
@@ -5934,20 +5987,24 @@ function renderVacationMiniJobs(){
     return ia - ib;
   });
   list.innerHTML = shown.length ? shown.map(function(j){
+    /* 🪙 이번 주 누적 + 오늘 횟수를 함께 — 아래줄 「오늘 M회」가 더블클릭 취소 기준 (#14106 · #14229) */
     var nToday = vacCountOn(kidKey, dayKey(), j.id);
-    var nWeek = 0, amtWeek = 0;
-    miniWeekLog(kidKey).forEach(function(x){ if(x.id === j.id){ nWeek = x.count; amtWeek = x.amount; } });
+    var amtToday = Number((peekDay(kidKey, dayKey()).vac || {})[j.id]) || 0;
+    var nWeek = 0;
+    miniWeekLog(kidKey).forEach(function(x){ if(x.id === j.id) nWeek = x.count; });
     var done = nWeek > 0;
-    /* 오른쪽 — 이번 주 0회는 「+100원 · 빈 도장」, 1회 이상은 「이번 주 N회 · 찍힌 도장」 (#12925) */
+    /* 오른쪽 — 이번 주·오늘 모두 0회는 「+100원 · 빈 도장」, 기록이 있으면 두 줄 배지 (#12925 · #14229) */
     return '<div class="vac-card' + (done ? ' done' : '') + '" data-id="' + esc(j.id) + '" data-cat="' + esc(j.cat) + '">' +
       '<span class="vac-ico" aria-hidden="true">' + esc(j.icon || '🌴') + '</span>' +
       '<span class="vac-main"><b>' + esc(j.label) + '</b><small>' + esc(j.desc || '') + '</small></span>' +
       (done
-        ? '<em class="vac-week">이번 주 ' + nWeek + '회</em>'
+        ? '<em class="vac-week" title="이번 주 ' + nWeek + '회 · 오늘 ' + nToday + '회 (+' + fmt(amtToday) + ')">' +
+            '<b>이번 주 ' + nWeek + '회</b>' +
+            '<i' + (nToday > 0 ? '' : ' class="zero"') + '>오늘 ' + nToday + '회</i></em>'
         : '<span class="vac-amt">+' + fmt(Number(j.amount) || 100) + '</span>') +
-      '<button type="button" class="vac-stamp-btn' + (done ? ' on' : '') + '" data-action="toggle-vac" data-id="' + esc(j.id) + '"' +
-        ' aria-pressed="' + (done ? 'true' : 'false') + '" aria-label="' + esc(j.label) + ' 도장 찍기 (한 번 누르면 적립 · 두 번 빠르게 누르면 취소)">' +
-        '<span aria-hidden="true">' + (done ? '★' : '☆') + '</span><small>' + (done ? '완료' : '도장') + '</small></button>' +
+      '<button type="button" class="vac-stamp-btn' + (nToday > 0 ? ' on' : '') + '" data-action="toggle-vac" data-id="' + esc(j.id) + '"' +
+        ' aria-pressed="' + (nToday > 0 ? 'true' : 'false') + '" aria-label="' + esc(j.label) + ' 도장 찍기 (한 번 누르면 적립 · 두 번 빠르게 누르면 오늘 1건 취소)">' +
+        '<span aria-hidden="true">' + (nToday > 0 ? '★' : '☆') + '</span><small>' + (nToday > 0 ? '완료' : '도장') + '</small></button>' +
       '<span class="vac-tools" data-parent-only="1">' +
         '<button type="button" data-action="vac-edit" data-id="' + esc(j.id) + '" aria-label="' + esc(j.label) + ' 수정">✏️</button>' +
         '<button type="button" data-action="vac-del" data-id="' + esc(j.id) + '" aria-label="' + esc(j.label) + ' 삭제">✕</button>' +
@@ -10606,9 +10663,11 @@ function miniBoardHtml(kidKey, kind){
     ? ['7일 완성 → 보너스 도장 +3개']
     : ['하루 5개 완료 시 오늘 🌟 · 7일 완성 시 보너스 도장 +' + SELF_WEEK_STAMP_BONUS + '개', '월 4주 완성 보너스 +' + fmt(MONTH_BONUS_SPACE[0][1])];
   var note = notes.map(function(t){ return '<span class="mb-note-line">' + t + '</span>'; }).join('');
+  /* ① 도장판 → ② 이번 달 목표 진행바 → ③ 맨 아래 설명 문구 (#14106 순서 통일) */
   return '<div class="mini-board"><div class="mb-head"><b>' + title + '</b><span>' + n + '/7일</span></div>' +
-    '<div class="mb-days">' + slots + '</div><p class="mb-note">' + note + '</p>' +
+    '<div class="mb-days">' + slots + '</div>' +
     monthBonusBlockHtml(kidKey, (kind === 'morning') ? 'morning' : 'space') +
+    '<p class="mb-note">' + note + '</p>' +
   '</div>';
 }
 function renderStudyHwBoard(kidKey){
@@ -11681,11 +11740,13 @@ function monthGoalGaugeHtml(kidKey, me, mmax, idSuffix){
     ? '🎉 최대보다 +' + fmt(total - max) + ' 더 벌었어요!'
     : (done ? '🎉 이번 달 최대까지 모두 달성!' : fmt(left) + ' 남았어요');
   var parts = 'STUDY ' + fmt(WEEK_MAX_STUDY) + '×' + mmax.weeks + '주 · ☀️ ' + fmt(MORNING_MONEY) + '×' + monthDimOf(mmax.month) + '일 · 🏠 가족 ' + fmt(mmax.family) + ' · 📈 월간 ' + fmt(MONTH_BONUS_STUDY[0][1] + MONTH_BONUS_MORNING[0][1] + MONTH_BONUS_SPACE[0][1]);
+  var extra = '📅 월별 최대 금액 상이 · 💯 100점·🎁 보너스 별도';   /* 목표 계산 밖에서 더 쌓이는 돈 (#14279 · #14290 · #14415) */
+  var extra2 = '매달 일수·주 수·방학에 따라 달라져요';
   return '<div class="rwd-goal' + (done ? ' done' : '') + '" id="rwdGoal' + (idSuffix ? '-' + idSuffix : '') + '" role="group" aria-label="이번 달 용돈 목표">' +
       '<div class="rwd-goal-h"><span>🎯 이번 달 용돈 목표</span><b>' + pct.toFixed(1) + '% 달성</b></div>' +
       '<div class="rwd-goal-nums"><strong>' + fmt(total) + '</strong><span>/ 월 최대 ' + fmt(max) + '</span></div>' +
       '<div class="rwd-goal-bar"><i style="width:' + pct.toFixed(1) + '%"></i></div>' +
-      '<div class="rwd-goal-foot"><small>' + foot + '</small><em>' + parts + '</em></div>' +
+      '<div class="rwd-goal-foot"><small>' + foot + '</small><em>' + parts + '</em><em class="rwd-goal-extra">' + extra + '</em><em class="rwd-goal-sub">' + extra2 + '</em></div>' +
     '</div>';
 }
 /* 📈 이번 달 보너스 한 줄 — 도장판 아래에 진행바·현재 달성액을 함께 (#13783 · #13787) */
@@ -12653,10 +12714,12 @@ function renderMorningBoard(kidKey){
     '</div>';
   }).join('');
   var bonus = morningWeekBonus(kidKey);
+  /* ① 도장판 → ② 이번 달 목표 진행바 → ③ 맨 아래 설명 문구 (#14106 순서 통일) */
   box.innerHTML =
     '<div class="mb-head"><span class="mb-title">🌞 아침 미션 7일 스탬프판</span>' +
       '<span class="mb-pill">' + doneDays + '/7일</span></div>' +
     '<div class="mb-days">' + cells + '</div>' +
+    monthBonusBlockHtml(kidKey, 'morning') +
     '<div class="mb-foot' + (bonus ? ' done' : '') + '">' +
       (bonus ? '🎉 7일 완성! 보너스 도장 +' + bonus + '개 적립' : '7일 완성 → 보너스 도장 +' + MORNING_WEEK_BONUS + '개 🎉') +
     '</div>';
@@ -13177,6 +13240,20 @@ function rwdMoneyRowMaker(rows){
     rows.push({ date:String(date || ''), icon:icon || '•', label:String(label || ''), sub:String(sub || ''), val:Number(val) || 0, del:del || null });
   };
 }
+/* 🪙 미니알바 하루치를 한 건씩 나눈 금액들 (#14106)
+   같은 날 같은 알바를 네 번 찍었으면 [100,100,100,100] — 상세 내역에서 줄 하나씩 지울 수 있게 */
+function vacUnitRowsOf(d, vid){
+  var total = Number((d.vac || {})[vid]) || 0;
+  var n = (d.vacN && d.vacN[vid] !== undefined) ? Math.max(0, Number(d.vacN[vid]) || 0) : (total ? 1 : 0);
+  if(n <= 0) return [];
+  var each = Math.round(total / n), left = total, out = [];
+  for(var i = 0; i < n; i++){
+    var amt = (i === n - 1) ? left : each;
+    left -= amt;
+    out.push(amt);
+  }
+  return out;
+}
 function rwdWeekMoneyRows(kidKey, month, add){
   var k = state.kids[kidKey] || {};
   allWeeks(kidKey).forEach(function(w){
@@ -13226,7 +13303,10 @@ function rwdWeekMoneyRows(kidKey, month, add){
       });
       Object.keys(d.vac || {}).forEach(function(vid){
         var job = miniJobInfo(kidKey, dk, vid);
-        add(dk, job ? job.icon : '🪙', job ? job.label : '미니알바', '100원 미니알바', job ? job.amount : (Number(d.vac[vid]) || 0), { type:'vac', day:dk, id:vid });
+        /* 같은 날 같은 알바를 여러 번 했어도 한 건(+100원)씩 따로 — 줄마다 ✕로 1건만 지운다 (#14106) */
+        vacUnitRowsOf(d, vid).forEach(function(amt){
+          add(dk, job ? job.icon : '🪙', job ? job.label : '미니알바', '100원 미니알바', amt, { type:'vac', day:dk, id:vid, once:true });
+        });
       });
     });
     /* ☀️ 아침 습관 — 오전 12시 전에 3가지 다 하면 하루 +100원 (#13408) */
@@ -13287,7 +13367,10 @@ function rwdDetailRows(kind, kidKey){
     });
     Object.keys(peekDay(kidKey, today).vac || {}).forEach(function(vid){
       var job = miniJobInfo(kidKey, today, vid);
-      add(today, job ? job.icon : '🪙', job ? job.label : '미니알바', '100원 미니알바', job ? job.amount : 0, { type:'vac', day:today, id:vid });
+      var dToday = peekDay(kidKey, today);
+      vacUnitRowsOf(dToday, vid).forEach(function(amt){
+        add(today, job ? job.icon : '🪙', job ? job.label : '미니알바', '100원 미니알바', amt, { type:'vac', day:today, id:vid, once:true });
+      });
     });
     adjustmentsOf(kidKey).forEach(function(a){
       if((a.kind === 'stamp' ? 'stamp' : 'money') !== 'money' || a.date !== today) return;
@@ -13421,11 +13504,29 @@ function rwdDeleteItem(kind, kidKey, del){
   }else if(type === 'vac'){
     var vd = k.days && k.days[del.day];
     if(!vd || !vd.vac || vd.vac[del.id] === undefined) return;
-    var job = vacationJobOf(del.id);
+    var vinfo = miniJobInfo(kidKey, del.day, del.id) || {};
+    var vname = vinfo.label || '미니알바';
     var vamt = Number(vd.vac[del.id]) || 0;
-    label = (job ? job.label : '미니알바') + ' ' + fmt(vamt);
-    body = '<b>' + esc(kd.name) + '</b> ' + esc(rwdRowDate(del.day)) + ' <b>' + esc(job ? job.label : '미니알바') + ' ' + fmt(vamt) + '</b> 완료를 취소할까요?';
-    run = function(){ delete vd.vac[del.id]; };
+    var vn = (vd.vacN && vd.vacN[del.id] !== undefined) ? Math.max(0, Number(vd.vacN[del.id]) || 0) : 1;
+    var vone = vn > 0 ? Math.round(vamt / vn) : vamt;
+    var vOnce = !!del.once && vn > 1;   /* 상세 내역은 한 건(+100원)씩 — 한 줄만 지운다 (#14106) */
+    label = vname + ' ' + fmt(vOnce ? vone : vamt) + (vOnce ? ' (1건)' : '');
+    body = '<b>' + esc(kd.name) + '</b> ' + esc(rwdRowDate(del.day)) + ' <b>' + esc(vname) +
+      (vOnce ? ' 1건 ' + fmt(vone) : ' ' + fmt(vamt)) + '</b> 내역을 취소할까요?' +
+      (vOnce ? '<br><small>오늘 ' + vn + '건 중 1건만 취소되고, 나머지 ' + (vn - 1) + '건은 그대로 남아요.</small>'
+             : '<br><small>그날 ' + esc(vname) + ' 기록이 모두 빠져요.</small>');
+    run = function(){
+      if(vOnce){
+        var vleft = Math.max(0, vamt - vone);
+        vd.vacN[del.id] = vn - 1;
+        vd.vac[del.id] = vleft;
+        if(vd.vacMeta && vd.vacMeta[del.id]) vd.vacMeta[del.id].amount = vleft;
+      }else{
+        delete vd.vac[del.id];
+        if(vd.vacN) delete vd.vacN[del.id];
+        if(vd.vacMeta) delete vd.vacMeta[del.id];
+      }
+    };
   }else if(type === 'payout'){
     var p = (k.payouts || [])[del.index];
     if(!p) return;
@@ -13728,13 +13829,13 @@ function rewardGuideHtml(kidKey){
   var stamps = '<div class="rgd-stamps">' +
       '<div class="rgd-stamps-h">' + ico3d('gift','i3d-24') + '<b>MY SPACE 누적 도장 리워드</b>' +
         '<button type="button" class="rgd-next" data-action="guide-stamp-rewards" data-kid="' + kidKey + '">다음 목표 <span aria-hidden="true">›</span></button></div>' +
-      '<div class="rgd-grid">' + stampMilestones().map(function(r){ return rewardGuideCellHtml(r, pos, next, !!used[r.stamp] && pos >= r.stamp); }).join('') + '</div>' +
-      '<div class="rgd-round">' + ico3d('ticket','i3d-18') +
-        '<span><b>' + (cyc.count + 1) + '회차 도전 중</b> · 1,000도장 <b>' + cyc.count + '회 달성</b></span></div>' +
       '<div class="rgd-progress">' +
         '<div class="rgd-progress-h">' + ico3d('star','i3d-18') + '<span>지금까지 <b>' + numFmt(pos) + '개</b>!</span></div>' +
         '<div class="rgd-bar"><i style="width:' + pct.toFixed(1) + '%"></i><span>1,000개</span></div>' +
       '</div>' +
+      '<div class="rgd-round">' + ico3d('ticket','i3d-18') +
+        '<span><b>' + (cyc.count + 1) + '회차 도전 중</b> · 1,000도장 <b>' + cyc.count + '회 달성</b></span></div>' +
+      '<div class="rgd-grid">' + stampMilestones().map(function(r){ return rewardGuideCellHtml(r, pos, next, !!used[r.stamp] && pos >= r.stamp); }).join('') + '</div>' +
       '<div class="rgd-cum">' + ico3d('trophy','i3d-30') +
         '<div class="rgd-cum-txt"><b>FUN PASS 누적 달성</b><small>1,000도장을 완성할 때마다 1회씩 늘어나요!</small></div>' +
         '<b class="rgd-cum-n">' + cyc.count + '회</b></div>' +
@@ -13745,10 +13846,9 @@ function rewardGuideHtml(kidKey){
       '<button type="button" class="rgd-ok" data-action="close-modal">확인</button>' +
     '</div>';
 
-  /* 2장 — 🏅 도장 모으기 / 💰 용돈 모으기 / 📈 월간 보너스 세 묶음 (#v28 · #13408) */
-  var rules = '<div class="rgd-morning-tip">☀️ <b>오전(낮 12시 전)에 아침 습관 3가지 모두 완료하면 +' + fmt(MORNING_MONEY) + '!</b>' +
-      '<small>12시가 넘으면 도장은 그대로 찍히고 ' + fmt(MORNING_MONEY) + '는 안 붙어요</small></div>' +
-    '<div class="rgd-rules">' +
+  /* 2장 — 🏅 도장 모으기 / 💰 용돈 모으기 / 📈 월간 보너스 세 묶음 (#v28 · #13408)
+     ☀️ 오전 100원 설명 박스는 없애고 용돈 모으기의 아침 습관 줄에 함께 적는다 (#14429) */
+  var rules = '<div class="rgd-rules">' +
       '<div class="rgd-rules-h">' + ico3d('checklist','i3d-22') + '<b>보상 규칙 한눈에</b></div>' +
       /* 🏅 도장 규칙끼리 한 묶음 */
       '<div class="rgd-grp">' +
@@ -13758,20 +13858,30 @@ function rewardGuideHtml(kidKey){
         ruleRow('🌟', '스스로 체크 7일 모두', 'MY SPACE · 아침 · 함께', '+' + SELF_WEEK_STAMP_BONUS + '개') +
         ruleRow('⭐', '추가 보너스 ' + bonusItemsOf(kidKey).length + '가지', '항목당 도장 +' + WEEKEND_BONUS_STAMP + '개', '최대 +' + (WEEKEND_BONUS_STAMP * bonusMaxOf(kidKey)) + '개') +
         ruleRow('✨', 'MY SPACE 5가지', '하루 스스로 체크', '+' + STAMP_DAILY_MAX + '개') +
-        '<div class="rgd-grp-note">도장 모으는 곳 — 하루 최대 ' + STAMP_DAY_CAP + '도장 (아침 습관 ' + MORNING_DAILY_MAX + ' + MY SPACE ' + STAMP_DAILY_MAX + ' + 펀미션 최대 ' + (WEEKEND_BONUS_STAMP * bonusMaxOf(kidKey)) + ') · 주간 완성 보너스 (아침 7일 +' + MORNING_WEEK_BONUS + '도장 · 스스로 7일 +' + SELF_WEEK_STAMP_BONUS + '도장) · 도장은 보상을 받아도 차감되지 않아요</div>' +
+        '<div class="rgd-grp-note"><b>도장 모으는 곳 — 하루 최대 ' + STAMP_DAY_CAP + '도장</b><br>' +
+          '(아침 습관 ' + MORNING_DAILY_MAX + ' + MY SPACE ' + STAMP_DAILY_MAX + ' + 펀미션 최대 ' + (WEEKEND_BONUS_STAMP * bonusMaxOf(kidKey)) + ')<br>' +
+          '주간 완성 보너스 (아침 7일 +' + MORNING_WEEK_BONUS + '도장 · 스스로 7일 +' + SELF_WEEK_STAMP_BONUS + '도장)<br>' +
+          '도장은 보상을 받아도 차감되지 않아요</div>' +
       '</div>' +
       /* 💰 용돈 규칙끼리 한 묶음 */
       '<div class="rgd-grp money">' +
         '<div class="rgd-grp-h"><span aria-hidden="true">💰</span>용돈 모으기</div>' +
         ruleRow('📚', '숙제 완료', '월~목 각 ' + fmt(REWARD_DAILY) + ' · 금~일 통합 ' + fmt(REWARD_DAILY), '최대 ' + fmt(REWARD_DAILY * STUDY_WEEK_GOALS)) +
-        ruleRow('☀️', '아침 습관 3가지 (오전 12시 전)', '도장은 시간 무관 · 100원은 오전에만', '+' + fmt(MORNING_MONEY)) +
+        ruleRowRaw('☀️', '아침 습관 3가지 <em class="rgd-hl">(오전 12시 전)</em>',
+          '<span class="rgd-sub2">하루 +' + fmt(MORNING_MONEY) + ' · 7일 ' + fmt(WEEK_MAX_MORNING) + ' · 도장은 시간 무관 · <em class="rgd-hl">100원은 오전에만</em></span>',
+          '주 최대 ' + fmt(WEEK_MAX_MORNING)) +
         ruleRow('🤝', '가족 미션 · 100원 미니알바', '스스로 500·1,000원 → 함께 200·500원', '주 최대 ' + fmt(FAMILY_WEEK_MAX)) +
-        ruleRow('👩', '엄마 · 아빠 보너스', '주마다 직접 정해요', '자유') +
+        ruleRow('👩', '엄마 · 아빠 보너스', '주마다 직접 정해요', '무한대') +
         ruleRow('💯', '100점 맞았어요', '받아쓰기 · 단원평가', '+' + fmt(HUNDRED_AMOUNT)) +
         '<div class="rgd-fam">' + ico3d('handshake','i3d-30') +
           '<div><b>가족 미션 · 정산</b><p>가족 미션과 100원 미니알바를 합쳐 주간 최대 ' + fmt(FAMILY_WEEK_MAX) + '까지 쌓여요. 용돈은 매달 계좌이체나 현금으로 정산해요. 💗</p></div>' +
         '</div>' +
-        '<div class="rgd-grp-note">이번 주 용돈은 최대 ' + fmt(WEEK_MAX) + ' — 공부 ' + fmt(WEEK_MAX_STUDY) + ' + 아침 습관 ' + fmt(WEEK_MAX_MORNING) + ' + 가족 미션·미니알바 ' + fmt(FAMILY_WEEK_MAX) + '</div>' +
+        '<div class="rgd-grp-note rgd-note-money"><b>이번 주 용돈은 최대 ' + fmt(WEEK_MAX) + '</b><br>' +
+          '공부 ' + fmt(WEEK_MAX_STUDY) + ' + 아침 습관 ' + fmt(WEEK_MAX_MORNING) + ' + 가족 미션·미니알바 ' + fmt(FAMILY_WEEK_MAX) + '<br>' +
+          '<small>📅 월별 최대 금액 상이 · 💯 100점·🎁 보너스 별도</small></div>' +
+        '<div class="rgd-grp-note">🩷 달력 월에 따라 모을 수 있는 최대 금액이 달라져요<br>' +
+          '100점 맞았어요! 현금 지급과<br>' +
+          '엄마·아빠 보너스는 별도로 추가됩니다</div>' +
       '</div>' +
       /* 📈 이번 달 완성 보너스 (#13408) */
       '<div class="rgd-grp">' +
@@ -13779,7 +13889,9 @@ function rewardGuideHtml(kidKey){
         ruleRow('📚', 'STUDY 숙제 완료', MONTH_BONUS_STUDY.slice().reverse().map(function(t){ return t[0] + '회 +' + fmt(t[1]); }).join(' · '), '최대 +' + fmt(MONTH_BONUS_STUDY[0][1])) +
         ruleRow('☀️', '아침 습관 3가지', MONTH_BONUS_MORNING.slice().reverse().map(function(t){ return t[0] + '일 +' + fmt(t[1]); }).join(' · '), '최대 +' + fmt(MONTH_BONUS_MORNING[0][1])) +
         ruleRow('✨', 'MY SPACE 7일 완성', '한 달에 4주 달성', '+' + fmt(MONTH_BONUS_SPACE[0][1])) +
-        '<div class="rgd-grp-note">가장 높은 구간 하나만 지급해요 (20회면 +2,000원 · 30일이면 +1,000원) · 이번 달 벌은 용돈에 함께 쌓여요</div>' +
+        '<div class="rgd-grp-note"><b>가장 높은 구간 하나만 지급해요</b><br>' +
+          '(20회면 +' + fmt(MONTH_BONUS_STUDY[0][1]) + ' · 30일이면 +' + fmt(MONTH_BONUS_MORNING[0][1]) + ')<br>' +
+          '이번 달 벌은 용돈에 함께 쌓여요</div>' +
       '</div>' +
     '</div>';
 
@@ -13804,6 +13916,14 @@ function ruleRow(icon, title, sub, val){
   return '<div class="rgd-rule">' +
     '<span class="rgd-rule-ico" aria-hidden="true">' + icon + '</span>' +
     '<span class="rgd-rule-txt"><b>' + esc(title) + '</b><small>' + esc(sub) + '</small></span>' +
+    '<span class="rgd-rule-val">' + esc(val) + '</span>' +
+  '</div>';
+}
+/* 강조 표시를 넣을 수 있는 규칙 줄 — 제목·설명에 미리 만든 HTML을 그대로 쓴다 (#14440) */
+function ruleRowRaw(icon, titleHtml, subHtml, val){
+  return '<div class="rgd-rule">' +
+    '<span class="rgd-rule-ico" aria-hidden="true">' + icon + '</span>' +
+    '<span class="rgd-rule-txt"><b>' + titleHtml + '</b><small>' + subHtml + '</small></span>' +
     '<span class="rgd-rule-val">' + esc(val) + '</span>' +
   '</div>';
 }
@@ -14333,6 +14453,9 @@ function rewardKidCardHtml(kidKey, primary, multi){
       '<p class="rwd-kidline" id="' + kidId('walletSub') + '">' + kidAvHtml(kd.key) + ' 이번 주 ' + fmt(st.grand) + ' · 공부·아침 ' + fmt(st.total) + ' / ' + fmt(WEEK_MAX_STUDY_ALL) + '</p>' +
     '</div>' +
 
+    /* 🎯 이번 달 용돈 목표 게이지 — 2×3 요약 카드보다 위, 카드 맨 위에 (#14106) */
+    gauge +
+
     /* 👩‍💼 🧔 보너스 주기 (엄마 전용) — 아이 이름 바로 아래, 리워드 카드보다 먼저 */
     '<div class="bonus-box" id="' + kidId('bonusBox') + '" data-parent-only="1" data-bonus-scope="' + kidKey + '" aria-label="' + name + ' 엄마 아빠 보너스">' +
       '<div class="bonus-box-h"><span aria-hidden="true">' + ico3d('gift','i3d-22') + '</span><b>' + name + ' 보너스 주기</b></div>' +
@@ -14367,8 +14490,7 @@ function rewardKidCardHtml(kidKey, primary, multi){
       '<div class="rh star" role="button" tabindex="0" data-action="rwd-detail" data-kind="stamps" data-kid="' + kidKey + '" aria-label="' + name + ' 누적 스탬프 내역 보기"><span class="rh-ico" aria-hidden="true"><span class="rs-emo">🎖️</span></span><span class="rh-label">누적 스탬프</span><strong id="' + kidId('rwStampTotal') + '">' + numFmt(stamps) + '개</strong></div>' +
     '</div>' +
 
-    /* 🎯 이번 달 용돈 목표 게이지 (#13828) */
-    gauge +
+    /* 🎯 이번 달 용돈 목표 게이지는 카드 맨 위로 올렸어요 (#14106) */
 
     /* 💎 이번 주 스탬프 카드 자리 — 엄마·아빠·아이 모두 같은 카드 하나만 (#v30)
        단독 「스스로 체크 보상 7일」 카드는 아래 💎 이번 주 스탬프와 겹쳐서 없앴다 */
@@ -14665,8 +14787,8 @@ function rwsPageOf(kidKey, page){
     '<article class="rws-page" id="rwsPage-' + kidKey + '-' + page + '" data-page="' + page + '" role="tabpanel">' +
       '<div class="rws-ph"><b>' + title + '</b><span>' + n + '/' + total + (page === 3 ? '회' : '일') + '</span></div>' +
       '<div class="rws-days">' + slots + '</div>' +
-      '<p class="rws-note">' + note + '</p>' +
       monthBonusBlockHtml(kidKey, page === 1 ? 'morning' : (page === 2 ? 'space' : 'study')) +
+      '<p class="rws-note">' + note + '</p>' +
     '</article>' };
 }
 function rwsTabHtml(kidKey, page, label){
@@ -15200,6 +15322,37 @@ function acViaHtml(e, isLast){
     (isParentMode() ? '<button class="ac-del" data-action="del-ac-via" data-id="' + esc(e.id) + '" aria-label="' + esc(e.via) + ' 경유지 삭제">✕</button>' : '') +
     '</li>';
 }
+/* 🏠 집 · 🅿️ 지하주차장 · 📍 장소 — 같은 슬림 한 줄 카드 (#13971 · #13982 · #13991)
+   · [시간 알약] [큰 이모지 + 이름] [📍 메모] [다음 · ✕] 순서 — 두 줄로 두툼해지지 않는다 */
+function stopKindOf(a){
+  if(!a) return '';
+  if(isHomeStop(a.name)) return 'home';
+  if(a.stop === 'parking' || a.emoji === '🅿️' || /주차장/.test(String(a.name || ''))) return 'parking';
+  if(a.stop === 'place' || a.emoji === '📍') return 'place';
+  return '';
+}
+function acStopCardHtml(a, isNext){
+  var kind = stopKindOf(a) || 'place';
+  var home = (kind === 'home');
+  var ico = home ? '🏠' : (kind === 'parking' ? '🅿️' : '📍');
+  var title = home
+    ? (String(a.name || '').replace(/^[🏠\s]+/u, '') || '집')
+    : (String(a.name || '').replace(/^[🅿️📍\s]+/u, '') || (kind === 'parking' ? '주차장' : '장소'));
+  var memo = acStopMemoOf(a);
+  /* 이름과 같은 말이면 메모를 한 번만 — 「양원성당 / 양원성당에서 기다려요!」 → 「📍 양원성당」 (#13558 · #13982) */
+  var titleFlat = acMemoNorm(title);
+  if(memo && titleFlat && acMemoNorm(memo).indexOf(titleFlat) === 0) memo = '';
+  var time = (a.start || a.end) ? fmtRangePretty(a) : '';
+  return '<li class="ac-item stop-card ' + (home ? 'home-stop' : 'place-stop') + (isNext ? ' next' : '') + '"' +
+    ' data-action="edit-academy" data-id="' + a.id + '" role="button" tabindex="0">' +
+    (time ? '<span class="ac-time">' + esc(time) + '</span>' : '') +
+    '<span class="ac-main"><b><span class="ac-ico" aria-hidden="true">' + ico + '</span> ' + esc(title) + '</b>' +
+      (memo ? '<small class="ac-place">' + (home ? '📍 ' : '') + esc(memo) + '</small>' : '') +
+    '</span>' +
+    (isNext ? '<span class="ac-badge">다음</span>' : '') +
+    (isParentMode() ? '<button class="ac-del" data-action="del-academy" data-id="' + a.id + '" aria-label="' + esc(title) + ' 삭제">✕</button>' : '') +
+  '</li>';
+}
 /* 🗓 SCHEDULE 요일 바 (#v36) — 화면에서만 쓰는 값, 새로 열면 오늘로 돌아온다 */
 var AC_VIEW_DAY = new Date().getDay();
 /* 이번 주(월~일) 그 요일의 날짜 — 월요일을 이번 주 시작으로 */
@@ -15235,6 +15388,8 @@ function renderAcademy(){
   var md = monthData(kidKey, mk);
   var nowMin = now.getHours() * 60 + now.getMinutes();
   var todayList = dayEntries(kidKey, mk, dow);
+  /* 🏫 요약 칩과 「N개 일정」은 실제 학원만 — 🏠 집 · 🅿️ 주차장 · 📍 장소 · 🏫 방과후는 빼다 (#13961) */
+  var academyList = todayList.filter(isAcademyEntry);
   var school = (md.school && md.school[dow]) || '';
   /* 🏖️ 쉬는 날(토·일·공휴일)에는 학교 대신 집 (#5524) */
   var offKey = dayKey(viewDate);
@@ -15266,8 +15421,9 @@ function renderAcademy(){
     else html += '<p class="muted">학원 시간표·동선을 추가하거나 차차에게 알려주세요!</p>';
     html += '</div>';
   }else{
-    /* 오늘 가는 학원 — 이모지 + 이름만 담은 네모 미니 카드 (방과후·집 정류장은 뺌) */
-    var chips = todayList.filter(function(a){ return !isHomeStop(a.name) && a.stop !== 'school'; });
+    /* 오늘 가는 학원 — 실제 학원만 이모지 + 이름 네모 미니 카드로 요약
+       · 🏠 집 · 🏫 방과후 · 🅿️ 주차장 · 📍 장소 같은 중간 장소/정류장은 칩에서 빼고 동선 카드로만 보여 준다 (#13961) */
+    var chips = academyList;
     if(chips.length){
       var chipCols = Math.max(1, Math.min(4, chips.length));
       html += '<div class="ac-chips" style="grid-template-columns:repeat(' + chipCols + ',minmax(0,1fr))">' + chips.map(function(a){
@@ -15310,36 +15466,11 @@ function renderAcademy(){
           (a.end ? '<small>' + esc(a.start + '~' + a.end) + '</small>' : '') + '</li>';
         return;   /* 방과후는 학교 줄로 이미 보인다 */
       }
-      if(a.stop === 'parking' || a.stop === 'place'){
-        /* 🅿️·📍 도 중간 정류장 — 흰 점선 박스 + ✕ (#12975 · #13019) */
-        var gearIco = (a.stop === 'parking') ? '🅿️' : '📍';
-        var gearSub = acStopText(a) || '';
-        var gearTitle = String(a.name || '').replace(/^[🅿️📍\s]+/u, '') || (a.stop === 'parking' ? '주차장' : '장소');
-        var gearName = gearSub || gearTitle;
-        html += '<li class="ac-thin stop place-stop' + (isNext ? ' next' : '') + '" data-action="edit-academy" data-id="' + a.id + '" role="button" tabindex="0">' +
-          gearIco + ' <b>' + esc(gearTitle) + '</b>' +
-          (gearSub && gearSub !== gearTitle ? '<small>' + esc(gearSub) + '</small>' : '') +
-          ((a.start || a.end) ? '<small>' + esc(fmtRangePretty(a)) + '</small>' : '') +
-          (isNext ? '<span class="ac-badge">다음</span>' : '') +
-          (isParentMode() ? '<button class="ac-del" data-action="del-academy" data-id="' + a.id + '" aria-label="' + esc(gearName) + ' 삭제">✕</button>' : '') +
-        '</li>';
+      if(stopKindOf(a)){
+        /* 🏠 집 · 🅿️ 지하주차장 · 📍 장소 — 모두 같은 슬림 한 줄 카드 (#13971 · #13982 · #13991)
+           · [시간 알약] [큰 이모지 + 이름] [메모] [다음 · ✕] 순서 */
+        html += acStopCardHtml(a, isNext);
         return;   /* 장소 카드는 여기서 끝 — 아래 학원 카드로 또 그리지 않는다 (#v35) */
-      }
-      /* 🏠 집 정류장 — 학원 카드와 같은 순서: [시간] 🏠 집 / 📍 메모 / 다음 · ✕ (#13558 · #13581)
-         · 메모는 원문 그대로 한 번만 — 「…해요」 뒤에 「를 해요」를 또 붙이지 않는다
-         · 이동 수단·시각은 위아래 세로 동선 칩이 보여 준다 (#13592) */
-      if(isHomeStop(a.name)){
-        var homeMemo = acHomeMemoOf(a);
-        var homeName = String(a.name || '').replace(/^[🏠\s]+/u, '') || '집';
-        html += '<li class="ac-item home-stop' + (isNext ? ' next' : '') + '" data-action="edit-academy" data-id="' + a.id + '" role="button" tabindex="0">' +
-          (a.start ? '<span class="ac-time">' + esc(fmtRangePretty(a)) + '</span>' : '') +
-          '<span class="ac-main"><b><span class="ac-ico" aria-hidden="true">🏠</span> ' + esc(homeName) + '</b>' +
-            (homeMemo ? '<small class="ac-place">📍 ' + esc(homeMemo) + '</small>' : '') +
-          '</span>' +
-          (isNext ? '<span class="ac-badge">다음</span>' : '') +
-          (isParentMode() ? '<button class="ac-del" data-action="del-academy" data-id="' + a.id + '" aria-label="집 삭제">✕</button>' : '') +
-        '</li>';
-        return;
       }
       /* 🚌 학원 카드 안에는 학원 이름과 장소만 — 갈 때·올 때 이동수단 요약 줄은
          위아래 세로 동선 칩이 이미 보여주므로 넣지 않는다 (#13592) */
@@ -15369,7 +15500,12 @@ function renderAcademy(){
   box.innerHTML = html;
 
   var sub = $('#academySub');
-  if(sub) sub.textContent = kd.name + ' · ' + (todayList.length ? todayList.length + '개 일정' : '이 날은 일정 없음') + (isTodayView ? ' · 오늘' : ' · ' + WEEK[dow] + '요일');
+  if(sub){
+    var countText = academyList.length
+      ? (academyList.length + '개 일정')
+      : (todayList.length ? (todayList.length + '개 일정') : '이 날은 일정 없음');
+    sub.textContent = kd.name + ' · ' + countText + (isTodayView ? ' · 오늘' : ' · ' + WEEK[dow] + '요일');
+  }
   /* ➕ 추가 폼의 이모지·프리셋 칩과 조건부 학원차 칸 (#v31) */
   renderAcEmojiRow();
   renderAcStopRow();
@@ -15403,8 +15539,8 @@ function renderWeek(){
   var academyCount = 0;
   DAY_ORDER.forEach(function(d){
     var items = dayEntries(kidKey, mk, d);
-    /* 🏠 「집」 정류장 · 🏫 방과후는 학원 목록 카드에 넣지 않고 동선 줄에만 남긴다 (#v30 · #v31) */
-    var chips = items.filter(function(a){ return !isHomeStop(a.name) && a.stop !== 'school'; });
+    /* 🏠 「집」 정류장 · 🏫 방과후 · 🅿️ 주차장 · 📍 장소는 학원 목록 카드에 넣지 않고 동선 줄에만 남긴다 (#v30 · #v31 · #13961) */
+    var chips = items.filter(isAcademyEntry);
     academyCount += chips.length;
     var dismiss = schoolDismissalOf(kidKey, mk, d);
     var isToday = isCur && d === todayDow;
@@ -16468,7 +16604,7 @@ function calBandTexts(ev, pieces){
   var n = pieces.length;
   var widths = pieces.map(function(x){ return Math.max(1, (x.col1 - x.col0 + 1)); });
   function withEmo(i, txt){
-    if(widths[i] === 1) return txt;
+    /* 🔥 앞부분(이어진 곳이 아닌 첫 조각)에는 이모지를 붙인다 — 1칸짜리 바에서도 이모지가 보이게 (#14187) */
     if(pieces[i].contL) return txt;
     return ((p.emo ? p.emo + ' ' : '') + txt).trim();
   }
@@ -16792,13 +16928,15 @@ function renderFamilyCalendar(){
 /* 기념일 종류별 색 — 🎂 생일 빨강 · 🕯️ 제사 회색 · 💐 기념일 골드 (#13326) */
 function annColorOf(kind){
   if(kind === 'memorial') return '#6B7280';
-  if(kind === 'anniv') return '#C2410C';
-  return '#BE123C';
+  /* 💐 기념일 괄호 — 개나리색 (선명한 노랑-골드) (#14036) */
+  if(kind === 'anniv') return '#FACC15';
+  /* 🎂 생일 괄호 — 진빨강 (#14036) */
+  return '#B91C1C';
 }
-/* 기념일 알약의 바탕색 — 생일은 진한 빨강 채움, 나머지는 밝은 파스텔 (#13326) */
+/* 기념일 알약의 바탕색 — 생일은 진한 빨강 채움, 기념일은 겨울방학 배경보다 진한 연노랑, 제사는 연회색 (#13326 · #14036) */
 function annSoftOf(kind){
   if(kind === 'memorial') return '#F1F2F4';
-  if(kind === 'anniv') return '#FFE45C';
+  if(kind === 'anniv') return '#FEF08A';
   return '#EF4444';
 }
 function renderFamCalDay(sel){
@@ -16825,7 +16963,11 @@ function renderFamCalDay(sel){
       var endD = calEventEnd(e);
       if(endD) meta.push(calRangeLabel(e.date, endD));
       if(e.note) meta.push(e.note);
-      return '<li class="cal-ev cal-c-' + e.category + '" data-id="' + esc(e.id) + '">' +
+      /* 🎂 생일·기념일·제사는 종류 색을 그대로 — 생일 괄호가 분홍으로 덮이지 않게 (#14167) */
+      var annK = calEventKindOf(e);
+      return '<li class="cal-ev cal-c-' + e.category + (annK ? ' ann-' + annK : '') + '"' +
+        (annK ? ' style="--cat:' + annColorOf(annK) + ';--cat-soft:' + annSoftOf(annK) + '"' : '') +
+        ' data-id="' + esc(e.id) + '">' +
         '<span class="cal-ev-badge">' + personIconHtml(e.who) + ' ' + esc(who.label) + '</span>' +
         '<span class="cal-ev-body">' +
           (e.time ? '<em class="cal-ev-time">' + esc(e.time) + '</em>' : '') +
@@ -18133,7 +18275,10 @@ function renderHome(){
       evBox.innerHTML = '<p class="home-empty">오늘은 등록된 가족 일정이 없어요 · 여유로운 하루 🌿</p>';
     }else{
       evBox.innerHTML = list.map(function(e){
-        return '<div class="home-ev cal-c-' + e.category + '">' +
+        /* 🎂 생일 괄호는 진빨강 — 아이 카테고리 핑크에 덮이지 않게 (#14167) */
+        var annK = calEventKindOf(e);
+        return '<div class="home-ev cal-c-' + e.category + (annK ? ' ann-' + annK : '') + '"' +
+          (annK ? ' style="--cat:' + annColorOf(annK) + '"' : '') + '>' +
           '<span class="he-badge">' + personIconHtml(e.who) + ' ' + esc(calWhoOf(e.who).label) + '</span>' +
           (e.time ? '<span class="he-time">' + esc(e.time) + '</span>' : '') +
           (e.emoji ? '<span class="he-emo" aria-hidden="true">' + esc(e.emoji) + '</span>' : '') +
@@ -18179,7 +18324,7 @@ function renderHome(){
       var mOn = morningMoneyOn(kk2, dayKey());
       var pastNoon = hhmmNow() >= MORNING_MONEY_CUTOFF;
       if(mOn) htip.innerHTML = '🎉 오전 완료! 아침 습관 3가지 <b>+' + fmt(MORNING_MONEY) + '</b> 받았어요';
-      else if(pastNoon) htip.innerHTML = '⏰ 12시가 넘었어요 — 도장은 그대로, <b>' + fmt(MORNING_MONEY) + '</b>는 다음에 오전에 도전!';
+      else if(pastNoon) htip.innerHTML = '⏰ 12시가 넘었어요 — 도장은 그대로, <b>' + fmt(MORNING_MONEY) + '</b>은 다음에 오전에 도전!';
       else htip.innerHTML = '☀️ 오전(낮 12시 전) 3가지 모두 완료하면 <b>+' + fmt(MORNING_MONEY) + '!</b>';
       htip.className = 'habit-money-tip' + (mOn ? ' on' : (pastNoon ? ' late' : ''));
     }
@@ -18243,7 +18388,7 @@ function renderHome(){
           /* HOME 요약 줄은 시간 · 이름 · 장소만 — 「갈 때/올 때」 이동 표시는
              🛣️ 오늘의 동선과 학원·동선 관리 목록에서 보여 준다 (#3976 · #3981)
              · 🏠 집 등 중간 장소의 메모는 📍 한 줄로만 — 같은 말을 📝로 또 쓰지 않는다 (#13558) */
-          return '<div class="ha-item">' +
+          return '<div class="ha-item' + (isAcademyEntry(a) ? ' is-academy' : '') + '">' +
             '<span class="ha-time">' + esc(fmtRangePretty(a)) + '</span>' +
             '<b>' + (isHomeStop(a.name) ? '🏠 ' : '') + esc(a.name) + '</b>' +
             acMemoLines(a).map(function(m){
@@ -18413,23 +18558,74 @@ function renderFamilyPick(){
   html += '<button type="button" class="fpb-btn' + (tab === 'minijob' ? ' on' : '') + '" data-action="pick-family-view" data-view="minijob"' +
     ' aria-pressed="' + (tab === 'minijob' ? 'true' : 'false') + '">🪙 미니알바</button>';
   box.innerHTML = html;
-  /* 안내 문구 — 미니알바만 중복 적립이 된다 (#12925) */
+  /* 안내 문구 — 미니알바 탭에서는 카드 안쪽(#miniJobHint)에 있어요 (#14260) */
   var hintEl = $('#familyTeamHint');
   if(hintEl){
-    hintEl.innerHTML = tab === 'minijob'
-      ? '<span aria-hidden="true">ⓘ</span> 미니알바는 중복 적립할 수 있어요!'
-      : '<span aria-hidden="true">ⓘ</span> 같은 미션은 주 1회만 적립돼요.';
+    hintEl.hidden = (tab === 'minijob');
+    hintEl.innerHTML = '<span aria-hidden="true">ⓘ</span> 같은 미션은 주 1회만 적립돼요.';
   }
 }
-/* 🕐 최근 내역 「전체보기」 — 이번 주 가족 미션 + 미니알바 전체 (#12889) */
+/* 🕐 「전체보기」 — 이번 주에 미션·알바별로 몇 번 · 얼마나 쌓였는지 누적 집계 (#14113) */
+function familyWeekAgg(kidKey, wk){
+  var week = wk || weekStartKey(new Date());
+  var out = [], byKey = {};
+  var pick = function(key, seed){
+    if(!byKey[key]){
+      seed.key = key; seed.count = 0; seed.amount = 0; seed.lastDay = '';
+      byKey[key] = seed; out.push(seed);
+    }
+    return byKey[key];
+  };
+  weekDays(week).forEach(function(dk){
+    var d = peekDay(kidKey, dk);
+    /* 🤝 가족 미션 — 같은 미션이라도 함께 1번 · 스스로 1번은 각각 따로 센다 */
+    familyMissionsOn(kidKey, dk).forEach(function(id){
+      var info = familyMissionInfo(kidKey, dk, id);
+      if(!info) return;
+      var row = pick('m|' + id + '|' + info.team, { kind:'mission', id:id, team:info.team, label:info.label, icon:info.icon });
+      row.count += 1;
+      row.amount += Number(d.self[id]) || 0;   /* 실제 적립된 금액 */
+      row.lastDay = dk;
+    });
+    /* 🪙 미니알바 — 같은 날 여러 번 찍은 건 건수 그대로 센다 */
+    Object.keys(d.vac || {}).forEach(function(vid){
+      var info = miniJobInfo(kidKey, dk, vid);
+      if(!info) return;
+      var n = (d.vacN && d.vacN[vid] !== undefined) ? Math.max(0, Number(d.vacN[vid]) || 0) : 1;
+      if(n <= 0) return;
+      var row = pick('v|' + vid, { kind:'vac', id:vid, team:'all', label:info.label, icon:info.icon });
+      row.count += n;
+      row.amount += Number(d.vac[vid]) || 0;
+      row.lastDay = dk;
+    });
+  });
+  out.sort(function(a, b){ return (b.amount - a.amount) || (b.count - a.count) || (a.lastDay < b.lastDay ? 1 : (a.lastDay > b.lastDay ? -1 : 0)); });
+  return out;
+}
+function familyWeekAggPillHtml(r){
+  var tag = r.kind === 'vac' ? '미니알바' : familyTeamDef(r.team).label;
+  return '<span class="fwl-pill fwm-pill">' +
+    '<b>' + esc(r.icon || '🤝') + ' ' + esc(r.label) + '</b>' +
+    '<em>' + esc(tag) + '</em>' +
+    '<i>' + r.count + '회</i>' +
+    '<strong>+' + fmt(r.amount) + '</strong></span>';
+}
+/* 🕐 최근 내역 「전체보기」 — 이번 주 가족 미션 + 미니알바를 항목별로 모아서 (#12889 · #14113) */
 function openFamilyWeekLogModal(){
   var kidKey = scopedKidKey();
-  var log = familyWeekLog(kidKey).slice().reverse();
+  var rows = familyWeekAgg(kidKey);
+  var totN = 0, totAmt = 0, totMission = 0, totVac = 0;
+  rows.forEach(function(r){
+    totN += r.count; totAmt += r.amount;
+    if(r.kind === 'vac') totVac += r.amount; else totMission += r.amount;
+  });
   openModal(
-    '<h2 class="modal-title">🕐 이번 주 가족 미션 내역</h2>' +
-    '<p class="modal-sub">' + log.length + '건 · 월요일 자정에 새로 시작해요</p>' +
-    (log.length
-      ? '<div class="fwl-list fwl-modal">' + log.map(familyWeekLogPillHtml).join('') + '</div>'
+    '<h2 class="modal-title">🕐 이번 주 미션·미니알바 내역</h2>' +
+    '<p class="modal-sub">' + rows.length + '가지 · 미션·알바별로 모아 봤어요 (월요일 자정에 새로 시작)</p>' +
+    (rows.length
+      ? '<div class="fwm-sum"><span>이번 주 총 <b>' + totN + '회</b></span><span>합계 <b>+' + fmt(totAmt) + '</b></span></div>' +
+        '<p class="fwm-split">🤝 가족 미션 +' + fmt(totMission) + ' · 🪙 미니알바 +' + fmt(totVac) + '</p>' +
+        '<div class="fwl-list fwl-modal">' + rows.map(familyWeekAggPillHtml).join('') + '</div>'
       : '<p class="fwl-empty">이번 주에는 아직 가족 미션을 하지 않았어요 🌱</p>') +
     '<div class="modal-actions"><button type="button" class="btn btn-ghost" data-action="close-modal">닫기</button></div>'
   );
@@ -20176,15 +20372,41 @@ function acStopDef(key){
   return null;
 }
 /* 프리셋 안내 문구 — 예) 「양원성당에서 만나요!」 · 「영어 방과후」 · 「간식 먹고 숙제를 해요」 */
+/* 「…에서 만나요!」·「…에서 기다려요!」 — 이미 그 말로 끝나 있으면 같은 말을 또 붙이지 않는다 (#13982)
+   · 예) 「엄마차에서 만나요!」 + 「에서 만나요!」 → 「엄마차에서 만나요!」 그대로 */
+function acStopPhrase(base, tail){
+  var b = String(base == null ? '' : base).trim();
+  if(!b) return '';
+  var flat = b.replace(/\s+/g, '').replace(/[!.,~]+$/, '');
+  var core = String(tail || '').replace(/[!\s]/g, '');
+  if(core && flat.length >= core.length && flat.slice(-core.length) === core) return b;
+  /* 서술어로 끝나면 「에서 …」을 덧붙이지 않는다 — 「…만나요」 「…기다려요」 「…해요」 */
+  if(/(만나요|만날게요|만나자|기다려요|기다릴게요|기다려|있어요|있을게요|할게요|해요|줘요|주세요)$/.test(flat)) return b;
+  return b + tail;
+}
 function acStopText(e){
   var d = acStopDef(e && e.stop);
   if(!d) return '';
-  if(d.key === 'parking') return (e.stopPlace || e.pickup || '') + '에서 만나요!';
-  if(d.key === 'place') return (e.stopPlace || e.pickup || '') + '에서 기다려요!';
+  var base = String((e && (e.stopPlace || e.pickup)) || '').trim();
+  if(d.key === 'parking') return acStopPhrase(base, '에서 만나요!');
+  if(d.key === 'place') return acStopPhrase(base, '에서 기다려요!');
   if(d.key === 'school') return String(e.name || '') + ' 방과후';
   /* 🏠 집은 적어 둔 메모를 그대로 — 「…해요」 뒤에 「를 해요」를 또 붙이지 않는다 (#13558) */
   if(d.key === 'home') return String(e.homeTask || '');
   return '';
+}
+/* 🏠🅿️📍 중간 장소 카드의 메모 한 줄 — 집은 적어 둔 메모, 주차장·장소는 안내 문구 (#13982) */
+function acStopMemoOf(e){
+  if(!e) return '';
+  if(isHomeStop(e.name)) return acHomeMemoOf(e);
+  var t = String(acStopText(e) || '').trim();
+  return t || acHomeMemoOf(e);
+}
+/* 🏫 요약 칩에 올리는 진짜 학원인가 — 🏠 집 · 🏫 방과후 · 🅿️ 주차장 · 📍 장소는 뺀다 (#13961) */
+function isAcademyEntry(a){
+  if(!a) return false;
+  if(a.stop === 'school' || stopKindOf(a)) return false;
+  return true;
 }
 function entryEmoji(e){
   if(e && e.emoji) return String(e.emoji);
@@ -20545,6 +20767,7 @@ function openTimerPanel(){
 var TAP_WINDOW = 460;   /* 두 번 누름을 「취소」로 읽는 시간 (#v34 — 380ms는 손이 빠르지 않으면 놓쳤다) */
 var _lastTapKey = '';
 var _lastTapAt = 0;
+var _lastVacAdded = 0;   /* 바로 앞 미니알바 탭에서 실제로 더해진 개수 (주간 한도로 막히면 0) — #14106 */
 function stampTapHit(el){
   if(!el || !el.closest) return null;
   var inner = el.closest('[data-action]');
@@ -20555,6 +20778,12 @@ function stampTapHit(el){
   /* 🪙 미니알바 카드 — 한 번 누르면 도장, 두 번 누르면 취소 (#v34) */
   var vac = el.closest('[data-action="toggle-vac"]');
   if(vac) return (inner && inner !== vac) ? null : { kind:'vac', id:vac.getAttribute('data-id') || '', el:vac };
+  /* 🪙 미니알바 목록 항목 자체를 눌러도 — 한 번은 +100원, 두 번은 오늘 찍은 1건 취소 (#14106)
+     ✏️ 수정 · ✕ 삭제 도구는 빼고 */
+  var vcard = el.closest('.vac-card');
+  if(vcard && !el.closest('.vac-tools')){
+    return { kind:'vac', id:vcard.getAttribute('data-id') || '', el:vcard };
+  }
   var row = el.closest('[data-basic-id]');
   if(row){
     /* 행 안의 ○ 버튼(toggle-basic)은 행과 같은 것으로 본다 — ✏️·✕ 도구만 빠진다 (#v32) */
@@ -20580,13 +20809,18 @@ document.addEventListener('click', function(e){
   if(dbl){
     if(hit.kind === 'self') toggleSelf(hit.id, true);
     else if(hit.kind === 'basic') toggleBasic(hit.id, true);
-    else if(hit.kind === 'vac') toggleVacationJob(hit.id, true);
+    /* 🪙 두 번째 탭 — 첫 탭이 더한 개수까지 같이 빼서 결과적으로 오늘 1건이 줄어든다 (#14106) */
+    else if(hit.kind === 'vac') toggleVacationJob(hit.id, 1 + (_lastVacAdded > 0 ? 1 : 0));
     else funUndoDone(hit.id);
     return;
   }
   if(hit.kind === 'self') toggleSelf(hit.id, false);
   else if(hit.kind === 'basic') toggleBasic(hit.id, false);
-  else if(hit.kind === 'vac') toggleVacationJob(hit.id, false);
+  else if(hit.kind === 'vac'){
+    var vacBefore = vacCountOn(scopedKidKey(), dayKey(), hit.id);
+    toggleVacationJob(hit.id, false);
+    _lastVacAdded = Math.max(0, vacCountOn(scopedKidKey(), dayKey(), hit.id) - vacBefore);
+  }
   else funToggleDone(hit.id);
 }, true);
 
