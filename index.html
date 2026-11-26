@@ -788,7 +788,14 @@ details.ac-add[open] summary{margin-bottom:9px}
 .ac-thin.school{background:var(--wday-bg);border-color:var(--wday-line);color:var(--wday-tink);margin-bottom:5px}
 .ac-thin.school b{font-weight:900}
 .ac-thin.stop{background:#FBFDFF;border-style:dashed;color:var(--ink-2)}
-.ac-thin.home-stop{background:var(--done-soft);border-color:var(--done-line);color:var(--done-ink)}
+/* 중간 정류장(🏠 집 · 🅿️ 주차장 · 📍 장소)은 흰색 점선 — 연두빛은 마지막 「🏠 집 도착」만 (#12997 · #13008 · #13019) */
+.ac-thin.home-stop{background:#FBFDFF;border-style:dashed;color:var(--ink-2)}
+.ac-thin.end-home{background:var(--done-soft);border-color:var(--done-line);border-style:solid;color:var(--done-ink)}
+.ac-thin.end-home b{color:var(--done-ink)}
+/* 중간 정류장 오른쪽 ✕ 삭제 버튼 (#12975) */
+.ac-thin{position:relative}
+.ac-thin .ac-del{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:23px;height:23px;font-size:11px}
+.ac-thin .ac-del:active{transform:translateY(-50%) scale(.94)}
 .ac-leg.veh{justify-content:center;font-size:10.5px;font-weight:900;color:#3D6FA8;background:#F2F8FF;border:1px dashed #CFE3F7;
   border-radius:999px;padding:2px 9px;margin:2px auto;max-width:100%}
 .ac-leg.veh small{font-size:9.5px;color:#6F8CAD;font-weight:800}
@@ -941,11 +948,11 @@ details.ac-add[open] summary{margin-bottom:9px}
 
 /* ---------- 📅 우리집 공유 달력 (#1044 · #1056 · #1067) ---------- */
 .cal-c-all{--cat:var(--muted);--cat-soft:var(--chip-bg)}
-.cal-c-family{--cat:#E55353;--cat-soft:#FDECEC}
-.cal-c-seonwoo{--cat:#3B82F6;--cat-soft:#EBF3FE}
-.cal-c-jiwoo{--cat:#EC4899;--cat-soft:#FDF0F6}
-.cal-c-mom{--cat:#F97316;--cat-soft:#FFF3E6}
-.cal-c-dad{--cat:#10B981;--cat-soft:#ECFDF5}
+.cal-c-family{--cat:#E55353;--cat-soft:#FDECEC;--cat-fill:#F9D2D2}
+.cal-c-seonwoo{--cat:#3B82F6;--cat-soft:#EBF3FE;--cat-fill:#D3E4FC}
+.cal-c-jiwoo{--cat:#EC4899;--cat-soft:#FDF0F6;--cat-fill:#FAD7E8}
+.cal-c-mom{--cat:#F97316;--cat-soft:#FFF3E6;--cat-fill:#FDE0C6}
+.cal-c-dad{--cat:#10B981;--cat-soft:#ECFDF5;--cat-fill:#CFEFE0}
 .famcal{padding-bottom:clamp(14px,2vw,20px)}
 .famcal .card-head{flex-wrap:wrap;row-gap:8px}
 /* 한 줄: [📅 전체] ‹ 2026년 11월 › [오늘] (#5164) */
@@ -1027,20 +1034,11 @@ button.cal-cell:active{transform:scale(.985)}
 .cal-hol-tag{font-size:10px;font-weight:900;font-style:normal;color:#E55353;background:#FDECEC;border-radius:999px;padding:2px 8px}
 /* 🎂 기념일 관리 버튼·모달 (#v25) */
 .cal-tools{display:flex;justify-content:flex-end;margin:-4px 0 8px}
-/* 이번 달 개수 + ➕ 가족 일정 추가 + 🎂 기념일 관리 한 줄 (#v35) */
+/* 이번 달 개수 + 🎂 기념일 관리 한 줄 (#v37 — ➕ 가족 일정 추가는 달력 아래 상세 폼) */
 .cal-tools-row{display:flex;align-items:center;gap:8px;margin:-4px 1px 8px;flex-wrap:wrap}
 .cal-tools-row .cal-sub{margin:0;font-size:11.5px;font-weight:900;color:#41556E;flex:1 1 auto;min-width:0}
 .cal-tools-row .cal-tools{margin:0;flex:0 0 auto;display:flex;gap:6px;justify-content:flex-end}
 .cal-tools-row .cal-tool-btn{white-space:nowrap;min-height:30px;padding:5px 10px;font-size:11px}
-.cal-tool-btn.add{border-color:#CDE6C4;background:linear-gradient(150deg,#F4FBEF,#FFFDF6);color:#3E7B2B}
-.cal-tool-btn.add:hover{border-color:#A9D695;background:linear-gradient(150deg,#EDF9E4,#FFF9EA)}
-/* ➕ 가족 일정 팝업 — 칸이 겹치지 않게 한 줄씩 (#v35) */
-.evm{display:flex;flex-direction:column;gap:9px;margin:2px 0 10px}
-.evm-row2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:9px;align-items:end}
-.evm .fam-field{display:flex;flex-direction:column;gap:3px;min-width:0;width:100%}
-.evm .fam-field input,.evm .fam-field select{width:100%;min-width:0;max-width:100%;box-sizing:border-box;
-  min-height:38px;padding:6px 9px;border-radius:11px;font-size:13px}
-.evm .fam-field input[type=date],.evm .fam-field input[type=time]{font-size:12.5px}
 
 body.mode-kid .cal-tools{display:none !important}
 .cal-tool-btn{display:inline-flex;align-items:center;gap:5px;min-height:30px;padding:5px 12px;border-radius:999px;
@@ -1252,8 +1250,12 @@ body.mode-kid .cal-tools{display:none !important}
 
 /* 🌤️ 오늘은 숙제 없는 날 (#v26) */
 .mf-tools{display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:flex-end;margin-left:auto}
-.nohw-toggle{display:inline-flex;align-items:center;gap:4px;min-height:36px;padding:6px 11px;border-radius:999px;
-  border:1.5px dashed #DDD3F2;background:#fff;color:#6B5FA8;font-size:11px;font-weight:900;letter-spacing:-.02em;cursor:pointer}
+/* STUDY 상단 한 줄 — 숙제 없는 날 · 공부 항목 추가 (#13107 · #13121) */
+.study-quick-tools{display:flex;align-items:center;gap:6px;flex-wrap:nowrap;justify-content:center;margin:-2px 0 10px}
+.study-quick-tools[hidden]{display:none !important}
+.study-quick-tools .nohw-toggle{flex:0 1 auto;min-width:0;justify-content:center;white-space:nowrap;font-size:11px;padding:6px 8px}
+.study-quick-tools .btn{flex:0 0 auto;white-space:nowrap;font-size:11px;padding:6px 9px;min-height:36px;border-radius:999px}
+.nohw-toggle{display:inline-flex;align-items:center;gap:4px;min-height:36px;padding:6px 11px;border-radius:999px;border:1.5px dashed #DDD3F2;background:#fff;color:#6B5FA8;font-size:11px;font-weight:900;letter-spacing:-.02em;cursor:pointer}
 .nohw-toggle:hover{background:#FBF8FF}
 .nohw-toggle.on{border-style:solid;border-color:#BFD8E8;background:linear-gradient(150deg,#F2FBFF,#E7F5FE);color:#245C7E;box-shadow:0 6px 14px -12px rgba(52,120,160,.8)}
 .nohw-card{display:flex;align-items:center;gap:10px;padding:13px 12px;margin:2px 0 10px;border-radius:16px;
@@ -1625,6 +1627,9 @@ body.mode-kid .brand-sub{color:#A08B74}
 .set-add input[type=number]{width:74px;min-height:36px;padding:5px 7px;border-radius:9px;font-size:12px}
 .set-add .btn{flex:0 0 auto;min-height:36px;padding:5px 10px;font-size:12px}
 .set-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+/* ✏️ 일정 고치기 · 달력 아래 추가 폼 — 같은 간격으로 한 줄씩 (#v37 · IMG_9908) */
+.ev-edit-form{display:flex;flex-direction:column;gap:6px}
+.ev-edit-form .fam-form-row{margin-bottom:0}
 .set-field{display:flex;flex-direction:column;gap:3px;font-size:11.5px;color:var(--muted);font-weight:700}
 .set-field input{min-height:38px;border-radius:10px}
 .set-fixed{min-height:38px;display:flex;align-items:center;padding:0 10px;border-radius:10px;background:var(--soft-bg);font-size:12px;font-weight:800;color:var(--ink-2)}
@@ -1975,7 +1980,7 @@ body.drag-active,body.drag-active *{-webkit-user-select:none;user-select:none;-w
 .fam-add-tools{display:flex;align-items:center;gap:5px;margin-left:auto;flex:0 0 auto;width:auto}
 .fam-add-tools .btn{width:auto}
 .fam-pick-bar{margin:2px 0 10px}
-.fam-pick-hint{display:block;margin:6px 2px 0;font-size:10.5px;font-weight:800;letter-spacing:-.02em}
+.fam-pick-hint{display:block;margin:6px 2px 0;font-size:10.5px;font-weight:800;letter-spacing:-.02em;text-align:center;color:#7C8770}
 .fpb-title{display:block;font-size:11.5px;font-weight:900;color:var(--ink);margin:0 0 6px 2px;letter-spacing:-.01em}
 .fpb-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
 .fpb-grid .fpb-btn{min-width:0;font-size:11.5px;padding:0 4px;white-space:nowrap}
@@ -2007,46 +2012,55 @@ body.drag-active,body.drag-active *{-webkit-user-select:none;user-select:none;-w
 .famrule-btn .frb-chev{margin-left:1px;font-size:15px;font-weight:900;color:#8FA57F;line-height:1}
 .fam-add-tools{display:flex;align-items:center;gap:5px;margin-left:auto}
 .fam-add-tools .btn{border-radius:999px;font-size:11.5px;font-weight:900;padding:5px 9px;min-height:31px;white-space:nowrap;letter-spacing:-.02em}
-.famjoin{position:relative;padding:13px 14px 12px;border-radius:22px;overflow:hidden;
+.famjoin{position:relative;padding:11px 12px 10px;border-radius:20px;overflow:hidden;
   background:linear-gradient(168deg,#F3FBF1 0%,#FFFDF6 56%,#F0F9FF 100%);border:1.5px solid #DCEBD3;
   box-shadow:0 18px 32px -34px rgba(58,96,44,.65)}
-.famjoin::after{content:'';position:absolute;left:7px;right:7px;top:7px;bottom:7px;border-radius:17px;
+.famjoin::after{content:'';position:absolute;left:6px;right:6px;top:6px;bottom:6px;border-radius:15px;
   border:1px dashed rgba(146,188,134,.34);pointer-events:none}
 .fj-body{position:relative;z-index:1;display:flex;align-items:flex-start;gap:2px}
-.fj-main{flex:1 1 auto;min-width:0;padding-top:2px}
-.fj-art{flex:0 0 106px;width:106px;margin:-9px -6px 0 0}
+.fj-main{flex:1 1 auto;min-width:0;padding-top:1px}
+.fj-art{flex:0 0 92px;width:92px;margin:-7px -4px 0 0}
 .fj-art .fam-art{filter:drop-shadow(0 6px 10px rgba(120,150,110,.16))}
-.fj-title{display:flex;align-items:center;gap:5px;font-size:15.5px;font-weight:900;color:#2C4A34;letter-spacing:-.035em;line-height:1.25}
-.fj-title>span{font-size:19px;line-height:1}
-.fj-spark{width:15px;height:15px;flex:0 0 auto;color:#FFC94D}
-.fj-spark.s2{width:10px;height:10px;margin-left:-1px;margin-top:-7px;opacity:.9}
-.fj-count{margin:9px 0 0;padding:6px 11px;border-radius:999px;background:rgba(255,255,255,.86);border:1px solid rgba(120,160,120,.18);
-  font-size:11px;font-weight:800;color:#4A6350;line-height:1.35;letter-spacing:-.02em}
-.fj-count b{font-size:13px;font-weight:900;color:#1F5E3A}
-.fj-money{position:relative;z-index:1;margin:8px 0 0;padding:6px 11px;border-radius:999px;background:#F0F9E6;border:1px solid #DFEDCB;
-  font-size:10.5px;font-weight:800;color:#4F6B3C;line-height:1.35;letter-spacing:-.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.fj-money b{font-size:13.5px;font-weight:900;color:#2F7D4F}
+.fj-title{display:flex;align-items:center;gap:4px;font-size:14.5px;font-weight:900;color:#2C4A34;letter-spacing:-.035em;line-height:1.2}
+.fj-title>span{font-size:17px;line-height:1}
+.fj-spark{width:13px;height:13px;flex:0 0 auto;color:#FFC94D}
+.fj-spark.s2{width:9px;height:9px;margin-left:-1px;margin-top:-6px;opacity:.9}
+.fj-count{margin:6px 0 0;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.86);border:1px solid rgba(120,160,120,.18);
+  font-size:10.5px;font-weight:800;color:#4A6350;line-height:1.3;letter-spacing:-.02em}
+.fj-count b{font-size:12.5px;font-weight:900;color:#1F5E3A}
+.fj-money{position:relative;z-index:1;margin:6px 0 0;padding:4px 10px;border-radius:999px;background:#F0F9E6;border:1px solid #DFEDCB;
+  font-size:10px;font-weight:800;color:#4F6B3C;line-height:1.3;letter-spacing:-.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fj-money b{font-size:12.5px;font-weight:900;color:#2F7D4F}
 .fj-money em{font-style:normal;font-weight:800;color:#8A9B7C}
-.fj-gauge{position:relative;z-index:1;display:flex;align-items:center;gap:8px;margin-top:18px}
-.fj-jar{flex:0 0 38px;width:38px;margin:-4px 0 -2px;filter:drop-shadow(0 4px 5px rgba(140,170,190,.3))}
-.fj-track{position:relative;flex:1 1 auto;min-width:0;height:15px;border-radius:99px;background:#E9EFE4;
+.fj-gauge{position:relative;z-index:1;display:flex;align-items:center;gap:7px;margin-top:12px}
+.fj-jar{flex:0 0 34px;width:34px;margin:-3px 0 -2px;filter:drop-shadow(0 4px 5px rgba(140,170,190,.3))}
+.fj-track{position:relative;flex:1 1 auto;min-width:0;height:14px;border-radius:99px;background:#E9EFE4;
   box-shadow:inset 0 1px 2px rgba(90,120,80,.12);overflow:visible}
 .fj-track i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#A4DBAC,#4FAE6A);transition:width .5s ease}
-.fj-bubble{position:absolute;left:0;bottom:calc(100% + 5px);transform:translateX(0);white-space:nowrap;
-  font-size:10px;font-weight:900;color:#2F7D4F;background:#FFFFFF;border:1px solid #CDE7D2;border-radius:999px;padding:2px 8px;
+.fj-bubble{position:absolute;left:0;bottom:calc(100% + 2px);transform:translateX(0);white-space:nowrap;
+  font-size:9.5px;font-weight:900;color:#2F7D4F;background:#FFFFFF;border:1px solid #CDE7D2;border-radius:999px;padding:1px 7px;
   box-shadow:0 6px 12px -12px rgba(46,120,70,.9)}
-.fj-bubble::after{content:'';position:absolute;left:14px;top:100%;width:0;height:0;
+.fj-bubble::after{content:'';position:absolute;left:12px;top:100%;width:0;height:0;
   border-left:4px solid transparent;border-right:4px solid transparent;border-top:4px solid #CDE7D2}
-.fj-cap{flex:0 0 auto;font-size:11px;font-weight:900;color:#5C6F58;font-variant-numeric:tabular-nums}
-.fj-hist{position:relative;z-index:1;margin-top:12px;padding:6px;border-radius:15px;background:#FFF8E3;border:1px solid #F2E3B2}
+.fj-cap{flex:0 0 auto;font-size:10.5px;font-weight:900;color:#5C6F58;font-variant-numeric:tabular-nums}
+.fj-hist{position:relative;z-index:1;margin-top:9px;padding:6px;border-radius:14px;background:#FFF8E3;border:1px solid #F2E3B2}
 .fj-hist[hidden]{display:none}
-.fj-hist .fwl-list{display:flex;flex-direction:column;gap:4px}
-.fj-hist .fwl-pill{display:flex;align-items:center;gap:6px;width:100%;min-width:0;background:rgba(255,255,255,.82);
-  border:1px solid #F1E4BE;border-radius:10px;padding:4px 8px;font-size:10.5px;font-weight:800;line-height:1.45;color:#5A4512}
-.fj-hist .fwl-pill i{flex:0 0 auto;font-style:normal;font-weight:800;font-size:9.5px;color:#9A7A2A;font-variant-numeric:tabular-nums}
-.fj-hist .fwl-pill b{flex:1 1 auto;min-width:0;font-weight:900;color:#5A4512;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.fj-hist .fwl-pill em{flex:0 0 auto;font-style:normal;font-weight:800;font-size:9px;color:#8A6A3A;background:#FBF0CF;border:1px solid #F0DFB0;border-radius:999px;padding:0 5px;line-height:1.5}
-.fj-hist .fwl-pill strong{flex:0 0 auto;font-weight:900;font-size:10.5px;color:#2F7D4F;font-variant-numeric:tabular-nums}
+/* 🕐 최근 내역 머리 — 제목 + 전체보기 (#12889) */
+.fj-hist .fwl-head{display:flex;align-items:center;gap:6px;margin:0 1px 5px}
+.fj-hist .fwl-head b{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:900;color:#8A6A2A;letter-spacing:-.01em}
+.fj-hist .fwl-all{margin-left:auto;display:inline-flex;align-items:center;gap:2px;min-height:22px;padding:1px 8px;border-radius:999px;
+  border:1px solid #EADFC0;background:rgba(255,255,255,.9);color:#8A6A2A;font-size:9.5px;font-weight:900;cursor:pointer}
+.fj-hist .fwl-all:hover{border-color:#DCC894;background:#FFFDF4}
+/* 네 줄 높이로 고정하고 카드 안에서 스크롤 (#12889) */
+.fj-hist .fwl-list{display:flex;flex-direction:column;gap:3px;max-height:108px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;padding-right:1px}
+.fj-hist .fwl-list::-webkit-scrollbar{width:4px}
+.fj-hist .fwl-list::-webkit-scrollbar-thumb{background:#E4D4A6;border-radius:99px}
+.fj-hist .fwl-pill,.fwl-modal .fwl-pill{display:flex;align-items:center;gap:6px;width:100%;min-width:0;background:rgba(255,255,255,.82);
+  border:1px solid #F1E4BE;border-radius:9px;padding:3px 7px;font-size:10px;font-weight:800;line-height:1.35;color:#5A4512}
+.fj-hist .fwl-pill i,.fwl-modal .fwl-pill i{flex:0 0 auto;font-style:normal;font-weight:800;font-size:9.5px;color:#9A7A2A;font-variant-numeric:tabular-nums}
+.fj-hist .fwl-pill b,.fwl-modal .fwl-pill b{flex:1 1 auto;min-width:0;font-weight:900;color:#5A4512;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fj-hist .fwl-pill em,.fwl-modal .fwl-pill em{flex:0 0 auto;font-style:normal;font-weight:800;font-size:9px;color:#8A6A3A;background:#FBF0CF;border:1px solid #F0DFB0;border-radius:999px;padding:0 5px;line-height:1.5}
+.fj-hist .fwl-pill strong,.fwl-modal .fwl-pill strong{flex:0 0 auto;font-weight:900;font-size:10.5px;color:#2F7D4F;font-variant-numeric:tabular-nums}
 .fj-hist .fwl-more{display:block;padding:3px 2px 0;font-size:9px;font-weight:800;color:#9A7A3A;text-align:right}
 .fj-hist .fwl-more[hidden]{display:none}
 @media (max-width:380px){
@@ -2179,22 +2193,14 @@ body.drag-active,body.drag-active *{-webkit-user-select:none;user-select:none;-w
 .mjb-hero-txt b em{font-style:normal;font-size:16px;color:#8B5CF6}
 .mjb-hero-txt small{display:block;margin-top:2px;font-size:10px;font-weight:800;color:#8A7AA0}
 .mjb-hero-art{margin-left:auto;font-size:20px;letter-spacing:-2px;opacity:.9}
-.mjb-week{margin:0 0 10px;padding:9px 10px 10px;border-radius:17px;
-  background:linear-gradient(160deg,#FFF9EA,#FCF8FF 70%);border:1.5px solid #F2E4C4;box-shadow:0 10px 22px -26px rgba(140,110,40,.8)}
-.mjw-head{display:flex;align-items:center;gap:6px;margin:0 0 7px}
-.mjw-head b{font-size:11.5px;font-weight:900;color:#6A4E86}
-.mjw-head small{margin-left:auto;font-size:10px;font-weight:900;color:#7C6AA0}
-.mjw-list{display:flex;flex-direction:column;gap:4px}
-.mjw-pill{display:flex;align-items:center;gap:6px;width:100%;min-width:0;background:#fff;border:1px solid #EAE2F8;
-  border-radius:11px;padding:5px 9px;font-size:10px;font-weight:900;color:#4B3B7A;line-height:1.5;white-space:nowrap}
-.mjw-pill .mjw-ico{flex:0 0 auto;font-size:12px;line-height:1}
-.mjw-main{flex:1 1 auto;min-width:0;display:flex;align-items:baseline;gap:4px}
-.mjw-main b{flex:0 1 auto;min-width:0;max-width:56%;font-size:10px;font-weight:900;color:#4B3B7A;overflow:hidden;text-overflow:ellipsis}
-.mjw-main small{flex:1 1 0;min-width:0;font-size:9px;font-weight:700;color:#8A7AA8;overflow:hidden;text-overflow:ellipsis}
-.mjw-pill i{flex:0 0 auto;font-style:normal;font-size:9px;font-weight:800;color:#8A7AA8;background:#F1ECFB;border-radius:999px;padding:0 6px}
-.mjw-pill em{flex:0 0 auto;font-style:normal;font-size:10px;font-weight:900;color:#7C55E8;font-variant-numeric:tabular-nums}
-.mjw-empty{padding:8px 10px;border-radius:12px;background:#F6F3FF;border:1px dashed #DED3F8;
-  font-size:10.5px;font-weight:800;color:#8A7AA8;text-align:center}
+/* 「전체보기」 팝업 목록은 화면 높이의 절반까지 한 줄씩 (#12889) */
+.fwl-modal{max-height:52vh}
+.fwl-list.fwl-modal{display:flex;flex-direction:column;gap:4px}
+.fwl-empty{font-size:11.5px;font-weight:800;color:#8A7AA8;text-align:center;padding:10px 4px}
+/* 📅 미니알바 목록 카드 — 제목 + 6개 분류 + 100원 미니알바 (#12925) */
+.mjl-head{display:flex;align-items:center;gap:6px;margin:0 1px 8px}
+.mjl-head b{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:900;color:#6A4E86;letter-spacing:-.02em}
+.mjl-head b span{font-size:14px}
 .mjb-cats{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:4px;margin-bottom:9px}
 .mjc-btn{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 1px;border-radius:11px;
   border:1.5px solid #E7E2F4;background:#fff;color:#5B4A86;font:inherit;cursor:pointer}
@@ -2202,7 +2208,9 @@ body.drag-active,body.drag-active *{-webkit-user-select:none;user-select:none;-w
 .mjc-btn b{font-size:9px;font-weight:900;letter-spacing:-.03em}
 .mjc-btn.on{background:linear-gradient(160deg,#B49BF7,#8B5CF6);border-color:#8B5CF6;color:#fff;
   box-shadow:0 6px 12px -10px rgba(139,92,246,.95)}
-.vac-count{display:block;margin-top:2px;font-style:normal;font-size:9px;font-weight:900;color:#8A7AA8}
+/* 이번 주 N회 완료 배지 — +100원 자리에 들어간다 (#12925) */
+.vac-week{flex:0 0 auto;font-style:normal;font-size:9.5px;font-weight:900;color:#0E7C43;background:#E7F7EE;
+  border:1px solid #C1E8D3;border-radius:999px;padding:1px 7px;line-height:1.5;white-space:nowrap}
 .vac-stamp-btn{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;
   width:44px;height:44px;border-radius:50%;border:1.5px solid #E4DCF6;background:#fff;color:#B9AEDA;
   font:inherit;cursor:pointer;line-height:1}
@@ -2245,7 +2253,7 @@ body.drag-active,body.drag-active *{-webkit-user-select:none;user-select:none;-w
 .vac-card .vac-main small{display:block;font-size:9.5px;font-weight:700;color:var(--muted);line-height:1.25;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .vac-card .vac-amt{flex:0 0 auto;font-size:10.5px;font-weight:900;color:#0E7C43;font-variant-numeric:tabular-nums}
-.vac-card.done{background:#E9F8EF;border-color:#C8ECDA}
+.vac-card.done{background:#F4FBF7;border-color:#D9F0E3}
 .vac-card.locked{opacity:.62}
 /* 🪙 찍힌 미니알바 도장 — 보라 동그라미 (#v34) */
 .vac-card .vac-stamp{flex:0 0 auto;width:23px;height:23px;border-radius:50%;display:grid;place-items:center;
@@ -3051,6 +3059,8 @@ body.auth-locked .topbar,body.auth-locked .wrap{display:none !important}
 
 .tab-panels{display:block}
 .tab-panel{display:flex;flex-direction:column;gap:14px}
+/* 🤝 FAMILY — 고정 하단 탭 바가 마지막 미니알바 카드를 가리지 않게 (#12889) */
+[data-tab-panel="family"]{padding-bottom:calc(18px + env(safe-area-inset-bottom))}
 .tab-panel[hidden]{display:none !important}
 
 /* 💎 REWARD 작은 버튼은 이제 섹션 머리글 오른쪽에 붙는다 (#5470) */
@@ -4173,7 +4183,7 @@ body.mode-kid .home-more{display:none}
 #famCalGrid button.cal-cell:active{transform:none;background:transparent}
 #famCalGrid button.cal-cell:hover{background:rgba(120,150,190,.05)}
 #famCalGrid .cal-head-line{display:flex;align-items:baseline;gap:3px;min-width:0;width:100%;line-height:1.1}
-#famCalGrid .cal-cell .cal-date{font-size:13px;font-weight:800;line-height:1.05;letter-spacing:-.02em;color:#1F2A37;
+#famCalGrid .cal-cell .cal-date{font-size:13.5px;font-weight:800;line-height:1.05;letter-spacing:-.02em;color:#1F2A37;
   min-width:0;padding:0;flex:0 0 auto}
 #famCalGrid .cal-cell.sun .cal-date{color:#E55353}
 #famCalGrid .cal-cell.sat .cal-date{color:#3B82F6}
@@ -4193,7 +4203,7 @@ body.mode-kid .home-more{display:none}
 #famCalGrid .cal-cell.bg-winter.today{background:#F7EBBF}
 #famCalGrid .cal-cell.bg-spring.today{background:#F9DCE8}
 #famCalGrid .cal-cell.bg-summer.today{background:#DBEEFB}
-#famCalGrid .cal-hol{font-size:8px;font-weight:900;color:#E55353;line-height:1.05;min-width:0;flex:0 1 auto;
+#famCalGrid .cal-hol{font-size:9px;font-weight:900;color:#E55353;line-height:1.05;min-width:0;flex:0 1 auto;
   overflow:hidden;text-overflow:clip;white-space:nowrap}
 #famCalGrid .cal-dots{display:flex;gap:2px;align-items:center;justify-content:center;flex-wrap:nowrap;
   margin-top:auto;padding-top:2px;min-height:7px;width:100%;overflow:hidden}
@@ -4205,7 +4215,7 @@ body.mode-kid .home-more{display:none}
   box-shadow:none;pointer-events:none;z-index:2;min-width:0;overflow:hidden}
 #famCalGrid .cal-band.cont-l{border-top-left-radius:0;border-bottom-left-radius:0;margin-left:0}
 #famCalGrid .cal-band.cont-r{border-top-right-radius:0;border-bottom-right-radius:0;margin-right:0}
-#famCalGrid .cal-band .cal-band-txt{font-size:8px;font-weight:900;letter-spacing:-.04em;white-space:nowrap;
+#famCalGrid .cal-band .cal-band-txt{font-size:8.5px;font-weight:900;letter-spacing:-.04em;white-space:nowrap;
   overflow:hidden;text-overflow:clip}
 /* 단일 형광펜 — ( ) 강조는 그대로 */
 #famCalGrid .cal-band.paren{background:var(--cat-soft);border-radius:999px;
@@ -4213,29 +4223,33 @@ body.mode-kid .home-more{display:none}
 /* 생일 · 기념일 — 부드러운 파스텔 알약 */
 #famCalGrid .cal-band.bday{background:var(--ann-soft,#FDEEF3);color:var(--ann,#D9537E);border-radius:999px;
   box-shadow:none;font-weight:900}
-#famCalGrid .cal-band.bday .cal-band-txt{font-size:8px;letter-spacing:-.04em}
-#famCalGrid .cal-band.one .cal-band-txt{font-size:8px}
+#famCalGrid .cal-band.bday .cal-band-txt{font-size:8.5px;letter-spacing:-.04em}
+#famCalGrid .cal-band.one .cal-band-txt{font-size:8px;letter-spacing:-.05em}
+/* 주 경계 1칸 조각 — 나뉜 낱말 하나가 한 줄에 쏙 들어간다 (#v37 · #12856) */
+#famCalGrid .cal-band.one{padding:0 2px}
 /* 🎂 생일·기념일 · 🏫 단일 행사 — 칸 가운데 2줄 알약 (#v36) */
 #famCalGrid .cal-chips{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;width:100%;min-width:0;
   flex:1 1 auto;margin-top:calc(var(--used-lanes,0) * var(--cal-lane));z-index:3;pointer-events:none}
 #famCalGrid .cal-chip{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;
-  width:auto;max-width:100%;min-width:0;padding:1px 3px 2px;border-radius:8px;
-  background:var(--cat-soft,#FDEDF3);color:var(--cat,#D9537E);overflow:hidden;text-align:center}
-#famCalGrid .cal-chip i{font-style:normal;font-size:9px;line-height:1.05}
-#famCalGrid .cal-chip b{max-width:100%;font-size:7.5px;font-weight:900;line-height:1.12;letter-spacing:-.045em;
+  width:calc(100% - 4px);max-width:calc(100% - 4px);min-width:0;padding:2px 2px 3px;border-radius:6px;
+  background:var(--cat-fill,var(--cat-soft,#FDEDF3));color:var(--cat,#D9537E);overflow:hidden;text-align:center;
+  /* 양쪽 끝 괄호 테두리 — 홈 「오늘의 일정」 강조 카드처럼 (#13066) */
+  border-left:2.5px solid var(--cat,#D9537E);border-right:2.5px solid var(--cat,#D9537E)}
+#famCalGrid .cal-chip i{font-style:normal;font-size:10px;line-height:1.05}
+#famCalGrid .cal-chip b{max-width:100%;font-size:8.5px;font-weight:900;line-height:1.12;letter-spacing:-.04em;
   word-break:keep-all;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 #famCalGrid .cal-chip-more{font-style:normal;font-size:7px;font-weight:900;color:#7A8CA3;line-height:1}
 @media (max-width:430px){
   #famCalGrid{--cal-line:12px;--cal-dateh:19px;--cal-lane:10px}
   #famCalGrid .cal-cell{padding:2px 3px 3px}
-  #famCalGrid .cal-cell .cal-date{font-size:12.5px}
-  #famCalGrid .cal-hol{font-size:6.5px}
+  #famCalGrid .cal-cell .cal-date{font-size:13px}
+  #famCalGrid .cal-hol{font-size:7.5px}
   #famCalGrid .cal-band{height:9px;padding:0 2px;margin:0}
-  #famCalGrid .cal-band .cal-band-txt{font-size:7.5px;letter-spacing:-.05em}
-  #famCalGrid .cal-band.bday .cal-band-txt{font-size:7.5px}
-  #famCalGrid .cal-chip{padding:1px 2px 1px;border-radius:7px}
-  #famCalGrid .cal-chip i{font-size:8.5px}
-  #famCalGrid .cal-chip b{font-size:7px}
+  #famCalGrid .cal-band .cal-band-txt{font-size:8px;letter-spacing:-.05em}
+  #famCalGrid .cal-band.bday .cal-band-txt{font-size:8px}
+  #famCalGrid .cal-chip{padding:2px 1px 2px;border-radius:6px;border-left-width:2px;border-right-width:2px}
+  #famCalGrid .cal-chip i{font-size:9.5px}
+  #famCalGrid .cal-chip b{font-size:8px}
 }
 </style>
 </head>
@@ -4589,11 +4603,10 @@ body.mode-kid .home-more{display:none}
         </div>
         <button type="button" class="cal-today-btn" data-action="cal-today">오늘</button>
       </div>
-      <!-- 이번 달 가족 일정 개수 · ➕ 추가 · 🎂 기념일 관리 (#v35) -->
+      <!-- 이번 달 가족 일정 개수 · 🎂 기념일 관리 (#v37 — 가족 일정 추가는 달력 아래 상세 폼으로) -->
       <div class="cal-tools-row">
         <p class="sub cal-sub" id="famCalSub">이번 달 가족 일정 0개</p>
         <div class="cal-tools">
-          <button type="button" class="cal-tool-btn add" data-action="open-family-event-modal" data-parent-only="1"><span aria-hidden="true">➕</span> 가족 일정 추가</button>
           <button type="button" class="cal-tool-btn" data-action="open-ann-manager"><span aria-hidden="true">🎂</span> 기념일 관리</button>
         </div>
       </div>
@@ -4602,28 +4615,20 @@ body.mode-kid .home-more{display:none}
       </div>
       <div class="cal-grid" id="famCalGrid" role="group" aria-label="가족 일정 달력"></div>
       <div class="cal-day" id="famCalDay"></div>
-      <div class="fam-form" id="famCalForm" data-parent-only="1" hidden>
+      <!-- ✏️ 달력 바로 아래 — 「일정 고치기」와 똑같은 상세 폼을 접지 않고 펼쳐 둔다 (#v37 · IMG_9908) -->
+      <div class="fam-form ev-edit-form" id="famCalForm" data-parent-only="1" hidden>
         <div class="fam-form-head">➕ 가족 일정 추가 <small>부모님 화면에서만 넣을 수 있어요</small></div>
+        <div id="famEvIconPick"></div>
+        <label class="set-field">일정 이름<input type="text" id="famEvTitle" maxlength="30" placeholder="예: 현장학습" aria-label="일정 이름"></label>
         <div class="fam-form-row fam-date-row">
-          <label class="fam-field">시작일<input type="date" id="famEvDate" aria-label="일정 시작일"></label>
-          <label class="fam-field">종료일<input type="date" id="famEvEnd" aria-label="일정 종료일 (선택 · 비우면 하루)"></label>
+          <label class="set-field">시작일<input type="date" id="famEvDate" aria-label="일정 시작일"></label>
+          <label class="set-field">종료일<input type="date" id="famEvEnd" aria-label="일정 종료일 (선택 · 비우면 하루)"></label>
         </div>
-        <!-- ⏰ 시간 옆에 표시 방식을 나란히 (#v32) -->
-        <div class="fam-form-row fam-time-row">
-          <label class="fam-field">시간<input type="time" id="famEvTime" aria-label="일정 시간 (선택)"></label>
-          <label class="fam-field">표시 방식<select id="famEvDisp" aria-label="달력 표시 방식">
-            <option value="auto">자동</option>
-            <option value="bar">형광펜 바</option>
-            <option value="dot">점</option>
-            <option value="summer">방학 · 여름</option>
-            <option value="winter">방학 · 겨울</option>
-            <option value="spring">방학 · 봄</option>
-          </select></label>
-        </div>
-        <div class="fam-form-row fam-who-row">
-          <span class="fam-field-label">누구 일정인가요?</span>
-          <div class="fam-pills" id="famEvPills" role="group" aria-label="일정 대상 골라기"></div>
-          <div class="fam-selects-hidden" aria-hidden="true">
+        <label class="set-field">시간<input type="time" id="famEvTime" aria-label="일정 시간 (선택)"></label>
+        <label class="set-field">표시 방식<select id="famEvDisp" aria-label="달력 표시 방식"></select></label>
+        <span class="fam-field-label">누구 일정인가요?</span>
+        <div class="fam-pills" id="famEvPills" role="group" aria-label="일정 대상 골라기"></div>
+        <div class="fam-selects-hidden" aria-hidden="true">
             <select id="famEvWho" aria-label="일정 대상" tabindex="-1">
               <option value="all">🏠 가족</option>
               <option value="seonwoo">선우</option>
@@ -4639,15 +4644,8 @@ body.mode-kid .home-more{display:none}
               <option value="dad">아빠</option>
             </select>
           </div>
-        </div>
-        <div class="fam-form-row" id="famEvIconRow">
-          <div id="famEvIconPick"></div>
-        </div>
-        <div class="fam-form-row">
-          <input id="famEvTitle" type="text" maxlength="30" placeholder="일정 이름 (예: 현장학습)" aria-label="일정 이름">
-          <input id="famEvNote" type="text" maxlength="60" placeholder="메모 (선택)" aria-label="일정 메모">
-        </div>
-        <button type="button" class="btn btn-primary btn-sm" data-action="add-family-event">일정 추가</button>
+        <label class="set-field">메모<input type="text" id="famEvNote" maxlength="60" placeholder="메모 (선택)" aria-label="일정 메모"></label>
+        <button type="button" class="btn btn-primary" data-action="add-family-event">추가</button>
       </div>
     </section>
     </section>
@@ -4842,6 +4840,12 @@ body.mode-kid .home-more{display:none}
       </div>
     </div>
 
+    <!-- 🌤️ 숙제 없는 날 · ＋ 공부 항목 추가 — 타이머·REWARD 줄 바로 아래 한 줄 (#13107 · #13116 · #13121) -->
+    <div class="study-quick-tools" id="studyQuickTools" data-parent-only="1">
+      <button type="button" class="nohw-toggle" id="studyNoHwBtn" data-action="toggle-no-homework" data-parent-only="1" aria-pressed="false">🌤️ 오늘은 숙제 없는 날</button>
+      <button type="button" class="btn btn-ghost btn-sm" data-action="add-study" data-cat="school" data-parent-only="1" id="studyAddBtn">＋ 공부 항목 추가</button>
+    </div>
+
     <!-- 🏫 학교 시간표 (#v25) — 「🏫 학교 시간표」 버튼은 SCHEDULE 탭으로 옮겼어요 -->
 
     <div class="study-grid">
@@ -4884,10 +4888,6 @@ body.mode-kid .home-more{display:none}
 
         <div class="mission-foot">
           <span class="hint" id="missionHint">매일 공부를 모두 하면 오늘 500원이 쌓여요 🪙</span>
-          <div class="mf-tools">
-            <button type="button" class="nohw-toggle" id="studyNoHwBtn" data-action="toggle-no-homework" data-parent-only="1" aria-pressed="false">🌤️ 오늘은 숙제 없는 날</button>
-            <button type="button" class="btn btn-ghost btn-sm" data-action="add-study" data-cat="school" data-parent-only="1" id="studyAddBtn">＋ 공부 항목 추가</button>
-          </div>
         </div>
       </section>
 
@@ -4915,7 +4915,7 @@ body.mode-kid .home-more{display:none}
           <button type="button" class="hs-kind big" id="hundredKindTest" data-action="hundred-kind" data-kind="단원평가 100점" aria-pressed="false">
             <span class="hs-ico" aria-hidden="true">🏫</span>
             <b>단원평가 100점</b>
-            <small class="hs-cap" data-cap="test">하루 1건 가능</small>
+            <small class="hs-cap" data-cap="test">과목별 하루 1건 가능</small>
           </button>
         </div>
         <!-- 📖 단원평가일 때만 — 과목 고르기 -->
@@ -5004,19 +5004,25 @@ body.mode-kid .home-more{display:none}
             <div class="fj-track"><i id="familyCapBar"></i><span class="fj-bubble" id="familyBubble">이번 주 0원 달성!</span></div>
             <b class="fj-cap" id="familyMaxCap">3,000원</b>
           </div>
-          <div class="fj-hist" id="familyWeekLog" hidden><div class="fwl-list" id="familyWeekLogList"></div></div>
+          <div class="fj-hist" id="familyWeekLog" hidden>
+            <div class="fwl-head">
+              <b><span aria-hidden="true">🕐</span> 최근 내역</b>
+              <button type="button" class="fwl-all" data-action="open-family-week-log" aria-haspopup="dialog" aria-label="이번 주 가족 미션 내역 전체보기">전체보기 <span aria-hidden="true">›</span></button>
+            </div>
+            <div class="fwl-list" id="familyWeekLogList"></div>
+          </div>
           <div class="fam-cap-note" id="familyCapNote" hidden></div>
         </div>
         <div class="fam-pick-bar" id="familyPickBar">
           <span class="fpb-title">참여 방식 선택</span>
           <div class="fpb-grid" id="familyPickGrid" role="group" aria-label="참여 방식 선택"></div>
-          <span class="hint fam-pick-hint" id="familyTeamHint">👫 함께 · 🙋 스스로 · 🪙 미니알바 중에서 골라요</span>
+          <span class="hint fam-pick-hint" id="familyTeamHint"><span aria-hidden="true">ⓘ</span> 같은 미션은 주 1회만 적립돼요.</span>
         </div>
         <div class="chore-grid" id="familyList"></div>
 
-        <!-- 🪙 100원 미니알바 — 6개 분류 · 상시 활동 (#v35 · 시안 B00F4DD4) -->
+        <!-- 📅 미니알바 목록 — 6개 분류 · 100원 미니알바 (#12925) -->
         <div class="vac-box" id="vacationMiniJobsBox" hidden>
-          <div class="mjb-week" id="miniWeekDone"></div>
+          <div class="mjl-head"><b><span aria-hidden="true">📅</span> 미니알바 목록</b></div>
           <div class="mjb-cats" id="miniCatChips" role="group" aria-label="미니알바 분류"></div>
           <div class="vac-head">
             <b>🪙 100원 미니알바</b>
@@ -5423,18 +5429,28 @@ function familyWeekLog(kidKey, wk){
       var team = familyTeamKeyOf(d, id);
       /* 같은 미션이라도 함께 1번 · 스스로 1번은 각각 남는다 (#v35) */
       if(out.some(function(x){ return x.id === id && x.team === team; })) return;
-      var it = findSelfItem(kidKey, id);
-      if(!it) return;
-      out.push({ id:id, label:it.label, icon:it.icon, day:k, team:team, amt:Number(d.self[id]) || 0 });
+      var info = familyMissionInfo(kidKey, k, id);
+      if(!info) return;
+      out.push({ id:id, label:info.label, icon:info.icon, day:k, team:info.team, amt:info.amount });
     });
-    /* 🪙 미니알바 — 이번 주에 한 것도 함께 보여 준다 (#v27 · 상시 #v35) */
+    /* 🪙 미니알바 — 이번 주에 한 것도 날짜별로 함께 보여 준다 (#v27 · 상시 #v35 · #12947) */
     Object.keys(d.vac || {}).forEach(function(vid){
-      if(out.some(function(x){ return x.id === vid && x.vac; })) return;
-      var job = vacationJobOf(vid);
-      out.push({ id:vid, label:job ? job.label : '미니알바', icon: job ? job.icon : '🪙', day:k, team:'all', vac:true, amt:Number(d.vac[vid]) || 0 });
+      var info = miniJobInfo(kidKey, k, vid);
+      if(!info) return;
+      out.push({ id:vid, label:info.label, icon: info.icon, day:k, team:'all', vac:true, amt:info.amount });
     });
   });
   return out;
+}
+/* 🕐 이번 주 가족 미션 한 줄 — 카드 안 목록과 「전체보기」 팝업이 같이 쓴다 (#12889) */
+function familyWeekLogPillHtml(x){
+  var md = Number(x.day.slice(5, 7)) + '/' + Number(x.day.slice(8));
+  var tdef = familyTeamDef(x.team);
+  return '<span class="fwl-pill" data-fwl-id="' + esc(x.id) + '" data-fwl-team="' + x.team + '">' +
+    '<i>' + md + '</i>' +
+    '<b>' + esc(x.icon || '🤝') + ' ' + esc(x.label) + '</b>' +
+    (x.vac ? '<em>미니알바</em>' : '<em>' + esc(tdef.label) + '</em>') +
+    '<strong>+' + fmt(x.amt) + '</strong></span>';
 }
 /* =========================================================
    🌴 방학 미니알바 (#v27)
@@ -5627,6 +5643,7 @@ function toggleVacationJob(id, undo){
     if(n <= 0){
       delete d.vac[id];
       delete d.vacN[id];
+      if(d.vacMeta) delete d.vacMeta[id];
     }else{
       d.vacN[id] = n;
       d.vac[id] = Math.max(0, (Number(d.vac[id]) || 0) - amt);
@@ -5644,6 +5661,9 @@ function toggleVacationJob(id, undo){
   }
   d.vacN[id] = n + 1;
   d.vac[id] = (Number(d.vac[id]) || 0) + amt;
+  /* 🧾 그날 완료한 이름·이모지·금액을 남긴다 — 나중에 지우거나 고쳐도 내역은 그대로 (#12947 · #12958) */
+  d.vacMeta = d.vacMeta || {};
+  d.vacMeta[id] = { label: String(job.label || '미니알바'), icon: String(job.icon || ''), amount: Number(d.vac[id]) || 0 };
   saveState();
   renderAll();
   chime('pay');
@@ -5699,24 +5719,7 @@ function renderVacationMiniJobs(){
     badge.textContent = miniJobBadgeLabel(kidKey, dayKey());
     badge.className = 'vac-badge on';
   }
-  /* ① 이번 주 한 일 — 빈 칸 없이 도장 찍은 것만 쌓인다 */
-  var weekDone = $('#miniWeekDone');
-  if(weekDone){
-    var log = miniWeekLog(kidKey);
-    var weekAmt = 0;
-    log.forEach(function(x){ weekAmt += x.amount; });
-    weekDone.innerHTML = log.length
-      ? '<div class="mjw-head"><b><span aria-hidden="true">📅</span> 이번 주 한 일</b><small>' + fmt(weekAmt) + ' 모았어요</small></div>' +
-        '<div class="mjw-list">' + log.map(function(x){
-          var j = vacationJobOf(x.id) || { icon: '🪙', label: x.id };
-          return '<span class="mjw-pill" data-mjw-id="' + esc(x.id) + '">' +
-            '<span class="mjw-ico" aria-hidden="true">' + esc(j.icon || '🪙') + '</span>' +
-            '<span class="mjw-main"><b>' + esc(j.label) + '</b>' +
-              (j.desc ? '<small>(' + esc(j.desc) + ')</small>' : '') + '</span>' +
-            '<em>+' + fmt(x.amount) + '</em><i>' + x.count + '회</i></span>';
-        }).join('') + '</div>'
-      : '<div class="mjw-empty">🌟 아직 이번 주에 한 일이 없어요 — 아래에서 도장을 찍어 보세요!</div>';
-  }
+  /* ① 이번 주 한 일 박스는 없앴다 — 위쪽 「최근 내역」이 미니알바까지 같이 보여 준다 (#12925) */
   /* ② 6개 분류 */
   var chips = $('#miniCatChips');
   if(chips){
@@ -5741,16 +5744,17 @@ function renderVacationMiniJobs(){
     var nToday = vacCountOn(kidKey, dayKey(), j.id);
     var nWeek = 0, amtWeek = 0;
     miniWeekLog(kidKey).forEach(function(x){ if(x.id === j.id){ nWeek = x.count; amtWeek = x.amount; } });
-    var done = nToday > 0;
+    var done = nWeek > 0;
+    /* 오른쪽 — 이번 주 0회는 「+100원 · 빈 도장」, 1회 이상은 「이번 주 N회 · 찍힌 도장」 (#12925) */
     return '<div class="vac-card' + (done ? ' done' : '') + '" data-id="' + esc(j.id) + '" data-cat="' + esc(j.cat) + '">' +
       '<span class="vac-ico" aria-hidden="true">' + esc(j.icon || '🌴') + '</span>' +
-      '<span class="vac-main"><b>' + esc(j.label) + '</b><small>' + esc(j.desc || '') + '</small>' +
-        (nWeek ? '<em class="vac-count">이번 주 ' + nWeek + '번 · 오늘 ' + nToday + '번</em>' : '') +
-      '</span>' +
-      '<span class="vac-amt">+' + fmt(Number(j.amount) || 100) + '</span>' +
+      '<span class="vac-main"><b>' + esc(j.label) + '</b><small>' + esc(j.desc || '') + '</small></span>' +
+      (done
+        ? '<em class="vac-week">이번 주 ' + nWeek + '회</em>'
+        : '<span class="vac-amt">+' + fmt(Number(j.amount) || 100) + '</span>') +
       '<button type="button" class="vac-stamp-btn' + (done ? ' on' : '') + '" data-action="toggle-vac" data-id="' + esc(j.id) + '"' +
-        ' aria-pressed="' + (done ? 'true' : 'false') + '" aria-label="' + esc(j.label) + ' 도장 찍기">' +
-        '<span aria-hidden="true">' + (done ? '★' : '☆') + '</span><small>' + (done ? '완료!' : '도장') + '</small></button>' +
+        ' aria-pressed="' + (done ? 'true' : 'false') + '" aria-label="' + esc(j.label) + ' 도장 찍기 (한 번 누르면 적립 · 두 번 빠르게 누르면 취소)">' +
+        '<span aria-hidden="true">' + (done ? '★' : '☆') + '</span><small>' + (done ? '완료' : '도장') + '</small></button>' +
       '<span class="vac-tools" data-parent-only="1">' +
         '<button type="button" data-action="vac-edit" data-id="' + esc(j.id) + '" aria-label="' + esc(j.label) + ' 수정">✏️</button>' +
         '<button type="button" data-action="vac-del" data-id="' + esc(j.id) + '" aria-label="' + esc(j.label) + ' 삭제">✕</button>' +
@@ -9857,6 +9861,37 @@ function normalize(raw){
             done: !!(d.extra && d.extra.done)
           }
         };
+        /* 🧾 완료 당시 이름·이모지·금액 스냅샷도 정리할 때 그대로 살린다 (#12947 · #12958) */
+        if(d.selfMeta && typeof d.selfMeta === 'object'){
+          var smeta = {};
+          Object.keys(d.selfMeta).forEach(function(id){
+            var mt = d.selfMeta[id];
+            if(!mt || typeof mt !== 'object' || mt.cat !== 'family') return;
+            var nidm = selfIdNow(id);
+            smeta[nidm] = {
+              label: String(mt.label || '가족 미션').slice(0, 30),
+              icon: String(mt.icon || '').slice(0, 4),
+              cat: 'family',
+              amount: num(mt.amount, 0, 0, 5000),
+              team: (mt.team === 'solo' || mt.team === 'all' || mt.team === 'mom' || mt.team === 'dad') ? mt.team : 'all'
+            };
+          });
+          if(Object.keys(smeta).length) days[k].selfMeta = smeta;
+        }
+        if(d.vacMeta && typeof d.vacMeta === 'object'){
+          var vmeta = {};
+          Object.keys(d.vacMeta).forEach(function(vk){
+            var mt2 = d.vacMeta[vk];
+            if(!mt2 || typeof mt2 !== 'object') return;
+            if(!/^[\w:-]{1,24}$/.test(vk)) return;
+            vmeta[vk] = {
+              label: String(mt2.label || '미니알바').slice(0, 30),
+              icon: String(mt2.icon || '').slice(0, 4),
+              amount: num(mt2.amount, 0, 0, 5000)
+            };
+          });
+          if(Object.keys(vmeta).length) days[k].vacMeta = vmeta;
+        }
         if(typeof d.basicClear === 'boolean') days[k].basicClear = d.basicClear;
         if(d.vac && typeof d.vac === 'object'){
           var rvac = {};
@@ -10710,6 +10745,43 @@ function findSelfItem(kidKey, id){
   (state.kids[kidKey].self || []).forEach(function(it){ if(it.id === id) found = it; });
   return found;
 }
+/* =========================================================
+   🧾 지운·고친 항목의 지난 기록 — 완료 당시 스냅샷 (#12947 · #12958)
+   · 도장을 찍을 때 d.selfMeta / d.vacMeta 에 이름·이모지·금액을 남긴다
+   · 나중에 목록에서 지우거나 이름·금액을 고쳐도 그날 내역은 그대로 보인다
+   ========================================================= */
+function selfMetaOf(d, id){ return (d && d.selfMeta && d.selfMeta[id]) ? d.selfMeta[id] : null; }
+function vacMetaOf(d, id){ return (d && d.vacMeta && d.vacMeta[id]) ? d.vacMeta[id] : null; }
+/* 가족 미션 하나의 표시 정보 — 그날 스냅샷 → 지금 목록 순서로 읽는다 */
+function familyMissionInfo(kidKey, dayKeyStr, id){
+  var d = peekDay(kidKey, dayKeyStr);
+  var it = findSelfItem(kidKey, id);
+  var meta = selfMetaOf(d, id);
+  if(!it && !meta) return null;
+  return {
+    id: id,
+    label: (meta && meta.label) || (it && it.label) || '가족 미션',
+    icon: (meta && meta.icon) || (it && it.icon) || '🤝',
+    cat: (meta && meta.cat) || (it && (it.cat || 'space')) || 'family',
+    amount: Number(d.self[id]) || 0,
+    team: familyTeamKeyOf(d, id) || (meta && meta.team) || 'all',
+    gone: !it
+  };
+}
+/* 100원 미니알바 하나의 표시 정보 — 그날 스냅샷 → 지금 목록 순서 */
+function miniJobInfo(kidKey, dayKeyStr, id){
+  var d = peekDay(kidKey, dayKeyStr);
+  var job = vacationJobOf(id);
+  var meta = vacMetaOf(d, id);
+  if(!job && !meta) return null;
+  return {
+    id: id,
+    label: (meta && meta.label) || (job && job.label) || '미니알바',
+    icon: (meta && meta.icon) || (job && job.icon) || '🪙',
+    amount: Number(d.vac[id]) || 0,
+    gone: !job
+  };
+}
 /* 하루에 스스로 체크한 항목 수 (내 공간·함께 하는 일 모두 · 화면 요일 칸과 같은 기준) */
 function selfCheckCountOn(kidKey, key){
   var d = peekDay(kidKey, key);
@@ -11001,9 +11073,15 @@ function familyCheckedOn(kidKey, key){
 }
 function familyMissionsOn(kidKey, key){
   var d = peekDay(kidKey, key);
-  var out = [];
+  var out = [], seen = {};
   (state.kids[kidKey].self || []).forEach(function(it){
-    if((it.cat || 'space') === 'family' && d.self[it.id] !== undefined) out.push(it.id);
+    if((it.cat || 'space') === 'family' && d.self[it.id] !== undefined){ out.push(it.id); seen[it.id] = true; }
+  });
+  /* 목록에서 지운 미션도 그날 찍힌 기록이 있으면 그대로 남긴다 (#12947) */
+  Object.keys(d.self || {}).forEach(function(id){
+    if(seen[id]) return;
+    var meta = selfMetaOf(d, id);
+    if(meta && meta.cat === 'family') out.push(id);
   });
   return out;
 }
@@ -11036,6 +11114,22 @@ function familyWeekEarned(kidKey, wk){
       var amt = Number(d.self[it.id]) || 0;
       raw += amt;
       missionRaw += amt;
+      count++; missionCount++;
+    });
+    /* 목록에서 지운 미션도 그 주에 쌓은 금액은 그대로 (#12947) */
+    Object.keys(d.self || {}).forEach(function(id){
+      var it = findSelfItem(kidKey, id);
+      if(it && (it.cat || 'space') === 'family') return;   /* 위에서 이미 셈 */
+      var meta = selfMetaOf(d, id);
+      if(!meta || meta.cat !== 'family') return;
+      var team2 = familyTeamKeyOf(d, id) || meta.team || 'all';
+      var key2 = id + '|' + team2;
+      if(seen[key2]) return;
+      seen[key2] = true;
+      if(ids.indexOf(id) < 0) ids.push(id);
+      var amt2 = Number(d.self[id]) || 0;
+      raw += amt2;
+      missionRaw += amt2;
       count++; missionCount++;
     });
     /* 🪙 미니알바도 같은 주 용돈에 함께 쌓인다 — 평일 포함 상시 (#v35) */
@@ -12392,25 +12486,13 @@ function renderMissions(){
     famNoteEl.hidden = !famMsg;
     famNoteEl.textContent = famMsg;
   }
-  /* 이번 주 실제 내역 — 날짜 · 미션 · 함께/스스로 · 금액을 한 줄씩 차곡차곡 (#v36) */
+  /* 이번 주 실제 내역 — 날짜 · 미션 · 함께/스스로 · 금액을 한 줄씩, 네 줄 높이로 스크롤 (#12889) */
   var famLogEl = $('#familyWeekLog');
   var famLogList = $('#familyWeekLogList');
   if(famLogEl && famLogList){
-    var famLog = familyWeekLog(kidKey);
-    var famShow = famLog.slice(-5).reverse();
+    var famLog = familyWeekLog(kidKey).slice().reverse();
     famLogEl.hidden = !famLog.length;
-    famLogList.innerHTML = famShow.map(function(x){
-      var md = Number(x.day.slice(5, 7)) + '/' + Number(x.day.slice(8));
-      var tdef = familyTeamDef(x.team);
-      var amtTxt = '+' + fmt(x.amt);
-      return '<span class="fwl-pill" data-fwl-id="' + x.id + '" data-fwl-team="' + x.team + '">' +
-        '<i>' + md + '</i>' +
-        '<b>' + esc(x.icon || '🤝') + ' ' + esc(x.label) + '</b>' +
-        (x.vac ? '<em>미니알바</em>' : '<em>' + esc(tdef.label) + '</em>') +
-        '<strong>' + amtTxt + '</strong></span>';
-    }).join('') + (famLog.length > famShow.length
-      ? '<span class="fwl-more" id="familyWeekLogMore">그 외 ' + (famLog.length - famShow.length) + '건 더 있어요</span>'
-      : '<span class="fwl-more" id="familyWeekLogMore" hidden></span>');
+    famLogList.innerHTML = famLog.map(familyWeekLogPillHtml).join('');
   }
 
   var hint = $('#missionHint');
@@ -12706,21 +12788,21 @@ function rwdWeekMoneyRows(kidKey, month, add){
     var seen = {};
     days.forEach(function(dk){
       var d = peekDay(kidKey, dk);
-      (k.self || []).forEach(function(it){
-        if((it.cat || 'space') !== 'family') return;
-        if(d.self[it.id] === undefined) return;
-        var first = !seen[it.id];
-        if(first) seen[it.id] = dk;
-        var team = familyTeamKeyOf(d, it.id);
+      familyMissionsOn(kidKey, dk).forEach(function(id){
+        var info = familyMissionInfo(kidKey, dk, id);
+        if(!info) return;
+        var first = !seen[id];
+        if(first) seen[id] = dk;
+        var team = info.team;
         var teamLabel = (team === 'solo') ? '스스로' : '함께';
-        add(dk, it.icon || '🤝', it.label,
+        add(dk, info.icon || '🤝', info.label,
           '가족 미션 · ' + teamLabel + (first ? '' : ' · 이번 주 이미 인정'),
-          first ? (Number(d.self[it.id]) || 0) : 0,
-          { type:'self', day:dk, id:it.id });
+          first ? info.amount : 0,
+          { type:'self', day:dk, id:id });
       });
       Object.keys(d.vac || {}).forEach(function(vid){
-        var job = vacationJobOf(vid);
-        add(dk, job ? job.icon : '🪙', job ? job.label : '미니알바', '100원 미니알바', Number(d.vac[vid]) || 0, { type:'vac', day:dk, id:vid });
+        var job = miniJobInfo(kidKey, dk, vid);
+        add(dk, job ? job.icon : '🪙', job ? job.label : '미니알바', '100원 미니알바', job ? job.amount : (Number(d.vac[vid]) || 0), { type:'vac', day:dk, id:vid });
       });
     });
   });
@@ -12762,12 +12844,12 @@ function rwdDetailRows(kind, kidKey){
   if(kind === 'today-earn'){
     if(basicDone(kidKey, studyKeyNow())) add(today, '📚', '매일 공부 완료', '오늘 공부 보상', REWARD_DAILY, { type:'study', day:studyKeyNow() });
     familyMissionsOn(kidKey, today).forEach(function(id){
-      var it = findSelfItem(kidKey, id);
-      if(it) add(today, it.icon || '🤝', it.label, '가족 미션 완료', Number(it.reward) || REWARD_FAMILY, { type:'self', day:today, id:id });
+      var info = familyMissionInfo(kidKey, today, id);
+      if(info) add(today, info.icon || '🤝', info.label, '가족 미션 완료', info.amount, { type:'self', day:today, id:id });
     });
     Object.keys(peekDay(kidKey, today).vac || {}).forEach(function(vid){
-      var job = vacationJobOf(vid);
-      add(today, job ? job.icon : '🪙', job ? job.label : '미니알바', '100원 미니알바', Number(peekDay(kidKey, today).vac[vid]) || 0, { type:'vac', day:today, id:vid });
+      var job = miniJobInfo(kidKey, today, vid);
+      add(today, job ? job.icon : '🪙', job ? job.label : '미니알바', '100원 미니알바', job ? job.amount : 0, { type:'vac', day:today, id:vid });
     });
     adjustmentsOf(kidKey).forEach(function(a){
       if((a.kind === 'stamp' ? 'stamp' : 'money') !== 'money' || a.date !== today) return;
@@ -13636,7 +13718,7 @@ function renderHundred(){
     kinds[i].setAttribute('aria-pressed', on ? 'true' : 'false');
     if(kinds[i].setAttribute) kinds[i].setAttribute('aria-disabled', used ? 'true' : 'false');
     var cap = kinds[i].querySelector('.hs-cap');
-    if(cap) cap.textContent = used ? '오늘 1건 사용함' : '하루 1건 가능';
+    if(cap) cap.textContent = used ? '오늘 1건 사용함' : ((kb === '단원평가 100점') ? '과목별 하루 1건 가능' : '하루 1건 가능');
   }
   var subjBox = $('#hundredSubject');
   var subjGrid = $('#hundredSubjectGrid');
@@ -13702,8 +13784,8 @@ function todayWonOf(kidKey){
   var key = studyKeyNow();   /* 금·토·일은 같은 금요일 묶음 */
   var sum = basicDone(kidKey, key) ? REWARD_DAILY : 0;
   familyMissionsOn(kidKey, dayKey()).forEach(function(id){
-    var it = findSelfItem(kidKey, id);
-    if(it) sum += Number(it.reward) || 0;
+    var info = familyMissionInfo(kidKey, dayKey(), id);
+    if(info) sum += info.amount;
   });
   return sum;
 }
@@ -14083,15 +14165,15 @@ function weekEarnRows(kidKey, wk){
       if(doneSoFar === STUDY_WEEK_GOALS && !streakDay) streakDay = dk;
     }
     familyMissionsOn(kidKey, dk).forEach(function(id){
-      var it = findSelfItem(kidKey, id);
-      if(!it) return;
-      var team = familyTeamDef(familyTeamKeyOf(d, id));
-      rows.push({ date:dk, icon:it.icon || '🤝', text:String(it.label || '가족 미션') + (team ? '(' + team.label + ')' : ''),
-        amount:Number(d.self[id]) || 0, cat:'family' });
+      var info = familyMissionInfo(kidKey, dk, id);
+      if(!info) return;
+      var team = familyTeamDef(info.team);
+      rows.push({ date:dk, icon:info.icon || '🤝', text:String(info.label || '가족 미션') + (team ? '(' + team.label + ')' : ''),
+        amount:info.amount, cat:'family' });
     });
     Object.keys(d.vac || {}).forEach(function(vid){
-      var job = vacationJobOf(vid);
-      rows.push({ date:dk, icon:(job && job.icon) || '🪙', text:((job && job.label) || '미니알바'), amount:Number(d.vac[vid]) || 0, cat:'family' });
+      var job = miniJobInfo(kidKey, dk, vid);
+      rows.push({ date:dk, icon:(job && job.icon) || '🪙', text:((job && job.label) || '미니알바'), amount:(job ? job.amount : 0), cat:'family' });
     });
   });
   if(streakDay) rows.push({ date:streakDay, icon:'🏅', text:'숙제 5회 성공 보너스', amount:REWARD_STREAK, cat:'study' });
@@ -14540,8 +14622,11 @@ function acViaHtml(e, isLast){
   if(!e || !e.via) return '';
   if(isLast && /집/.test(e.via)) return '';
   var ico = /주차/.test(e.via) ? '🅿️' : (/집/.test(e.via) ? '🏠' : '📍');
+  /* 자동으로 생긴 중간 경유지도 흰 점선 박스 + ✕로 지울 수 있다 (#12975) */
   return '<li class="ac-thin stop via">' + ico + ' <span>' + esc(e.via) + '</span>' +
-    (e.viaNote ? '<small>' + esc(e.viaNote) + '</small>' : '') + '</li>';
+    (e.viaNote ? '<small>' + esc(e.viaNote) + '</small>' : '') +
+    (isParentMode() ? '<button class="ac-del" data-action="del-ac-via" data-id="' + esc(e.id) + '" aria-label="' + esc(e.via) + ' 경유지 삭제">✕</button>' : '') +
+    '</li>';
 }
 /* 🗓 SCHEDULE 요일 바 (#v36) — 화면에서만 쓰는 값, 새로 열면 오늘로 돌아온다 */
 var AC_VIEW_DAY = new Date().getDay();
@@ -14654,18 +14739,17 @@ function renderAcademy(){
         return;   /* 방과후는 학교 줄로 이미 보인다 */
       }
       if(a.stop === 'parking' || a.stop === 'place'){
-        /* 🅿️·📍 도 학원처럼 장소 카드로 — ✕ 로 지우고 ✏️ 로 고친다 (#v35) */
+        /* 🅿️·📍 도 중간 정류장 — 흰 점선 박스 + ✕ (#12975 · #13019) */
         var gearIco = (a.stop === 'parking') ? '🅿️' : '📍';
         var gearSub = acStopText(a) || '';
         var gearTitle = String(a.name || '').replace(/^[🅿️📍\s]+/u, '') || (a.stop === 'parking' ? '주차장' : '장소');
         var gearName = gearSub || gearTitle;
-        html += '<li class="ac-item stop-card' + (isNext ? ' next' : '') + '" data-action="edit-academy" data-id="' + a.id + '" role="button" tabindex="0">' +
-          '<span class="ac-time">' + fmtRangePretty(a) + '</span>' +
-          '<span class="ac-main"><b>' + gearIco + ' ' + esc(gearTitle) + '</b>' +
-            '<small>' + (a.stop === 'parking' ? '🅿️ 주차장' : '📍 장소') + (gearSub ? ' · ' + esc(gearSub) : '') + (a.start || a.end ? ' · ' + esc(fmtRangePretty(a)) : '') + '</small>' +
-          '</span>' +
+        html += '<li class="ac-thin stop place-stop' + (isNext ? ' next' : '') + '" data-action="edit-academy" data-id="' + a.id + '" role="button" tabindex="0">' +
+          gearIco + ' <b>' + esc(gearTitle) + '</b>' +
+          (gearSub && gearSub !== gearTitle ? '<small>' + esc(gearSub) + '</small>' : '') +
+          ((a.start || a.end) ? '<small>' + esc(fmtRangePretty(a)) + '</small>' : '') +
           (isNext ? '<span class="ac-badge">다음</span>' : '') +
-          '<button class="ac-del" data-action="del-academy" data-id="' + a.id + '" data-parent-only="1" aria-label="' + esc(gearName) + ' 삭제">✕</button>' +
+          (isParentMode() ? '<button class="ac-del" data-action="del-academy" data-id="' + a.id + '" aria-label="' + esc(gearName) + ' 삭제">✕</button>' : '') +
         '</li>';
         return;   /* 장소 카드는 여기서 끝 — 아래 학원 카드로 또 그리지 않는다 (#v35) */
       }
@@ -15791,15 +15875,39 @@ function calBarParts(ev){
   }
   return { emo: emo, name: name, full: (emo ? emo + ' ' : '') + name };
 }
-/* 주 경계에서 1칸으로 끊긴 이어지는 일정 — 같은 제목을 앞뒤 조각에 두 번 적지 않고 나눠 잇는다 (#v28)
-   앞 조각(토) = 이모지 + 첫 어절 · 뒤 조각(일) = 나머지 어절 */
-function calBarJoinText(ev, isTail){
+/* 주 경계에서 끊긴 이어지는 일정 바 — 조각마다 제목 낱말을 나눠 1줄에 쏙 들어가게 (#v37 · #12856)
+   · 예: '🥬 외할머니댁 김장' 이 토·일 1칸씩이면 토='외할머니댁', 일='김장'
+   · 낱말이 조각 수보다 많으면 조각 너비 비율대로 앞에서부터 차례로 나눈다
+   · 낱말이 모자라면(한 낱말 제목) 모든 조각에 그 낱말을 그대로 보여 준다
+   · 1칸 조각에는 이모지를 붙이지 않는다 — 낱말이 한 줄에 다 들어가야 해서 */
+function calBandTexts(ev, pieces){
   var p = calBarParts(ev);
-  var words = String(p.name || '').trim().split(/\s+/).filter(function(w){ return w; });
-  var txt = p.name;
-  if(words.length > 1) txt = isTail ? words.slice(1).join(' ') : words[0];
-  if(isTail) return txt;
-  return (p.emo ? p.emo + ' ' : '') + txt;
+  var name = String(p.name || '').trim();
+  var words = name.split(/\s+/).filter(function(w){ return w; });
+  var n = pieces.length;
+  var widths = pieces.map(function(x){ return Math.max(1, (x.col1 - x.col0 + 1)); });
+  function withEmo(i, txt){
+    if(widths[i] === 1) return txt;
+    if(pieces[i].contL) return txt;
+    return ((p.emo ? p.emo + ' ' : '') + txt).trim();
+  }
+  if(n <= 1) return [String(p.full || name || '')];
+  if(!words.length) return pieces.map(function(){ return ''; });
+  if(words.length < n){
+    return pieces.map(function(x, i){ return withEmo(i, name); });
+  }
+  var total = widths.reduce(function(a, b){ return a + b; }, 0);
+  var out = [], at = 0;
+  for(var i = 0; i < n; i++){
+    var left = n - i;                /* 이 조각 포함 남은 조각 수 */
+    var rest = words.length - at;    /* 아직 나누지 않은 낱말 수 */
+    var take = (i === n - 1) ? rest : Math.round(widths[i] / total * words.length);
+    if(take > rest - (left - 1)) take = rest - (left - 1);
+    if(take < 1) take = 1;
+    out.push(withEmo(i, words.slice(at, at + take).join(' ')));
+    at += take;
+  }
+  return out;
 }
 function calEventIsBg(e){
   var d = calEventDisp(e);
@@ -15954,25 +16062,26 @@ function renderFamilyCalendar(){
     var sIdx = firstDow + Number(s0.slice(8, 10)) - 1;
     var eIdx = firstDow + Number(en.slice(8, 10)) - 1;
     var wFrom = Math.floor(sIdx / 7), wTo = Math.floor(eIdx / 7);
+    var pieces = [];
     for(var w = wFrom; w <= wTo; w++){
       var col0 = Math.max(sIdx, w * 7) - w * 7;
       var col1 = Math.min(eIdx, w * 7 + 6) - w * 7;
-      /* 1칸 폭으로 끊긴 조각(주 경계 포함)은 글자가 잘리지 않게 칸 안 두 줄 알약으로 (#v36) */
-      if(col0 === col1){
-        var pieceDay = w * 7 + col0 - firstDow + 1;
-        if(pieceDay >= 1 && pieceDay <= dim){
-          var pieceK = mk + '-' + pad2(pieceDay);
-          (cellChips[pieceK] = cellChips[pieceK] || []).push({ e: e, kind: 'day' });
-          continue;
-        }
-      }
-      weekItems[w].push({
-        kind: 'bar', e: e, text: String(e.title || ''),
-        col0: col0, col1: col1,
-        contL: sIdx < w * 7,
-        contR: eIdx > w * 7 + 6
+      pieces.push({
+        w: w, col0: col0, col1: col1,
+        contL: sIdx < w * 7 + col0,
+        contR: eIdx > w * 7 + col1
       });
     }
+    /* 주 경계(토→일)에서 1칸+1칸으로 끊긴 일정도 얇은 1줄 형광펜 바 그대로 (#v37)
+       조각마다 낱말을 나눠 넣어 글자가 잘리지 않고, 토는 오른쪽 · 일은 왼쪽 모서리가 직각 */
+    var pieceTexts = calBandTexts(e, pieces);
+    pieces.forEach(function(pc, pi){
+      weekItems[pc.w].push({
+        kind: 'bar', e: e, text: pieceTexts[pi], full: String(e.title || ''),
+        col0: pc.col0, col1: pc.col1,
+        contL: pc.contL, contR: pc.contR
+      });
+    });
   });
   /* 생일 · 기념일 · 단일 형광펜 — 칸 안 가운데 2줄 알약으로 (#v36)
      1줄 이모지 / 2줄 이름 · 칸 폭을 넘지 않고 두 줄까지 줄바꿈 */
@@ -16081,7 +16190,7 @@ function renderFamilyCalendar(){
           '<span class="cal-band-txt">' + esc(it.text) + '</span></span>';
       }
       cls += ' cal-c-' + it.e.category + (it.contL ? ' cont-l' : '') + (it.contR ? ' cont-r' : '') + (span === 1 ? ' one' : '');
-      return '<span class="' + cls + '" style="grid-column:' + (it.col0 + 1) + '/span ' + span + ';grid-row:' + row + '" title="' + esc(it.text) + '">' +
+      return '<span class="' + cls + '" style="grid-column:' + (it.col0 + 1) + '/span ' + span + ';grid-row:' + row + '" title="' + esc(it.full || it.text) + '">' +
         '<span class="cal-band-txt">' + esc(it.text) + '</span></span>';
     }).join('');
     outHtml.push('<div class="cal-week" data-rows="6">' + cellsHtml.join('') + bandHtml + '</div>');
@@ -16090,9 +16199,10 @@ function renderFamilyCalendar(){
 
   renderFamCalDay(sel);
 
-  /* ➕ 가족 일정 추가는 팝업으로 옮겼다 — 아래 인라인 폼은 숨겨만 둔다 (#v35) */
+  /* ➕ 가족 일정 추가 — 달력 바로 아래 상세 폼을 접지 않고 펼쳐 둔다 (#v37) */
   var form = $('#famCalForm');
-  if(form) form.hidden = true;
+  if(form) form.hidden = !isParentMode();
+  renderEvAddDisp();
   var dateEl = $('#famEvDate');
   if(dateEl && !dateEl.value) dateEl.value = sel;
 }
@@ -16267,7 +16377,7 @@ function evIconRowHtml(cur, act, inputId, hint){
   '</div>';
 }
 function paintEvIconRow(){
-  var box = document.querySelector('#modalRoot .ev-icon-row, #famEvIconRow');
+  var box = document.querySelector('#modalRoot .ev-icon-row, #famEvIconPick .ev-icon-row');
   if(!box) return;
   var cur = (EV_EDIT_ICON || EV_ADD_ICON || '');
   Array.prototype.forEach.call(box.querySelectorAll('.ev-icon-chip'), function(b){
@@ -16350,6 +16460,12 @@ function renderEvAddIconRow(){
   if(!box) return;
   box.innerHTML = evIconRowHtml(EV_ADD_ICON, 'pick-ev-icon', 'famEvEmojiFree');
 }
+/* 표시 방식 목록 — 추가 폼과 수정 모달이 같은 문구를 쓴다 (#v37) */
+function renderEvAddDisp(){
+  var el = $('#famEvDisp');
+  if(!el || el.options.length) return;
+  el.innerHTML = evDispOptionsHtml(el.value || 'auto');
+}
 function selectEvIcon(icon){
   var inModal = !!document.querySelector('#modalRoot.open');
   if(inModal){
@@ -16395,78 +16511,6 @@ function evDispOptionsHtml(cur){
 function evDispValue(el){
   var v = el ? String(el.value || '') : '';
   return (v === 'auto' || CAL_DISP_VALUES.indexOf(v) >= 0) ? v : 'auto';
-}
-/* ➕ 가족 일정 추가 — 달력 위 버튼으로 바로 여는 팝업 (#v35)
-   · 시작일·종료일 / 시간·표시 방식 / 대상 / 이름·메모를 겹치지 않게 한 줄씩 */
-function openFamilyEventModal(){
-  if(!isParentMode()) return;
-  var sel = calDayState() || dayKey();
-  var whoOpts = CAL_WHOS.map(function(w){
-    return '<option value="' + w.id + '">' + esc(w.label) + '</option>';
-  }).join('');
-  openModal(
-    '<h2 class="modal-title">➕ 가족 일정 추가</h2>' +
-    '<p class="modal-sub">' + esc(calDayLabel(sel)) + '에 넣어요 · 부모님 화면</p>' +
-    '<div class="evm">' +
-      '<div class="evm-row2">' +
-        '<label class="fam-field">시작일<input type="date" id="evmDate" value="' + esc(sel) + '" aria-label="일정 시작일"></label>' +
-        '<label class="fam-field">종료일<input type="date" id="evmEnd" aria-label="일정 종료일 (선택)"></label>' +
-      '</div>' +
-      '<div class="evm-row2">' +
-        '<label class="fam-field">시간<input type="time" id="evmTime" aria-label="일정 시간 (선택)"></label>' +
-        '<label class="fam-field">표시 방식<select id="evmDisp" aria-label="달력 표시 방식">' +
-          '<option value="auto">자동</option>' +
-          '<option value="bar">형광펜 바</option>' +
-          '<option value="dot">점</option>' +
-          '<option value="summer">방학 · 여름</option>' +
-          '<option value="winter">방학 · 겨울</option>' +
-          '<option value="spring">방학 · 봄</option>' +
-        '</select></label>' +
-      '</div>' +
-      '<label class="fam-field">누구 일정인가요?<select id="evmWho" aria-label="일정 대상">' + whoOpts + '</select></label>' +
-      '<label class="fam-field">일정 이름<input type="text" id="evmTitle" maxlength="30" placeholder="예: 현장학습" aria-label="일정 이름"></label>' +
-      '<label class="fam-field">메모 (선택)<input type="text" id="evmNote" maxlength="60" placeholder="예: 9시까지 등교" aria-label="일정 메모"></label>' +
-    '</div>' +
-    '<div class="modal-actions">' +
-      '<button type="button" class="btn btn-ghost" data-action="close-modal">취소</button>' +
-      '<button type="button" class="btn btn-primary" data-action="create-family-event">일정 추가</button>' +
-    '</div>'
-  );
-  var inp = $('#evmTitle');
-  if(inp){ try{ inp.focus(); }catch(e){} }
-}
-function saveFamilyEventModal(){
-  if(!isParentMode()) return;
-  var dateEl = $('#evmDate'), endEl = $('#evmEnd'), timeEl = $('#evmTime'), dispEl = $('#evmDisp');
-  var whoEl = $('#evmWho'), titleEl = $('#evmTitle'), noteEl = $('#evmNote');
-  var date = dateEl ? String(dateEl.value || '').trim() : '';
-  var title = titleEl ? String(titleEl.value || '').trim() : '';
-  if(!/^\d{4}-\d{2}-\d{2}$/.test(date)){ toast('날짜를 먼저 골라 주세요 📅'); return; }
-  if(!title){ toast('일정 이름을 넣어 주세요'); if(titleEl && titleEl.focus){ try{ titleEl.focus(); }catch(e){} } return; }
-  var end = endEl ? String(endEl.value || '').trim() : '';
-  if(!/^\d{4}-\d{2}-\d{2}$/.test(end) || end <= date) end = '';
-  var whoKey = whoEl ? String(whoEl.value || '') : 'all';
-  var whoOk = CAL_WHOS.some(function(w){ return w.id === whoKey; });
-  if(!whoOk) whoKey = 'all';
-  var disp = evDispValue(dispEl);
-  familyEvents().push({
-    id: uid(),
-    date: date,
-    end: end,
-    disp: (disp === 'auto') ? '' : disp,
-    time: cleanEventTime(timeEl ? timeEl.value : ''),
-    emoji: '',
-    title: title.slice(0, 30),
-    who: whoKey,
-    category: (whoKey === 'all') ? 'family' : whoKey,
-    note: noteEl ? String(noteEl.value || '').trim().slice(0, 60) : ''
-  });
-  state.calMonth = date.slice(0, 7);
-  state.calDay = date;
-  saveState();
-  closeModal();
-  renderFamilyCalendar();
-  toast('📅 ' + title.slice(0, 30) + ' 일정을 넣었어요');
 }
 function addFamilyEvent(){
   if(!isParentMode()) return;
@@ -17775,6 +17819,26 @@ function renderFamilyPick(){
   html += '<button type="button" class="fpb-btn' + (tab === 'minijob' ? ' on' : '') + '" data-action="pick-family-view" data-view="minijob"' +
     ' aria-pressed="' + (tab === 'minijob' ? 'true' : 'false') + '">🪙 미니알바</button>';
   box.innerHTML = html;
+  /* 안내 문구 — 미니알바만 중복 적립이 된다 (#12925) */
+  var hintEl = $('#familyTeamHint');
+  if(hintEl){
+    hintEl.innerHTML = tab === 'minijob'
+      ? '<span aria-hidden="true">ⓘ</span> 미니알바는 중복 적립할 수 있어요!'
+      : '<span aria-hidden="true">ⓘ</span> 같은 미션은 주 1회만 적립돼요.';
+  }
+}
+/* 🕐 최근 내역 「전체보기」 — 이번 주 가족 미션 + 미니알바 전체 (#12889) */
+function openFamilyWeekLogModal(){
+  var kidKey = scopedKidKey();
+  var log = familyWeekLog(kidKey).slice().reverse();
+  openModal(
+    '<h2 class="modal-title">🕐 이번 주 가족 미션 내역</h2>' +
+    '<p class="modal-sub">' + log.length + '건 · 월요일 자정에 새로 시작해요</p>' +
+    (log.length
+      ? '<div class="fwl-list fwl-modal">' + log.map(familyWeekLogPillHtml).join('') + '</div>'
+      : '<p class="fwl-empty">이번 주에는 아직 가족 미션을 하지 않았어요 🌱</p>') +
+    '<div class="modal-actions"><button type="button" class="btn btn-ghost" data-action="close-modal">닫기</button></div>'
+  );
 }
 /* 📢 FAMILY 규칙 안내 팝업 — 시안 DD709D2C (#v36 아기자기 일러스트) */
 function openFamilyRules(){
@@ -17875,6 +17939,7 @@ function toggleSelf(id, undo){
     /* 한 번 누르기로는 이미 찍힌 도장이 풀리지 않는다 — 두 번 누를 때만 취소 (#v32) */
     if(!undo) return;
     delete d.self[id];
+    if(d.selfMeta) delete d.selfMeta[id];
     if(isFam && d.team) delete d.team[id];
   }else{
     if(isFam){
@@ -17897,6 +17962,17 @@ function toggleSelf(id, undo){
       d.team[id] = famTeamNow;
     }
     d.self[id] = isFam ? familyMissionAmount(item, currentFamilyTeam()) : 0;
+    /* 🧾 지금 이름·이모지·금액을 그날 기록에 남긴다 — 나중에 지우거나 고쳐도 내역은 그대로 (#12947 · #12958) */
+    if(isFam){
+      d.selfMeta = d.selfMeta || {};
+      d.selfMeta[id] = {
+        label: String(item.label || '가족 미션'),
+        icon: String(item.icon || ''),
+        cat: 'family',
+        amount: Number(d.self[id]) || 0,
+        team: (d.team && d.team[id]) || currentFamilyTeam()
+      };
+    }
     if(isMorning && d.morningOff) delete d.morningOff;   /* 다시 체크하면 취소했던 아침 도장도 돌아온다 (#v29) */
   }
   if((item.cat || 'space') === 'space'){
@@ -17959,11 +18035,56 @@ function toggleSelf(id, undo){
   checkWeeklyBonuses(prev);
 }
 var pendingSelfCat = 'family';
+/* 🪙 가족 미션을 넣으면 100원 미니알바로도 함께 (#13047)
+   · 이름·이모지를 보고 분류를 먼저 골라 주고, 엄마가 6칩에서 바꿀 수 있다 */
+var SELF_ADD_JOB_CAT = 'organize';
+var SELF_ADD_JOB_MANUAL = false;
+var SELF_JOB_CAT_HINTS = [
+  [/세탁|빨래|수건/, 'laundry'],
+  [/청소|쓸|닦|걸레|화장실|욕실/, 'clean'],
+  [/주방|요리|식사|설거지|밥|간식|음식/, 'kitchen'],
+  [/심부름|장보|배달|사다|사오/, 'errand'],
+  [/정리|정돈|가지런|제자리|집기|접기/, 'organize']
+];
+function selfAddJobCatGuess(label, icon){
+  var t = String(label || '');
+  for(var i = 0; i < SELF_JOB_CAT_HINTS.length; i++){
+    if(SELF_JOB_CAT_HINTS[i][0].test(t)) return SELF_JOB_CAT_HINTS[i][1];
+  }
+  var ic = String(icon || '');
+  for(var j = 0; j < MINI_JOB_CATS.length; j++){
+    if(ic && MINI_JOB_CATS[j].icon === ic) return MINI_JOB_CATS[j].key;
+  }
+  return 'etc';
+}
+function selfJobCatPickHtml(){
+  return '<div class="set-field" style="margin-top:9px"><span class="set-label">미니알바 분류</span>' +
+    '<div class="vac-cat-pick" id="selfJobCatPick" role="group" aria-label="미니알바 분류">' +
+      MINI_JOB_CATS.map(function(c){
+        var on = c.key === SELF_ADD_JOB_CAT;
+        return '<button type="button" class="vcp-btn' + (on ? ' on' : '') + '" data-action="pick-self-job-cat" data-cat="' + c.key + '"' +
+          ' aria-pressed="' + (on ? 'true' : 'false') + '">' + c.chip + '</button>';
+      }).join('') +
+    '</div>' +
+    '<span class="hint" style="display:block;margin-top:5px;font-size:10px;font-weight:800;color:#7C6AA0">🪙 저장하면 이 분류의 100원 미니알바로도 함께 들어가요</span>' +
+  '</div>';
+}
+function paintSelfJobCatPick(){
+  var box = document.getElementById('selfJobCatPick');
+  if(!box) return;
+  Array.prototype.forEach.call(box.querySelectorAll('.vcp-btn'), function(b){
+    var on = b.getAttribute('data-cat') === SELF_ADD_JOB_CAT;
+    b.classList.toggle('on', on);
+    b.setAttribute('aria-pressed', on ? 'true' : 'false');
+  });
+}
 function addSelfModal(cat){
   if(!isParentMode()) return;
   pendingSelfCat = (cat === 'space' || cat === 'morning') ? cat : 'family';
   ITEM_EDIT_ICON = (pendingSelfCat === 'family') ? '🤝' : (pendingSelfCat === 'morning' ? '🌤️' : '✅');
   ITEM_EDIT_MANUAL = false;
+  SELF_ADD_JOB_CAT = 'organize';
+  SELF_ADD_JOB_MANUAL = false;
   var catName = pendingSelfCat === 'family' ? '함께 하는 일' : (pendingSelfCat === 'morning' ? '아침 습관' : '혼자 하는 일');
   openModal(
     '<h2 class="modal-title">＋ ' + catName + ' 추가</h2>' +
@@ -17976,7 +18097,7 @@ function addSelfModal(cat){
         ? '<div class="fam-amt-grid">' +
             '<label class="set-field">스스로 금액(원)<input type="number" id="selfSoloAmount" min="0" max="5000" step="100" inputmode="numeric" value="500" aria-label="스스로 할 때 용돈"></label>' +
             '<label class="set-field">함께 금액(원)<input type="number" id="selfTogetherAmount" min="0" max="5000" step="100" inputmode="numeric" value="200" aria-label="함께 할 때 용돈"></label>' +
-          '</div>'
+          '</div>' + selfJobCatPickHtml()
         : '') +
     '</div>' +
     '<div class="modal-actions">' +
@@ -18045,6 +18166,13 @@ function createSelf(){
     dedupeKidSelfNow(k);
   });
   alignFamilyMissionLists(state);
+  /* 🪙 가족 미션과 같은 이름의 100원 미니알바도 함께 넣는다 (#13047) */
+  if(isFam){
+    var jobCat = miniJobCatDef(SELF_ADD_JOB_MANUAL ? SELF_ADD_JOB_CAT : selfAddJobCatGuess(label, icon)).key;
+    if(!vacationJobs().some(function(j){ return j.label === label; })){
+      state.vacationMiniJobs.push({ id: uid(), cat: jobCat, icon: icon, label: label, desc: desc, amount: 100 });
+    }
+  }
   saveState();
   closeModal();
   renderAll();
@@ -18174,7 +18302,8 @@ function deleteSelf(id){
         if(!hitId) return;
         kid.self = kid.self.filter(function(s){ return s.id !== hitId; });
         var dd = kid.days[dayKey()];
-        if(dd && dd.self) delete dd.self[hitId];
+        /* 🤝 가족 미션을 지워도 오늘 완료한 기록은 남긴다 — 용돈 내역·최근 내역에 그대로 (#12947) */
+        if(dd && dd.self && cat !== 'family') delete dd.self[hitId];
       });
       alignFamilyMissionLists(state);
       saveState();
@@ -19251,6 +19380,24 @@ function saveAcademyEdit(id){
   renderHome();
   toast('학원 일정을 수정했어요');
 }
+/* 🚏 중간 경유지(🏠 집 · 🅿️ 지하주차장 · 📍 장소)만 지운다 — 학원 일정은 그대로 (#12975)
+   · 자동으로 생긴 경유지와 엄마가 직접 넣은 경유지 모두 e.via 를 비워 저장한다 */
+function deleteAcVia(id){
+  if(!isParentMode()) return;
+  var found = findAcademy(id);
+  if(!found) return;
+  var e = found.entry;
+  if(!e || !e.via) return;
+  var label = String(e.via);
+  e.via = '';
+  e.viaNote = '';
+  saveState();
+  renderAcademy();
+  renderWeek();
+  renderGlance();
+  renderHome();
+  toast('🚏 ' + label + ' 경유지를 지웠어요');
+}
 function deleteAcademy(id){
   if(!isParentMode()) return;
   var found = findAcademy(id);
@@ -19969,8 +20116,7 @@ document.addEventListener('click', function(e){
     case 'pick-family-team': setFamilyTeam(target.getAttribute('data-team')); break;
     case 'pick-family-view': setFamilyView(target.getAttribute('data-view')); break;
     case 'open-family-rules': openFamilyRules(); break;
-    case 'open-family-event-modal': openFamilyEventModal(); break;
-    case 'create-family-event': saveFamilyEventModal(); break;
+    case 'open-family-week-log': openFamilyWeekLogModal(); break;
     /* 👀 아빠 관람 — 보는 아이 · 참여 방식별 오늘 스탬프 (#v32) */
     case 'dad-kid': setDadKid(target.getAttribute('data-kid')); break;
     case 'dad-fam-tab': setDadFamTab(target.getAttribute('data-kind')); break;
@@ -20017,6 +20163,11 @@ document.addEventListener('click', function(e){
     case 'add-tuition': addTuition(target.getAttribute('data-tk')); break;
     case 'del-tuition': delTuition(target.getAttribute('data-tk'), target.getAttribute('data-ti')); break;
     case 'add-self': addSelfModal(target.getAttribute('data-cat') || 'family'); break;
+    case 'pick-self-job-cat':
+      SELF_ADD_JOB_CAT = miniJobCatDef(target.getAttribute('data-cat')).key;
+      SELF_ADD_JOB_MANUAL = true;
+      paintSelfJobCatPick();
+      break;
     /* 📚 매일 공부 3분류 — 엄마가 직접 넣고 고치고 지운다 (#study) */
     case 'add-study': addStudyModal(target.getAttribute('data-cat') || 'school'); break;
     case 'study-preset': setStudyPreset(target.getAttribute('data-preset') || 'daily'); break;
@@ -20112,6 +20263,7 @@ document.addEventListener('click', function(e){
     case 'edit-academy': editAcademyModal(target.getAttribute('data-id')); break;
     case 'save-academy': saveAcademyEdit(target.getAttribute('data-id')); break;
     case 'del-academy': deleteAcademy(target.getAttribute('data-id')); break;
+    case 'del-ac-via': deleteAcVia(target.getAttribute('data-id')); break;
     /* 🗓️ 요일 바 — 이번 주 그 요일 동선 보기 (#v36) */
     case 'ac-day':
       AC_VIEW_DAY = Number(target.getAttribute('data-day'));
@@ -20540,6 +20692,11 @@ document.addEventListener('input', function(e){
   if((t.id === 'selfLabel' || t.id === 'selfEditLabel') && !ITEM_EDIT_MANUAL){
     var h3 = learnedIcon(t.value) || hintIcon(ITEM_ICON_HINTS, t.value);
     if(h3){ ITEM_EDIT_ICON = h3; paintItemIconRow(); }
+  }
+  /* 🪙 가족 미션 이름을 적으면 미니알바 분류를 먼저 골라 준다 (#13047) */
+  if(t.id === 'selfLabel' && !SELF_ADD_JOB_MANUAL){
+    SELF_ADD_JOB_CAT = selfAddJobCatGuess(t.value, ITEM_EDIT_ICON);
+    paintSelfJobCatPick();
   }
   /* 📚 매일 공부 — 이름을 적으면 어울리는 이모지를 먼저 골라 준다 (#study) */
   if((t.id === 'studyLabel' || t.id === 'studyEditLabel') && !STUDY_EDIT_MANUAL){
