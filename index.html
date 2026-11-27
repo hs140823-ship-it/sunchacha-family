@@ -3988,9 +3988,6 @@ body.mode-kid .fmr-edit{display:none !important}
 .scope-bar b{font-weight:900;color:#5B4FD6}
 /* 머리글에는 아이 전환 캡슐과 🔒·⚙️만 — 시계·구름 아이콘은 두지 않는다 (#4157) */
 .topbar .clock,.topbar .sync-pill{display:none !important}
-/* 👀 미리보기 중에는 머리글을 통째로 숨기고 「○○ 화면 미리보기 중」 안내부터 시작 (#4138) */
-body.preview-on .topbar{display:none !important}
-@media (min-width:861px){body.preview-on .tabbar{top:0}}
 
 .mini-summary{gap:4px}
 .ms-chip{font-size:10.5px;padding:4px 8px;background:rgba(255,255,255,.85);border-color:rgba(120,150,190,.18);color:#4A5E76}
@@ -4054,12 +4051,14 @@ body.preview-on .topbar{display:none !important}
 .hh-name{font-size:15px;font-weight:900;letter-spacing:-.02em;color:#26333F}
 .hh-date{font-size:10px;font-weight:800;color:#7A8DA4}
 .hh-chev{font-size:15px;font-weight:900;color:#93A7BF;margin-left:1px;line-height:1}
-.hh-greet{margin-top:7px;font-size:14.5px;font-weight:900;letter-spacing:-.03em;line-height:1.34;color:#22303D;max-width:none;word-break:keep-all}
+.hh-greet{margin-top:7px;font-size:14.5px;font-weight:900;letter-spacing:-.03em;line-height:1.38;color:#22303D;max-width:none;word-break:keep-all;text-wrap:balance}
 .hh-ro{display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:900;color:#4E7387;
   background:rgba(255,255,255,.82);border:1px solid rgba(120,160,220,.22);border-radius:999px;padding:3px 8px;white-space:nowrap}
 .hh-ro.preview{display:none}
-.hh-art{position:relative;right:auto;top:auto;width:100%;max-width:none;margin-top:-2px;pointer-events:none;z-index:4}
+.hh-art{position:relative;right:auto;top:auto;width:100%;max-width:none;margin-top:-2px;z-index:4;display:flex;flex-direction:column;align-items:center;background:none;border:0;padding:0;cursor:pointer;font-family:inherit}
 .hh-art img{width:100%;height:auto;max-height:178px;object-fit:contain;object-position:right bottom;display:block;margin-left:auto;filter:drop-shadow(0 12px 16px rgba(64,96,140,.18))}
+.hh-rwd-chip{position:relative;z-index:5;margin-top:-10px;display:inline-flex;align-items:center;gap:3px;padding:3px 10px;border-radius:999px;background:rgba(255,255,255,.97);border:1.5px solid rgba(124,58,237,.38);color:#5B21B6;font-size:10.5px;font-weight:900;letter-spacing:.01em;box-shadow:0 4px 12px -4px rgba(109,40,217,.38);white-space:nowrap}
+.hh-art.on .hh-rwd-chip{background:#7C3AED;color:#fff;border-color:#7C3AED}
 body[data-face="parent"] .hh-art{max-width:none;right:auto;top:auto}
 @media (max-width:420px){.hero-head{grid-template-columns:minmax(0,1fr) 96px}}
 @media (min-width:760px){.hero-head{grid-template-columns:minmax(0,1fr) 152px}.hh-greet{font-size:17px}}
@@ -4349,7 +4348,7 @@ body.mode-kid .home-more{display:none}
   border:1px solid rgba(122,158,196,.28);background:rgba(255,255,255,.72);color:#3F6E8E;
   -webkit-tap-highlight-color:transparent;transition:transform .12s ease,background .16s ease,color .16s ease}
 .sec-head .head-timer{margin-left:auto;flex:0 0 auto;align-self:center;position:relative;top:10px}   /* 아래 버튼 줄에 살짝 가까이 (#14207) */
-.sec-head .head-timer + .head-reward{margin-left:0;position:relative;top:10px}
+.sec-head .head-timer{margin-left:auto;align-self:center}
 .head-timer .tm-ico{font-size:13px;line-height:1.15}
 .head-timer .tm-label{font-size:8.5px;font-weight:800;letter-spacing:.01em;line-height:1.15}
 .head-timer:hover{background:#EEF7FF;color:#2E6E97}
@@ -4377,8 +4376,13 @@ body.mode-kid .home-more{display:none}
   .sync-pill{max-width:88px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .kidswap{gap:1px;min-height:29px;padding:2px}
   .kidswap .ks-opt{font-size:10.5px;padding:4px 6px;min-height:24px}
-  .tabbar{position:fixed;left:8px;right:8px;bottom:calc(8px + env(safe-area-inset-bottom));top:auto;height:auto;
-    padding:6px 4px;border-radius:22px;background:rgba(255,255,255,.94);border:1px solid #fff;box-shadow:0 18px 36px -26px rgba(38,66,110,.8);gap:3px}
+  .tabbar{position:fixed;left:0;right:0;bottom:0;top:auto;height:auto;
+    padding:6px 6px calc(6px + env(safe-area-inset-bottom));border-radius:18px 18px 0 0;background:rgba(255,255,255,.97);border:0;border-top:1px solid rgba(201,214,230,.55);box-shadow:0 -6px 20px -12px rgba(38,66,110,.18);gap:3px;-webkit-transform:translateZ(0);transform:translateZ(0)}
+  html,body{overflow-x:clip}
+  #homeHeroHead{position:sticky;top:0;z-index:40;margin:0 -14px 10px;padding:calc(6px + env(safe-area-inset-top)) 14px 14px;
+    background:linear-gradient(180deg,rgba(241,247,255,.97) 0%,rgba(245,250,255,.95) 88%,rgba(245,250,255,0) 100%);
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+  #homeHeroHead .hh-greet{padding-bottom:4px}
   /* 6탭은 390px에서도 넉넉하게 — 이름이 잘리지 않는 크기 (#4309) */
   .tab-btn{font-size:9px;padding:5px 1px;min-height:46px;border-radius:16px;gap:1px}
   .tab-btn .tb-ico{font-size:17px}
@@ -4753,12 +4757,13 @@ body.mode-kid .home-more{display:none}
     <button type="button" class="tab-btn" role="tab" id="tabBtn-family" data-action="tab" data-tab="family" aria-controls="tabPanel-family" aria-selected="false" tabindex="-1"><span class="tb-ico" aria-hidden="true">🤝</span><span class="tb-label">FAMILY</span></button>
   </nav>
 
+  <div class="hero-head" id="homeHeroHead"></div>
+
   <div class="tab-panels" id="tabPanels">
 
     <section class="tab-panel" id="tabPanel-home" role="tabpanel" aria-labelledby="tabBtn-home" data-tab-panel="home">
   <!-- 1) 히어로: 얼굴·이름·오늘의 응원한마디 + 날씨 알약 (응원한마디는 인사말에 통합 · #2482) -->
   <section class="hero" id="homeHero">
-    <div class="hero-head" id="homeHeroHead"></div>
     <article class="card weather" id="weatherCard">
       <div class="w-top">
         <span class="w-city">📍 서울 중랑구</span>
@@ -5056,7 +5061,6 @@ body.mode-kid .home-more{display:none}
       <div class="sec-head">
         <span class="sec-num" aria-hidden="true">✨</span>
         <h2 id="sec2Title">MY SPACE</h2>
-        <button type="button" class="tab-mini head-reward" data-action="tab" data-tab="reward" aria-controls="tabPanel-reward" aria-label="리워드 화면 열기"><span class="tm-ico" aria-hidden="true">💎</span><span class="tm-label">REWARD</span></button>
         <div class="sec-desc">
           <span class="sec-sub">혼자 하는 일</span>
         </div>
@@ -5133,7 +5137,6 @@ body.mode-kid .home-more{display:none}
       <span class="sec-num" aria-hidden="true">📚</span>
       <h2 id="sec4Title">STUDY</h2>
       <button type="button" class="tab-mini head-timer" data-action="open-timer" aria-label="⏱️ 타이머 열기"><span class="tm-ico" aria-hidden="true">⏱️</span><span class="tm-label">타이머</span></button>
-      <button type="button" class="tab-mini head-reward" data-action="tab" data-tab="reward" aria-controls="tabPanel-reward" aria-label="리워드 화면 열기"><span class="tm-ico" aria-hidden="true">💎</span><span class="tm-label">REWARD</span></button>
       <div class="sec-desc">
         <span class="sec-sub">오늘의 학습 · 타이머</span>
       </div>
@@ -5294,7 +5297,6 @@ body.mode-kid .home-more{display:none}
       <div class="sec-head">
         <span class="sec-num" aria-hidden="true">🤝</span>
         <h2 id="sec3Title">FAMILY</h2>
-        <button type="button" class="tab-mini head-reward" data-action="tab" data-tab="reward" aria-controls="tabPanel-reward" aria-label="리워드 화면 열기"><span class="tm-ico" aria-hidden="true">💎</span><span class="tm-label">REWARD</span></button>
         <div class="sec-desc">
           <span class="sec-lead">주간 최대 3,000원 가족 미션</span>
           <span class="sec-sub">주중·주말 언제든 · 금액 상한 3,000원</span>
@@ -5942,17 +5944,13 @@ function vacationJobOf(id){
 function isVacationDate(ymd){
   var dk = String(ymd || '').slice(0, 10);
   if(!/^\d{4}-\d{2}-\d{2}$/.test(dk)) return false;
-  var hit = familyEvents().some(function(e){
+  return familyEvents().some(function(e){
     if(!e || !e.date) return false;
     var isBg = (e.disp === 'summer' || e.disp === 'winter' || e.disp === 'spring');
     if(!isBg && String(e.title || '').indexOf('방학') < 0) return false;
     var end = calEventEnd(e) || e.date;
     return e.date <= dk && dk <= end;
   });
-  if(hit) return true;
-  /* 달력에 방학 일정이 아직 없어도 학사일정대로 안다: 여름(3주) 7/25~8/15 · 겨울(5주) 12/25~1/31 · 봄(2주) 2/13~3/1 (#v36 · #15189) */
-  var md = dk.slice(5);
-  return (md >= '07-25' && md <= '08-15') || (md >= '12-25' || md <= '01-31') || (md >= '02-13' && md <= '03-01');
 }
 /* 🪙 100원 미니알바 — 평일 포함 상시 활동 (#v35)
    · 「공휴일·주말·방학에만 오픈」·「방학 하루 5건」 규칙은 없앴다
@@ -8092,8 +8090,8 @@ var PREVIEW_LABELS = {
   jiwoo: '지우 화면 미리보기',
   dad: '👀 아빠 관람 미리보기'
 };
-function canPreviewSwitch(){ return INITIAL_URL_MODE === 'parent'; }
-function isPreviewing(){ return canPreviewSwitch() && MODE !== 'parent'; }
+function canPreviewSwitch(){ return INITIAL_URL_MODE === 'parent' || INITIAL_URL_MODE === 'dad'; }
+function isPreviewing(){ return canPreviewSwitch() && MODE !== INITIAL_URL_MODE; }
 function previewName(mode){
   if(mode === 'seonwoo') return '선우';
   if(mode === 'jiwoo') return '지우';
@@ -8139,7 +8137,7 @@ function scrollPreviewTop(){
 function isParentMode(){ return MODE === 'parent'; }
 function isDadMode(){ return MODE === 'dad'; }
 function isKidMode(){ return MODE === 'seonwoo' || MODE === 'jiwoo'; }
-function canCheck(){ return !isDadMode(); }
+function canCheck(){ return INITIAL_URL_MODE !== 'dad' && !isDadMode(); }
 /* 👀 아빠 관람 화면 — 두 아이를 골라 보는 스위치 (#v32)
    아빠 링크(?mode=dad)로 열면 선우부터 보이고, SCHEDULE · MY SPACE · STUDY · FAMILY
    위의 [선우 보기 | 지우 보기] 로 화면을 새로고침하지 않고 바로 바꾼다. */
@@ -8174,28 +8172,7 @@ function renderDadKidSwitch(){
     var panel = document.querySelector('[data-tab-panel="' + tab + '"]');
     if(!panel) continue;
     var bar = document.getElementById('dadKidBar-' + tab);
-    if(!isDadMode()){ if(bar) bar.hidden = true; continue; }
-    if(!bar){
-      bar = document.createElement('div');
-      bar.className = 'dad-kid-wrap';
-      bar.id = 'dadKidBar-' + tab;
-      bar.setAttribute('role', 'group');
-      bar.setAttribute('aria-label', '보는 아이 고르기');
-      dadInsertAfterHead(panel, bar);
-    }
-    /* 🗂 탭 제목 아래가 아니라 「탭 맨 윗칸」으로 — 네 탭 모두 같은 자리 (#v34) */
-    if(panel.firstChild !== bar) panel.insertBefore(bar, panel.firstChild);
-    bar.hidden = false;
-    var cur = dadKidNow();
-    bar.innerHTML = '<span class="dad-kid-lbl" aria-hidden="true">👀 보는 아이</span>' +
-      '<div class="kidswap">' +
-        ['seonwoo', 'jiwoo'].map(function(k){
-          var kd = kidDef(k);
-          var on = (cur === k);
-          return '<button type="button" class="ks-opt" data-action="dad-kid" data-kid="' + k + '"' +
-            ' aria-pressed="' + (on ? 'true' : 'false') + '">' + (k === 'seonwoo' ? '👦 ' : '👧 ') + esc(kd.name) + ' 보기</button>';
-        }).join('') +
-      '</div>';
+    if(bar) bar.hidden = true;
   }
 }
 /* 👀 아빠 FAMILY — 참여 방식별 오늘 찍힌 스탬프 (#v32) */
@@ -8291,13 +8268,33 @@ function heroGreetOf(mode){
   return modeFace(mode).name + '야, ' + a;
 }
 
+function formatGreetHtml(raw){
+  var s = String(raw || '').trim().replace(/\s+/g, ' ');
+  if(s.length <= 16) return esc(s);
+  var words = s.split(' ');
+  if(words.length < 3) return esc(s);
+  var total = s.length;
+  var bestIdx = -1, bestScore = 1e9, acc = 0;
+  for(var i = 0; i < words.length - 1; i++){
+    acc += (i ? 1 : 0) + words[i].length;
+    var ratio = acc / total;
+    if(ratio < 0.34 || ratio > 0.72) continue;
+    var w = words[i];
+    var bonus = /,$/.test(w) ? -0.18 : (/(면|고|서|니|은|는|이|가|을|를|에|에서|으로|도)$/.test(w) ? -0.12 : 0);
+    var score = Math.abs(ratio - 0.5) + bonus;
+    if(score < bestScore){ bestScore = score; bestIdx = i; }
+  }
+  if(bestIdx < 0) return esc(s);
+  return esc(words.slice(0, bestIdx + 1).join(' ')) + '<br>' + esc(words.slice(bestIdx + 1).join(' '));
+}
+
 /* 상단 히어로 헤더: 동그란 얼굴 + 이름 + 날짜 + 인사말 + 일러스트 */
 var _heroKey = '';
 function renderHeroHead(){
   var box = $('#homeHeroHead');
   if(!box) return false;
   /* 같은 화면이면 다시 그리지 않아요 (그림 data URI 를 매번 새로 만들지 않도록) */
-  var sig = MODE + '|' + dayKey() + '|' + (canPreviewSwitch() ? '1' : '0') + '|' + (isDadMode() ? 'd' : (isPreviewing() ? 'p' : '-'));
+  var sig = MODE + '|' + dayKey() + '|' + (canPreviewSwitch() ? '1' : '0') + '|' + (isDadMode() ? 'd' : (isPreviewing() ? 'p' : '-')) + '|' + (currentTab() === 'reward' ? 'r' : '');
   if(sig === _heroKey && box.firstChild) return true;
   _heroKey = sig;
   var f = modeFace(MODE);
@@ -8313,13 +8310,14 @@ function renderHeroHead(){
     ? '<button type="button" class="hh-pill can-switch" id="userSwitchBtn" data-action="open-user-menu" aria-haspopup="menu" aria-expanded="false" aria-controls="userSwitchMenu" aria-label="보는 사람 바꾸기">' + inner + '</button>'
     : '<div class="hh-pill locked" id="userSwitchBtn" aria-label="' + esc(f.name) + ' 화면">' + inner + '</div>';
   var badge = '';
-  if(isDadMode()) badge = '<span class="hh-ro" id="heroReadOnlyBadge">👀 보기 전용</span>';
+  if(isPreviewing()) badge = '<span class="hh-ro" id="heroPreviewBadge">👀 ' + esc(previewName(MODE)) + ' 화면 미리보기 중</span>';
+  else if(isDadMode()) badge = '<span class="hh-ro" id="heroReadOnlyBadge">👀 보기 전용</span>';
   box.innerHTML =
     '<div class="hh-text">' +
       '<div class="hh-top">' + pill + badge + '</div>' +
-      '<p class="hh-greet" id="heroGreet" data-mode="' + MODE + '">' + esc(greet) + '</p>' +
+      '<p class="hh-greet" id="heroGreet" data-mode="' + MODE + '">' + formatGreetHtml(greet) + '</p>' +
     '</div>' +
-    '<div class="hh-art"><img src="' + f.hero + '" alt=""></div>';
+    '<button type="button" class="hh-art' + (currentTab() === 'reward' ? ' on' : '') + '" data-action="tab" data-tab="reward" aria-label="리워드 화면 열기"><img src="' + f.hero + '" alt=""><span class="hh-rwd-chip"><span aria-hidden="true">💎</span> REWARD</span></button>';
   renderSubReward();
   return true;
 }
@@ -12357,21 +12355,8 @@ function renderModeBar(){
 function renderPreviewReturnBar(){
   var bar = $('#previewReturnBar');
   if(!bar) return;
-  if(!isPreviewing()){ bar.hidden = true; bar.innerHTML = ''; return; }
-  bar.hidden = false;
-  var opts = [['seonwoo', '선우 화면'], ['jiwoo', '지우 화면'], ['dad', '아빠 화면']];
-  bar.innerHTML =
-    '<div class="preview-return">' +
-      '<span class="pr-now">👀 <b>' + esc(previewName(MODE)) + ' 화면</b> 미리보기 중</span>' +
-      '<div class="pr-switch" role="group" aria-label="미리 볼 화면 고르기">' +
-        opts.map(function(o){
-          var on = MODE === o[0];
-          return '<button type="button" class="pr-chip' + (on ? ' on' : '') + '" data-action="preview-mode" data-mode="' + o[0] + '"' +
-            ' aria-pressed="' + (on ? 'true' : 'false') + '">' + o[1] + '</button>';
-        }).join('') +
-      '</div>' +
-      '<button type="button" class="pr-back" data-action="preview-mode" data-mode="parent">👩‍💼 엄마 화면으로 돌아가기</button>' +
-    '</div>';
+  bar.hidden = true;
+  bar.innerHTML = '';
 }
 function copyKidLink(kidKey){
   var url = kidLink(kidKey);
@@ -12621,8 +12606,7 @@ function renderSubReward(){
 /* 머리글 오른쪽 💎 REWARD 버튼 — MY SPACE·STUDY·FAMILY 머리글이 같은 모양 (#5470)
    ※ HOME 히어로(#5545), CALENDAR·SCHEDULE 제목 줄에서는 뺐다 */
 function headRewardBtnHtml(){
-  return '<button type="button" class="tab-mini head-reward" data-action="tab" data-tab="reward" aria-controls="tabPanel-reward" aria-label="리워드 화면 열기">' +
-    '<span class="tm-ico" aria-hidden="true">💎</span><span class="tm-label">REWARD</span></button>';
+  return '';
 }
 
 /* 칭찬 도장 문구 (#3823) — 같은 말만 반복하지 않고 항목·날마다 다섯 가지 중 하나 */
