@@ -2643,7 +2643,10 @@ body.mode-viewer .rl-form{display:none !important}
 .rwd-stat.mint{background:linear-gradient(150deg,#EFFAF4,#FFFFFF)}
 .rwd-stat.peach{background:linear-gradient(150deg,#FFF6EC,#FFFFFF)}
 /* 🎯 이번 달 용돈 목표 게이지 (#13828 · #14106 맨 위로 · 흰 박스 없이 배경에 녹아들게) */
-.rwd-goal{margin:0 2px 12px;padding:0;border:0;border-radius:0;background:none;box-shadow:none}
+.rwd-goal{margin:0 0 11px;padding:0;border:0;border-radius:0;background:none;box-shadow:none}
+.rwd-hero-box{margin:0 0 12px;padding:14px 12px 12px;border-radius:22px;background:linear-gradient(180deg,#FFFFFF 0%,#FAF7FF 100%);border:1.5px solid rgba(183,155,255,.32);box-shadow:0 10px 26px -18px rgba(106,69,216,.28)}
+.rwd-hero-box .rwd-grid{margin-bottom:8px}
+.rwd-hero-box .rwd-high{margin-bottom:0}
 .rwd-goal-h{display:flex;align-items:baseline;gap:6px;font-size:11px;font-weight:900;color:#4B3E7A;letter-spacing:-.01em}
 .rwd-goal-h b{margin-left:auto;font-size:10.5px;font-weight:900;color:#6A45D8;background:#F1EBFF;border-radius:999px;padding:2px 9px;white-space:nowrap}
 .rwd-goal-nums{display:flex;align-items:baseline;gap:5px;margin-top:4px;flex-wrap:wrap}
@@ -14137,32 +14140,27 @@ function rewardGuideStampsPageHtml(kidKey){
   var stampTotalMonth = stampBaseMonth + stampWeekBonusMonth;
   var tot = totalStamps(kidKey);
   var cyc = stampCycleOf(tot);
+  var used = usedStampsOf(kidKey);
   var pct = Math.max(4, Math.min(100, Math.round(cyc.pos / STAMP_CYCLE * 100)));
   var next = nextStampMilestone(tot);
-  var nextMsg = next
-    ? '다음 <b>' + next.count + '개 · ' + esc(next.reward) + '</b>까지 <b>' + (next.count - cyc.pos) + '개</b>'
+  var nextObj = stampMilestones().filter(function(r){ return r.stamp === next; })[0];
+  var nextMsg = nextObj
+    ? '다음 <b>' + nextObj.stamp + '개 · ' + esc(nextObj.label) + '</b>까지 <b>' + (nextObj.stamp - cyc.pos) + '개</b>'
     : '🎉 <b>FUN PASS</b>까지 모두 모았어요!';
   var cards = stampMilestones().map(function(r){
-    var done = cyc.pos >= r.count;
-    var isNext = next && r.count === next.count;
-    return '<div class="rgd-card' + (done ? ' done' : '') + (isNext ? ' next' : '') + (r.fun ? ' fun' : '') + '">' +
-      '<div class="rgd-c-top"><b>' + r.count + '개</b>' + (done ? '<span>✓</span>' : '') + '</div>' +
-      '<div class="rgd-c-rw">' + esc(r.reward) + '</div>' +
-      (r.detail ? '<div class="rgd-c-sub">' + esc(r.detail) + '</div>' : '') +
-      (isNext ? '<span class="rgd-c-tag">다음 목표</span>' : '') +
-    '</div>';
+    return rewardGuideCellHtml(r, cyc.pos, next, !!used[r.stamp] && cyc.pos >= r.stamp);
   }).join('');
   return '<div class="rgd-infocard">' +
       '<div class="rgd-ribbon">' +
-        '<span class="rgd-ribbon-pill">' + ico3d('stamp','i3d-22') + ' 도장 모으기</span>' +
+        '<span class="rgd-ribbon-pill">🏅 도장 모으기</span>' +
         '<p class="rgd-ribbon-sub">하루에 몇 개? 한 달엔 최대 몇 개? 💗</p>' +
       '</div>' +
       '<div class="rgd-pillars">' +
-        '<div class="rgd-pil"><span class="rgd-pil-ico">' + ico3d('sun','i3d-26') + '</span><span class="rgd-pil-lbl">아침 습관</span><b class="rgd-pil-val">' + MORNING_DAILY_MAX + '개</b></div>' +
+        '<div class="rgd-pil"><span class="rgd-pil-ico">☀️</span><span class="rgd-pil-lbl">아침 습관</span><b class="rgd-pil-val">' + MORNING_DAILY_MAX + '개</b></div>' +
         '<span class="rgd-plus">+</span>' +
-        '<div class="rgd-pil green"><span class="rgd-pil-ico">' + ico3d('sparkles','i3d-26') + '</span><span class="rgd-pil-lbl">스스로 체크</span><b class="rgd-pil-val">' + STAMP_DAILY_MAX + '개</b></div>' +
+        '<div class="rgd-pil green"><span class="rgd-pil-ico">✨</span><span class="rgd-pil-lbl">스스로 체크</span><b class="rgd-pil-val">' + STAMP_DAILY_MAX + '개</b></div>' +
         '<span class="rgd-plus">+</span>' +
-        '<div class="rgd-pil purple"><span class="rgd-pil-ico">' + ico3d('target','i3d-26') + '</span><span class="rgd-pil-lbl">오늘의 도전</span><b class="rgd-pil-val">' + (WEEKEND_BONUS_STAMP * bonusMaxOf(kidKey)) + '개</b></div>' +
+        '<div class="rgd-pil purple"><span class="rgd-pil-ico">🎯</span><span class="rgd-pil-lbl">오늘의 도전</span><b class="rgd-pil-val">' + (WEEKEND_BONUS_STAMP * bonusMaxOf(kidKey)) + '개</b></div>' +
       '</div>' +
       '<div class="rgd-capbox"><span>✨ 하루 최대 ' + stampDaily + '개 × ' + dim + '일</span><b>' + stampBaseMonth + '개</b></div>' +
       '<div class="rgd-bonus-row">' +
@@ -14170,21 +14168,23 @@ function rewardGuideStampsPageHtml(kidKey){
         '<div class="rgd-bcard"><b>📋 스스로 체크 7일 완성</b><span>주간 보너스 <em>+' + SELF_WEEK_STAMP_BONUS + '개</em> (4주 +' + (SELF_WEEK_STAMP_BONUS * 4) + '개)</span></div>' +
       '</div>' +
       '<div class="rgd-max-banner">' +
-        '<div class="rgd-max-l">' + ico3d('trophy','i3d-26') + '<div><b>' + dim + '일 기준 최대 도장</b><small>보상을 받아도 도장은 차감되지 않아요</small></div></div>' +
+        '<div class="rgd-max-l"><span>🏆</span><div><b>' + dim + '일 기준 최대 도장</b><small>보상을 받아도 도장은 차감되지 않아요</small></div></div>' +
         '<b class="rgd-max-num">' + stampTotalMonth + '개!</b>' +
         '<img class="rgd-kid-peek" src="' + avImg + '" alt="" aria-hidden="true">' +
       '</div>' +
     '</div>' +
     '<div class="rgd-stamps">' +
-      '<div class="rgd-stamps-h">' + ico3d('gift','i3d-22') + '<span style="display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:999px;background:linear-gradient(135deg,#8B5CF6,#EC4899);color:#fff;font-size:11.5px;font-weight:900;box-shadow:0 3px 10px -4px rgba(139,92,246,.55)">🎟️ 펀패스 도장 리워드</span></div>' +
+      '<div class="rgd-stamps-h"><span style="display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:999px;background:linear-gradient(135deg,#8B5CF6,#EC4899);color:#fff;font-size:11.5px;font-weight:900;box-shadow:0 3px 10px -4px rgba(139,92,246,.55)">🎟️ 펀패스 도장 리워드</span></div>' +
       '<div class="rgd-progress">' +
-        '<div class="rgd-p-top"><span>지금까지 <b>' + cyc.pos + '개</b>!</span><em>FUN PASS까지 ' + (STAMP_CYCLE - cyc.pos) + '개</em></div>' +
-        '<div class="rgd-p-bar"><i style="width:' + pct + '%"></i></div>' +
-        '<p class="rgd-p-next">' + nextMsg + '</p>' +
+        '<div class="rgd-progress-h">' + ico3d('star','i3d-18') + '<span>지금까지 <b>' + numFmt(cyc.pos) + '개</b>! · FUN PASS까지 <b>' + numFmt(STAMP_CYCLE - cyc.pos) + '개</b></span></div>' +
+        '<div class="rgd-bar"><i style="width:' + pct + '%"></i><span>1,000개</span></div>' +
+        '<p class="rgd-p-next" style="margin:6px 0 0;font-size:11.5px;color:#5B4E8C">' + nextMsg + '</p>' +
       '</div>' +
-      '<div class="rgd-round"><span class="rgd-round-pill">🎟️ ' + (cyc.passes + 1) + '회차 도전 중</span><small>1,000도장 ' + cyc.passes + '회 달성 · 누적 ' + tot + '개</small></div>' +
+      '<div class="rgd-round">' + ico3d('ticket','i3d-18') + '<span><b>' + (cyc.count + 1) + '회차 도전 중</b> · 1,000도장 <b>' + cyc.count + '회 달성</b> · 누적 ' + numFmt(tot) + '개</span></div>' +
       '<div class="rgd-grid">' + cards + '</div>' +
-      '<p class="rgd-cum"><b>1,000개 달성 시 FUN PASS!</b> (10,000원 자유 소비권 · 도장은 차감되지 않아요)</p>' +
+      '<div class="rgd-cum">' + ico3d('trophy','i3d-30') +
+        '<div class="rgd-cum-txt"><b>1,000개 달성 시 FUN PASS!</b><small>10,000원 자유 소비권 · 도장은 차감되지 않아요</small></div>' +
+        '<b class="rgd-cum-n">' + cyc.count + '회</b></div>' +
     '</div>';
 }
 function rewardGuideMoneyPageHtml(kidKey){
@@ -14195,12 +14195,12 @@ function rewardGuideMoneyPageHtml(kidKey){
   var avImg = (kidKey === 'jiwoo') ? ART.avJiwoo : ART.avSeonwoo;
   return '<div class="rgd-infocard week">' +
       '<div class="rgd-ribbon">' +
-        '<span class="rgd-ribbon-pill">' + ico3d('money','i3d-22') + ' 이번 주 용돈은 최대 <b>' + fmt(WEEK_MAX) + '</b>!</span>' +
+        '<span class="rgd-ribbon-pill">💰 이번 주 용돈은 최대 <b>' + fmt(WEEK_MAX) + '</b>!</span>' +
       '</div>' +
       '<div class="rgd-pillars">' +
-        '<div class="rgd-pil"><span class="rgd-pil-ico">' + ico3d('books','i3d-26') + '</span><span class="rgd-pil-lbl">공부</span><b class="rgd-pil-val">' + fmt(WEEK_MAX_STUDY) + '</b><span class="rgd-pil-sub">500원 × 5회</span></div>' +
+        '<div class="rgd-pil"><span class="rgd-pil-ico">📚</span><span class="rgd-pil-lbl">공부</span><b class="rgd-pil-val">' + fmt(WEEK_MAX_STUDY) + '</b><span class="rgd-pil-sub">500원 × 5회</span></div>' +
         '<span class="rgd-plus">+</span>' +
-        '<div class="rgd-pil green"><span class="rgd-pil-ico">' + ico3d('sun','i3d-26') + '</span><span class="rgd-pil-lbl">아침 습관</span><b class="rgd-pil-val">' + fmt(WEEK_MAX_MORNING) + '</b><span class="rgd-pil-sub"><em>오전 12시 전</em> 100원</span></div>' +
+        '<div class="rgd-pil green"><span class="rgd-pil-ico">☀️</span><span class="rgd-pil-lbl">아침 습관</span><b class="rgd-pil-val">' + fmt(WEEK_MAX_MORNING) + '</b><span class="rgd-pil-sub"><em>오전 12시 전</em> 100원</span></div>' +
         '<span class="rgd-plus">+</span>' +
         '<div class="rgd-pil purple"><span class="rgd-pil-ico">' + ico3d('handshake','i3d-26') + '</span><span class="rgd-pil-lbl">가족·미니알바</span><b class="rgd-pil-val">' + fmt(FAMILY_WEEK_MAX) + '</b><span class="rgd-pil-sub">스스로·함께·알바</span></div>' +
       '</div>' +
@@ -14244,10 +14244,10 @@ function rewardGuideYearPageHtml(kidKey){
       '<div class="rgd-ribbon">' +
         '<span class="rgd-ribbon-pill">' + ico3d('calendar','i3d-22') + ' 1년 용돈 안내표</span>' +
       '</div>' +
-      '<div class="rgd-rule-tip">' +
-        '✨ 달마다 <b>월요일 수(4주·5주)</b>에 맞춰 자동으로 계산돼요!<br>' +
-        '💡 <b>중복 없는 정산 기준:</b> 매주(월~일)는 <b>월요일이 속한 달</b>에 한 번만 들어가서 달이 바뀌어도 겹치거나 빠지지 않아요!<br>' +
-        '🏖️ <b>방학 FAMILY 2배 이벤트</b>가 적용돼요!' +
+      '<div class="rgd-rule-tip" style="display:flex;flex-direction:column;gap:4px">' +
+        '<div style="display:flex;gap:6px;align-items:flex-start"><span aria-hidden="true">✨</span><span>달마다 <b>월요일 수(4주·5주)</b>에 맞춰 자동으로 계산돼요!</span></div>' +
+        '<div style="display:flex;gap:6px;align-items:flex-start"><span aria-hidden="true">💡</span><span><b>중복 없는 정산 기준:</b> 매주(월~일)는 <b>월요일이 속한 달</b>에 한 번만 들어가서 달이 바뀌어도 겹치거나 빠지지 않아요!</span></div>' +
+        '<div style="display:flex;gap:6px;align-items:flex-start"><span aria-hidden="true">🏖️</span><span><b>방학 FAMILY 2배 이벤트</b>가 적용돼요!</span></div>' +
       '</div>' +
       '<div class="rgd-yrbar">' +
         '<span class="rgd-yrbar-t">📅 월별 최대 용돈</span>' +
@@ -14268,7 +14268,7 @@ function rewardGuideYearPageHtml(kidKey){
             var isCur = (mkRow === curMk);
             var hasVac = (mm.family > FAMILY_WEEK_MAX * mm.weeks);
             return '<tr' + (isCur ? ' class="cur"' : '') + '>' +
-              '<td><b>' + m + '월</b>' + (isCur ? ' 💗' : '') + (hasVac ? ' <small style="color:#0284C7;font-weight:900">🏖️방학</small>' : '') + '</td>' +
+              '<td><b>' + m + '월</b>' + (isCur ? ' 💗' : '') + (hasVac ? ' 🏖️' : '') + '</td>' +
               '<td>' + mm.weeks + '주 (' + mm.dim + '일)</td>' +
               '<td>' + fmt(wkSum) + ' + ' + fmt(bnSum) + '</td>' +
               '<td><b>' + fmt(mm.total) + '</b></td>' +
@@ -14850,19 +14850,9 @@ function rewardKidCardHtml(kidKey, primary, multi){
       '<p class="rwd-kidline" id="' + kidId('walletSub') + '">' + kidAvHtml(kd.key) + ' 이번 주 ' + fmt(st.grand) + ' · 공부·아침 ' + fmt(st.total) + ' / ' + fmt(WEEK_MAX_STUDY_ALL) + '</p>' +
     '</div>' +
 
-    /* 🎯 이번 달 용돈 목표 게이지 — 2×3 요약 카드보다 위, 카드 맨 위에 (#14106) */
-    gauge +
-
-    /* 👩‍💼 🧔 보너스 주기 (엄마 전용) — 아이 이름 바로 아래, 리워드 카드보다 먼저 */
-    '<div class="bonus-box" id="' + kidId('bonusBox') + '" data-parent-only="1" data-bonus-scope="' + kidKey + '" aria-label="' + name + ' 엄마 아빠 보너스">' +
-      '<div class="bonus-box-h"><span aria-hidden="true">' + ico3d('gift','i3d-22') + '</span><b>' + name + ' 보너스 주기</b></div>' +
-      bonusTabs +
-      '<div class="bonus-pane" data-who="mom"' + (bwho === 'mom' ? '' : ' hidden') + '>' + bonusRow('mom', '👩‍💼', '엄마 보너스', st.mom) + '</div>' +
-      '<div class="bonus-pane" data-who="dad"' + (bwho === 'dad' ? '' : ' hidden') + '>' + bonusRow('dad', '🧔', '아빠 보너스', st.dad) + '</div>' +
-      (isKidMode() ? '' : hundredCashBoxHtml()) +
-      (isKidMode() ? '' : settlementBoxHtml()) +
-      '<p class="bonus-hint">이번 주 <b>' + name + '</b>에게 주는 보너스 · 원하는 금액을 넣어 주세요<span class="bh-sub">(0원부터, 주마다 새로 정해요)</span></p>' +
-    '</div>' +
+    /* 🎯 이번 달 용돈 목표 게이지 + 2×3 요약 카드를 한 박스로 귀엽게 (#15872) */
+    '<div class="rwd-hero-box">' +
+      gauge +
 
     /* 오늘·이번 달 요약 2×2 */
     '<div class="rwd-grid">' +
@@ -14885,6 +14875,18 @@ function rewardKidCardHtml(kidKey, primary, multi){
     '<div class="rwd-high">' +
       '<div class="rh pig" role="button" tabindex="0" data-action="rwd-detail" data-kind="balance" data-kid="' + kidKey + '" aria-label="' + name + ' 남은 용돈 내역 보기"><span class="rh-ico" aria-hidden="true"><span class="rs-emo">🐷</span></span><span class="rh-label">남은 용돈</span><strong id="' + kidId('totalMoney') + '">' + fmt(bal) + '</strong></div>' +
       '<div class="rh star" role="button" tabindex="0" data-action="rwd-detail" data-kind="stamps" data-kid="' + kidKey + '" aria-label="' + name + ' 누적 스탬프 내역 보기"><span class="rh-ico" aria-hidden="true"><span class="rs-emo">🎖️</span></span><span class="rh-label">누적 스탬프</span><strong id="' + kidId('rwStampTotal') + '">' + numFmt(stamps) + '개</strong></div>' +
+    '</div>' +
+    '</div>' +
+
+    /* 👩‍💼 🧔 보너스 주기 (엄마 전용) — 요약 박스 바로 아래 */
+    '<div class="bonus-box" id="' + kidId('bonusBox') + '" data-parent-only="1" data-bonus-scope="' + kidKey + '" aria-label="' + name + ' 엄마 아빠 보너스">' +
+      '<div class="bonus-box-h"><span aria-hidden="true">' + ico3d('gift','i3d-22') + '</span><b>' + name + ' 보너스 주기</b></div>' +
+      bonusTabs +
+      '<div class="bonus-pane" data-who="mom"' + (bwho === 'mom' ? '' : ' hidden') + '>' + bonusRow('mom', '👩‍💼', '엄마 보너스', st.mom) + '</div>' +
+      '<div class="bonus-pane" data-who="dad"' + (bwho === 'dad' ? '' : ' hidden') + '>' + bonusRow('dad', '🧔', '아빠 보너스', st.dad) + '</div>' +
+      (isKidMode() ? '' : hundredCashBoxHtml()) +
+      (isKidMode() ? '' : settlementBoxHtml()) +
+      '<p class="bonus-hint">이번 주 <b>' + name + '</b>에게 주는 보너스 · 원하는 금액을 넣어 주세요<span class="bh-sub">(0원부터, 주마다 새로 정해요)</span></p>' +
     '</div>' +
 
     /* 🎯 이번 달 용돈 목표 게이지는 카드 맨 위로 올렸어요 (#14106) */
