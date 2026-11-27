@@ -15506,9 +15506,9 @@ function acMemoLines(e){
   var out = [];
   var place = String(entryPlace(e) || '').trim();
   var task = String(entryHomeTask(e) || '').trim();
-  if(isHomeStop(e && e.name)){
-    var one = acHomeMemoOf(e);
-    if(one) out.push({ ico:'📍', text:one, cls:'ha-memo' });
+  if(isHomeStop(e && e.name) || stopKindOf(e)){
+    var one = acHomeMemoOf(e) || task || place;
+    if(one) out.push({ ico:'', text:one, cls:'ha-memo' });
     return out;
   }
   if(place) out.push({ ico:'📍', text:place, cls:'ha-place' });
