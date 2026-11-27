@@ -12893,7 +12893,7 @@ function renderMissions(){
   var weekendNote = $('#studyWeekendNote');
   if(weekendNote){
     weekendNote.hidden = (!weekend || noHw);
-    weekendNote.innerHTML = '<span aria-hidden="true">📅</span> 주말 숙제 — <b>금~일 합쳐서 1번 +' + fmt(REWARD_DAILY) + '</b> · 금요일에 체크한 숙제는 토·일에도 이어져요';
+    weekendNote.innerHTML = '<span aria-hidden="true" style="flex:0 0 auto">📅</span><span style="line-height:1.45">주말 숙제 — <b>금~일 합쳐서 1번 +' + fmt(REWARD_DAILY) + '</b><br>금요일에 체크한 숙제는 토·일에도 이어져요</span>';
   }
 
   var list = $('#basicList');
