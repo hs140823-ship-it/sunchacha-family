@@ -10426,6 +10426,16 @@ function normalize(raw){
   s.familyOrder = Array.isArray(raw.familyOrder) ? raw.familyOrder.filter(function(x){ return typeof x === 'string' && x; }).slice(0, 80) : [];
   /* 🪙 미니알바도 엄마가 꾹 눌러 바꾼 순서를 그대로 지킨다 (#v36) */
   s.miniJobOrder = Array.isArray(raw.miniJobOrder) ? raw.miniJobOrder.filter(function(x){ return typeof x === 'string' && x; }).slice(0, 200) : [];
+  /* ⭐ FUN MISSION 추가·삭제·수정·순서도 저장 후 사라지지 않게 그대로 살린다 (#16014) */
+  var fp = (raw.funPool && typeof raw.funPool === 'object') ? raw.funPool : {};
+  s.funPool = {
+    add: Array.isArray(fp.add) ? fp.add.filter(function(m){ return m && m.key && m.label; }).map(function(m){
+      return { key:String(m.key), cat:String(m.cat || 'explore'), icon:String(m.icon || '⭐'), label:String(m.label).slice(0, 40), sub:String(m.sub || '').slice(0, 60) };
+    }) : [],
+    del: Array.isArray(fp.del) ? fp.del.filter(function(x){ return typeof x === 'string' && x; }) : [],
+    order: Array.isArray(fp.order) ? fp.order.filter(function(x){ return typeof x === 'string' && x; }).slice(0, 200) : [],
+    edits: (fp.edits && typeof fp.edits === 'object') ? fp.edits : {}
+  };
   if(alignFamilyMissionLists(s)) NORMALIZE_DIRTY = true;
   return s;
 }
