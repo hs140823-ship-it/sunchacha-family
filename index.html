@@ -778,7 +778,10 @@ details.ac-add summary{
 details.ac-add summary::-webkit-details-marker{display:none}
 details.ac-add summary::before{content:"＋";font-weight:900;color:#84A5C9}
 details.ac-add[open] summary{margin-bottom:9px}
-.ac-form{display:flex;flex-direction:column;gap:7px}
+.ac-form{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+.ac-inline-3{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1fr) minmax(0,1fr);gap:6px;align-items:end}
+.ac-inline-3 select,.ac-inline-3 input[type=time]{-webkit-appearance:none;appearance:none;width:100%;min-width:0;max-width:100%;box-sizing:border-box;display:block;margin:0;min-height:38px;font-size:12px;padding:6px 7px}
+.ac-time-row input[type=time],.ac-bus-time-row input[type=time]{-webkit-appearance:none;appearance:none;width:100%;min-width:0;max-width:100%;box-sizing:border-box;display:block;margin:0}
 .ac-form-row{display:flex;gap:7px;align-items:flex-start}
 .ac-form-row select{flex:1 1 auto}
 .ac-form-row > input[type=time]{flex:0 0 118px}
@@ -1062,8 +1065,8 @@ button.cal-cell:active{transform:scale(.985)}
 .cal-hol-tag{font-size:10px;font-weight:900;font-style:normal;color:#E55353;background:#FDECEC;border-radius:999px;padding:2px 8px}
 /* 🎂 기념일 관리 버튼·모달 (#v25) */
 .cal-tools{display:flex;justify-content:flex-end;margin:-4px 0 8px}
-/* 이번 달 개수 + 🎂 기념일 관리 한 줄 (#v37 — ➕ 가족 일정 추가는 달력 아래 상세 폼) */
-.cal-tools-row{display:flex;align-items:center;gap:8px;margin:-4px 1px 8px;flex-wrap:wrap}
+/* 이번 달 개수 + 🎂 기념일 관리 한 줄 (#v37 — 오늘 버튼과 여유 있게 띄운다 #14992) */
+.cal-tools-row{display:flex;align-items:center;gap:8px;margin:6px 1px 10px;flex-wrap:wrap}
 .cal-tools-row .cal-sub{margin:0;font-size:11.5px;font-weight:900;color:#41556E;flex:1 1 auto;min-width:0}
 .cal-tools-row .cal-tools{margin:0;flex:0 0 auto;display:flex;gap:6px;justify-content:flex-end}
 .cal-tools-row .cal-tool-btn{white-space:nowrap;min-height:30px;padding:5px 10px;font-size:11px}
@@ -1089,8 +1092,8 @@ body.mode-kid .cal-tools{display:none !important}
 .ann-form-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;margin-bottom:8px}
 .ann-form-row.name-row{grid-template-columns:minmax(0,1fr) 66px}
 .ann-field{display:flex;flex-direction:column;gap:2px;font-size:9.5px;font-weight:900;color:var(--muted);min-width:0}
-.ann-field input,.ann-field select{min-height:32px;padding:4px 8px;border-radius:10px;font-size:12px;width:100%;min-width:0;max-width:100%;box-sizing:border-box}
-.ann-field input[type=date]{font-size:11.5px;padding:4px 6px}
+.ann-field input,.ann-field select{min-height:36px;padding:6px 8px;border-radius:10px;font-size:12px;width:100%;min-width:0;max-width:100%;box-sizing:border-box;display:block;margin:0}
+.ann-field input[type=date]{font-size:11.5px;padding:6px 7px;-webkit-appearance:none;appearance:none}
 /* 매년 반복 체크박스 — 전역 input(width:100% · min-height:40px)을 덮어 18×18 로 고정하고 라벨은 한 줄 (#v27) */
 .ann-check{display:flex;align-items:center;justify-content:flex-start;gap:8px;font-size:11px;font-weight:800;color:var(--ink-2);margin:2px 0 8px;white-space:nowrap;text-align:left}
 .ann-check input[type=checkbox]{width:18px;height:18px;min-height:0;flex:0 0 18px;margin:0;padding:0;accent-color:var(--accent);border-radius:4px}
@@ -1457,15 +1460,15 @@ button.tt-school:hover{border-color:#BFE0F6}
 .fam-form-head{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:11.5px;font-weight:900;color:var(--ink-2);margin-bottom:8px}
 .fam-form-head small{font-size:10.5px;font-weight:700;color:var(--muted)}
 .fam-form-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px}
-/* 📅 시작일·종료일 2열 · 시간은 아래 줄 — iPhone 390px에서 겹치지 않게 (#v27) */
-.fam-date-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;flex-wrap:nowrap}
+/* 📅 시작일·종료일 2열 · 시간은 아래 줄 — iPhone Safari에서도 겹치지 않게 -webkit-appearance:none (#14992) */
+.fam-date-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;flex-wrap:nowrap}
 .fam-date-row .fam-field,.fam-date-row .set-field{min-width:0}
 /* ⏰ 시간 + 표시 방식 나란히 (#v32) */
 .fam-time-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:10px;align-items:end}
 .fam-time-row .fam-field{min-width:0;flex:1 1 auto}
-.fam-time-row input[type=time],.fam-time-row select{width:100%;font-size:11.5px;min-height:34px}
-.fam-field input,.fam-field select,.ev-edit-form .set-field input,.ev-edit-form .set-field select{min-width:0;width:100%;max-width:100%;box-sizing:border-box}
-.fam-date-row input[type=date]{font-size:11.5px;padding:4px 6px}
+.fam-time-row input[type=time],.fam-time-row select{width:100%;font-size:11.5px;min-height:36px}
+.fam-field input,.fam-field select,.ev-edit-form .set-field input,.ev-edit-form .set-field select{min-width:0;width:100%;max-width:100%;box-sizing:border-box;display:block;margin:0}
+.fam-date-row input[type=date],.ev-edit-form input[type=date],.ev-edit-form input[type=time]{font-size:12px;padding:7px 8px;min-height:38px;-webkit-appearance:none;appearance:none}
 /* 누구 일정인가요? 5개 칩이 한 줄에 (#v27) */
 .fam-pills{gap:4px}
 /* 5개 칩이 iPhone 폭에서도 한 줄에 (#v27) */
@@ -2581,7 +2584,17 @@ body.mode-viewer .rl-form{display:none !important}
 /* =========================================================
    💎 REWARD 대시보드 (#6320) — 시안 2장을 합친 배치
    ========================================================= */
-.rwd-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin:2px 2px 12px}
+.rwd-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin:2px 2px 10px}
+/* 💎 REWARD 3페이지 좌우 슬라이드 (#14860 · #14877) */
+.rwd-pagetabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;margin:0 0 11px;padding:3px;border-radius:999px;
+  background:#fff;border:1.5px solid rgba(148,124,214,.22);box-shadow:0 6px 14px -12px rgba(70,50,120,.28)}
+.rwd-pagetab{border:0;background:transparent;border-radius:999px;padding:6px 3px;font-family:inherit;font-size:10.5px;font-weight:900;
+  color:#6C7F96;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:-.03em}
+.rwd-pagetab.on{background:linear-gradient(135deg,#EDE4FF,#FCE7F3);color:#4B3678;box-shadow:inset 0 0 0 1.5px rgba(148,124,214,.45)}
+.rwd-pager{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;gap:0;align-items:flex-start}
+.rwd-pager::-webkit-scrollbar{display:none}
+.rwd-page{flex:0 0 100%;width:100%;min-width:0;scroll-snap-align:start;box-sizing:border-box}
+.rgd-kid-peek{width:38px;height:38px;border-radius:50%;object-fit:cover;border:2px solid #fff;box-shadow:0 4px 10px -6px rgba(180,70,130,.5);flex:0 0 auto;background:#fff}
 /* 💵 정산 · ⚙️ 설정 · 리워드 안내 — 헤더 오른쪽 한 줄 (#13883) */
 .rwd-tools{flex:0 0 auto;display:flex;align-items:center;justify-content:flex-end;gap:5px;flex-wrap:nowrap}
 .rwd-tools .head-sched{min-width:42px}
@@ -2891,6 +2904,14 @@ body.mode-viewer .rl-form{display:none !important}
 .rgd-tbl td small{display:block;font-size:8.5px;font-weight:700;color:#7D7499}
 .rgd-tbl tr.tot td{background:linear-gradient(90deg,#FFF0F7,#FFF7E6);font-size:11.5px;font-weight:900;color:#E11D62}
 .rgd-tbl tr.tot td:first-child{color:#4C243B}
+.rgd-tbl tr.cur td{background:#FFF4F9;color:#BE185D;font-weight:900}
+.rgd-yrbar{display:flex;align-items:center;justify-content:space-between;gap:6px;margin:9px 0 6px}
+.rgd-yrbar-t{font-size:11px;font-weight:900;color:#4C243B;letter-spacing:-.01em}
+.rgd-yrctrl{display:inline-flex;align-items:center;gap:4px;background:#fff;border:1.5px solid #E9DDFC;border-radius:999px;padding:2px 6px}
+.rgd-yrbtn{border:0;background:transparent;font-family:inherit;font-size:11px;font-weight:900;color:#6D28D9;cursor:pointer;padding:1px 5px;line-height:1.2}
+.rgd-yrctrl b{font-size:11px;font-weight:900;color:#3B2E6E;min-width:42px;text-align:center}
+.rgd-rule-tip{margin:0 0 8px;padding:7px 9px;border-radius:12px;background:#fff;border:1.5px dashed #D8B4FE;
+  font-size:9.5px;font-weight:800;color:#5B4678;line-height:1.4;word-break:keep-all}
 .rgd-rules-h{display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:900;color:#3B2E6E;margin-bottom:7px}
 .rgd-rule-list{display:flex;flex-direction:column;gap:5px}
 .rgd-rule{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:13px;background:#fff;border:1.5px solid #EFE9FB}
@@ -4944,46 +4965,36 @@ body.mode-kid .home-more{display:none}
       <div class="card-head">
         <div>
           <h2>🏫 오늘의 학원<small class="ac-date" id="acTodayDate" aria-live="polite"></small></h2>
-          <p class="sub" id="academySub">요일별 시간표는 아래 ＋로 넣고 ✏️로 고쳐요</p>
+          <p class="sub" id="academySub">요일별 시간표는 위 ＋로 넣고 ✏️로 고쳐요</p>
         </div>
       </div>
-      <!-- 🗓 월~일 요일 바 — 기본은 오늘, 누르면 이번 주 그 요일 동선 (#v36) -->
-      <div class="ac-daybar" id="acDayBar" role="group" aria-label="동선 볼 요일 고르기"></div>
-      <div id="todayRoute"></div>
-      <div id="todayAcademy"></div>
-      <p class="ac-admin-hint" data-parent-only="1">🧡 엄마는 아래 「학원 · 셔틀 동선 추가」와 ✏️로 학원 시간표·셔틀 픽업 동선을 직접 넣고 고치고 지울 수 있어요</p>
-      <p class="ac-ro-hint">👀 학원 시간표와 동선은 보기만 해요 · 엄마 화면에서 고칠 수 있어요</p>
-      <details class="ac-add" id="acAddPanel" data-parent-only="1">
+      <details class="ac-add" id="acAddPanel" data-parent-only="1" style="margin:0 0 10px">
         <summary>➕ 학원 · 셔틀 동선 추가 <small>엄마 화면</small></summary>
-        <div class="ac-form">
+        <div class="ac-form" id="acAddForm">
           <p class="ac-form-hint" id="acFormHint">11월 시간표에 추가돼요</p>
-          <div class="ac-form-row">
-            <select id="acDay" aria-label="요일">
-              <option value="1">월요일</option>
-              <option value="2">화요일</option>
-              <option value="3">수요일</option>
-              <option value="4">목요일</option>
-              <option value="5">금요일</option>
-              <option value="6">토요일</option>
-              <option value="0">일요일</option>
-            </select>
+          <div class="ac-pick-block">
+            <span class="ac-pick-label">학원 이모지 · 장소 이모지 (선택)</span>
+            <div class="ac-emoji-row" id="acEmojiRow" role="group" aria-label="학원 이모지 고르기"></div>
+            <div class="ac-stop-row" id="acStopRow" role="group" aria-label="장소 이모지 고르기" style="margin-top:5px"></div>
           </div>
-          <div class="ac-form-row ac-time-row">
+          <input id="acName" type="text" maxlength="24" placeholder="학원 이름 · 장소 이름 (예: 수학학원 · 양원성당 · 집)" aria-label="학원 이름 또는 장소 이름">
+          <div class="ac-inline-3">
+            <label class="ac-time-field">요일
+              <select id="acDay" aria-label="요일">
+                <option value="1">월요일</option>
+                <option value="2">화요일</option>
+                <option value="3">수요일</option>
+                <option value="4">목요일</option>
+                <option value="5">금요일</option>
+                <option value="6">토요일</option>
+                <option value="0">일요일</option>
+              </select>
+            </label>
             <label class="ac-time-field">시작<input id="acStart" type="time" value="16:00" aria-label="시작 시간"></label>
             <label class="ac-time-field">종료<input id="acEnd" type="time" aria-label="종료 시간 (모르면 비워 두세요)"></label>
           </div>
-          <input id="acName" type="text" maxlength="24" placeholder="학원 이름 (예: 수학학원 · 영어)" aria-label="학원 이름">
-          <div class="ac-pick-block">
-            <span class="ac-pick-label">학원 이모지 (선택)</span>
-            <div class="ac-emoji-row" id="acEmojiRow" role="group" aria-label="학원 이모지 고르기"></div>
-          </div>
-          <div class="ac-pick-block">
-            <span class="ac-pick-label">정류장 · 활동 (선택)</span>
-            <div class="ac-stop-row" id="acStopRow" role="group" aria-label="정류장·활동 프리셋 고르기"></div>
-          </div>
-          <input id="acStopPlace" type="text" maxlength="20" placeholder="만날 장소 (예: 양원성당 · 학교 앞)" aria-label="만날 장소" hidden>
-          <input id="acHomeTask" type="text" maxlength="40" placeholder="집에서 할 일 (선택) 예: 간식 먹고 숙제" aria-label="집에서 할 일">
-          <input id="acPlace" type="text" maxlength="40" placeholder="학원 장소·주소 (예: 양원역로10길)" aria-label="학원 장소나 주소">
+          <input id="acPlace" type="text" maxlength="40" placeholder="학원 장소 · 주소 입력 (선택 · 예: 양원역로10길)" aria-label="학원 장소나 주소">
+          <input id="acMemo" type="text" maxlength="40" placeholder="메모 · 학원/장소에서 할 일 (선택 · 예: 간식, 준비물)" aria-label="메모">
           <div class="ac-form-row">
             <select id="acMove" aria-label="갈 때 이동 방식">
               <option value="">갈 때 (선택)</option>
@@ -5004,10 +5015,12 @@ body.mode-kid .home-more{display:none}
           </div>
           <p class="ac-form-hint" id="acMoveHint">갈 때·올 때를 따로 고를 수 있어요 · 도보는 동선에 쓰지 않아요</p>
           <div class="ac-form-row ac-bus-row" id="acBusRow" hidden>
-            <input id="acPickup" type="text" maxlength="20" placeholder="승차 장소 (예: 양원성당)" aria-label="학원차 승차·하차 장소">
+            <input id="acGoPlace" type="text" maxlength="20" placeholder="갈 때 승차장소 (예: 양원성당)" aria-label="갈 때 학원차 승차장소" hidden>
+            <input id="acBackPlace" type="text" maxlength="20" placeholder="올 때 하차장소 (예: 학원 앞)" aria-label="올 때 학원차 하차장소" hidden>
           </div>
           <div class="ac-form-row ac-bus-time-row" id="acBusTimeRow" hidden>
-            <label class="ac-time-field">학원차 시각<input id="acPickupTime" type="time" aria-label="학원차 탑승 시각 (자차는 비워 두세요)"></label>
+            <label class="ac-time-field" id="acGoBusTimeWrap" hidden>갈 때 학원차 시간<input id="acGoBusTime" type="time" aria-label="갈 때 학원차 탑승 시각"></label>
+            <label class="ac-time-field" id="acBackBusTimeWrap" hidden>올 때 학원차 시간<input id="acBackBusTime" type="time" aria-label="올 때 학원차 탑승 시각"></label>
           </div>
           <div class="ac-hide" aria-hidden="true">
             <select id="acPickupKind" aria-label="승차·하차 구분" tabindex="-1">
@@ -5019,10 +5032,14 @@ body.mode-kid .home-more{display:none}
               <option value="도착">도착</option>
             </select>
           </div>
-          <input id="acMemo" type="text" maxlength="40" placeholder="메모 (선택) 예: 준비물 챙기기" aria-label="메모">
           <button class="btn btn-primary btn-sm" data-action="add-academy">학원 · 동선 추가</button>
         </div>
       </details>
+      <!-- 🗓 월~일 요일 바 — 기본은 오늘, 누르면 이번 주 그 요일 동선 (#v36) -->
+      <div class="ac-daybar" id="acDayBar" role="group" aria-label="동선 볼 요일 고르기"></div>
+      <div id="todayRoute"></div>
+      <div id="todayAcademy"></div>
+      <p class="ac-ro-hint">👀 학원 시간표와 동선은 보기만 해요 · 엄마 화면에서 고칠 수 있어요</p>
     </section>
 
   </section>
@@ -5128,16 +5145,16 @@ body.mode-kid .home-more{display:none}
       <section class="card missions" id="missionsCard">
         <div class="card-head">
           <div>
-            <h2>🎯 오늘의 학습 체크</h2>
+            <h2>🎯 오늘의 학습 확인</h2>
             <p class="sub" id="missionSub">매일 공부 4개를 모두 채워요</p>
           </div>
           <div class="progress-pill" id="missionProgress">0/4</div>
         </div>
         <div class="track"><i id="missionBar"></i></div>
 
-        <!-- 📚 이번 주 숙제 5회 스탬프판 (#v25) -->
+        <!-- 📚 이번 주 공부 (#14949) -->
         <div class="hw-board" id="studyHwBoard">
-          <div class="hwb-head"><b>📚 이번 주 숙제 5회 스탬프판</b><span id="hwBoardCount">0/5회</span></div>
+          <div class="hwb-head"><b>📚 이번 주 공부</b><span id="hwBoardCount">0/5회</span></div>
           <div class="hwb-days" id="hwBoardDays"></div>
           <div id="hwBoardMonth"></div>
           <p class="hwb-note">월 15회 +1,000원 · 20회 +2,000원 보너스 🎉</p>
@@ -5226,24 +5243,36 @@ body.mode-kid .home-more{display:none}
       <div class="rwd-tools">
         <button type="button" class="tab-mini head-sched" data-action="pay" data-parent-only="1" aria-label="이번 달 용돈 정산하기"><span class="tm-ico" aria-hidden="true">💵</span><span class="tm-label">정산하기</span></button>
         <button type="button" class="tab-mini head-sched" data-action="open-settings" data-parent-only="1" aria-label="부모님 설정 열기"><span class="tm-ico" aria-hidden="true">⚙️</span><span class="tm-label">부모님 설정</span></button>
-        <button type="button" class="rwd-guide" data-action="reward-guide" aria-label="리워드 규칙 안내 열기">리워드 안내 <span aria-hidden="true">›</span></button>
       </div>
     </header>
-    <!-- 💵 정산 · ⚙️ 설정은 헤더로 올렸다 (#13883) — 전체/선우/지우 어느 스위치에서도 그대로 보인다 -->
-    <!-- 🪙 이번 주 용돈 + 👩‍💼 🧔 보너스 — 리워드 페이지 맨 위, 아이별 카드 (#6310)
-         엄마·아빠 화면: 스위치(전체/선우/지우) 기준 / 아이 화면: 자기 카드 하나 -->
-    <div class="wallet-stack" id="walletStack"></div>
+    <div class="rwd-pagetabs" id="rwdPageTabs" role="tablist" aria-label="리워드 페이지 전환">
+      <button type="button" class="rwd-pagetab on" data-action="rwd-page" data-page="1" role="tab" aria-selected="true">💎 1. 현황</button>
+      <button type="button" class="rwd-pagetab" data-action="rwd-page" data-page="2" role="tab" aria-selected="false">🏅 2. 도장</button>
+      <button type="button" class="rwd-pagetab" data-action="rwd-page" data-page="3" role="tab" aria-selected="false">👑 3. 용돈</button>
+      <button type="button" class="rwd-pagetab" data-action="rwd-page" data-page="4" role="tab" aria-selected="false">📅 4. 12달</button>
+    </div>
+    <div class="rwd-pager" id="rwdPager">
+      <div class="rwd-page" data-rwd-page="1">
+        <!-- 💵 정산 · ⚙️ 설정은 헤더로 올렸다 (#13883) — 전체/선우/지우 어느 스위치에서도 그대로 보인다 -->
+        <!-- 🪙 이번 주 용돈 + 👩‍💼 🧔 보너스 — 리워드 페이지 맨 위, 아이별 카드 (#6310)
+             엄마·아빠 화면: 스위치(전체/선우/지우) 기준 / 아이 화면: 자기 카드 하나 -->
+        <div class="wallet-stack" id="walletStack"></div>
 
-    <!-- 💎 이번 주 3페이지 스탬프 모아보기 (#v26)
-         1장 스스로 체크 7일 · 2장 아침 미션 7일 · 3장 숙제 5일 — 좌우로 밀거나 탭으로 넘겨요
-         HOME · MY SPACE · STUDY 의 컴팩트 스탬프판과 같은 기록을 본다 -->
-    <div id="rewardStampHome"><div class="rwd-stamps" id="rewardStampStack" aria-label="이번 주 스탬프 모아보기"></div></div>
+        <!-- 💎 이번 주 3페이지 스탬프 모아보기 (#v26)
+             1장 스스로 체크 7일 · 2장 아침 미션 7일 · 3장 숙제 5일 — 좌우로 밀거나 탭으로 넘겨요
+             HOME · MY SPACE · STUDY 의 컴팩트 스탬프판과 같은 기록을 본다 -->
+        <div id="rewardStampHome"><div class="rwd-stamps" id="rewardStampStack" aria-label="이번 주 스탬프 모아보기"></div></div>
 
-    <!-- 📚 이번 달 완성 보너스는 각 스탬프판(💎 이번 주 스탬프 · HOME · MY SPACE · STUDY) 아래로 옮겼다 (#13783) -->
+        <!-- 📚 이번 달 완성 보너스는 각 스탬프판(💎 이번 주 스탬프 · HOME · MY SPACE · STUDY) 아래로 옮겼다 (#13783) -->
 
-    <!-- 💎 한눈에 보기 (획득·사용·잔액 + 📋 사용 기록)
-         제목은 위 섹션 머리글 한 곳에서만 말해요 (#4470) -->
-    <div class="reward-overview" id="rewardOverview" aria-label="리워드 요약"></div>
+        <!-- 💎 한눈에 보기 (획득·사용·잔액 + 📋 사용 기록)
+             제목은 위 섹션 머리글 한 곳에서만 말해요 (#4470) -->
+        <div class="reward-overview" id="rewardOverview" aria-label="리워드 요약"></div>
+      </div>
+      <div class="rwd-page" data-rwd-page="2" id="rwdGuideStamps"></div>
+      <div class="rwd-page" data-rwd-page="3" id="rwdGuideMoney"></div>
+      <div class="rwd-page" data-rwd-page="4" id="rwdGuideYear"></div>
+    </div>
 
   </section>
     </section>
@@ -5409,13 +5438,13 @@ var WEEK_MAX_STUDY_ALL = WEEK_MAX_STUDY + WEEK_MAX_MORNING;   // 3,200 (공부 2
    · MY SPACE 7일 완성 4주 +1,000 */
 var MONTH_BONUS_STUDY = [[20, 2000], [15, 1000]];
 var MONTH_BONUS_MORNING = [[30, 1000], [20, 500]];
-var MONTH_BONUS_SPACE = [[4, 1000]];
+var MONTH_BONUS_SPACE = [[4, 1000], [2, 500]];
 var WEEK_MAX = WEEK_MAX_STUDY_ALL + 3000; // 6,200 (공부 2,500 + 아침 700 + 가족 미션·미니알바 주간 상한 FAMILY_WEEK_MAX 3,000)
 
 /* 🏫📚🌱 매일 공부 분류 — 엄마가 넣은 항목을 이 세 묶음으로 보여 준다 */
 var STUDY_CATS = [
-  { key:'school',  label:'학교 숙제',   icon:'🏫' },
-  { key:'academy', label:'학원 숙제',   icon:'📚' },
+  { key:'school',  label:'학교 공부',   icon:'🏫' },
+  { key:'academy', label:'학원 공부',   icon:'📚' },
   { key:'self',    label:'스스로 공부', icon:'🌱' }
 ];
 function studyCatDef(key){
@@ -7971,7 +8000,7 @@ var TAB_META = {
   calendar: { icon:'📅', label:'CALENDAR', name:'우리집 달력', desc:'가족 일정을 한 달에 모아 봐요' },
   schedule: { icon:'🗓', label:'SCHEDULE', name:'학원 시간표', desc:'학원 시간표 · 동선 · 학원비' },
   myspace:  { icon:'✨', label:'MY SPACE', name:'내 공간',     desc:'스스로 챙기는 습관과 도장' },
-  study:    { icon:'📚', label:'STUDY',    name:'오늘의 공부', desc:'오늘의 학습 체크 · 타이머' },
+  study:    { icon:'📚', label:'STUDY',    name:'오늘의 공부', desc:'오늘의 학습 확인 · 타이머' },
   reward:   { icon:'💎', label:'REWARD',   name:'리워드',      desc:'획득 · 사용 · 잔액' },
   family:   { icon:'🤝', label:'FAMILY',   name:'패밀리 팀',   desc:'주말 가족 미션과 형제 나눔' }
 };
@@ -10577,6 +10606,8 @@ function cleanEntries(list){
       move: moveModeOf(e.move) ? e.move : '',
       pickup: e.pickup ? String(e.pickup).trim().slice(0, 20) : '',
       pickupTime: /^\d{1,2}:\d{2}$/.test(e.pickupTime || '') ? normalizeHHMM(e.pickupTime) : '',
+      goBusTime: /^\d{1,2}:\d{2}$/.test(e.goBusTime || '') ? normalizeHHMM(e.goBusTime) : '',
+      backBusTime: /^\d{1,2}:\d{2}$/.test(e.backBusTime || '') ? normalizeHHMM(e.backBusTime) : '',
       pickupKind: PICKUP_KINDS.some(function(k){ return k.key === e.pickupKind; }) ? e.pickupKind : '',
       via: e.via ? String(e.via).trim().slice(0, 24) : '',
       viaMove: moveModeOf(e.viaMove) ? e.viaMove : '',
@@ -10718,17 +10749,15 @@ function miniBoardHtml(kidKey, kind){
     if(done) n++;
     slots += '<span class="mb-day stamp-slot' + (done ? ' on' : '') + '">' + stampDiscHtml(done, art) + '<b>' + labels[i] + '</b></span>';
   });
-  var title = (kind === 'morning') ? '🌞 아침 미션 7일 스탬프판' : '🌟 이번 주 스스로 체크 7일 스탬프판';
-  /* 🌟 스스로 체크는 7일 보너스 도장 + 월 4주 완성 보너스까지 알려 준다 (#13723) */
-  var notes = (kind === 'morning')
-    ? ['7일 완성 → 보너스 도장 +3개']
-    : ['하루 5개 완료 시 오늘 🌟 · 7일 완성 시 보너스 도장 +' + SELF_WEEK_STAMP_BONUS + '개', '월 4주 완성 보너스 +' + fmt(MONTH_BONUS_SPACE[0][1])];
-  var note = notes.map(function(t){ return '<span class="mb-note-line">' + t + '</span>'; }).join('');
-  /* ① 도장판 → ② 이번 달 목표 진행바 → ③ 맨 아래 설명 문구 (#14106 순서 통일) */
+  var title = (kind === 'morning') ? '🌞 아침 미션 7일 스탬프판' : '🌟 이번 주 스스로 확인';
+  var note = (kind === 'morning')
+    ? '7일 완성 → 보너스 도장 +3개'
+    : '하루 5개 완료 시 오늘 🌟 · 7일 완성 시 보너스 도장 +' + SELF_WEEK_STAMP_BONUS + '개';
+  /* ① 도장판 → ② 박스 없는 7일 안내(도장 바로 아래) → ③ 이번 달 목표 진행바 (#14949) */
   return '<div class="mini-board"><div class="mb-head"><b>' + title + '</b><span>' + n + '/7일</span></div>' +
     '<div class="mb-days">' + slots + '</div>' +
+    '<p class="mb-note" style="margin:5px 0 4px;background:none;border:0;padding:0">' + note + '</p>' +
     monthBonusBlockHtml(kidKey, (kind === 'morning') ? 'morning' : 'space') +
-    '<p class="mb-note">' + note + '</p>' +
   '</div>';
 }
 function renderStudyHwBoard(kidKey){
@@ -11762,29 +11791,30 @@ function monthBonusAmountOf(kidKey, mk){
   monthBonusRowsOf(kidKey, mk || currentMonthKey()).forEach(function(r){ sum += r.amount; });
   return sum;
 }
-/* 📅 그 달에 하루라도 걸친 주(월요일 시작)들 — 달 최대치 계산용 (#13828) */
-function monthWeekStartsOf(mk){
-  var out = [], seen = {};
+/* 📅 그 달에 「월요일」이 속한 주들만 — monthEarnedOf와 똑같이 한 주도 중복·누락 없이 딱 한 달에만 속한다 (#14749) */
+function monthMondaysOf(mk){
+  var out = [];
   monthDaysOf(mk).forEach(function(dk){
-    var w = weekStartKey(fromKey(dk));
-    if(seen[w]) return;
-    seen[w] = true; out.push(w);
+    if(fromKey(dk).getDay() === 1) out.push(dk);
   });
   return out;
 }
-/* 🎯 그 달에 정기 보상으로 벌 수 있는 최대 — 2월(28일) 4주 · 나머지 달 5주 / STUDY 500원×20회 + 보너스 2,000 / 아침 100×일수 + 1,000 / FAMILY 3,000×주 / MY SPACE 4주 +1,000 (#14716) */
+/* 🎯 그 달에 정기 보상으로 벌 수 있는 최대 — 월요일이 속한 달 기준(4주 또는 5주) + 월간 보너스 (#14749) */
 function monthMaxEarnOf(kidKey, mk){
   mk = mk || currentMonthKey();
   var dim = monthDimOf(mk);
-  var mon = Number(String(mk).slice(5, 7));
-  var weeksCount = (mon === 2 && dim <= 28) ? 4 : 5;
-  var study = REWARD_DAILY * 20 + MONTH_BONUS_STUDY[0][1];
-  var morning = MORNING_MONEY * dim + MONTH_BONUS_MORNING[0][1];
-  var family = FAMILY_WEEK_MAX * weeksCount;
+  var weeks = monthMondaysOf(mk);
+  var wc = weeks.length;
+  var study = WEEK_MAX_STUDY * wc + MONTH_BONUS_STUDY[0][1];
+  var morningBonus = (dim >= MONTH_BONUS_MORNING[0][0]) ? MONTH_BONUS_MORNING[0][1]
+                   : (dim >= MONTH_BONUS_MORNING[1][0] ? MONTH_BONUS_MORNING[1][1] : 0);
+  var morning = WEEK_MAX_MORNING * wc + morningBonus;
+  var family = 0;
+  weeks.forEach(function(w){ family += familyWeekCap(w); });
   var space = MONTH_BONUS_SPACE[0][1];
   return {
-    month: mk, weeks: weeksCount, dim: dim,
-    study: study, morning: morning, family: family, space: space,
+    month: mk, weeks: wc, dim: dim,
+    study: study, morning: morning, morningBonus: morningBonus, family: family, space: space,
     total: study + morning + family + space
   };
 }
@@ -11800,7 +11830,7 @@ function monthGoalGaugeHtml(kidKey, me, mmax, idSuffix){
   var foot = over
     ? '🎉 최대보다 +' + fmt(total - max) + ' 더 벌었어요!'
     : (done ? '🎉 이번 달 최대까지 모두 달성!' : fmt(left) + ' 남았어요');
-  var parts = 'FAMILY ' + fmt(FAMILY_WEEK_MAX) + '×' + mmax.weeks + '주 · STUDY ' + fmt(REWARD_DAILY) + '×20회 · ☀️ ' + fmt(MORNING_MONEY) + '×' + monthDimOf(mmax.month) + '일 · 📈 보너스 ' + fmt(MONTH_BONUS_STUDY[0][1] + MONTH_BONUS_MORNING[0][1] + MONTH_BONUS_SPACE[0][1]);
+  var parts = '주 ' + fmt(WEEK_MAX) + '×' + mmax.weeks + '주(월요일 기준) · 📈 월간 보너스 ' + fmt(MONTH_BONUS_STUDY[0][1] + (mmax.morningBonus || 0) + MONTH_BONUS_SPACE[0][1]);
   var extra = '📅 월별 최대 금액 상이 · 💯 100점·🎁 보너스 별도';   /* 목표 계산 밖에서 더 쌓이는 돈 (#14279 · #14290 · #14415) */
   var extra2 = '매달 일수·주 수·방학에 따라 달라져요';
   return '<div class="rwd-goal' + (done ? ' done' : '') + '" id="rwdGoal' + (idSuffix ? '-' + idSuffix : '') + '" role="group" aria-label="이번 달 용돈 목표">' +
@@ -11810,11 +11840,11 @@ function monthGoalGaugeHtml(kidKey, me, mmax, idSuffix){
       '<div class="rwd-goal-foot"><small>' + foot + '</small><em>' + parts + '</em><em class="rwd-goal-extra">' + extra + '</em><em class="rwd-goal-sub">' + extra2 + '</em></div>' +
     '</div>';
 }
-/* 📈 이번 달 보너스 한 줄 — 도장판 아래에 진행바·현재 달성액을 함께 (#13783 · #13787) */
+/* 📈 이번 달 보너스 한 줄 — 도장판 아래에 진행바·현재 달성액을 함께 (#13783 · #13787 · #14949) */
 var MNB_INLINE_HEAD = {
   morning: '☀️ 이번 달 아침 습관 3가지',
   space:   '✨ 이번 달 MY SPACE 7일',
-  study:   '📚 이번 달 STUDY 숙제 완료'
+  study:   '📚 이번 달 공부 완료'
 };
 function monthBonusBlockHtml(kidKey, key){
   var rows = monthBonusRowsOf(kidKey, currentMonthKey());
@@ -11822,16 +11852,21 @@ function monthBonusBlockHtml(kidKey, key){
   rows.forEach(function(x){ if(x.key === key) r = x; });
   if(!r || !MNB_INLINE_HEAD[key]) return '';
   var pct = r.amount ? 100 : Math.max(4, Math.min(100, Math.round(r.count / r.top * 100)));
-  var tierTxt = (key === 'space')
-    ? '4주 완성 보너스 +' + fmt(r.tiers[0][1])
-    : r.tiers.slice().reverse().map(function(t){ return t[0] + r.unit + ' +' + fmt(t[1]); }).join(' · ');
-  var msg = r.count >= r.top ? (r.top + r.unit + ' 모두 달성! 🎉')
-          : (r.nextNeed ? ('다음 ' + r.nextNeed + r.unit + ' → +' + fmt(r.nextAmount)) : '');
+  var tierHtml = '';
+  if(key === 'morning'){
+    tierHtml = '30일 중 20일 성공 보너스 → +500원<br>30일 완성 보너스 → +1,000원 🎉';
+  }else if(key === 'space'){
+    tierHtml = '2주 완성 보너스 +500원<br>4주 완성 보너스 +1,000원 🎉';
+  }else{
+    var msg = r.count >= r.top ? (r.top + r.unit + ' 모두 달성! 🎉')
+            : (r.nextNeed ? ('다음 ' + r.nextNeed + r.unit + ' → +' + fmt(r.nextAmount)) : '');
+    tierHtml = r.tiers.slice().reverse().map(function(t){ return t[0] + r.unit + ' +' + fmt(t[1]); }).join(' · ') + (msg ? ' · ' + msg : '');
+  }
   return '<div class="mnb-inline' + (r.amount ? ' done' : '') + '" data-mb-key="' + key + '">' +
       '<div class="mnb-inline-h"><b>' + MNB_INLINE_HEAD[key] + '</b>' +
         '<span class="mnb-inline-n">' + r.count + '/' + r.top + r.unit + '</span></div>' +
       '<span class="mnb-track"><i style="width:' + pct + '%"></i></span>' +
-      '<div class="mnb-inline-f"><small>' + tierTxt + (msg ? ' · ' + msg : '') + '</small>' +
+      '<div class="mnb-inline-f"><small>' + tierHtml + '</small>' +
         '<b>' + (r.amount ? '+' + fmt(r.amount) + ' 완성!' : '+0원') + '</b></div>' +
     '</div>';
 }
@@ -12775,15 +12810,15 @@ function renderMorningBoard(kidKey){
     '</div>';
   }).join('');
   var bonus = morningWeekBonus(kidKey);
-  /* ① 도장판 → ② 이번 달 목표 진행바 → ③ 맨 아래 설명 문구 (#14106 순서 통일) */
+  /* ① 도장판 → ② 박스 없는 7일 완성 안내 → ③ 이번 달 목표 진행바 (#14949) */
   box.innerHTML =
     '<div class="mb-head"><span class="mb-title">🌞 아침 미션 7일 스탬프판</span>' +
       '<span class="mb-pill">' + doneDays + '/7일</span></div>' +
     '<div class="mb-days">' + cells + '</div>' +
-    monthBonusBlockHtml(kidKey, 'morning') +
-    '<div class="mb-foot' + (bonus ? ' done' : '') + '">' +
-      (bonus ? '🎉 7일 완성! 보너스 도장 +' + bonus + '개 적립' : '7일 완성 → 보너스 도장 +' + MORNING_WEEK_BONUS + '개 🎉') +
-    '</div>';
+    '<div class="mb-foot' + (bonus ? ' done' : '') + '" style="background:none;border:0;padding:4px 0 2px">' +
+      (bonus ? '🎉 7일 완성! 보너스 도장 +' + bonus + '개 적립' : '7일 완성 → 보너스 도장 +' + MORNING_WEEK_BONUS + '개') +
+    '</div>' +
+    monthBonusBlockHtml(kidKey, 'morning');
 }
 function renderMissions(){
   var kidKey = scopedKidKey();
@@ -13963,28 +13998,51 @@ function rewardGuideHtml(kidKey){
         '</div>' +
       '</div>' +
 
-      /* ③ 한 달 용돈 최대치 */
+      /* ③ 한 달 용돈 최대치 (우리 한 달 기준: 월요일이 속한 달 = 중복 0 + 매년 자동 계산 12달 표) */
       '<div class="rgd-infocard month">' +
         '<div class="rgd-ribbon">' +
           '<span class="rgd-ribbon-pill">👑 한 달 용돈 최대치</span>' +
-          '<p class="rgd-ribbon-sub">' + monNum + '월(' + dim + '일 · ' + mmax.weeks + '주 기준) 최대 ' + fmt(mmax.total) + '을 모을 수 있어요!</p>' +
+          '<p class="rgd-ribbon-sub">' + monNum + '월(월요일 ' + mmax.weeks + '번) 최대 ' + fmt(mmax.total) + '을 모을 수 있어요!</p>' +
         '</div>' +
-        '<table class="rgd-tbl" aria-label="한 달 용돈 최대치 표">' +
-          '<thead><tr><th>항목</th><th>월 최대 계산</th><th>월 최대 금액</th></tr></thead>' +
+        '<div class="rgd-rule-tip">💡 <b>중복 없는 정산 기준:</b> 매주(월~일)는 <b>월요일이 속한 달</b>에 한 번만 들어가서 달이 바뀌어도 겹치거나 빠지지 않아요!</div>' +
+        '<table class="rgd-tbl" aria-label="이달 용돈 최대치 표">' +
+          '<thead><tr><th>항목</th><th>이달 계산 (' + mmax.weeks + '주)</th><th>월 최대</th></tr></thead>' +
           '<tbody>' +
-            '<tr><td>👨‍👩‍👧‍👦 <b>FAMILY</b></td><td>' + fmt(FAMILY_WEEK_MAX) + ' × ' + mmax.weeks + '주</td><td><b>' + fmt(mmax.family) + '</b></td></tr>' +
-            '<tr><td>📖 <b>STUDY</b></td><td>' + fmt(REWARD_DAILY) + ' × 20회</td><td><b>' + fmt(REWARD_DAILY * 20) + '</b></td></tr>' +
-            '<tr><td>🏆 <b>숙제 완료 보너스</b><small>STUDY 달성 보너스 (15회 +1,000 · 20회 +2,000)</small></td><td>20회 달성</td><td><b>' + fmt(MONTH_BONUS_STUDY[0][1]) + '</b></td></tr>' +
-            '<tr><td>☀️ <b>아침 습관</b><small>도장은 시간 무관 · 100원은 오전에만</small></td><td>' + fmt(MORNING_MONEY) + ' × ' + dim + '일</td><td><b>' + fmt(MORNING_MONEY * dim) + '</b></td></tr>' +
-            '<tr><td>🎯 <b>아침 습관 보너스</b><small>월 20일 +500 · 30일 +1,000 (최고 구간만)</small></td><td>30일 달성</td><td><b>' + fmt(MONTH_BONUS_MORNING[0][1]) + '</b></td></tr>' +
+            '<tr><td>👨‍👩‍👧‍👦 <b>FAMILY</b></td><td>주 3,000원 × ' + mmax.weeks + '주</td><td><b>' + fmt(mmax.family) + '</b></td></tr>' +
+            '<tr><td>📖 <b>STUDY</b></td><td>주 2,500원 × ' + mmax.weeks + '주</td><td><b>' + fmt(WEEK_MAX_STUDY * mmax.weeks) + '</b></td></tr>' +
+            '<tr><td>🏆 <b>숙제 완료 보너스</b><small>월 15회 +1,000 · 20회 +2,000</small></td><td>20회 달성</td><td><b>' + fmt(MONTH_BONUS_STUDY[0][1]) + '</b></td></tr>' +
+            '<tr><td>☀️ <b>아침 습관</b><small>오전 12시 전 · 주 최대 700원</small></td><td>주 700원 × ' + mmax.weeks + '주</td><td><b>' + fmt(WEEK_MAX_MORNING * mmax.weeks) + '</b></td></tr>' +
+            '<tr><td>🎯 <b>아침 습관 보너스</b><small>월 20일 +500 · 30일 +1,000</small></td><td>' + (dim >= 30 ? '30일 달성' : '20일 달성') + '</td><td><b>' + fmt(mmax.morningBonus) + '</b></td></tr>' +
             '<tr><td>⭐ <b>MY SPACE</b></td><td>4주 완성</td><td><b>' + fmt(MONTH_BONUS_SPACE[0][1]) + '</b></td></tr>' +
-            '<tr class="tot"><td>총합</td><td>' + dim + '일 · ' + mmax.weeks + '주 기준</td><td>' + fmt(mmax.total) + '</td></tr>' +
+            '<tr class="tot"><td>이달 총합</td><td>' + monNum + '월 (' + mmax.weeks + '주 기준)</td><td>' + fmt(mmax.total) + '</td></tr>' +
           '</tbody>' +
         '</table>' +
-        '<div class="rgd-max-banner">' +
-          '<div class="rgd-max-l"><span>👑</span><div><b>보너스 최대 4,000원 별도 포함</b><small>31일 달 32,100원 · 30일 달 32,000원 · 2월(28일·4주) 28,800원</small></div></div>' +
-          '<b class="rgd-max-num">' + fmt(mmax.total) + '</b>' +
+        '<div class="rgd-yrbar">' +
+          '<span class="rgd-yrbar-t">📅 1년 12달 월별 안내표</span>' +
+          '<span class="rgd-yrctrl">' +
+            '<button type="button" class="rgd-yrbtn" data-action="rgd-year" data-delta="-1" aria-label="이전 해">◀</button>' +
+            '<b>' + REWARD_GUIDE_YEAR + '년</b>' +
+            '<button type="button" class="rgd-yrbtn" data-action="rgd-year" data-delta="1" aria-label="다음 해">▶</button>' +
+          '</span>' +
         '</div>' +
+        '<table class="rgd-tbl" aria-label="' + REWARD_GUIDE_YEAR + '년 12달 월별 용돈 안내표">' +
+          '<thead><tr><th>월</th><th>주차 (월요일 수)</th><th>주간 + 보너스</th><th>월 최대</th></tr></thead>' +
+          '<tbody>' +
+            [1,2,3,4,5,6,7,8,9,10,11,12].map(function(m){
+              var mkRow = REWARD_GUIDE_YEAR + '-' + pad2(m);
+              var mm = monthMaxEarnOf(kidKey, mkRow);
+              var wkSum = mm.family + (WEEK_MAX_STUDY * mm.weeks) + (WEEK_MAX_MORNING * mm.weeks);
+              var bnSum = MONTH_BONUS_STUDY[0][1] + mm.morningBonus + MONTH_BONUS_SPACE[0][1];
+              var isCur = (mkRow === curMk);
+              return '<tr' + (isCur ? ' class="cur"' : '') + '>' +
+                '<td><b>' + m + '월</b>' + (isCur ? ' 💗' : '') + '</td>' +
+                '<td>' + mm.weeks + '주 (' + mm.dim + '일)</td>' +
+                '<td>' + fmt(wkSum) + ' + ' + fmt(bnSum) + '</td>' +
+                '<td><b>' + fmt(mm.total) + '</b></td>' +
+              '</tr>';
+            }).join('') +
+          '</tbody>' +
+        '</table>' +
       '</div>' +
     '</div>';
 
@@ -14021,6 +14079,7 @@ function ruleRowRaw(icon, titleHtml, subHtml, val){
   '</div>';
 }
 var REWARD_GUIDE_PAGE = 1;
+var REWARD_GUIDE_YEAR = new Date().getFullYear();
 function setRewardGuidePage(n){
   var p = Number(n) < 2 ? 1 : 2;
   if(p === REWARD_GUIDE_PAGE) return false;
@@ -14029,10 +14088,197 @@ function setRewardGuidePage(n){
   if(root && root.querySelector('.rgd-modal')) openModal(rewardGuideHtml(REWARD_GUIDE_KID || rewardGuidePick('')));
   return true;
 }
+function setRewardGuideYear(delta){
+  REWARD_GUIDE_YEAR = Math.max(2024, Math.min(2035, REWARD_GUIDE_YEAR + (Number(delta) || 0)));
+  var root = $('#modalRoot');
+  if(root && root.querySelector('.rgd-modal')) openModal(rewardGuideHtml(REWARD_GUIDE_KID || rewardGuidePick('')));
+  renderRewardGuidePages();
+}
+function rewardGuideStampsPageHtml(kidKey){
+  var curMk = currentMonthKey();
+  var dim = monthDimOf(curMk);
+  var avImg = (kidKey === 'jiwoo') ? ART.avJiwoo : ART.avSeonwoo;
+  var stampDaily = MORNING_DAILY_MAX + STAMP_DAILY_MAX + (WEEKEND_BONUS_STAMP * bonusMaxOf(kidKey));
+  var stampBaseMonth = stampDaily * dim;
+  var stampWeekBonusMonth = (MORNING_WEEK_BONUS * 4) + (SELF_WEEK_STAMP_BONUS * 4);
+  var stampTotalMonth = stampBaseMonth + stampWeekBonusMonth;
+  var tot = totalStamps(kidKey);
+  var cyc = stampCycleOf(tot);
+  var pct = Math.max(4, Math.min(100, Math.round(cyc.pos / STAMP_CYCLE * 100)));
+  var next = nextStampMilestone(tot);
+  var nextMsg = next
+    ? '다음 <b>' + next.count + '개 · ' + esc(next.reward) + '</b>까지 <b>' + (next.count - cyc.pos) + '개</b>'
+    : '🎉 <b>FUN PASS</b>까지 모두 모았어요!';
+  var cards = stampMilestones().map(function(r){
+    var done = cyc.pos >= r.count;
+    var isNext = next && r.count === next.count;
+    return '<div class="rgd-card' + (done ? ' done' : '') + (isNext ? ' next' : '') + (r.fun ? ' fun' : '') + '">' +
+      '<div class="rgd-c-top"><b>' + r.count + '개</b>' + (done ? '<span>✓</span>' : '') + '</div>' +
+      '<div class="rgd-c-rw">' + esc(r.reward) + '</div>' +
+      (r.detail ? '<div class="rgd-c-sub">' + esc(r.detail) + '</div>' : '') +
+      (isNext ? '<span class="rgd-c-tag">다음 목표</span>' : '') +
+    '</div>';
+  }).join('');
+  return '<div class="rgd-infocard">' +
+      '<div class="rgd-ribbon">' +
+        '<span class="rgd-ribbon-pill">' + ico3d('stamp','i3d-22') + ' 도장 모으기</span>' +
+        '<p class="rgd-ribbon-sub">하루에 몇 개? 한 달엔 최대 몇 개? 💗</p>' +
+      '</div>' +
+      '<div class="rgd-pillars">' +
+        '<div class="rgd-pil"><span class="rgd-pil-ico">' + ico3d('sun','i3d-26') + '</span><span class="rgd-pil-lbl">아침 습관</span><b class="rgd-pil-val">' + MORNING_DAILY_MAX + '개</b></div>' +
+        '<span class="rgd-plus">+</span>' +
+        '<div class="rgd-pil green"><span class="rgd-pil-ico">' + ico3d('sparkles','i3d-26') + '</span><span class="rgd-pil-lbl">스스로 체크</span><b class="rgd-pil-val">' + STAMP_DAILY_MAX + '개</b></div>' +
+        '<span class="rgd-plus">+</span>' +
+        '<div class="rgd-pil purple"><span class="rgd-pil-ico">' + ico3d('target','i3d-26') + '</span><span class="rgd-pil-lbl">오늘의 도전</span><b class="rgd-pil-val">' + (WEEKEND_BONUS_STAMP * bonusMaxOf(kidKey)) + '개</b></div>' +
+      '</div>' +
+      '<div class="rgd-capbox"><span>✨ 하루 최대 ' + stampDaily + '개 × ' + dim + '일</span><b>' + stampBaseMonth + '개</b></div>' +
+      '<div class="rgd-bonus-row">' +
+        '<div class="rgd-bcard"><b>📅 아침 습관 7일 완성</b><span>주간 보너스 <em>+' + MORNING_WEEK_BONUS + '개</em> (4주 +' + (MORNING_WEEK_BONUS * 4) + '개)</span></div>' +
+        '<div class="rgd-bcard"><b>📋 스스로 체크 7일 완성</b><span>주간 보너스 <em>+' + SELF_WEEK_STAMP_BONUS + '개</em> (4주 +' + (SELF_WEEK_STAMP_BONUS * 4) + '개)</span></div>' +
+      '</div>' +
+      '<div class="rgd-max-banner">' +
+        '<div class="rgd-max-l">' + ico3d('trophy','i3d-26') + '<div><b>' + dim + '일 기준 최대 도장</b><small>보상을 받아도 도장은 차감되지 않아요</small></div></div>' +
+        '<b class="rgd-max-num">' + stampTotalMonth + '개!</b>' +
+        '<img class="rgd-kid-peek" src="' + avImg + '" alt="" aria-hidden="true">' +
+      '</div>' +
+    '</div>' +
+    '<div class="rgd-stamps">' +
+      '<div class="rgd-stamps-h">' + ico3d('gift','i3d-22') + '<span style="display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:999px;background:linear-gradient(135deg,#8B5CF6,#EC4899);color:#fff;font-size:11.5px;font-weight:900;box-shadow:0 3px 10px -4px rgba(139,92,246,.55)">🎟️ 펀패스 도장 리워드</span></div>' +
+      '<div class="rgd-progress">' +
+        '<div class="rgd-p-top"><span>지금까지 <b>' + cyc.pos + '개</b>!</span><em>FUN PASS까지 ' + (STAMP_CYCLE - cyc.pos) + '개</em></div>' +
+        '<div class="rgd-p-bar"><i style="width:' + pct + '%"></i></div>' +
+        '<p class="rgd-p-next">' + nextMsg + '</p>' +
+      '</div>' +
+      '<div class="rgd-round"><span class="rgd-round-pill">🎟️ ' + (cyc.passes + 1) + '회차 도전 중</span><small>1,000도장 ' + cyc.passes + '회 달성 · 누적 ' + tot + '개</small></div>' +
+      '<div class="rgd-grid">' + cards + '</div>' +
+      '<p class="rgd-cum"><b>1,000개 달성 시 FUN PASS!</b> (10,000원 자유 소비권 · 도장은 차감되지 않아요)</p>' +
+    '</div>';
+}
+function rewardGuideMoneyPageHtml(kidKey){
+  var curMk = currentMonthKey();
+  var mmax = monthMaxEarnOf(kidKey, curMk);
+  var dim = mmax.dim || monthDimOf(curMk);
+  var monNum = Number(String(curMk).slice(5, 7));
+  var avImg = (kidKey === 'jiwoo') ? ART.avJiwoo : ART.avSeonwoo;
+  return '<div class="rgd-infocard week">' +
+      '<div class="rgd-ribbon">' +
+        '<span class="rgd-ribbon-pill">' + ico3d('money','i3d-22') + ' 이번 주 용돈은 최대 <b>' + fmt(WEEK_MAX) + '</b>!</span>' +
+      '</div>' +
+      '<div class="rgd-pillars">' +
+        '<div class="rgd-pil"><span class="rgd-pil-ico">' + ico3d('books','i3d-26') + '</span><span class="rgd-pil-lbl">공부</span><b class="rgd-pil-val">' + fmt(WEEK_MAX_STUDY) + '</b><span class="rgd-pil-sub">500원 × 5회</span></div>' +
+        '<span class="rgd-plus">+</span>' +
+        '<div class="rgd-pil green"><span class="rgd-pil-ico">' + ico3d('sun','i3d-26') + '</span><span class="rgd-pil-lbl">아침 습관</span><b class="rgd-pil-val">' + fmt(WEEK_MAX_MORNING) + '</b><span class="rgd-pil-sub"><em>오전 12시 전</em> 100원</span></div>' +
+        '<span class="rgd-plus">+</span>' +
+        '<div class="rgd-pil purple"><span class="rgd-pil-ico">' + ico3d('handshake','i3d-26') + '</span><span class="rgd-pil-lbl">가족·미니알바</span><b class="rgd-pil-val">' + fmt(FAMILY_WEEK_MAX) + '</b><span class="rgd-pil-sub">스스로·함께·알바</span></div>' +
+      '</div>' +
+      '<div class="rgd-fam">' + ico3d('handshake','i3d-30') +
+        '<div><b>가족 미션 · 정산</b><p>가족 미션과 100원 미니알바를 합쳐 주간 최대 ' + fmt(FAMILY_WEEK_MAX) + '까지 쌓여요. 용돈은 매달 계좌이체나 현금으로 정산해요. 💗</p></div>' +
+      '</div>' +
+      '<div class="rgd-split2">' +
+        '<div class="rgd-mini"><b>📅 달력 월에 따라</b><small>일수(28·30·31일)와 주 수(4·5주)에 따라 월 최대 금액이 달라져요</small></div>' +
+        '<div class="rgd-mini pink"><b>🏆 100점 맞았어요!</b><small>100점 현금(+5,000원)과 엄마·아빠 보너스(무한대)는 별도로 추가됩니다!</small></div>' +
+      '</div>' +
+    '</div>' +
+    '<div class="rgd-infocard month">' +
+      '<div class="rgd-ribbon">' +
+        '<span class="rgd-ribbon-pill">' + ico3d('crown','i3d-22') + ' 한 달 용돈 최대치</span>' +
+        '<p class="rgd-ribbon-sub">' + monNum + '월(월요일 ' + mmax.weeks + '번) 최대 ' + fmt(mmax.total) + '을 모을 수 있어요! ✨</p>' +
+      '</div>' +
+      '<div class="rgd-rule-tip">💡 <b>중복 없는 정산 기준:</b> 매주(월~일)는 <b>월요일이 속한 달</b>에 한 번만 들어가서 달이 바뀌어도 겹치거나 빠지지 않아요!</div>' +
+      '<table class="rgd-tbl" aria-label="이달 용돈 최대치 표">' +
+        '<thead><tr><th>항목</th><th>이달 계산 (' + mmax.weeks + '주)</th><th>월 최대</th></tr></thead>' +
+        '<tbody>' +
+          '<tr><td>👨‍👩‍👧‍👦 <b>FAMILY</b></td><td>주 3,000원 × ' + mmax.weeks + '주</td><td><b>' + fmt(mmax.family) + '</b></td></tr>' +
+          '<tr><td>📖 <b>STUDY</b></td><td>주 2,500원 × ' + mmax.weeks + '주</td><td><b>' + fmt(WEEK_MAX_STUDY * mmax.weeks) + '</b></td></tr>' +
+          '<tr><td>🏆 <b>숙제 완료 보너스</b><small>월 15회 +1,000 · 20회 +2,000</small></td><td>20회 달성</td><td><b>' + fmt(MONTH_BONUS_STUDY[0][1]) + '</b></td></tr>' +
+          '<tr><td>☀️ <b>아침 습관</b><small>오전 12시 전 · 주 최대 700원</small></td><td>주 700원 × ' + mmax.weeks + '주</td><td><b>' + fmt(WEEK_MAX_MORNING * mmax.weeks) + '</b></td></tr>' +
+          '<tr><td>🎯 <b>아침 습관 보너스</b><small>월 20일 +500 · 30일 +1,000</small></td><td>' + (dim >= 30 ? '30일 달성' : '20일 달성') + '</td><td><b>' + fmt(mmax.morningBonus) + '</b></td></tr>' +
+          '<tr><td>⭐ <b>MY SPACE</b></td><td>4주 완성</td><td><b>' + fmt(MONTH_BONUS_SPACE[0][1]) + '</b></td></tr>' +
+          '<tr class="tot"><td>이달 총합</td><td>' + monNum + '월 (' + mmax.weeks + '주 기준)</td><td>' + fmt(mmax.total) + '</td></tr>' +
+        '</tbody>' +
+      '</table>' +
+      '<div class="rgd-max-banner">' +
+        '<div class="rgd-max-l">' + ico3d('trophy','i3d-26') + '<div><b>📈 이번 달 완성 보너스</b><small>가장 높은 구간 하나만 지급해요</small></div></div>' +
+        '<span style="display:inline-flex;align-items:center;justify-content:center;padding:4px 10px;border-radius:999px;background:linear-gradient(135deg,#F472B6,#A855F7);color:#fff;font-size:11px;font-weight:900;white-space:nowrap;box-shadow:0 3px 10px -4px rgba(168,85,247,.5)">최대 +4,000원</span>' +
+        '<img class="rgd-kid-peek" src="' + avImg + '" alt="" aria-hidden="true">' +
+      '</div>' +
+    '</div>';
+}
+function rewardGuideYearPageHtml(kidKey){
+  var curMk = currentMonthKey();
+  var avImg = (kidKey === 'jiwoo') ? ART.avJiwoo : ART.avSeonwoo;
+  return '<div class="rgd-infocard month">' +
+      '<div class="rgd-ribbon">' +
+        '<span class="rgd-ribbon-pill">' + ico3d('calendar','i3d-22') + ' 1년 12달 월별 안내표</span>' +
+        '<p class="rgd-ribbon-sub">달마다 월요일 수(4주·5주)에 맞춰 자동으로 계산돼요! ✨</p>' +
+      '</div>' +
+      '<div class="rgd-rule-tip">💡 <b>중복 없는 정산 기준:</b> 매주(월~일)는 <b>월요일이 속한 달</b>에 한 번만 들어가서 달이 바뀌어도 겹치거나 빠지지 않아요!</div>' +
+      '<div class="rgd-yrbar">' +
+        '<span class="rgd-yrbar-t">📅 연도별 최대 용돈</span>' +
+        '<span class="rgd-yrctrl">' +
+          '<button type="button" class="rgd-yrbtn" data-action="rgd-year" data-delta="-1" aria-label="이전 해">◀</button>' +
+          '<b>' + REWARD_GUIDE_YEAR + '년</b>' +
+          '<button type="button" class="rgd-yrbtn" data-action="rgd-year" data-delta="1" aria-label="다음 해">▶</button>' +
+        '</span>' +
+      '</div>' +
+      '<table class="rgd-tbl" aria-label="' + REWARD_GUIDE_YEAR + '년 12달 월별 용돈 안내표">' +
+        '<thead><tr><th>월</th><th>주차 (월요일 수)</th><th>주간 + 보너스</th><th>월 최대</th></tr></thead>' +
+        '<tbody>' +
+          [1,2,3,4,5,6,7,8,9,10,11,12].map(function(m){
+            var mkRow = REWARD_GUIDE_YEAR + '-' + pad2(m);
+            var mm = monthMaxEarnOf(kidKey, mkRow);
+            var wkSum = mm.family + (WEEK_MAX_STUDY * mm.weeks) + (WEEK_MAX_MORNING * mm.weeks);
+            var bnSum = MONTH_BONUS_STUDY[0][1] + mm.morningBonus + MONTH_BONUS_SPACE[0][1];
+            var isCur = (mkRow === curMk);
+            return '<tr' + (isCur ? ' class="cur"' : '') + '>' +
+              '<td><b>' + m + '월</b>' + (isCur ? ' 💗' : '') + '</td>' +
+              '<td>' + mm.weeks + '주 (' + mm.dim + '일)</td>' +
+              '<td>' + fmt(wkSum) + ' + ' + fmt(bnSum) + '</td>' +
+              '<td><b>' + fmt(mm.total) + '</b></td>' +
+            '</tr>';
+          }).join('') +
+        '</tbody>' +
+      '</table>' +
+      '<div class="rgd-max-banner">' +
+        '<div class="rgd-max-l">' + ico3d('trophy','i3d-26') + '<div><b>매년 자동 계산!</b><small>새해가 되면 달력 월요일 수에 맞춰 자동으로 바뀌어요</small></div></div>' +
+        '<img class="rgd-kid-peek" src="' + avImg + '" alt="" aria-hidden="true">' +
+      '</div>' +
+    '</div>';
+}
+function renderRewardGuidePages(){
+  var p2 = $('#rwdGuideStamps'), p3 = $('#rwdGuideMoney'), p4 = $('#rwdGuideYear');
+  if(!p2 && !p3 && !p4) return;
+  var k = rewardGuidePick('');
+  if(p2) p2.innerHTML = rewardGuideStampsPageHtml(k);
+  if(p3) p3.innerHTML = rewardGuideMoneyPageHtml(k);
+  if(p4) p4.innerHTML = rewardGuideYearPageHtml(k);
+}
+function setRewardPage(n, instant){
+  var p = Math.max(1, Math.min(4, Number(n) || 1));
+  var pager = $('#rwdPager');
+  if(pager && pager.clientWidth){
+    pager.scrollTo({ left: (p - 1) * pager.clientWidth, behavior: instant ? 'auto' : 'smooth' });
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('#rwdPageTabs .rwd-pagetab'), function(b){
+    var on = Number(b.getAttribute('data-page')) === p;
+    b.classList.toggle('on', on);
+    b.setAttribute('aria-selected', on ? 'true' : 'false');
+  });
+}
+function syncRewardPagerScroll(pager){
+  if(!pager || !pager.clientWidth) return;
+  var p = Math.max(1, Math.min(4, Math.round(pager.scrollLeft / pager.clientWidth) + 1));
+  Array.prototype.forEach.call(document.querySelectorAll('#rwdPageTabs .rwd-pagetab'), function(b){
+    var on = Number(b.getAttribute('data-page')) === p;
+    b.classList.toggle('on', on);
+    b.setAttribute('aria-selected', on ? 'true' : 'false');
+  });
+}
 function openRewardGuide(kidKey){
   var k = rewardGuidePick(kidKey);
   REWARD_GUIDE_KID = k;
   REWARD_GUIDE_PAGE = 1;
+  REWARD_GUIDE_YEAR = new Date().getFullYear();
   openModal(rewardGuideHtml(k));
 }
 /* 도장 로드맵 (설정 · 스탬프 리워드 모달에서 씀) */
@@ -14851,22 +15097,22 @@ function rwsPageOf(kidKey, page){
   var title = '', note = '';
   if(page === 1){
     title = '🌞 아침 미션 7일 스탬프판';
-    note = '7일 완성 → 보너스 도장 +3개<br>12시 이전 완성 보너스 ' + fmt(MORNING_MONEY) + ' · 월 20회 +' + fmt(MONTH_BONUS_MORNING[1][1]) + ' · 30회 +' + fmt(MONTH_BONUS_MORNING[0][1]);
+    note = '7일 완성 → 보너스 도장 +3개';
     days.forEach(function(dk, i){
       var done = morningAllDone(kidKey, dk);
       if(done) n++;
       slots += rwsDayCell(done, RWS_WD[i], dk, false, STAMP_ART.sun);
     });
   }else if(page === 2){
-    title = '🌟 스스로 체크 7일 스탬프판';
-    note = '7일 완성 → 보너스 도장 +' + SELF_WEEK_STAMP_BONUS + '개<br>월 4주 완성 보너스 +' + fmt(MONTH_BONUS_SPACE[0][1]);
+    title = '🌟 이번 주 스스로 확인';
+    note = '하루 5개 완료 시 오늘 🌟 · 7일 완성 시 보너스 도장 +' + SELF_WEEK_STAMP_BONUS + '개';
     days.forEach(function(dk, i){
       var done = selfCheckCountOn(kidKey, dk) > 0;
       if(done) n++;
       slots += rwsDayCell(done, RWS_WD[i], dk, false, STAMP_ART.star);
     });
   }else{
-    title = '📚 숙제 5일 스탬프판';
+    title = '📚 이번 주 공부';
     note = '하루 ' + fmt(REWARD_DAILY) + ' (주 최대 ' + fmt(WEEK_MAX_STUDY) + ')<br>월 15회 +' + fmt(MONTH_BONUS_STUDY[1][1]) + ' · 20회 +' + fmt(MONTH_BONUS_STUDY[0][1]);
     var labels = ['월', '화', '수', '목', '금~일'];
     for(var i = 0; i < 5; i++){
@@ -14880,8 +15126,8 @@ function rwsPageOf(kidKey, page){
     '<article class="rws-page" id="rwsPage-' + kidKey + '-' + page + '" data-page="' + page + '" role="tabpanel">' +
       '<div class="rws-ph"><b>' + title + '</b><span>' + n + '/' + total + (page === 3 ? '회' : '일') + '</span></div>' +
       '<div class="rws-days">' + slots + '</div>' +
+      '<p class="rws-note" style="background:none;border:0;padding:2px 0 4px">' + note + '</p>' +
       monthBonusBlockHtml(kidKey, page === 1 ? 'morning' : (page === 2 ? 'space' : 'study')) +
-      '<p class="rws-note">' + note + '</p>' +
     '</article>' };
 }
 function rwsTabHtml(kidKey, page, label){
@@ -15104,12 +15350,14 @@ function renderWallet(){
     var shAll = $('#rewardStampHome'), ovAll = $('#rewardOverview');
     if(shAll) shAll.hidden = true;
     if(ovAll) ovAll.hidden = true;
+    renderRewardGuidePages();
     return;
   }
   /* 아이를 고른 보기에서는 다시 보이게 */
   var shOne = $('#rewardStampHome'), ovOne = $('#rewardOverview');
   if(shOne) shOne.hidden = false;
   if(ovOne) ovOne.hidden = false;
+  renderRewardGuidePages();
   var inputId = function(k, which){ return which + 'BonusInput' + (k === keys[0] ? '' : '--' + k); };
   /* 다시 그려도 입력 중이던 보너스 금액은 잃지 않는다 */
   var keep = {};
@@ -15376,15 +15624,17 @@ function weekRouteHtml(kidKey, mk, day){
   return h;
 }
 /* 세로 동선의 차량 한 줄 — 도보는 그리지 않는다 (#v31 · #13570) */
-function acVehLegHtml(key, e){
+function acVehLegHtml(key, e, dir){
   var m = moveModeOf(key);
   if(!m || key === 'walk') return '';
   var sub = '';
   if(isBusMove(key)){
     var bits = [];
-    var place = e ? ((key === e.move) ? (e.goPlace || e.pickup) : (e.backPlace || e.pickup)) : '';
+    var isGo = dir ? (dir === 'go') : (key === e.move);
+    var place = e ? (isGo ? (e.goPlace || e.pickup) : (e.backPlace || e.pickup)) : '';
+    var btime = e ? (isGo ? (e.goBusTime || e.pickupTime) : (e.backBusTime || e.pickupTime)) : '';
     if(place) bits.push(place);
-    if(e && e.pickupTime) bits.push(e.pickupTime);
+    if(btime) bits.push(btime);
     if(bits.length) sub = bits.join(' ');
   }else if(e && e.pickup && isCarMove(key)){
     sub = e.pickup;
@@ -15537,18 +15787,18 @@ function renderAcademy(){
       var outKey = prev ? (entryBackMove(prev) || '') : '';
       var inKey = a.move || '';
       if(aIdx === 0){
-        html += acVehLegHtml(inKey, a);
+        html += acVehLegHtml(inKey, a, 'go');
       }else if(outKey && inKey && outKey === inKey){
         /* 같은 차 — 한 번만 */
-        html += acVehLegHtml(inKey, a);
+        html += acVehLegHtml(inKey, a, 'go');
       }else if(outKey && inKey){
         /* 갈아타는 날만 두 줄 */
-        html += acVehLegHtml(outKey, prev);
-        html += acVehLegHtml(inKey, a);
+        html += acVehLegHtml(outKey, prev, 'back');
+        html += acVehLegHtml(inKey, a, 'go');
       }else if(outKey){
-        html += acVehLegHtml(outKey, prev);
+        html += acVehLegHtml(outKey, prev, 'back');
       }else if(inKey){
-        html += acVehLegHtml(inKey, a);
+        html += acVehLegHtml(inKey, a, 'go');
       }
       var isNext = isTodayView && !marked && toMin(a.start) >= nowMin;
       if(isNext) marked = true;
@@ -15583,7 +15833,7 @@ function renderAcademy(){
     });
     /* 마지막 학원에서 집으로 오는 길 (#v31) */
     var lastE = todayList[todayList.length - 1];
-    if(lastE) html += acVehLegHtml(entryBackMove(lastE) || '', lastE);
+    if(lastE) html += acVehLegHtml(entryBackMove(lastE) || '', lastE, 'back');
     /* 세로 동선의 끝은 「↓ 🏠 집」 글자가 아니라 집 장소 칸으로 (#v35) */
     html += '<li class="ac-item home-stop ac-thin end-home" aria-label="집 도착">' +
       '🏠 <b>집</b><small>도착</small></li>';
@@ -20090,24 +20340,33 @@ function addAcademy(){
   var endEl = $('#acEnd');
   var nameEl = $('#acName');
   var memoEl = $('#acMemo');
+  var nameEl = $('#acName'), dayEl = $('#acDay'), startEl = $('#acStart'), endEl = $('#acEnd'), memoEl = $('#acMemo');
+  var stop = acStopDef(AC_FORM_STOP) ? AC_FORM_STOP : '';
   var name = nameEl ? String(nameEl.value || '').trim() : '';
-  if(!name){ toast('학원 이름을 적어 주세요'); if(nameEl) nameEl.focus(); return; }
+  if(!name && stop){
+    name = (stop === 'home') ? '집' : (stop === 'parking' ? '주차장' : (stop === 'school' ? '학교' : '장소'));
+  }
+  if(!name){ toast('학원 또는 장소 이름을 적어 주세요'); if(nameEl) nameEl.focus(); return; }
   var day = dayEl ? Number(dayEl.value) : new Date().getDay();
   if(!(day >= 0 && day <= 6)) day = 1;
   var start = startEl && /^\d{2}:\d{2}$/.test(startEl.value) ? startEl.value : '16:00';
   var end = endEl && /^\d{2}:\d{2}$/.test(endEl.value) ? endEl.value : '';
   if(end && toMin(end) <= toMin(start)){ toast('종료 시간은 시작보다 늦어야 해요'); return; }
   var memo = memoEl ? String(memoEl.value || '').trim().slice(0, 40) : '';
-  var taskEl = $('#acHomeTask');
-  var homeTask = taskEl ? String(taskEl.value || '').trim().slice(0, 40) : '';
   var placeEl = $('#acPlace');
   var place = placeEl ? String(placeEl.value || '').trim().slice(0, 40) : '';
   var moveEl = $('#acMove');
   var backEl = $('#acBackMove');
-  var pickupEl = $('#acPickup');
-  var move = moveEl && moveModeOf(moveEl.value) ? moveEl.value : '';
-  var backMove = backEl && moveModeOf(backEl.value) ? backEl.value : '';
-  var pickup = pickupEl ? String(pickupEl.value || '').trim().slice(0, 20) : '';
+  var goPlaceEl = $('#acGoPlace'), backPlaceEl = $('#acBackPlace');
+  var goTimeEl = $('#acGoBusTime'), backTimeEl = $('#acBackBusTime');
+  var move = (moveEl && moveModeOf(moveEl.value)) ? moveEl.value : '';
+  var backMove = (backEl && moveModeOf(backEl.value)) ? backEl.value : '';
+  var goPlace = (move === 'bus' && goPlaceEl) ? String(goPlaceEl.value || '').trim().slice(0, 20) : '';
+  var backPlace = (backMove === 'bus' && backPlaceEl) ? String(backPlaceEl.value || '').trim().slice(0, 20) : '';
+  var goBusTime = (move === 'bus' && goTimeEl && /^\d{2}:\d{2}$/.test(goTimeEl.value)) ? goTimeEl.value : '';
+  var backBusTime = (backMove === 'bus' && backTimeEl && /^\d{2}:\d{2}$/.test(backTimeEl.value)) ? backTimeEl.value : '';
+  var pickup = goPlace || backPlace;
+  var pickupTime = goBusTime || backBusTime;
   var kindEl = $('#acPickupKind');
   var pickupKind = kindEl && pickupKindOf(kindEl.value) ? kindEl.value : '';
   /* 학원차를 고른 쪽에 따라 승차/하차 — 둘 다면 구분 없이 (#v31) */
@@ -20115,17 +20374,12 @@ function addAcademy(){
   else if(move === 'bus') pickupKind = '승차';
   else if(backMove === 'bus') pickupKind = '하차';
   else pickupKind = '';
-  var pTimeEl = $('#acPickupTime');
-  var pickupTime = pTimeEl && /^\d{2}:\d{2}$/.test(pTimeEl.value) ? pTimeEl.value : '';
-  var stopPlaceEl = $('#acStopPlace');
-  var stopPlace = stopPlaceEl ? String(stopPlaceEl.value || '').trim().slice(0, 20) : '';
-  var stop = acStopDef(AC_FORM_STOP) ? AC_FORM_STOP : '';
-  /* 주차장·장소 프리셋은 안내 문구에 들어갈 장소를 승·하차 칸에도 같이 둔다 */
+  var stopPlace = (stop === 'parking' || stop === 'place') ? name.slice(0, 20) : '';
   if((stop === 'parking' || stop === 'place') && !pickup) pickup = stopPlace;
   var kidKey = state.current;
   var mk = state.month;
   var box = ensureMonth(kidKey, mk);
-  box.entries.push({ id: uid(), day: day, start: start, end: end, name: name.slice(0, 24), memo: memo, place: place, move: move, backMove: backMove, pickup: pickup, pickupTime: pickupTime, pickupKind: pickupKind, homeTask: homeTask, emoji: AC_FORM_EMOJI, stop: stop, stopPlace: stopPlace, goPlace: (move === 'bus' ? pickup : ''), backPlace: (backMove === 'bus' ? pickup : '') });
+  box.entries.push({ id: uid(), day: day, start: start, end: end, name: name.slice(0, 24), memo: memo, place: place, move: move, backMove: backMove, pickup: pickup, pickupTime: pickupTime, goBusTime: goBusTime, backBusTime: backBusTime, pickupKind: pickupKind, homeTask: '', emoji: AC_FORM_EMOJI, stop: stop, stopPlace: stopPlace, goPlace: goPlace, backPlace: backPlace });
   /* 🏫 학교 프리셋 — 그날 하교 시간을 이 방과후가 끝나는 시각으로 */
   if(stop === 'school' && end){
     if(!box.school || typeof box.school !== 'object') box.school = {};
@@ -20189,10 +20443,7 @@ function editAcademyModal(id){
       '</div>' +
       '<div class="set-grid" style="margin-top:7px">' +
         '<label class="set-field">장소·주소<input type="text" id="editAcPlace" maxlength="40" value="' + esc(e.place || '') + '" placeholder="예: 양원역로10길 · 집이면 비워 두세요"></label>' +
-        '<label class="set-field">메모 (선택)<input type="text" id="editAcMemo" maxlength="40" value="' + esc(e.memo) + '"></label>' +
-      '</div>' +
-      '<div class="set-grid" style="margin-top:7px">' +
-        '<label class="set-field" style="grid-column:1/-1">🏠 집에서 할 일 (선택)<input type="text" id="editAcHomeTask" maxlength="40" value="' + esc(e.homeTask || '') + '" placeholder="예: 간식 · 가방 챙기기"></label>' +
+        '<label class="set-field">메모 (선택)<input type="text" id="editAcMemo" maxlength="40" value="' + esc(e.memo || e.homeTask || '') + '" placeholder="예: 간식 · 가방 챙기기"></label>' +
       '</div>' +
       '<div class="set-grid" style="margin-top:7px">' +
         '<label class="set-field">갈 때 이동<select id="editAcMove">' +
@@ -20210,10 +20461,12 @@ function editAcademyModal(id){
       '</div>' +
       '<p class="set-hint" id="editAcMoveHint" style="margin-top:5px">갈 때·올 때를 따로 고를 수 있어요 · 도보는 동선에 그리지 않아요</p>' +
       '<div class="ac-form-row ac-bus-row" id="editAcBusRow"' + (bus ? '' : ' hidden') + ' style="margin-top:7px">' +
-        '<input type="text" id="editAcPickup" maxlength="20" value="' + esc(e.pickup) + '" placeholder="' + busLabel + ' (예: 양원성당)">' +
+        '<input type="text" id="editAcGoPlace" maxlength="20" value="' + esc(e.goPlace || e.pickup || '') + '" placeholder="갈 때 승차장소 (예: 양원성당)"' + (e.move === 'bus' ? '' : ' hidden') + '>' +
+        '<input type="text" id="editAcBackPlace" maxlength="20" value="' + esc(e.backPlace || e.pickup || '') + '" placeholder="올 때 하차장소 (예: 학원 앞)"' + (entryBackMove(e) === 'bus' ? '' : ' hidden') + '>' +
       '</div>' +
       '<div class="ac-form-row ac-bus-time-row" id="editAcBusTimeRow"' + (bus ? '' : ' hidden') + ' style="margin-top:7px">' +
-        '<label class="ac-time-field">학원차 시각<input type="time" id="editAcPickupTime" value="' + esc(e.pickupTime || '') + '"></label>' +
+        '<label class="ac-time-field" id="editAcGoBusTimeWrap"' + (e.move === 'bus' ? '' : ' hidden') + '>갈 때 학원차 시간<input type="time" id="editAcGoBusTime" value="' + esc(e.goBusTime || e.pickupTime || '') + '"></label>' +
+        '<label class="ac-time-field" id="editAcBackBusTimeWrap"' + (entryBackMove(e) === 'bus' ? '' : ' hidden') + '>올 때 학원차 시간<input type="time" id="editAcBackBusTime" value="' + esc(e.backBusTime || e.pickupTime || '') + '"></label>' +
       '</div>' +
       '<div class="ac-hide" aria-hidden="true">' +
         '<select id="editAcPickupKind" tabindex="-1"><option value=""' + (!e.pickupKind ? ' selected' : '') + '>미입력</option>' +
@@ -20251,29 +20504,30 @@ function saveAcademyEdit(id){
   var memoEl = $('#editAcMemo');
   found.entry.place = placeEl ? String(placeEl.value || '').trim().slice(0, 40) : '';
   found.entry.memo = memoEl ? String(memoEl.value || '').trim().slice(0, 40) : '';
-  var taskEl = $('#editAcHomeTask');
-  found.entry.homeTask = taskEl ? String(taskEl.value || '').trim().slice(0, 40) : '';
+  found.entry.homeTask = '';
   var moveEl = $('#editAcMove');
   var backEl = $('#editAcBackMove');
-  var pickupEl = $('#editAcPickup');
+  var goPlaceEl = $('#editAcGoPlace'), backPlaceEl = $('#editAcBackPlace');
+  var goTimeEl = $('#editAcGoBusTime'), backTimeEl = $('#editAcBackBusTime');
   found.entry.move = (moveEl && moveModeOf(moveEl.value)) ? moveEl.value : '';
   /* 올 때는 backMove로 저장하고, 예전 homeMove(하원) 칸도 같이 맞춰 둔다 (#3611) */
   found.entry.backMove = (backEl && moveModeOf(backEl.value)) ? backEl.value : '';
   found.entry.homeMove = found.entry.backMove;
-  found.entry.pickup = pickupEl ? String(pickupEl.value || '').trim().slice(0, 20) : '';
+  found.entry.goPlace = (found.entry.move === 'bus' && goPlaceEl) ? String(goPlaceEl.value || '').trim().slice(0, 20) : '';
+  found.entry.backPlace = (found.entry.backMove === 'bus' && backPlaceEl) ? String(backPlaceEl.value || '').trim().slice(0, 20) : '';
+  found.entry.goBusTime = (found.entry.move === 'bus' && goTimeEl && /^\d{2}:\d{2}$/.test(goTimeEl.value)) ? goTimeEl.value : '';
+  found.entry.backBusTime = (found.entry.backMove === 'bus' && backTimeEl && /^\d{2}:\d{2}$/.test(backTimeEl.value)) ? backTimeEl.value : '';
+  found.entry.pickup = found.entry.goPlace || found.entry.backPlace;
+  found.entry.pickupTime = found.entry.goBusTime || found.entry.backBusTime;
   var kindEl = $('#editAcPickupKind');
   found.entry.pickupKind = (kindEl && pickupKindOf(kindEl.value)) ? kindEl.value : '';
   if(found.entry.move === 'bus' && found.entry.backMove === 'bus') found.entry.pickupKind = '';
   else if(found.entry.move === 'bus') found.entry.pickupKind = '승차';
   else if(found.entry.backMove === 'bus') found.entry.pickupKind = '하차';
   else found.entry.pickupKind = '';
-  var pTimeEl = $('#editAcPickupTime');
-  found.entry.pickupTime = (pTimeEl && /^\d{2}:\d{2}$/.test(pTimeEl.value)) ? pTimeEl.value : '';
   /* 🏫 학원 이모지 · 정류장 프리셋 (#v31) */
   found.entry.emoji = AC_EDIT_EMOJI || '';
   found.entry.stop = acStopDef(AC_EDIT_STOP) ? AC_EDIT_STOP : '';
-  found.entry.goPlace = (found.entry.move === 'bus') ? found.entry.pickup : '';
-  found.entry.backPlace = (found.entry.backMove === 'bus') ? found.entry.pickup : '';
   /* 🏫 학교 프리셋은 그날 하교 시간을 이 일정이 끝나는 시각으로 */
   if(found.entry.stop === 'school' && found.entry.end){
     var mm = ensureMonth(found.kid, found.month);
@@ -20533,13 +20787,10 @@ function renderAcEmojiRow(){
 function renderAcStopRow(){
   var box = $('#acStopRow');
   if(box){
-    box.innerHTML = acStopRowHtml(AC_FORM_STOP, 'ac-preset');
-    /* 🏠 집 칩에 ac-quick-name 을 달았어도 프리셋 표시는 AC_FORM_STOP 을 따른다 */
-    Array.prototype.forEach.call(box.querySelectorAll('.ac-stop'), function(b){
-      var on = b.getAttribute('data-preset') === AC_FORM_STOP;
-      b.classList.toggle('on', on);
-      b.setAttribute('aria-pressed', on ? 'true' : 'false');
-    });
+    box.innerHTML = AC_STOPS.map(function(s){
+      var on = s.key === AC_FORM_STOP;
+      return '<button type="button" class="ac-stop' + (on ? ' on' : '') + '" data-action="ac-preset" data-preset="' + s.key + '" aria-pressed="' + (on ? 'true' : 'false') + '">' + s.icon + ' ' + s.label + '</button>';
+    }).join('');
   }
 }
 function pickAcEmoji(emoji, target){
@@ -20551,6 +20802,7 @@ function pickAcEmoji(emoji, target){
     return;
   }
   AC_FORM_EMOJI = (AC_FORM_EMOJI === emoji) ? '' : emoji;
+  if(AC_FORM_EMOJI){ AC_FORM_STOP = ''; renderAcStopRow(); }
   renderAcEmojiRow();
 }
 function setAcPreset(key, target){
@@ -20558,23 +20810,25 @@ function setAcPreset(key, target){
   var isEdit = (target === 'edit');
   var cur = isEdit ? AC_EDIT_STOP : AC_FORM_STOP;
   var next = (cur === key) ? '' : key;
-  if(isEdit) AC_EDIT_STOP = next; else AC_FORM_STOP = next;
-  var placeEl = isEdit ? null : $('#acStopPlace');
-  var taskEl = isEdit ? $('#editAcHomeTask') : $('#acHomeTask');
-  var nameEl = isEdit ? $('#editAcName') : $('#acName');
-  if(next === 'home' && nameEl) nameEl.value = '집';
-  if(placeEl){
-    var show = (next === 'parking' || next === 'place');
-    placeEl.hidden = !show;
-    placeEl.placeholder = next === 'parking' ? '주차장에서 만날 곳 (예: 양원성당)' : '기다릴 곳 (예: 학교 정문)';
+  if(isEdit){
+    AC_EDIT_STOP = next;
+    var eName = $('#editAcName');
+    if(next === 'home' && eName) eName.value = '집';
+    var eRow = document.querySelector('#modalRoot .ac-stop-row');
+    if(eRow) eRow.innerHTML = acStopRowHtml(next, 'edit-ac-preset');
+    return;
   }
-  if(taskEl && next === 'home'){
-    taskEl.classList.add('home-on');
-    try{ taskEl.focus(); }catch(e){}
+  AC_FORM_STOP = next;
+  if(next){ AC_FORM_EMOJI = ''; renderAcEmojiRow(); }
+  var nameEl = $('#acName');
+  if(nameEl){
+    var autoNames = ['주차장', '장소', '학교', '집'];
+    var curVal = String(nameEl.value || '').trim();
+    if(next === 'home') nameEl.value = '집';
+    else if(next === 'parking' && (!curVal || autoNames.indexOf(curVal) >= 0)) nameEl.value = '주차장';
+    else if(!next && autoNames.indexOf(curVal) >= 0) nameEl.value = '';
   }
-  var row = isEdit ? document.querySelector('#modalRoot .ac-stop-row') : $('#acStopRow');
-  if(row) row.innerHTML = acStopRowHtml(next, isEdit ? 'edit-ac-preset' : 'ac-preset');
-  if(!isEdit) syncAcFormHome();
+  renderAcStopRow();
 }
 /* 갈 때·올 때 중 하나라도 학원차(🚌)일 때만 승·하차 장소·시각 칸 (#v31) */
 function acBusSync(scope){
@@ -20583,17 +20837,17 @@ function acBusSync(scope){
   var goEl = $(p + 'Move'), backEl = $(p + 'BackMove');
   var go = goEl ? goEl.value : '';
   var back = backEl ? backEl.value : '';
-  var bus = (go === 'bus' || back === 'bus');
-  var row = $(p + 'BusRow'), timeRow = $(p + 'BusTimeRow'), inp = $(p + 'Pickup');
+  var goBus = (go === 'bus'), backBus = (back === 'bus');
+  var bus = (goBus || backBus);
+  var row = $(p + 'BusRow'), timeRow = $(p + 'BusTimeRow');
+  var gp = $(p + 'GoPlace'), bp = $(p + 'BackPlace');
+  var gt = $(p + 'GoBusTimeWrap'), bt = $(p + 'BackBusTimeWrap');
   if(row) row.hidden = !bus;
   if(timeRow) timeRow.hidden = !bus;
-  if(inp){
-    var label = '승차 장소', ph = '승차 장소 (예: 양원성당)';
-    if(go === 'bus' && back === 'bus'){ label = '승하차 장소'; ph = '승하차 장소 (예: 양원성당)'; }
-    else if(back === 'bus'){ label = '하차 장소'; ph = '하차 장소 (예: 학원 앞)'; }
-    inp.placeholder = ph;
-    inp.setAttribute('aria-label', label);
-  }
+  if(gp) gp.hidden = !goBus;
+  if(bp) bp.hidden = !backBus;
+  if(gt) gt.hidden = !goBus;
+  if(bt) bt.hidden = !backBus;
   var hint = $(p + 'MoveHint');
   if(hint){
     if(bus) hint.textContent = (go === 'bus' && back === 'bus')
@@ -21181,6 +21435,8 @@ document.addEventListener('click', function(e){
     case 'reward-guide': openRewardGuide(); break;
     case 'reward-guide-kid': openRewardGuide(target.getAttribute('data-kid')); break;
     case 'rgd-page': setRewardGuidePage(Number(target.getAttribute('data-page')) || 1); break;
+    case 'rwd-page': setRewardPage(Number(target.getAttribute('data-page')) || 1); break;
+    case 'rgd-year': setRewardGuideYear(Number(target.getAttribute('data-delta')) || 0); break;
     case 'guide-stamp-rewards': openStampRewards(target.getAttribute('data-kid')); break;
     case 'stamp-rewards': openStampRewards(); break;
     case 'reward-history-all': rewardHistoryOpen = !rewardHistoryOpen; renderRewardOverview(); break;
@@ -21208,6 +21464,7 @@ document.addEventListener('click', function(e){
     case 'save-school': saveSchoolTimes(); break;
     case 'ac-quick-name': acQuickName(target.getAttribute('data-value')); break;
     /* ➕ 학원 · 셔틀 동선 추가 — 학원 이모지 · 정류장 프리셋 (#v31) */
+    case 'ac-mode': setAcFormMode(target.getAttribute('data-mode')); break;
     case 'ac-emoji': pickAcEmoji(target.getAttribute('data-emoji'), 'form'); break;
     case 'ac-preset': setAcPreset(target.getAttribute('data-preset'), 'form'); break;
     case 'edit-ac-emoji': pickAcEmoji(target.getAttribute('data-emoji'), 'edit'); break;
@@ -21594,6 +21851,7 @@ window.addEventListener('blur', function(){ if(dragState) dragPointerUp({}); });
 document.addEventListener('scroll', function(e){
   var t = e.target;
   if(t && t.classList && t.classList.contains('rws-track')) syncRewardStampScroll(t);
+  if(t && t.id === 'rwdPager') syncRewardPagerScroll(t);
 }, true);
 
 /* 🏠 학원 이름을 치는 동안 '집'이면 주소·할 일 칸 안내가 바뀐다 (#3598) */
