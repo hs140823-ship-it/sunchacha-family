@@ -10800,7 +10800,9 @@ function renderStudyHwBoard(kidKey){
     var done = basicDone(kidKey, days[i]);
     if(done) n++;
     /* 🌤️ 숙제 없는 날은 그 칸에만 해를 띄우고, 끝낸 날은 책 스티커 도장 (#v32) */
-    html += '<span class="hwb-day stamp-slot' + (done ? ' on' : '') + (free ? ' free' : '') + '">' +
+    var editable = isParentMode() && !free;
+    html += '<span class="hwb-day stamp-slot' + (done ? ' on' : '') + (free ? ' free' : '') + '"' +
+      (editable ? ' data-action="toggle-study-day" data-day="' + days[i] + '" data-label="' + labels[i] + '" role="button" tabindex="0" style="cursor:pointer" title="' + labels[i] + ' 완료/취소 바꾸기"' : '') + '>' +
       (free
         ? '<i class="stamp-disc on free" aria-hidden="true">🌤️</i>'
         : stampDiscHtml(done, STAMP_ART.book)) +
@@ -21522,7 +21524,7 @@ document.addEventListener('click', function(e){
         label: lbl,
         sub: ($('#funEditSub') && $('#funEditSub').value || '').trim()
       };
-      save(); closeModal(); renderAll(); toast('⭐ FUN MISSION을 수정했어요');
+      saveState(); closeModal(); renderAll(); toast('⭐ FUN MISSION을 수정했어요');
     })(); break;
     case 'fun-unselect': funUnselect(target.getAttribute('data-id') || ''); break;
     case 'fun-filter': setFunFilter(target.getAttribute('data-cat') || 'all'); break;
@@ -21572,6 +21574,26 @@ document.addEventListener('click', function(e){
     case 'reward-guide-kid': openRewardGuide(target.getAttribute('data-kid')); break;
     case 'rgd-page': setRewardGuidePage(Number(target.getAttribute('data-page')) || 1); break;
     case 'study-page': setStudyPage(Number(target.getAttribute('data-page')) || 1); break;
+    case 'toggle-study-day': (function(){
+      if(!isParentMode()) return;
+      var k = state.current;
+      var dk = target.getAttribute('data-day');
+      var lbl = target.getAttribute('data-label') || '';
+      if(!dk || noHwOn(k, dk)) return;
+      var prev = weekStats(k);
+      var d = ensureDay(k, dk);
+      var tasks = studyTasksActive(k, dk);
+      var wasDone = basicDone(k, dk);
+      if(wasDone){
+        d.basicClear = false;
+        tasks.forEach(function(t){ delete d.basic[t.id]; });
+      }else{
+        d.basicClear = true;
+        tasks.forEach(function(t){ d.basic[t.id] = true; });
+      }
+      saveState(); renderAll(); checkWeeklyBonuses(prev);
+      toast('📚 ' + lbl + '요일 매일 공부를 ' + (!wasDone ? '완료했어요 (+500원) 🎉' : '미완료로 바꿨어요'));
+    })(); break;
     case 'rwd-page': setRewardPage(Number(target.getAttribute('data-page')) || 1); break;
     case 'rgd-year': setRewardGuideYear(Number(target.getAttribute('data-delta')) || 0); break;
     case 'guide-stamp-rewards': openStampRewards(target.getAttribute('data-kid')); break;
