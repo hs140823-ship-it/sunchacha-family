@@ -2738,8 +2738,9 @@ body.mode-viewer .rl-form{display:none !important}
 .rwd-goal-nums{display:flex;align-items:baseline;gap:5px;margin-top:4px;flex-wrap:wrap}
 .rwd-goal-nums strong{font-size:19px;font-weight:900;letter-spacing:-.03em;color:#0F1E33;font-variant-numeric:tabular-nums}
 .rwd-goal-nums span{font-size:10.5px;font-weight:800;color:#8A9CB0}
-/* 🎮 용돈 피버 게이지 — 0원 ↔ 70,000원 · 금빛 테두리 · 레드(일반)+파랑(보너스) (#17132 · #17148) */
-.rwd-goal-gauge{position:relative;margin:20px 0 5px;padding:0}
+/* 🎮 용돈 피버 게이지 — 0원 ↔ 100,000원 · 금빛 테두리 · 레드(일반)+파랑(보너스) · 보너스 상자 (#17838) */
+.rwd-goal-gauge{position:relative;margin:34px 0 6px;padding:0}
+.rgf-chest{position:absolute;right:0;bottom:100%;height:42px;width:auto;margin-bottom:-2px;pointer-events:none;z-index:5;filter:drop-shadow(0 3px 6px rgba(180,120,20,.22))}
 .rgf-row{display:flex;align-items:center;gap:5px}
 .rgf-pill{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;min-height:21px;padding:2px 8px;
   border-radius:999px;font-size:9px;font-weight:900;white-space:nowrap;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
@@ -2760,19 +2761,21 @@ body.mode-viewer .rl-form{display:none !important}
 .rgf-spark{position:absolute;z-index:3;font-size:7px;line-height:1;color:#fff;text-shadow:0 0 4px rgba(255,255,255,.95);pointer-events:none}
 /* 목표 지점 — 금빛 마커 + 별 + 아래 화살표 */
 .rgf-mark{position:absolute;bottom:100%;transform:translateX(-50%);z-index:6;display:flex;flex-direction:column;align-items:center;gap:0;margin-bottom:1px;pointer-events:none}
-.rgf-mark b{display:inline-flex;align-items:center;gap:2px;padding:1px 7px;border-radius:999px;font-size:7.6px;font-weight:900;
-  color:#8A5A00;white-space:nowrap;background:linear-gradient(160deg,#FFF8DE,#FFE199);border:1px solid #F0C44F;
-  box-shadow:0 2px 7px -3px rgba(180,120,0,.8)}
-.rgf-mark b::before{content:'★';color:#F2AE00;font-size:7.5px}
-.rgf-mark i{width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:6px solid #E7AF35;
+.rgf-mark b{display:inline-flex;align-items:center;gap:3px;padding:3px 11px;border-radius:999px;font-size:10.5px;font-weight:900;
+  color:#704200;white-space:nowrap;background:linear-gradient(160deg,#FFF8DE,#FFE199);border:1.5px solid #E2AC30;
+  box-shadow:0 3px 9px -3px rgba(180,120,0,.78)}
+.rgf-mark b::before{content:'★';color:#F2AE00;font-size:10.5px}
+.rgf-mark b .rgf-amt{color:#E11D48;font-weight:900}
+.rgf-mark i{width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:7px solid #E2AC30;
   filter:drop-shadow(0 1px 1px rgba(180,120,0,.55))}
 /* 보너스 배지 — 파란 구간 위 */
 .rgf-btag{position:absolute;top:-8px;transform:translateX(-50%);z-index:7;display:inline-flex;align-items:center;gap:2px;
   padding:1px 6px;border-radius:999px;font-size:7.4px;font-weight:900;color:#fff;white-space:nowrap;
   background:linear-gradient(160deg,#6EC0FF,#1F6FE0);border:1px solid rgba(255,255,255,.85);
   box-shadow:0 2px 7px -3px rgba(31,111,224,.85)}
-.rwd-goal-foot{display:flex;flex-direction:column;gap:1px;margin-top:5px}
-.rwd-goal-foot small{font-size:10px;font-weight:900;color:#5B4E8C}
+.rwd-goal-foot{display:flex;flex-direction:column;align-items:center;text-align:center;gap:1px;margin-top:6px}
+.rwd-goal-foot small{font-size:11.5px;font-weight:900;color:#3E3368}
+.rwd-goal-foot small b{color:#7C3AED;font-weight:900}
 .rwd-goal-foot em{font-style:normal;font-size:8px;font-weight:700;color:#8B84A8;line-height:1.25}
 .rwd-goal-foot em.rwd-goal-extra{font-weight:900;color:#7A6BA8}   /* 💯 100점 현금 · 🎁 엄마·아빠 보너스 별도 (#14279) */
 .rwd-goal-foot em.rwd-goal-sub{color:#9A93B8}   /* 매달 최대 금액이 달라져요 (#14290) */
@@ -4270,7 +4273,8 @@ body.mode-kid .fmr-edit{display:none !important}
 .hh-name{font-size:15px;font-weight:900;letter-spacing:-.02em;color:#26333F}
 .hh-date{font-size:10px;font-weight:800;color:#7A8DA4}
 .hh-chev{font-size:15px;font-weight:900;color:#93A7BF;margin-left:1px;line-height:1}
-.hh-greet{margin-top:7px;font-size:clamp(12.5px,3.4vw,14px);font-weight:900;letter-spacing:-.03em;line-height:1.38;color:#22303D;max-width:none;word-break:keep-all}
+.hh-greet-wrap{margin-top:9px;min-height:38px;display:flex;align-items:center}
+.hh-greet{margin:0;font-size:clamp(12.5px,3.4vw,13.8px);font-weight:900;letter-spacing:-.03em;line-height:1.4;color:#22303D;max-width:none;word-break:keep-all}
 .hh-ro{display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:900;color:#4E7387;
   background:rgba(255,255,255,.82);border:1px solid rgba(120,160,220,.22);border-radius:999px;padding:3px 8px;white-space:nowrap}
 .hh-ro.preview{display:none}
@@ -4605,7 +4609,7 @@ body.mode-kid .home-more{display:none}
   .sticky-top-shell .topbar{position:static;background:transparent;border-bottom:0;backdrop-filter:none;-webkit-backdrop-filter:none}
   .sticky-hero-wrap{padding:4px 14px 10px !important}
   #homeHeroHead{position:static;margin:0;padding:0;background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none}
-  #homeHeroHead .hh-greet{padding-bottom:4px}
+  #homeHeroHead .hh-greet{padding-bottom:0}
   /* 6탭은 390px에서도 넉넉하게 — 이름이 잘리지 않는 크기 (#4309) */
   .tab-btn{font-size:9px;padding:5px 1px;min-height:46px;border-radius:16px;gap:1px}
   .tab-btn .tb-ico{font-size:17px}
@@ -4615,12 +4619,11 @@ body.mode-kid .home-more{display:none}
   .tab-btn[aria-selected="true"] .tb-ico{background:transparent;border-radius:0;padding:0}
   .tab-btn[aria-selected="true"] .tb-label{color:#fff;font-weight:900;opacity:1;visibility:visible}
   .card{padding:13px;border-radius:18px}
-  .hh-greet{font-size:15px}
   .home-footer-art{margin:2px -12px -8px}
 }
 @media (max-width:400px){
   .hh-art{width:100%;max-width:none}
-  .hh-greet{max-width:none;font-size:14.5px}
+  .hh-greet{max-width:none}
   .hh-line{display:none}
   .menu-tile{padding:9px 5px 8px}
   .menu-tile .mt-ico{width:34px;height:34px;border-radius:11px}
@@ -8596,7 +8599,7 @@ function renderHeroHead(){
   box.innerHTML =
     '<div class="hh-text">' +
       '<div class="hh-top">' + pill + badge + '</div>' +
-      '<p class="hh-greet" id="heroGreet" data-mode="' + MODE + '">' + formatGreetHtml(greet) + '</p>' +
+      '<div class="hh-greet-wrap"><p class="hh-greet" id="heroGreet" data-mode="' + MODE + '">' + formatGreetHtml(greet) + '</p></div>' +
     '</div>' +
     '<button type="button" class="hh-art' + (currentTab() === 'reward' ? ' on' : '') + '" data-action="tab" data-tab="reward" aria-label="리워드 화면 열기"><img src="' + f.hero + '" alt=""><span class="hh-rwd-chip"><span aria-hidden="true">💎</span> REWARD</span></button>';
   renderSubReward();
@@ -12202,7 +12205,8 @@ function monthMaxEarnOf(kidKey, mk){
   };
 }
 /* 🎯 「이번 달 최대 vs 지금 벌은 용돈」 목표 게이지 카드 (#13828) */
-var GAUGE_SCALE = 70000;   /* 🎮 용돈 피버 게이지 — 0원 ~ 70,000원 (목표 35,000원이 절반) (#17148) */
+var GAUGE_SCALE = 100000;  /* 🎮 용돈 피버 게이지 — 0원 ~ 100,000원 (#17838) */
+var RGD_BONUS_CHEST = 'data:image/webp;base64,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';
 /* 그 달에 따로 붙는 보너스 — 💯 용돈으로 주기 · 엄마/아빠 보너스 · 월간 완성 보너스 */
 function monthBonusPartsOf(kidKey, mk){
   var month = mk || currentMonthKey();
@@ -12262,7 +12266,7 @@ function monthGoalGaugeHtml(kidKey, me, mmax, idSuffix){
         '<div class="rgf-row">' +
           '<span class="rgf-pill zero">0원</span>' +
           '<div class="rgf-wire">' +
-            '<span class="rgf-mark" style="left:' + markPct.toFixed(1) + '%"><b>이번 달 용돈 ' + fmt(max) + '</b><i></i></span>' +
+            '<span class="rgf-mark" style="left:' + markPct.toFixed(1) + '%"><b>이번 달 용돈 <span class="rgf-amt">' + fmt(max) + '</span></b><i></i></span>' +
             btag +
             '<div class="rwd-goal-bar">' +
               '<i class="rgf-base" style="width:' + basePct.toFixed(1) + '%"></i>' +
@@ -12272,8 +12276,9 @@ function monthGoalGaugeHtml(kidKey, me, mmax, idSuffix){
           '</div>' +
           '<span class="rgf-pill max">' + fmt(GAUGE_SCALE) + '</span>' +
         '</div>' +
+        '<img class="rgf-chest" src="' + RGD_BONUS_CHEST + '" alt="" aria-hidden="true">' +
       '</div>' +
-      '<div class="rwd-goal-foot"><small>지금 ' + fmt(rawTotal) + ' · ' + foot + '</small><em>' + parts + '</em><em class="rwd-goal-extra">' + extra + '</em><em class="rwd-goal-sub">' + extra2 + '</em></div>' +
+      '<div class="rwd-goal-foot"><small>지금 <b>' + fmt(rawTotal) + '</b> · ' + foot + '</small></div>' +
     '</div>';
 }
 /* 📈 이번 달 보너스 한 줄 — 도장판 아래에 진행바·현재 달성액을 함께 (#13783 · #13787 · #14949) */
