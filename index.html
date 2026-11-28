@@ -2679,7 +2679,7 @@ body.mode-viewer .rl-form{display:none !important}
   overscroll-behavior-x:contain;touch-action:pan-x pan-y}
 .rwd-pager::-webkit-scrollbar{display:none}
 /* 한 장씩만 넘어가게 — 빠르게 밀어도 두 장 건너뛰지 않는다 (#17104) */
-.rwd-page{flex:0 0 100%;width:100%;min-width:0;scroll-snap-align:start;scroll-snap-stop:always;box-sizing:border-box}
+.rwd-page{flex:0 0 100%;width:100%;min-width:0;scroll-snap-align:start;scroll-snap-stop:always;box-sizing:border-box;overflow-x:hidden}
 .rgd-kid-peek{width:38px;height:38px;border-radius:50%;object-fit:cover;border:2px solid #fff;box-shadow:0 4px 10px -6px rgba(180,70,130,.5);flex:0 0 auto;background:#fff}
 /* 💵 정산 · ⚙️ 설정 · 리워드 안내 — 헤더 오른쪽 한 줄 (#13883) */
 .rwd-tools{flex:0 0 auto;display:flex;align-items:center;justify-content:flex-end;gap:5px;flex-wrap:nowrap}
@@ -3019,20 +3019,20 @@ body.mode-viewer .rl-form{display:none !important}
 .space-week-lists{display:grid;gap:8px;margin-top:9px}
 .swl-block{padding:11px 12px 12px;border-radius:18px;border:1.5px solid rgba(170,150,225,.22);
   background:linear-gradient(160deg,#FBF7FF 0%,#F4FAFF 100%);box-shadow:0 8px 20px -20px rgba(106,69,216,.55)}
-.swl-block:nth-child(2){border-color:rgba(120,190,180,.26);background:linear-gradient(160deg,#F2FBF7 0%,#F6FBFF 100%)}
+.swl-block.swl-fun,.swl-block:nth-child(2){border-color:rgba(120,190,180,.26);background:linear-gradient(160deg,#F2FBF7 0%,#F6FBFF 100%)}
 .swl-head{display:flex;align-items:center;justify-content:space-between;gap:6px;font-size:11px;font-weight:900;color:#4B3E7A;margin-bottom:7px;letter-spacing:-.01em}
 .swl-head span{font-weight:800;font-size:9.5px;color:#7C6BA8;background:#fff;border:1px solid rgba(160,140,220,.28);border-radius:999px;padding:2px 8px;white-space:nowrap}
-.swl-block:nth-child(2) .swl-head{color:#2F6B5B}
-.swl-block:nth-child(2) .swl-head span{color:#3D7F6B;border-color:rgba(120,190,180,.35)}
+.swl-block.swl-fun .swl-head,.swl-block:nth-child(2) .swl-head{color:#2F6B5B}
+.swl-block.swl-fun .swl-head span,.swl-block:nth-child(2) .swl-head span{color:#3D7F6B;border-color:rgba(120,190,180,.35)}
 .swl-list{display:flex;flex-direction:column;gap:4px;max-height:162px;overflow-y:auto;overflow-x:hidden;padding-right:3px;-webkit-overflow-scrolling:touch}
 .swl-list::-webkit-scrollbar{width:4px}
 .swl-list::-webkit-scrollbar-thumb{background:#E2D8F6;border-radius:99px}
 .swl-pill{display:flex;align-items:center;gap:5px;width:100%;padding:4px 9px;border-radius:999px;background:#fff;
   border:1px solid rgba(160,140,220,.24);font-size:10px;font-weight:800;color:#4C6075;max-width:100%;
   box-shadow:0 3px 8px -7px rgba(106,69,216,.6)}
-.swl-block:nth-child(2) .swl-pill{border-color:rgba(120,190,180,.3)}
+.swl-block.swl-fun .swl-pill,.swl-block:nth-child(2) .swl-pill{border-color:rgba(120,190,180,.3)}
 .swl-pill i{font-style:normal;font-size:9px;font-weight:900;color:#8F7BC0;background:#F3EEFF;border-radius:999px;padding:1px 5px}
-.swl-block:nth-child(2) .swl-pill i{color:#3D7F6B;background:#EAF8F2}
+.swl-block.swl-fun .swl-pill i,.swl-block:nth-child(2) .swl-pill i{color:#3D7F6B;background:#EAF8F2}
 .swl-pill b{font-weight:900;color:#3E5570;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .swl-empty{margin:0;font-size:10.5px;font-weight:800;color:#9AA7BD;padding:6px 2px 4px}
 /* ⭐ 이번 주 FUN MISSION 5갈래 도장 + 횟수 (#17104) */
@@ -4256,7 +4256,7 @@ body.mode-kid .fmr-edit{display:none !important}
 
 /* ---------- 히어로 헤더 (한 손에 잡히는 높이로 압축 · #2505) ---------- */
 .hero{grid-template-columns:1fr;gap:8px}
-.hero-head{position:relative;z-index:3;display:grid;grid-template-columns:minmax(0,1fr) 104px;align-items:start;gap:6px;padding:0 0 0 2px;min-height:0}
+.hero-head{position:relative;z-index:3;display:grid;grid-template-columns:minmax(0,1fr) 82px;align-items:center;gap:6px;padding:0 0 2px 2px;min-height:0}
 .hh-text{position:relative;z-index:2;min-width:0;flex:1 1 auto}
 .hh-top{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
 .hh-pill{display:inline-flex;align-items:center;gap:8px;padding:3px 11px 3px 3px;border-radius:999px;
@@ -4274,15 +4274,15 @@ body.mode-kid .fmr-edit{display:none !important}
 .hh-ro{display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:900;color:#4E7387;
   background:rgba(255,255,255,.82);border:1px solid rgba(120,160,220,.22);border-radius:999px;padding:3px 8px;white-space:nowrap}
 .hh-ro.preview{display:none}
-.hh-art{position:relative;right:auto;top:auto;width:100%;max-width:none;margin-top:-2px;z-index:4;display:flex;flex-direction:column;align-items:center;background:none;border:0;padding:0;cursor:pointer;font-family:inherit}
-.hh-art img{width:auto;max-width:100%;height:96px;object-fit:contain;object-position:right bottom;display:block;margin-left:auto;filter:drop-shadow(0 12px 16px rgba(64,96,140,.18))}
-.hh-rwd-chip{position:relative;z-index:5;margin-top:-10px;display:inline-flex;align-items:center;gap:3px;padding:3px 10px;border-radius:999px;background:rgba(255,255,255,.97);border:1.5px solid rgba(124,58,237,.38);color:#5B21B6;font-size:10.5px;font-weight:900;letter-spacing:.01em;box-shadow:0 4px 12px -4px rgba(109,40,217,.38);white-space:nowrap}
+.hh-art{position:relative;right:auto;top:auto;width:100%;max-width:none;margin-top:0;z-index:4;display:flex;flex-direction:column;align-items:center;background:none;border:0;padding:0;cursor:pointer;font-family:inherit}
+.hh-art img{width:auto;max-width:100%;height:68px;object-fit:contain;object-position:right bottom;display:block;margin-left:auto;filter:drop-shadow(0 8px 12px rgba(64,96,140,.16))}
+.hh-rwd-chip{position:relative;z-index:5;margin-top:-8px;display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:999px;background:rgba(255,255,255,.97);border:1.5px solid rgba(124,58,237,.38);color:#5B21B6;font-size:9.5px;font-weight:900;letter-spacing:.01em;box-shadow:0 4px 10px -4px rgba(109,40,217,.35);white-space:nowrap}
 .hh-art.on .hh-rwd-chip{background:#7C3AED;color:#fff;border-color:#7C3AED}
 body[data-face="parent"] .hh-art{max-width:none;right:auto;top:auto}
 /* 🖼️ 지우 히어로 그림은 세로로 길어 상단이 길어진다 — 엄마·아빠·선우와 같은 높이로 (#16628) */
-body[data-face="jiwoo"] .hh-art img{height:96px}
+body[data-face="jiwoo"] .hh-art img{height:68px}
 body[data-face="jiwoo"] .hh-art{justify-content:flex-end}
-@media (max-width:420px){.hero-head{grid-template-columns:minmax(0,1fr) 96px}}
+@media (max-width:420px){.hero-head{grid-template-columns:minmax(0,1fr) 76px}}
 @media (min-width:760px){.hero-head{grid-template-columns:minmax(0,1fr) 152px}.hh-greet{font-size:17px}}
 @media (min-width:1000px){.hero-head{grid-template-columns:minmax(0,1fr) 176px}}
 
@@ -11086,11 +11086,12 @@ function miniBoardHtml(kidKey, kind){
   var note = (kind === 'morning')
     ? '7일 완성 → 보너스 도장 +3개'
     : '하루 5개 완료 시 오늘 🌟 · 7일 완성 시 보너스 도장 +' + SELF_WEEK_STAMP_BONUS + '개';
-  /* ① 도장판 → ② 박스 없는 7일 안내(도장 바로 아래) → ③ 이번 달 목표 진행바 (#14949) */
+  /* ① 도장판 → ② 박스 없는 7일 안내 → ③ 이번 달 목표 진행바 → ④ 이번 주 스스로 한 일 (#17437) */
   return '<div class="mini-board"><div class="mb-head"><b>' + title + '</b><span>' + n + '/7일</span></div>' +
     '<div class="mb-days">' + slots + '</div>' +
     '<p class="mb-note" style="margin:5px 0 4px;background:none;border:0;padding:0">' + note + '</p>' +
     monthBonusBlockHtml(kidKey, (kind === 'morning') ? 'morning' : 'space') +
+    ((kind === 'self') ? '<div id="spaceSelfDoneSlot"></div>' : '') +
   '</div>';
 }
 function renderStudyHwBoard(kidKey){
@@ -11146,8 +11147,9 @@ function funMaxFor(key, kidKey){
   }
   return FUN_MAX;
 }
-function funMaxToday(kidKey){ return funMaxFor(studyKeyNow(), kidKey || scopedKidKey()); }
-function bonusMaxOf(kidKey){ return funMaxFor(studyKeyNow(), kidKey); }
+function funKeyNow(){ return dayKey(); }
+function funMaxToday(kidKey){ return funMaxFor(funKeyNow(), kidKey || scopedKidKey()); }
+function bonusMaxOf(kidKey){ return funMaxFor(funKeyNow(), kidKey); }
 function bonusItemOf(kidKey, key){
   var found = null;
   bonusItemsAllOf(kidKey).forEach(function(r){ if(r.key === key) found = r; });
@@ -11160,7 +11162,7 @@ function bonusLabelOf(key, kidKey){
 /* 오늘 고른 미션 — d.funSel (예전 「추가 보너스」 체크 기록도 그대로 읽는다) */
 function funSelOf(kidKey, key){
   if(!state || !state.kids) return [];
-  var kk = key || studyKeyNow();
+  var kk = key || funKeyNow();
   var max = funMaxFor(kk, kidKey);
   var d = peekDay(kidKey, kk);
   if(Array.isArray(d.funSel)) return d.funSel.filter(function(k){ return !!k; }).slice(0, max);
@@ -11168,13 +11170,13 @@ function funSelOf(kidKey, key){
   return legacy.slice(0, max);
 }
 function funSetSel(kidKey, key, list){
-  var kk = key || studyKeyNow();
+  var kk = key || funKeyNow();
   var d = ensureDay(kidKey, kk);
   d.funSel = (list || []).filter(function(k){ return !!k; }).slice(0, funMaxFor(kk, kidKey));
   return d.funSel;
 }
 function bonusCountOf(kidKey, key){
-  var kk = key || studyKeyNow();
+  var kk = key || funKeyNow();
   var d = peekDay(kidKey, kk);
   var n = 0;
   if(d.bonus && typeof d.bonus === 'object'){
@@ -11192,25 +11194,23 @@ function funHeadToolsHtml(){
     '</span>';
 }
 /* FUN MISSION — 오늘(studyDayKey 기준: 평일은 그 요일 · 금~일은 한 세트) 숙제를 모두 끝냈을 때 열린다. */
-/* ⭐ FUN MISSION 열림 (#16664 · #16686):
-   · 월~목: 그날 숙제를 모두 끝내야 열린다
-   · 금·토·일: 상시 열림 · 🏖️ 방학 기간: 상시 열림
-   · 🌤️ 숙제 없는 날: 잠금만 풀리고 숙제 완료(+500원)로는 치지 않는다 */
+/* ⭐ FUN MISSION 열림 (#17477 · #17486):
+   · 월~목(평일): 그날 숙제를 모두 끝내야 열린다 (숙제 없는 날도 열림)
+   · 금·토·일: 숙제와 별개로 매일(요일별) 리셋되어 상시 열림 · 🏖️ 방학 기간: 상시 열림 */
 function bonusOpenNow(kidKey){
-  var key = studyKeyNow();
-  if(noHwOn(kidKey, key)) return true;
   var today = dayKey();
   if(isVacationDate(today)) return true;
   var dow = fromKey(today).getDay();
   if(dow === 5 || dow === 6 || dow === 0) return true;   /* 금·토·일 상시 열림 */
+  var key = studyKeyNow();
+  if(noHwOn(kidKey, key)) return true;
   return basicDone(kidKey, key);
 }
-/* 이번 주 추가 보너스 — 월~목은 각 날 세트, 금요일 세트가 금~일을 덮는다
-   한 항목마다 도장 +1 (돈이 아니라 도장으로 쌓인다) */
+/* 이번 주 추가 보너스 — 월~일 7일 모두 각 날짜별로 리셋·합산한다 (#17477) */
 function weekBonusTotals(kidKey, week){
   var days = weekDays(week || weekStartKey(new Date()));
   var stamps = 0, count = 0;
-  for(var i = 0; i <= 4; i++){
+  for(var i = 0; i < 7; i++){
     var n = bonusCountOf(kidKey, days[i]);
     stamps += bonusStampAmount(n, days[i], kidKey);
     count += n;
@@ -11220,13 +11220,13 @@ function weekBonusTotals(kidKey, week){
 function weekBonusStampsOf(kidKey, week){ return weekBonusTotals(kidKey, week).stamps; }
 /* ⭐ FUN MISSION — 미션 카드를 한 번 누르면 도장, 두 번 누르면 취소 (#v32) */
 function funMissionDone(kidKey, key, id){
-  var d = peekDay(kidKey, key || studyKeyNow());
+  var d = peekDay(kidKey, key || funKeyNow());
   return !!(d.bonus && d.bonus[id]);
 }
 function funToggleDone(id){
   if(!canCheck()) return;
   var kidKey = scopedKidKey();
-  var key = studyKeyNow();
+  var key = funKeyNow();
   /* ⭐ 엄마 화면은 숙제 전에도 미리 찍어 줄 수 있다 (#v34)
      · 아이 화면은 숙제를 모두 끝내야 열리므로, 막힌 이유를 말해 준다 */
   if(!bonusOpenNow(kidKey) && !isParentMode()){
@@ -11252,7 +11252,7 @@ function funToggleDone(id){
 function funUndoDone(id){
   if(!canCheck()) return false;
   var kidKey = scopedKidKey();
-  var key = studyKeyNow();
+  var key = funKeyNow();
   var d = ensureDay(kidKey, key);
   if(!d.bonus || !d.bonus[id]) return false;
   delete d.bonus[id];
@@ -11272,7 +11272,7 @@ function setFunFilter(cat){
 }
 function funSelect(id){
   if(!canCheck()) return;
-  var kidKey = state.current, key = studyKeyNow();
+  var kidKey = state.current, key = funKeyNow();
   var sel = funSelOf(kidKey, key);
   if(sel.indexOf(id) >= 0) return;
   var maxSel = funMaxFor(key, state.current);
@@ -11285,7 +11285,7 @@ function funSelect(id){
 }
 function funUnselect(id){
   if(!canCheck()) return;
-  var kidKey = state.current, key = studyKeyNow();
+  var kidKey = state.current, key = funKeyNow();
   var run = function(){
     var sel = funSelOf(kidKey, key).filter(function(k){ return k !== id; });
     funSetSel(kidKey, key, sel);
@@ -13408,7 +13408,7 @@ function renderMissions(){
       rBox.innerHTML = '<section class="card" style="text-align:center;padding:28px 18px"><div style="font-size:32px;margin-bottom:8px">🔒</div><h2 style="margin:0 0 6px;font-size:17px">⭐ FUN MISSION</h2><p class="sub" style="margin:0">오늘의 매일 공부를 모두 끝내면 열려요!</p></section>';
     }else{
       rBox.hidden = false;
-      rBox.innerHTML = funMissionHtml(kidKey, key, noHw);
+      rBox.innerHTML = funMissionHtml(kidKey, funKeyNow(), noHw);
     }
   }
 
@@ -16703,19 +16703,30 @@ function fitPagerHeight(pager, attr, p, opts){
   pager.style.height = h + 'px';
 }
 var _pagerSettle = {};
-function settlePagerHeight(pager, attr, p){
+function settlePagerHeight(pager, attr, p, onSettle){
   if(!pager) return;
   var id = pager.id || 'pager';
   if(_pagerSettle[id]) clearTimeout(_pagerSettle[id]);
   _pagerSettle[id] = setTimeout(function(){
     _pagerSettle[id] = null;
-    try{ fitPagerHeight(pager, attr, p); }catch(e){}
+    try{
+      if(typeof onSettle === 'function') onSettle();
+      if(pager.clientWidth){
+        var curP = Math.max(1, Math.round(pager.scrollLeft / pager.clientWidth) + 1);
+        var targetLeft = (curP - 1) * pager.clientWidth;
+        if(Math.abs(pager.scrollLeft - targetLeft) > 2){
+          pager.scrollTo({ left: targetLeft, behavior: 'auto' });
+        }
+        p = curP;
+      }
+      fitPagerHeight(pager, attr, p);
+    }catch(e){}
   }, 150);
 }
-/* 미는 동안: 높이는 키우기만 + 멈춘 뒤 제 높이로 맞춤 */
-function syncPagerDuringScroll(pager, attr, p){
+/* 미는 동안: 높이는 키우기만 + 멈춘 뒤 제 높이로 맞춤(중간에 DOM 재렌더로 스냅이 끊기지 않게) */
+function syncPagerDuringScroll(pager, attr, p, onSettle){
   fitPagerHeight(pager, attr, p, { growOnly: true });
-  settlePagerHeight(pager, attr, p);
+  settlePagerHeight(pager, attr, p, onSettle);
 }
 function fitAllPagers(){
   var stPage = 1;
@@ -16747,32 +16758,34 @@ function syncSpaceTabs(p){
 function setSpacePage(n, instant){
   var p = Math.max(1, Math.min(3, Number(n) || 1));
   SPACE_PAGE = p;
+  syncSpaceTabs(p);
+  if(p === 3) renderSpaceFunPage();
+  if(p === 1) renderSpaceWeekLog();
   var pager = $('#spacePager');
+  try{ fitPagerHeight(pager, 'data-space-page', p); }catch(e){}
   if(pager && pager.clientWidth){
     try{ pager.scrollTo({ left: (p - 1) * pager.clientWidth, behavior: instant ? 'auto' : 'smooth' }); }catch(e){}
   }
-  syncSpaceTabs(p);
-  try{ fitPagerHeight(pager, 'data-space-page', p); }catch(e){}
-  if(p === 3) renderSpaceFunPage();
-  if(p === 1) renderSpaceWeekLog();
 }
 function syncSpacePagerScroll(pager){
   if(!pager || !pager.clientWidth) return;
   var p = Math.max(1, Math.min(3, Math.round(pager.scrollLeft / pager.clientWidth) + 1));
-  if(p === SPACE_PAGE) return;
-  SPACE_PAGE = p;
-  syncSpaceTabs(p);
-  if(p === 3) renderSpaceFunPage();
-  if(p === 1) renderSpaceWeekLog();
-  try{ syncPagerDuringScroll(pager, 'data-space-page', p); }catch(e){}
+  if(p !== SPACE_PAGE){
+    SPACE_PAGE = p;
+    syncSpaceTabs(p);
+  }
+  try{ syncPagerDuringScroll(pager, 'data-space-page', p, function(){
+    if(SPACE_PAGE === 3) renderSpaceFunPage();
+    if(SPACE_PAGE === 1) renderSpaceWeekLog();
+  }); }catch(e){}
 }
 /* ⭐ FUN MISSION — MY SPACE 3페이지에서 그린다 */
 function renderSpaceFunPage(){
   var box = $('#weekendBonusCard');
   if(!box) return;
   var kidKey = scopedKidKey();
-  var key = studyKeyNow();
-  var noHw = noHwOn(kidKey, key);
+  var key = funKeyNow();
+  var noHw = noHwOn(kidKey, studyKeyNow());
   if(!bonusOpenNow(kidKey) && !isParentMode()){
     box.innerHTML = '<section class="card" style="text-align:center;padding:28px 18px"><div style="font-size:32px;margin-bottom:8px">🔒</div><h2 style="margin:0 0 6px;font-size:17px">⭐ FUN MISSION</h2><p class="sub" style="margin:0">오늘의 매일 공부를 모두 끝내면 열려요!</p></section>';
   }else{
@@ -16817,10 +16830,14 @@ function renderSpaceWeekLog(){
           '<span class="fms-img">' + (src ? '<img src="' + src + '" alt="" aria-hidden="true" draggable="false" loading="lazy">' : '') + '</span>' +
           '<b>' + esc(nm) + '</b><em>' + n + '회</em></span>';
     }).join('') + '</div>';
+  var selfSlot = $('#spaceSelfDoneSlot');
+  if(selfSlot){
+    selfSlot.innerHTML =
+      '<div class="swl-sub" style="margin-top:8px"><b>🌟 이번 주 스스로 한 일</b><span style="color:#7C6BA8;border-color:rgba(160,140,220,.28)">' + done.length + '개</span></div>' +
+      rows(done, '이번 주에는 아직 없어요 🌱');
+  }
   box.innerHTML =
-    '<div class="swl-block"><div class="swl-head"><b>🌟 이번 주 스스로 한 일</b><span>' + done.length + '개</span></div>' +
-      rows(done, '이번 주에는 아직 없어요 🌱') + '</div>' +
-    '<div class="swl-block"><div class="swl-head"><b>⭐ 이번 주 FUN MISSION</b><span>' + funs.length + '개 · 도장 ' + funs.length * WEEKEND_BONUS_STAMP + '</span></div>' +
+    '<div class="swl-block swl-fun"><div class="swl-head"><b>⭐ 이번 주 FUN MISSION</b><span>' + funs.length + '개 · 도장 ' + funs.length * WEEKEND_BONUS_STAMP + '</span></div>' +
       strip +
       '<div class="swl-sub"><b>🗓️ 이번 주 FUN MISSION 활동 기록</b><span>' + funs.length + '건</span></div>' +
       rows(funs, '아직 도전한 미션이 없어요') +
@@ -16855,22 +16872,22 @@ function syncSchedTabs(p){
 function setSchedPage(n, instant){
   var p = Math.max(1, Math.min(schedPageMax(), Number(n) || 1));
   SCHED_PAGE = p;
+  syncSchedTabs(p);
+  renderSchedulePages(true);
   var pager = $('#schedPager');
+  try{ fitPagerHeight(pager, 'data-sched-page', p); }catch(e){}
   if(pager && pager.clientWidth){
     try{ pager.scrollTo({ left: (p - 1) * pager.clientWidth, behavior: instant ? 'auto' : 'smooth' }); }catch(e){}
   }
-  syncSchedTabs(p);
-  renderSchedulePages(true);
-  try{ fitPagerHeight($('#schedPager'), 'data-sched-page', p); }catch(e){}
 }
 function syncSchedPagerScroll(pager){
   if(!pager || !pager.clientWidth) return;
   var p = Math.max(1, Math.min(schedPageMax(), Math.round(pager.scrollLeft / pager.clientWidth) + 1));
-  if(p === SCHED_PAGE) return;
-  SCHED_PAGE = p;
-  syncSchedTabs(p);
-  renderSchedulePages(true);
-  try{ syncPagerDuringScroll($('#schedPager'), 'data-sched-page', p); }catch(e){}
+  if(p !== SCHED_PAGE){
+    SCHED_PAGE = p;
+    syncSchedTabs(p);
+  }
+  try{ syncPagerDuringScroll(pager, 'data-sched-page', p, function(){ renderSchedulePages(true); }); }catch(e){}
 }
 function schedKidBarHtml(){
   if(isKidMode()) return '';
@@ -20128,27 +20145,27 @@ function setFamPage(n, instant){
       saveState();
     }
   }
+  syncFamTabs(p);
+  renderFamilyPages();
   var pager = $('#famPager');
+  try{ fitPagerHeight(pager, 'data-fam-page', p); }catch(e){}
   if(pager && pager.clientWidth){
     try{ pager.scrollTo({ left: (p - 1) * pager.clientWidth, behavior: instant ? 'auto' : 'smooth' }); }catch(e){}
   }
-  syncFamTabs(p);
-  renderFamilyPages();
-  try{ fitPagerHeight($('#famPager'), 'data-fam-page', p); }catch(e){}
 }
 function syncFamPagerScroll(pager){
   if(!pager || !pager.clientWidth) return;
   var p = Math.max(1, Math.min(4, Math.round(pager.scrollLeft / pager.clientWidth) + 1));
-  if(p === FAM_PAGE) return;
-  FAM_PAGE = p;
-  if(p === 2 || p === 3){
-    var team = famTeamForPage(p);
-    if(isDadMode()) DAD_FAM_TEAM = team;
-    else { state.familyTeam = team; }
+  if(p !== FAM_PAGE){
+    FAM_PAGE = p;
+    if(p === 2 || p === 3){
+      var team = famTeamForPage(p);
+      if(isDadMode()) DAD_FAM_TEAM = team;
+      else { state.familyTeam = team; }
+    }
+    syncFamTabs(p);
   }
-  syncFamTabs(p);
-  renderFamilyPages();
-  try{ syncPagerDuringScroll($('#famPager'), 'data-fam-page', p); }catch(e){}
+  try{ syncPagerDuringScroll(pager, 'data-fam-page', p, function(){ renderFamilyPages(); }); }catch(e){}
 }
 function renderFamilyPages(){
   syncFamTabs(FAM_PAGE);
