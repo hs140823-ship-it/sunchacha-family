@@ -2186,6 +2186,7 @@ body.drag-active,body.drag-active *{-webkit-user-select:none;user-select:none;-w
    flex-wrap:nowrap 이 없으면 칸을 넘길 때 옆으로 다음 열이 생겨 스크롤이 안 된다 */
 .fj-hist .fwl-list{display:flex;flex-direction:column;flex-wrap:nowrap;gap:3px;max-height:214px;overflow-y:auto;overflow-x:hidden;
   overscroll-behavior:contain;-webkit-overflow-scrolling:touch;touch-action:pan-y;scrollbar-width:thin;padding-right:1px}
+body[data-face="seonwoo"] .fj-hist .fwl-list,body[data-face="jiwoo"] .fj-hist .fwl-list{max-height:268px}
 .fj-hist .fwl-list::-webkit-scrollbar{width:4px}
 .fj-hist .fwl-list::-webkit-scrollbar-thumb{background:#E4D4A6;border-radius:99px}
 .fj-hist .fwl-pill,.fwl-modal .fwl-pill{display:flex;align-items:center;gap:6px;width:100%;min-width:0;background:rgba(255,255,255,.82);
@@ -2675,11 +2676,9 @@ body.mode-viewer .rl-form{display:none !important}
 .rwd-pagetab{border:0;background:transparent;border-radius:999px;padding:6px 3px;font-family:inherit;font-size:10.5px;font-weight:900;
   color:#6C7F96;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:-.03em}
 .rwd-pagetab.on{background:linear-gradient(135deg,#EDE4FF,#FCE7F3);color:#4B3678;box-shadow:inset 0 0 0 1.5px rgba(148,124,214,.45)}
-.rwd-pager{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;gap:0;align-items:flex-start;
-  overscroll-behavior-x:contain;touch-action:pan-x pan-y}
-.rwd-pager::-webkit-scrollbar{display:none}
-/* 한 장씩만 넘어가게 — 빠르게 밀어도 두 장 건너뛰지 않는다 (#17104) */
-.rwd-page{flex:0 0 100%;width:100%;min-width:0;scroll-snap-align:start;scroll-snap-stop:always;box-sizing:border-box;overflow-x:hidden}
+.rwd-pager{display:block;overflow:hidden;touch-action:pan-y}
+.rwd-page{display:none;width:100%;min-width:0;box-sizing:border-box}
+.rwd-page.on{display:block}
 .rgd-kid-peek{width:38px;height:38px;border-radius:50%;object-fit:cover;border:2px solid #fff;box-shadow:0 4px 10px -6px rgba(180,70,130,.5);flex:0 0 auto;background:#fff}
 /* 💵 정산 · ⚙️ 설정 · 리워드 안내 — 헤더 오른쪽 한 줄 (#13883) */
 .rwd-tools{flex:0 0 auto;display:flex;align-items:center;justify-content:flex-end;gap:5px;flex-wrap:nowrap}
@@ -3063,6 +3062,7 @@ body.mode-viewer .rl-form{display:none !important}
 #timerCard .tt-full-head{justify-content:center}
 /* 🕒 SCHEDULE · 🤝 FAMILY 좌우 슬라이드 (#16628) */
 .sched-pagetabs,.fam-pagetabs{grid-template-columns:repeat(4,minmax(0,1fr))}
+.sched-pagetabs.cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
 .sched-pagetabs .rwd-pagetab,.fam-pagetabs .rwd-pagetab{font-size:10px;padding:6px 1px}
 .sched-kidbar-slot[hidden]{display:none}
 .sched-kidbar{display:flex;gap:6px;margin:0 0 9px;padding:3px;border-radius:999px;background:#fff;
@@ -4270,7 +4270,7 @@ body.mode-kid .fmr-edit{display:none !important}
 .hh-name{font-size:15px;font-weight:900;letter-spacing:-.02em;color:#26333F}
 .hh-date{font-size:10px;font-weight:800;color:#7A8DA4}
 .hh-chev{font-size:15px;font-weight:900;color:#93A7BF;margin-left:1px;line-height:1}
-.hh-greet{margin-top:7px;font-size:14.5px;font-weight:900;letter-spacing:-.03em;line-height:1.38;color:#22303D;max-width:none;word-break:keep-all;text-wrap:balance}
+.hh-greet{margin-top:7px;font-size:clamp(12.5px,3.4vw,14px);font-weight:900;letter-spacing:-.03em;line-height:1.38;color:#22303D;max-width:none;word-break:keep-all}
 .hh-ro{display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:900;color:#4E7387;
   background:rgba(255,255,255,.82);border:1px solid rgba(120,160,220,.22);border-radius:999px;padding:3px 8px;white-space:nowrap}
 .hh-ro.preview{display:none}
@@ -5040,15 +5040,13 @@ body.mode-kid .home-more{display:none}
     <div class="habit-rounds" id="homeParentHabitRounds"></div>
   </section>
 
-  <!-- 🌱 아침 습관 3가지 (아이 HOME · 제목 줄에 진행·도장 배지 · #17104)
-       ☀️ 100원 · 🌞 7일 · 🌱 20일 안내는 카드에서 빼고 도장 찍을 때 잠깐만 띄운다 -->
+  <!-- 🌱 아침 습관 3가지 (아이 HOME · 제목 줄 정리 + 도장 하단 오전 12시 100원 안내 · #17559) -->
   <section class="card home-habit" id="homeHabitCard" aria-label="아침 습관 3가지" hidden>
     <div class="card-head habit-head">
       <h2>🌱 아침 습관 3가지</h2>
-      <span class="habit-cnt" id="homeHabitCnt">오늘 0/3</span>
-      <span class="habit-pill" id="homeHabitPill">하나마다 +1 도장</span>
     </div>
     <div class="habit-rounds" id="homeHabitRounds"></div>
+    <p class="habit-time-note" style="margin:8px 0 0;text-align:center;font-size:11px;font-weight:800;color:#6E7D91">☀️ 오전 12시 이전에 완료하면 100원 적립</p>
   </section>
 
   <!-- 3) 🕒 오늘의 시간표 (아이: 오늘 할 일 바로 아래 · #3001) -->
@@ -5183,7 +5181,7 @@ body.mode-kid .home-more{display:none}
       <button type="button" class="rwd-pagetab" data-action="sched-page" data-page="4" role="tab" aria-selected="false">💳 학원비</button>
     </div>
     <div class="rwd-pager" id="schedPager">
-    <div class="rwd-page" data-sched-page="1">
+    <div class="rwd-page on" data-sched-page="1">
     <div class="sched-kidbar-slot" id="schedKidBar1"></div>
     <section class="card academy" id="academyCard">
       <div class="card-head">
@@ -5295,7 +5293,7 @@ body.mode-kid .home-more{display:none}
       <!-- 👦👧 엄마·아빠만 보이는 [선우 | 지우] 전환 (#17289) -->
       <div class="sched-kidbar-slot" id="spaceKidBarSlot"></div>
       <div class="rwd-pager" id="spacePager">
-      <div class="rwd-page" data-space-page="1">
+      <div class="rwd-page on" data-space-page="1">
       <div class="card">
         <div class="self-tag space">🏠 내 공간과 내 물건 스스로 관리 · <b>하루 5개 완료 → 스탬프판 🌟</b></div>
         <div class="group-head"><span class="gh-title">📊 이번 주 활동 현황</span><span class="gh-pill">7일 스탬프 · 한 일 기록</span></div>
@@ -5394,7 +5392,7 @@ body.mode-kid .home-more{display:none}
     <div class="sched-kidbar-slot" id="studyKidBarSlot"></div>
     <div class="study-pagedots" id="studyPageDots" aria-hidden="true"><i class="on" data-dot="1"></i><i data-dot="2"></i><i data-dot="3"></i></div>
     <div class="rwd-pager" id="studyPager">
-    <div class="rwd-page" data-study-page="1">
+    <div class="rwd-page on" data-study-page="1">
     <div class="study-grid">
       <section class="card missions" id="missionsCard">
         <div class="card-head">
@@ -5521,7 +5519,7 @@ body.mode-kid .home-more{display:none}
       <button type="button" class="rwd-pagetab" data-action="rwd-page" data-page="4" role="tab" aria-selected="false">📅 12달</button>
     </div>
     <div class="rwd-pager" id="rwdPager">
-      <div class="rwd-page" data-rwd-page="1">
+      <div class="rwd-page on" data-rwd-page="1">
         <!-- 👦👧 엄마·아빠만 보이는 [선우 | 지우] 전환 (#17244) -->
         <div class="sched-kidbar-slot" id="rewardKidBarSlot"></div>
         <!-- 💵 정산 · ⚙️ 설정은 헤더로 올렸다 (#13883) — 전체/선우/지우 어느 스위치에서도 그대로 보인다 -->
@@ -5560,7 +5558,7 @@ body.mode-kid .home-more{display:none}
       <!-- 👦👧 엄마·아빠만 보이는 [선우 | 지우] 전환 (#17271) -->
       <div class="sched-kidbar-slot" id="famKidBarSlot"></div>
       <div class="rwd-pager" id="famPager">
-      <div class="rwd-page" data-fam-page="1">
+      <div class="rwd-page on" data-fam-page="1">
       <div class="card">
         <!-- 📢 미션 규칙 안내 + 엄마 수정 버튼 한 줄 (#v36) -->
         <div class="fam-topbar">
@@ -8549,8 +8547,8 @@ function heroGreetOf(mode){
 
 function formatGreetHtml(raw){
   var s = String(raw || '').trim().replace(/\s+/g, ' ');
-  /* 짧은 문장(22자 안팎)은 한 줄에 자연스럽게 들어간다 — 억지로 두 줄로 나누지 않는다 (#16628) */
-  if(s.length <= 24) return esc(s);
+  /* 짧은 문장(28자 이하)은 한 줄에 자연스럽게 들어간다 — 억지로 두 줄로 나누지 않는다 (#17559) */
+  if(s.length <= 28) return esc(s);
   var words = s.split(' ');
   if(words.length < 3) return esc(s);
   var total = s.length;
@@ -14783,9 +14781,6 @@ function renderRewardGuidePages(){
 function setStudyPage(n, instant){
   var p = Math.max(1, Math.min(3, Number(n) || 1));
   var pager = $('#studyPager');
-  if(pager && pager.clientWidth){
-    pager.scrollTo({ left: (p - 1) * pager.clientWidth, behavior: instant ? 'auto' : 'smooth' });
-  }
   Array.prototype.forEach.call(document.querySelectorAll('#studyPageTabs .rwd-pagetab'), function(b){
     var on = Number(b.getAttribute('data-page')) === p;
     b.classList.toggle('on', on);
@@ -14793,22 +14788,10 @@ function setStudyPage(n, instant){
   });
   try{ fitPagerHeight(pager, 'data-study-page', p); }catch(e){}
 }
-function syncStudyPagerScroll(pager){
-  if(!pager || !pager.clientWidth) return;
-  var p = Math.max(1, Math.min(3, Math.round(pager.scrollLeft / pager.clientWidth) + 1));
-  Array.prototype.forEach.call(document.querySelectorAll('#studyPageTabs .rwd-pagetab'), function(b){
-    var on = Number(b.getAttribute('data-page')) === p;
-    b.classList.toggle('on', on);
-    b.setAttribute('aria-selected', on ? 'true' : 'false');
-  });
-  try{ syncPagerDuringScroll(pager, 'data-study-page', p); }catch(e){}
-}
+function syncStudyPagerScroll(pager){ return; }
 function setRewardPage(n, instant){
   var p = Math.max(1, Math.min(4, Number(n) || 1));
   var pager = $('#rwdPager');
-  if(pager && pager.clientWidth){
-    pager.scrollTo({ left: (p - 1) * pager.clientWidth, behavior: instant ? 'auto' : 'smooth' });
-  }
   Array.prototype.forEach.call(document.querySelectorAll('#rwdPageTabs .rwd-pagetab'), function(b){
     var on = Number(b.getAttribute('data-page')) === p;
     b.classList.toggle('on', on);
@@ -14816,16 +14799,7 @@ function setRewardPage(n, instant){
   });
   try{ fitPagerHeight(pager, 'data-rwd-page', p); }catch(e){}
 }
-function syncRewardPagerScroll(pager){
-  if(!pager || !pager.clientWidth) return;
-  var p = Math.max(1, Math.min(4, Math.round(pager.scrollLeft / pager.clientWidth) + 1));
-  Array.prototype.forEach.call(document.querySelectorAll('#rwdPageTabs .rwd-pagetab'), function(b){
-    var on = Number(b.getAttribute('data-page')) === p;
-    b.classList.toggle('on', on);
-    b.setAttribute('aria-selected', on ? 'true' : 'false');
-  });
-  try{ syncPagerDuringScroll(pager, 'data-rwd-page', p); }catch(e){}
-}
+function syncRewardPagerScroll(pager){ return; }
 function openRewardGuide(kidKey){
   var k = rewardGuidePick(kidKey);
   REWARD_GUIDE_KID = k;
@@ -16065,6 +16039,8 @@ function routeStopText(e){
   return bits.join(' ');
 }
 function fmtRangePretty(e){
+  if(!e.start && !e.end) return '';
+  if(!e.start) return '~' + fmtTime(e.end);
   if(!e.end) return fmtTime(e.start);
   var a = fmtTime(e.start), b = fmtTime(e.end);
   var ap = a.slice(0, 2);
@@ -16688,46 +16664,52 @@ function tuitionSums(){
   return KID_DEFS.map(function(kd){ return { kd: kd, s: tuitionSum(kd.key) }; });
 }
 /* 💳 학원비는 SCHEDULE 하단 카드 대신 「💳 학원비」 모달에서만 (#v27) */
-/* 🧭 좌우 슬라이드 높이 — 지금 페이지 높이에 맞춰 아래 빈 공간을 없앤다 */
-function fitPagerHeight(pager, attr, p, opts){
+/* 🧭 상단 탭 버튼 전환 — 선택된 장만 .on 으로 보여 주어 세로 스크롤이 대각선으로 흔들리지 않는다 (#17633) */
+function fitPagerHeight(pager, attr, p){
   if(!pager) return;
-  var page = pager.querySelector('.rwd-page[' + attr + '="' + p + '"]');
-  if(!page) return;
-  var h = page.offsetHeight;
-  if(!(h > 0)) return;
-  /* 손가락으로 미는 중에는 키우기만 — 줄어들면 iOS scroll-snap 이 다른 장으로 튄다 */
-  if(opts && opts.growOnly){
-    var cur = parseFloat(pager.style.height) || 0;
-    if(h <= cur) return;
-  }
-  pager.style.height = h + 'px';
+  var target = String(p);
+  Array.prototype.forEach.call(pager.querySelectorAll('.rwd-page[' + attr + ']'), function(el){
+    el.classList.toggle('on', el.getAttribute(attr) === target);
+  });
+  pager.style.height = '';
 }
-var _pagerSettle = {};
-function settlePagerHeight(pager, attr, p, onSettle){
-  if(!pager) return;
-  var id = pager.id || 'pager';
-  if(_pagerSettle[id]) clearTimeout(_pagerSettle[id]);
-  _pagerSettle[id] = setTimeout(function(){
-    _pagerSettle[id] = null;
-    try{
-      if(typeof onSettle === 'function') onSettle();
-      if(pager.clientWidth){
-        var curP = Math.max(1, Math.round(pager.scrollLeft / pager.clientWidth) + 1);
-        var targetLeft = (curP - 1) * pager.clientWidth;
-        if(Math.abs(pager.scrollLeft - targetLeft) > 2){
-          pager.scrollTo({ left: targetLeft, behavior: 'auto' });
-        }
-        p = curP;
-      }
-      fitPagerHeight(pager, attr, p);
-    }catch(e){}
-  }, 150);
-}
-/* 미는 동안: 높이는 키우기만 + 멈춘 뒤 제 높이로 맞춤(중간에 DOM 재렌더로 스냅이 끊기지 않게) */
-function syncPagerDuringScroll(pager, attr, p, onSettle){
-  fitPagerHeight(pager, attr, p, { growOnly: true });
-  settlePagerHeight(pager, attr, p, onSettle);
-}
+function syncPagerDuringScroll(){}
+/* 👉 세로 스크롤 중 대각선 흔들림 없이, 분명한 가로 스와이프(>48px · 가로가 세로의 1.8배 이상)일 때만 장을 넘긴다 (#17684) */
+(function(){
+  if(typeof document === 'undefined' || window.__swipePagerBound) return;
+  window.__swipePagerBound = true;
+  var sx = 0, sy = 0, st = 0, activePager = null;
+  document.addEventListener('touchstart', function(ev){
+    if(!ev.touches || ev.touches.length !== 1) { activePager = null; return; }
+    var tg = ev.target;
+    if(tg && tg.closest && tg.closest('input,select,textarea')){ activePager = null; return; }
+    var pg = tg && tg.closest ? tg.closest('.rwd-pager') : null;
+    if(!pg){ activePager = null; return; }
+    activePager = pg;
+    sx = ev.touches[0].clientX;
+    sy = ev.touches[0].clientY;
+    st = Date.now();
+  }, { passive: true });
+  document.addEventListener('touchend', function(ev){
+    if(!activePager || !ev.changedTouches || !ev.changedTouches.length) return;
+    var pg = activePager; activePager = null;
+    if(Date.now() - st > 650) return;
+    var dx = ev.changedTouches[0].clientX - sx;
+    var dy = ev.changedTouches[0].clientY - sy;
+    if(Math.abs(dx) < 48 || Math.abs(dx) < Math.abs(dy) * 1.8) return;
+    var step = dx < 0 ? 1 : -1;
+    var id = pg.id;
+    if(id === 'rwdPager') setRewardPage(RWD_PAGE_NOW() + step);
+    else if(id === 'famPager') setFamPage(FAM_PAGE + step);
+    else if(id === 'schedPager') setSchedPage(SCHED_PAGE + step);
+    else if(id === 'spacePager') setSpacePage(SPACE_PAGE + step);
+    else if(id === 'studyPager'){
+      var stP = 1;
+      Array.prototype.forEach.call(document.querySelectorAll('#studyPageTabs .rwd-pagetab'), function(b, idx){ if(b.classList.contains('on')) stP = idx + 1; });
+      setStudyPage(stP + step);
+    }
+  }, { passive: true });
+})();
 function fitAllPagers(){
   var stPage = 1;
   Array.prototype.forEach.call(document.querySelectorAll('#studyPageTabs .rwd-pagetab'), function(b, idx){ if(b.classList.contains('on')) stPage = idx + 1; });
@@ -16763,22 +16745,8 @@ function setSpacePage(n, instant){
   if(p === 1) renderSpaceWeekLog();
   var pager = $('#spacePager');
   try{ fitPagerHeight(pager, 'data-space-page', p); }catch(e){}
-  if(pager && pager.clientWidth){
-    try{ pager.scrollTo({ left: (p - 1) * pager.clientWidth, behavior: instant ? 'auto' : 'smooth' }); }catch(e){}
-  }
 }
-function syncSpacePagerScroll(pager){
-  if(!pager || !pager.clientWidth) return;
-  var p = Math.max(1, Math.min(3, Math.round(pager.scrollLeft / pager.clientWidth) + 1));
-  if(p !== SPACE_PAGE){
-    SPACE_PAGE = p;
-    syncSpaceTabs(p);
-  }
-  try{ syncPagerDuringScroll(pager, 'data-space-page', p, function(){
-    if(SPACE_PAGE === 3) renderSpaceFunPage();
-    if(SPACE_PAGE === 1) renderSpaceWeekLog();
-  }); }catch(e){}
-}
+function syncSpacePagerScroll(pager){ return; }
 /* ⭐ FUN MISSION — MY SPACE 3페이지에서 그린다 */
 function renderSpaceFunPage(){
   var box = $('#weekendBonusCard');
@@ -16876,19 +16844,8 @@ function setSchedPage(n, instant){
   renderSchedulePages(true);
   var pager = $('#schedPager');
   try{ fitPagerHeight(pager, 'data-sched-page', p); }catch(e){}
-  if(pager && pager.clientWidth){
-    try{ pager.scrollTo({ left: (p - 1) * pager.clientWidth, behavior: instant ? 'auto' : 'smooth' }); }catch(e){}
-  }
 }
-function syncSchedPagerScroll(pager){
-  if(!pager || !pager.clientWidth) return;
-  var p = Math.max(1, Math.min(schedPageMax(), Math.round(pager.scrollLeft / pager.clientWidth) + 1));
-  if(p !== SCHED_PAGE){
-    SCHED_PAGE = p;
-    syncSchedTabs(p);
-  }
-  try{ syncPagerDuringScroll(pager, 'data-sched-page', p, function(){ renderSchedulePages(true); }); }catch(e){}
-}
+function syncSchedPagerScroll(pager){ return; }
 function schedKidBarHtml(){
   if(isKidMode()) return '';
   var k = schedKidNow();
@@ -16975,14 +16932,17 @@ function setSchedKid(k){
 function renderSchedulePages(force){
   renderSchedKidBars();
   var tui = $('#schedTuitionPage');
+  var tabs = $('#schedPageTabs');
   var tbtn = document.querySelector('#schedPageTabs [data-page="4"]');
   if(isKidMode()){
     if(tui) tui.hidden = true;
     if(tbtn) tbtn.hidden = true;
+    if(tabs) tabs.classList.add('cols-3');
     if(SCHED_PAGE === 4) SCHED_PAGE = 1;
   }else{
     if(tui) tui.hidden = false;
     if(tbtn) tbtn.hidden = false;
+    if(tabs) tabs.classList.remove('cols-3');
   }
   syncSchedTabs(SCHED_PAGE);
   try{ fitPagerHeight($('#schedPager'), 'data-sched-page', SCHED_PAGE); }catch(e){}
@@ -20149,24 +20109,8 @@ function setFamPage(n, instant){
   renderFamilyPages();
   var pager = $('#famPager');
   try{ fitPagerHeight(pager, 'data-fam-page', p); }catch(e){}
-  if(pager && pager.clientWidth){
-    try{ pager.scrollTo({ left: (p - 1) * pager.clientWidth, behavior: instant ? 'auto' : 'smooth' }); }catch(e){}
-  }
 }
-function syncFamPagerScroll(pager){
-  if(!pager || !pager.clientWidth) return;
-  var p = Math.max(1, Math.min(4, Math.round(pager.scrollLeft / pager.clientWidth) + 1));
-  if(p !== FAM_PAGE){
-    FAM_PAGE = p;
-    if(p === 2 || p === 3){
-      var team = famTeamForPage(p);
-      if(isDadMode()) DAD_FAM_TEAM = team;
-      else { state.familyTeam = team; }
-    }
-    syncFamTabs(p);
-  }
-  try{ syncPagerDuringScroll(pager, 'data-fam-page', p, function(){ renderFamilyPages(); }); }catch(e){}
-}
+function syncFamPagerScroll(pager){ return; }
 function renderFamilyPages(){
   syncFamTabs(FAM_PAGE);
   try{ renderScopeKidBars(); }catch(e){}
@@ -21497,9 +21441,9 @@ function addAcademy(){
   if(!name){ toast('학원 또는 장소 이름을 적어 주세요'); if(nameEl) nameEl.focus(); return; }
   var day = dayEl ? Number(dayEl.value) : new Date().getDay();
   if(!(day >= 0 && day <= 6)) day = 1;
-  var start = startEl && /^\d{2}:\d{2}$/.test(startEl.value) ? startEl.value : '16:00';
+  var start = startEl && /^\d{2}:\d{2}$/.test(startEl.value) ? startEl.value : '';
   var end = endEl && /^\d{2}:\d{2}$/.test(endEl.value) ? endEl.value : '';
-  if(end && toMin(end) <= toMin(start)){ toast('종료 시간은 시작보다 늦어야 해요'); return; }
+  if(start && end && toMin(end) <= toMin(start)){ toast('종료 시간은 시작보다 늦어야 해요'); return; }
   var memo = memoEl ? String(memoEl.value || '').trim().slice(0, 40) : '';
   var placeEl = $('#acPlace');
   var place = placeEl ? String(placeEl.value || '').trim().slice(0, 40) : '';
@@ -21647,9 +21591,9 @@ function saveAcademyEdit(id){
   var dayEl = $('#editAcDay');
   var startEl = $('#editAcStart');
   var endEl = $('#editAcEnd');
-  var start = startEl && /^\d{2}:\d{2}$/.test(startEl.value) ? startEl.value : found.entry.start;
+  var start = startEl && /^\d{2}:\d{2}$/.test(startEl.value) ? startEl.value : '';
   var end = endEl && /^\d{2}:\d{2}$/.test(endEl.value) ? endEl.value : '';
-  if(end && toMin(end) <= toMin(start)){ toast('종료 시간은 시작보다 늦어야 해요'); return; }
+  if(start && end && toMin(end) <= toMin(start)){ toast('종료 시간은 시작보다 늦어야 해요'); return; }
   found.entry.day = dayEl ? Number(dayEl.value) : found.entry.day;
   found.entry.start = start;
   found.entry.end = end;
